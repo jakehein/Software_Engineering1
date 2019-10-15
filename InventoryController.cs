@@ -41,7 +41,7 @@ namespace FinalProject1
         public bool DeleteItem(string pLU)
         {
             //InventoryDataAccess iDA = new IInventoryDataAccess();
-            if (!GetAllPLUs().Contains(pLU))
+            if (!AllPLUs.Contains(pLU))
             {
                 iDA.DeleteItem(pLU);
                 return true;
@@ -56,21 +56,25 @@ namespace FinalProject1
          * This method creates a list of PLUs for the calling method to act on. 
          * @return List<string> of all PLU values contained in iDA
          */
-        public List<string> GetAllPLUs()
+        public List<string> AllPLUs
         {
-            //InventoryDataAccess iDA = new IInventoryDataAccess();
-            List<string> allPLUs = new List<string>();
-            foreach(Item item in iDA)
+            get
             {
-                allPLUs.Add(item.GetPLU);
+                //InventoryDataAccess iDA = new IInventoryDataAccess();
+                List<string> allPLUs = new List<string>();
+                foreach (Item item in iDA)
+                {
+                    allPLUs.Add(item.GetPLU);
+                }
+                return allPLUs;
+                //throw new NotImplementedException();
             }
-            return allPLUs;
-            //throw new NotImplementedException();
         }
+
         /**
-         * This method creates a list of all Item objects contained in iDA
-         * @return List<Item> of all Item objects contained in iDA
-         */
+* This method creates a list of all Item objects contained in iDA
+* @return List<Item> of all Item objects contained in iDA
+*/
         public List<Item> GetAllItems()
         {
             //InventoryDataAccess iDA = new IInventoryDataAccess();
@@ -108,7 +112,7 @@ namespace FinalProject1
         public bool UpdateItem(string pLU, Item item)
         {
             //InventoryDataAccess iDA = new IInventoryDataAccess();
-            if (GetAllPLUs().Contains(pLU) && GetItem(item.GetPLU) != item.GetPLU)
+            if (AllPLUs.Contains(pLU) && GetItem(item.GetPLU) != item.GetPLU)
             {
                 iDA.UpdateItem(pLU, item);
                 return true;

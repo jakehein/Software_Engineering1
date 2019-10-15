@@ -14,7 +14,7 @@ namespace FinalProject1
 
         bool DeleteItem(string pLU);
 
-        List<string> GetAllPLUs();
+        List<string> AllPLUs { get; }
 
         Item GetItem(string pLU);
 
