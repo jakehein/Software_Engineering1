@@ -8,5 +8,11 @@ namespace FinalProject1
 {
     class Item
     {
+        public long ItemID { get; set; }
+        public string UPC { get; set; }
+        public string Name { get; set; }
+        public int? Quantity { get; set; }
+        public decimal? Price { get; set; }
+        public Category Category { get; set; }
     }
 }
