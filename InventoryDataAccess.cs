@@ -63,22 +63,13 @@ namespace FinalProject1
             if (DoesUPCExist(/*item.UPC*/""))
             {
                 MySqlConnection conn = OpenConnection();
-                string commandString = "UPDATE {TABLE_NAME} SET {COLUMN_NAME} = '" + "" + "' WHERE {ID} = '" + "" + "'";
+                string commandString = "UPDATE {TABLE_NAME} SET " + 
+                                       "{FIRST_COLUMN_NAME} = '" + "" +
+                                       "', {SECOND_COLUMN_NAME} = '" + "" +
+                                       "', {THIRD_COLUMN_NAME} = '" + "" +
+                                       "' WHERE {ID} = '" + "" + "'";
                 MySqlCommand cmd = new MySqlCommand(commandString, conn);
                 cmd.ExecuteNonQuery();
-
-                commandString = "UPDATE {TABLE_NAME} SET {COLUMN_NAME2} = '" + "" + "' WHERE {ID} = '" + "" + "'";
-                cmd.CommandText = commandString;
-                cmd.ExecuteNonQuery();
-
-                commandString = "UPDATE {TABLE_NAME} SET {COLUMN_NAME3} = '" + "" + "' WHERE {ID} = '" + "" + "'";
-                cmd.CommandText = commandString;
-                cmd.ExecuteNonQuery();
-
-                commandString = "UPDATE {TABLE_NAME} SET {COLUMN_NAME4} = '" + "" + "' WHERE {ID} = '" + "" + "'";
-                cmd.CommandText = commandString;
-                cmd.ExecuteNonQuery();
-
                 cmd.Dispose();
                 conn.Close();
                 return true;
