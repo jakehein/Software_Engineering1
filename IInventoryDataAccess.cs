@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FinalProject1
 {
-    public interface IInventoryDataAccess
+    interface IInventoryDataAccess
     {
         bool CreateItem(Item item);
 

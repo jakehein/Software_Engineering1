@@ -8,39 +8,164 @@ using System.Configuration;
 
 namespace FinalProject1
 {
-    class InventoryDataAccess
+    class InventoryDataAccess : IInventoryDataAccess
     {
-        bool CreateItem(Item item)
+        
+        private string connectionStringToDB = ConfigurationManager.ConnectionStrings["MySQLDB"].ConnectionString;
+        private MySqlConnection OpenConnection()
         {
+            MySqlConnection conn = new MySqlConnection(connectionStringToDB);
+            conn.Open();
+            return conn;
+        }
 
-            //throw new NotImplementedException();
+        /*
+         * Check if an item with the given upc already exists in the database
+         * Returns true if the item exists
+         */
+        private bool DoesUPCExist(string upc)
+        {
+            bool result = false;
+            string commandString = "SELECT EXISTS(SELECT 1 FROM {TABLE_NAME} WHERE UPC = '" + upc + "' LIMIT 1)";
+            MySqlConnection conn = OpenConnection();
+            MySqlCommand cmd = new MySqlCommand(commandString, conn);
+            result = int.Parse(cmd.ExecuteScalar().ToString()) == 1;
+            cmd.Dispose();
+            conn.Close();
+            return result;
+        }
+
+        /*
+         * Add the passed in Item to the DB if it doesn't already exist
+         * Returns true if Item is successfully added
+         */
+        public bool CreateItem(Item item)
+        {
+            int result = -1;
+            if (!DoesUPCExist(/*item.UPC*/""))
+            {
+                MySqlConnection conn = OpenConnection();
+                string commandString = "INSERT INTO {TABLE_NAME} VALUES('" + "{add values}" + "')";
+                MySqlCommand cmd = new MySqlCommand(commandString, conn);
+                result = cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                conn.Close();
+            }
+            return result > 0;
+        }
+
+        /*
+         * Update the DB table values of an Item
+         * returns true if the Item is successfully updated
+         */
+        public bool UpdateItem(string pLU, Item item)
+        {
+            if (DoesUPCExist(/*item.UPC*/""))
+            {
+                MySqlConnection conn = OpenConnection();
+                string commandString = "UPDATE {TABLE_NAME} SET {COLUMN_NAME} = '" + "" + "' WHERE {ID} = '" + "" + "'";
+                MySqlCommand cmd = new MySqlCommand(commandString, conn);
+                cmd.ExecuteNonQuery();
+
+                commandString = "UPDATE {TABLE_NAME} SET {COLUMN_NAME2} = '" + "" + "' WHERE {ID} = '" + "" + "'";
+                cmd.CommandText = commandString;
+                cmd.ExecuteNonQuery();
+
+                commandString = "UPDATE {TABLE_NAME} SET {COLUMN_NAME3} = '" + "" + "' WHERE {ID} = '" + "" + "'";
+                cmd.CommandText = commandString;
+                cmd.ExecuteNonQuery();
+
+                commandString = "UPDATE {TABLE_NAME} SET {COLUMN_NAME4} = '" + "" + "' WHERE {ID} = '" + "" + "'";
+                cmd.CommandText = commandString;
+                cmd.ExecuteNonQuery();
+
+                cmd.Dispose();
+                conn.Close();
+                return true;
+            }
             return false;
         }
 
-        bool UpdateItem(string pLU, Item item)
+        /*
+         * Delete an Item from the DB table if it exists
+         * Returns true if the item is removed
+         */
+        public bool DeleteItem(string pLU)
         {
-            throw new NotImplementedException();
-            return false;
+            int result = -1;
+            MySqlConnection conn = OpenConnection();
+            string commandString = "DELETE FROM {TABLE_NAME} WHERE {ID} = '" + "" + "'";
+            MySqlCommand cmd = new MySqlCommand(commandString, conn);
+            result = cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            conn.Close();
+            return result > 0;
         }
 
-        bool DeleteItem(string pLU)
+        /*
+         * Returns an Item if it exists otherwise returns null
+         */
+        public Item GetItem(string pLU)
         {
-            throw new NotImplementedException();
-            return false;
+            Item item = null;
+            string commandString = "SELECT * FROM {TABLE_NAME} WHERE {ID} = '" + pLU + "' LIMIT 1";
+            MySqlConnection conn = OpenConnection();
+            MySqlCommand cmd = new MySqlCommand(commandString, conn);
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                item = ReadInItem(reader);
+            }
+            reader.Close();
+            cmd.Dispose();
+            conn.Close();
+            return item;
         }
 
-        Item GetItem(string pLU)
+        /*
+         * Returns a List containing all Items in the DB
+         */
+        public List<Item> GetAllItems()
         {
-            throw new NotImplementedException();
-            return null;
-            //return item;
+            List<Item> items = new List<Item>();
+            string commandString = "SELECT * FROM {TABLE_NAME}";
+            MySqlConnection conn = OpenConnection();
+            MySqlCommand cmd = new MySqlCommand(commandString, conn);
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                items.Add(ReadInItem(reader));
+            }
+            reader.Close();
+            cmd.Dispose();
+            conn.Close();
+            return items;
         }
 
-        List<Item> GetAllItems()
+        /*
+         * Returns a List containing all PLUs
+         */
+        public List<string> GetAllPLUs()
         {
-            throw new NotImplementedException();
-            return null;
-            //return itemList;
+            List<string> pLUs = new List<string>();
+            string commandString = "SELECT {PLU} FROM {TABLE_NAME}";
+            MySqlConnection conn = OpenConnection();
+            MySqlCommand cmd = new MySqlCommand(commandString, conn);
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                pLUs.Add(reader.GetValue(0).ToString());
+            }
+            return pLUs;
+        }
+
+        /*
+         * Read in a single Item from the DB
+         */
+        private Item ReadInItem(MySqlDataReader reader)
+        {
+            // read in item fields
+            return new Item(/*set item parameters*/);
         }
     }
 }
