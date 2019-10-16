@@ -76,6 +76,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Category.cs" />
     <Compile Include="IInventoryController.cs" />
     <Compile Include="IInventoryDataAccess.cs" />
     <Compile Include="InventoryController.cs" />
