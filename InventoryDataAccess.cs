@@ -10,7 +10,15 @@ namespace FinalProject1
 {
     class InventoryDataAccess : IInventoryDataAccess
     {
-        
+        // Table and Column identifiers
+        private const string ItemTableName = "Item",
+                             CategoryColumn = "CategoryID",
+                             ItemIDColumn = "ItemID",
+                             NameColumn = "Name",
+                             PriceColumn = "Price",
+                             QuantityColumn = "Quantity",
+                             UPCColumn = "UPC";
+
         private string connectionStringToDB = ConfigurationManager.ConnectionStrings["MySQLDB"].ConnectionString;
         private MySqlConnection OpenConnection()
         {
@@ -26,7 +34,8 @@ namespace FinalProject1
         private bool DoesUPCExist(string upc)
         {
             bool result = false;
-            string commandString = "SELECT EXISTS(SELECT 1 FROM {TABLE_NAME} WHERE UPC = '" + upc + "' LIMIT 1)";
+            string commandString = "SELECT EXISTS(SELECT 1 FROM " + TableName +
+                                    " WHERE " + UPCColumn + " = '" + upc + "' LIMIT 1)";
             MySqlConnection conn = OpenConnection();
             MySqlCommand cmd = new MySqlCommand(commandString, conn);
             result = int.Parse(cmd.ExecuteScalar().ToString()) == 1;
@@ -45,7 +54,19 @@ namespace FinalProject1
             if (!DoesUPCExist(/*item.UPC*/""))
             {
                 MySqlConnection conn = OpenConnection();
-                string commandString = "INSERT INTO {TABLE_NAME} VALUES('" + "{add values}" + "')";
+
+                string commandString = "INSERT INTO " + TableName +
+                                        "(" + CategoryColumn + ", " +
+                                        "(" + NameColumn + ", " +
+                                        "(" + PriceColumn + ", " +
+                                        "(" + QuantityColumn + ", " +
+                                        "(" + UPCColumn + ")" +
+                                        " VALUES(" +
+                                        item.Category.CategoryID + ", '" +
+                                        item.Name + "', " +
+                                        item.Price + ", " +
+                                        item.Quantity + ", '" +
+                                        item.UPC + "')";
                 MySqlCommand cmd = new MySqlCommand(commandString, conn);
                 result = cmd.ExecuteNonQuery();
                 cmd.Dispose();
@@ -60,14 +81,16 @@ namespace FinalProject1
          */
         public bool UpdateItem(string pLU, Item item)
         {
-            if (DoesUPCExist(/*item.UPC*/""))
+            if (DoesUPCExist(item.UPC))
             {
                 MySqlConnection conn = OpenConnection();
-                string commandString = "UPDATE {TABLE_NAME} SET " + 
-                                       "{FIRST_COLUMN_NAME} = '" + "" +
-                                       "', {SECOND_COLUMN_NAME} = '" + "" +
-                                       "', {THIRD_COLUMN_NAME} = '" + "" +
-                                       "' WHERE {ID} = '" + "" + "'";
+                string commandString = "UPDATE " + TableName + " SET " + 
+                                       CategoryColumn + " = " + item.Category.CategoryID +
+                                       ", " + NameColumn  + " = '" + item.Name +
+                                       "', " + PriceColumn + " = " + item.Price +
+                                       ", " + QuantityColumn + " = " + item.Quantity + 
+                                       ", '" + UPCColumn + " = '" + item.UPC +
+                                       "' WHERE " + ItemIDColumn + " = " + item.ItemID;
                 MySqlCommand cmd = new MySqlCommand(commandString, conn);
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
@@ -85,7 +108,8 @@ namespace FinalProject1
         {
             int result = -1;
             MySqlConnection conn = OpenConnection();
-            string commandString = "DELETE FROM {TABLE_NAME} WHERE {ID} = '" + "" + "'";
+            string commandString = "DELETE FROM " + TableName +
+                                   " WHERE " + UPCColumn + " = '" + pLU + "'";
             MySqlCommand cmd = new MySqlCommand(commandString, conn);
             result = cmd.ExecuteNonQuery();
             cmd.Dispose();
@@ -99,7 +123,8 @@ namespace FinalProject1
         public Item GetItem(string pLU)
         {
             Item item = null;
-            string commandString = "SELECT * FROM {TABLE_NAME} WHERE {ID} = '" + pLU + "' LIMIT 1";
+            string commandString = "SELECT * FROM " + TableName +
+                                   " WHERE " + UPCColumn + " = '" + pLU + "' LIMIT 1";
             MySqlConnection conn = OpenConnection();
             MySqlCommand cmd = new MySqlCommand(commandString, conn);
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -119,7 +144,7 @@ namespace FinalProject1
         public List<Item> GetAllItems()
         {
             List<Item> items = new List<Item>();
-            string commandString = "SELECT * FROM {TABLE_NAME}";
+            string commandString = "SELECT * FROM " + TableName;
             MySqlConnection conn = OpenConnection();
             MySqlCommand cmd = new MySqlCommand(commandString, conn);
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -139,7 +164,7 @@ namespace FinalProject1
         public List<string> GetAllPLUs()
         {
             List<string> pLUs = new List<string>();
-            string commandString = "SELECT {PLU} FROM {TABLE_NAME}";
+            string commandString = "SELECT " + UPCColumn + " FROM " + TableName;
             MySqlConnection conn = OpenConnection();
             MySqlCommand cmd = new MySqlCommand(commandString, conn);
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -155,8 +180,14 @@ namespace FinalProject1
          */
         private Item ReadInItem(MySqlDataReader reader)
         {
-            // read in item fields
-            return new Item(/*set item parameters*/);
+            Item item = new Item();
+            item.ItemID = reader.GetInt64(ItemIDColumn);
+            item.UPC = reader.GetString(UPCColumn);
+            item.Name = reader.GetString(NameColumn);
+            item.Quantity = reader.GetInt32(QuantityColumn);
+            item.Price = reader.GetFloat(PriceColumn);
+            item.Category = null;
+            return item;
         }
     }
 }
