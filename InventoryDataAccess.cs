@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
+using System.Configuration;
 
 namespace FinalProject1
 {
@@ -10,7 +12,8 @@ namespace FinalProject1
     {
         bool CreateItem(Item item)
         {
-            throw new NotImplementedException();
+
+            //throw new NotImplementedException();
             return false;
         }
 
