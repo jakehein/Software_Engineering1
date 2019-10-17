@@ -231,7 +231,7 @@ namespace FinalProject1
                 Quantity = Reader.GetInt32(QuantityColumn),
                 Price = (decimal)Reader.GetFloat(PriceColumn),
                 //Category = category
-                Category = categoryDataAccess.GetCategory((long)Reader.GetDecimal(CategoryColumn))
+                Category = Category.createCategoryFromDTO(categoryDataAccess.GetCategory((long)Reader.GetDecimal(CategoryColumn)))
             };
             return item;
         }

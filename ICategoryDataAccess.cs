@@ -8,8 +8,8 @@ namespace FinalProject1
 {
     interface ICategoryDataAccess
     {
-        bool CreateCategory(Category category);
-        Category GetCategory(long categoryID);
-        List<Category> GetCategories();
+        bool CreateCategory(CategoryDTO category);
+        CategoryDTO GetCategory(long categoryID);
+        List<CategoryDTO> GetCategories();
     }
 }

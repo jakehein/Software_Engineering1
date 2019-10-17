@@ -32,7 +32,7 @@ namespace FinalProject1
         /// </summary>
         /// <param name="category">Category to add</param>
         /// <returns>True if Category added</returns>
-        public bool CreateCategory(Category category)
+        public bool CreateCategory(CategoryDTO category)
         {
             int result = -1;
             if (!CategoryExists(category.CategoryID))
@@ -53,9 +53,9 @@ namespace FinalProject1
         /// </summary>
         /// <param name="categoryID">ID of the Category</param>
         /// <returns>Category associated with id</returns>
-        public Category GetCategory(long categoryID)
+        public CategoryDTO GetCategory(long categoryID)
         {
-            Category category = null;
+            CategoryDTO category = null;
             string commandString = "SELECT * FROM " + CategoryTableName + 
                                    " WHERE " + CategoryIDColumn + " = " + categoryID + 
                                    " LIMIT 1";
@@ -72,9 +72,9 @@ namespace FinalProject1
         /// Get all of the Categories in the database
         /// </summary>
         /// <returns>List containing all Categories</returns>
-        public List<Category> GetCategories()
+        public List<CategoryDTO> GetCategories()
         {
-            List<Category> categories = new List<Category>();
+            List<CategoryDTO> categories = new List<CategoryDTO>();
             string commandString = "SELECT * FROM " + CategoryTableName;
             ExecuteReader(commandString);
             while (Reader.Read())
@@ -89,9 +89,9 @@ namespace FinalProject1
         /// Read in a Category from the Reader
         /// </summary>
         /// <returns>Read in Category</returns>
-        private Category ReadCategory()
+        private CategoryDTO ReadCategory()
         {
-            return new Category
+            return new CategoryDTO
             {
                 CategoryID = (long)Reader.GetDecimal(CategoryIDColumn),
                 Name = Reader.GetString(CategoryNameColumn)

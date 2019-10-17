@@ -20,7 +20,7 @@ namespace FinalProject1
         /// </summary>
         /// <param name="category">Category to add</param>
         /// <returns>True if Category added</returns>
-        public bool CreateCategory(Category category)
+        public bool CreateCategory(CategoryDTO category)
         {
 
             return ValidateName(category.Name) &&
@@ -32,7 +32,7 @@ namespace FinalProject1
         /// </summary>
         /// <param name="categoryID">Category ID</param>
         /// <returns>Category associated with id</returns>
-        public Category GetCategory(long categoryID)
+        public CategoryDTO GetCategory(long categoryID)
         {
             return categoryDataAccess.GetCategory(categoryID);
         }
@@ -41,9 +41,15 @@ namespace FinalProject1
         /// Get all categories from the datasource
         /// </summary>
         /// <returns>List of all Category</returns>
-        public List<Category> GetCategories()
+        public List<CategoryDTO> GetAllCategories()
         {
             return categoryDataAccess.GetCategories();
+        }
+
+        public List<CategoryDTO> GetAllCategoriesWithItems()
+        {
+            List<CategoryDTO> categoryDTOs = new List<CategoryDTO>();
+            return categoryDTOs;
         }
 
         /// <summary>
