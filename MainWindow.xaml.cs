@@ -25,7 +25,7 @@ namespace FinalProject1
             InitializeComponent();
 
             // Initializes Login Page
-            MainMenuUI.Content = new Login_Page();
+            //MainMenuUI.Content = new Login_Page();
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace FinalProject1
 
         private void InventoryButton_Click(object sender, RoutedEventArgs e)
         {
-            MainMenuUI.Content = new Inventory_Page();
+            MainMenuUI.Content = new InventoryPage();
         }
 
         private void SalesButton_Click(object sender, RoutedEventArgs e)

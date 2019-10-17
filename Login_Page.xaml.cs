@@ -41,7 +41,7 @@ namespace FinalProject1
             // forwards it onto the MainMenu page
 
             // Close Current Window... This will be done after validating if the credentials are good or not
-            Window.GetWindow(this).Close();
+            
         }
     }
 }

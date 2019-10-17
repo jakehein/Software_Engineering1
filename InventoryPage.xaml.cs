@@ -18,13 +18,13 @@ namespace FinalProject1
     /// <summary>
     /// Interaction logic for Inventory_Page.xaml
     /// </summary>
-    public partial class Inventory_Page : Page
+    public partial class InventoryPage : Page
     {
 
             IInventoryDataAccess iDA = new InventoryDataAccess();
             //InventoryController inventoryControl = new InventoryController(iDA);
             InventoryController inventoryControl;
-            public Inventory_Page()
+            public InventoryPage()
         {
                 InitializeComponent();
                 FillItemCombo();
@@ -65,7 +65,8 @@ namespace FinalProject1
             /// </summary>
             private void InventoryListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
             {
-                string text = InventoryListBox.SelectedItem.ToString();
+            string text = InventoryListBox.SelectedItem.ToString();
+            //string text = InventoryListBox.SelectedItem.ToString();
                 ItemDTO itm = inventoryControl.GetItem(text);
 
                 UPCText.Text = itm.UPC;

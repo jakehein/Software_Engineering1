@@ -68,10 +68,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Inventory_Page.xaml.cs">
-      <DependentUpon>Inventory_Page.xaml</DependentUpon>
+    <Compile Include="InventoryPage.xaml.cs">
+      <DependentUpon>InventoryPage.xaml</DependentUpon>
     </Compile>
-    <Page Include="Inventory_Page.xaml">
+    <Page Include="InventoryPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
