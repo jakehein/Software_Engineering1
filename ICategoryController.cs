@@ -10,6 +10,7 @@ namespace FinalProject1
     {
         bool CreateCategory(Category category);
         Category GetCategory(long categoryID);
-        List<Category> GetCategories();
+        List<Category> GetAllCategories();
+        List<Category> GetAllCategoriesWithItems();
     }
 }
