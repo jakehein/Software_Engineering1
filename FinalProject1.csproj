@@ -87,6 +87,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Category.cs" />
+    <Compile Include="CategoryController.cs" />
+    <Compile Include="CategoryDataAccess.cs" />
+    <Compile Include="ICategoryController.cs" />
+    <Compile Include="ICategoryDataAccess.cs" />
     <Compile Include="SQLDB.cs" />
     <Compile Include="IInventoryController.cs" />
     <Compile Include="IInventoryDataAccess.cs" />
