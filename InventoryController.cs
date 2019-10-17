@@ -29,7 +29,7 @@ namespace FinalProject1
 
             Item newItem = Item.createItemFromDTO(item);
 
-            if (GetItem(item.UPC).UPC != item.UPC && newItem.DataWarnings.Count == 0)
+            if (GetItem(item.UPC).UPC == null && newItem.DataWarnings.Count == 0)
             {
                 iDA.CreateItem(item);
                 return true;
