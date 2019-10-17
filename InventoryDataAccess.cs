@@ -23,6 +23,13 @@ namespace FinalProject1
                              UPCColumn = "UPC",
                              CategoryNameColumn = "Name";
 
+        private ICategoryDataAccess categoryDataAccess = null;
+
+        public InventoryDataAccess() { }
+        public InventoryDataAccess(ICategoryDataAccess categoryDataAccess)
+        {
+            this.categoryDataAccess = categoryDataAccess;
+        }
         //private string connectionStringToDB = ConfigurationManager.ConnectionStrings["MySQLDB"].ConnectionString;
         //private MySqlConnection OpenConnection()
         //{
@@ -133,11 +140,14 @@ namespace FinalProject1
         public Item GetItem(string uPC)
         {
             Item item = null;
+            //string commandString = "SELECT * FROM " + ItemTableName +
+            //                       " INNER JOIN " + CategoryTableName +
+            //                       " ON " + ItemTableName + "." + CategoryColumn + 
+            //                       " = " + CategoryTableName + "."  + CategoryColumn +
+            //                       " WHERE " + UPCColumn + " = '" + uPC + "' LIMIT 1";
             string commandString = "SELECT * FROM " + ItemTableName +
-                                   " INNER JOIN " + CategoryTableName +
-                                   " ON " + ItemTableName + "." + CategoryColumn + 
-                                   " = " + CategoryTableName + "."  + CategoryColumn +
                                    " WHERE " + UPCColumn + " = '" + uPC + "' LIMIT 1";
+
             //MySqlConnection conn = OpenConnection();
             //MySqlCommand cmd = new MySqlCommand(commandString, conn);
             //MySqlDataReader reader = cmd.ExecuteReader();
@@ -160,10 +170,12 @@ namespace FinalProject1
         public List<Item> GetAllItems()
         {
             List<Item> items = new List<Item>();
-            string commandString = "SELECT * FROM " + ItemTableName + 
-                                   " INNER JOIN " + CategoryTableName +
-                                   " ON " + ItemTableName + "." + CategoryColumn +
-                                   " = " + CategoryTableName + "." + CategoryColumn;
+            //string commandString = "SELECT * FROM " + ItemTableName + 
+            //                       " INNER JOIN " + CategoryTableName +
+            //                       " ON " + ItemTableName + "." + CategoryColumn +
+            //                       " = " + CategoryTableName + "." + CategoryColumn;
+            string commandString = "SELECT * FROM " + ItemTableName;
+
             //MySqlConnection conn = OpenConnection();
             //MySqlCommand cmd = new MySqlCommand(commandString, conn);
             //MySqlDataReader reader = cmd.ExecuteReader();
@@ -204,12 +216,12 @@ namespace FinalProject1
         /// <returns>The Item created with the read in values</returns>
         private Item ReadInItem()
         {
-            Category category = new Category
-            {
-                CategoryID = Reader.GetInt64(CategoryTableName + "." + CategoryColumn),
-                Name = Reader.GetString(CategoryTableName + "." + CategoryNameColumn),
-                Items = null
-            };
+            //Category category = new Category
+            //{
+            //    CategoryID = Reader.GetInt64(CategoryTableName + "." + CategoryColumn),
+            //    Name = Reader.GetString(CategoryTableName + "." + CategoryNameColumn),
+            //    Items = null
+            //};
 
             Item item = new Item
             {
@@ -218,7 +230,8 @@ namespace FinalProject1
                 Name = Reader.GetString(NameColumn),
                 Quantity = Reader.GetInt32(QuantityColumn),
                 Price = (decimal)Reader.GetFloat(PriceColumn),
-                Category = category
+                //Category = category
+                Category = categoryDataAccess.GetCategory((long)Reader.GetDecimal(CategoryColumn))
             };
             return item;
         }

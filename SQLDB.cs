@@ -8,7 +8,7 @@ using MySql.Data.MySqlClient;
 
 namespace FinalProject1
 {
-    abstract class SQLDB
+    public abstract class SQLDB
     {
         private readonly string connectionStringToDB = ConfigurationManager.ConnectionStrings["MySQLDB"].ConnectionString;
         private MySqlConnection conn = null;
@@ -39,7 +39,7 @@ namespace FinalProject1
         /// Call BuildSqlCommand and Execute the command
         /// </summary>
         /// <param name="commandString">SQL string command to be executed</param>
-        /// <returns>Result from the query</returns>
+        /// <returns>Number of affected rows</returns>
         protected int ExecuteNonQuery(string commandString)
         {
             BuildSqlCommand(commandString);
