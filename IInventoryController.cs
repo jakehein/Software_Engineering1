@@ -16,7 +16,7 @@ namespace FinalProject1
 
         List<string> AllPLUs { get; }
 
-        Item GetItem(string pLU);
+        ItemDTO GetItem(string pLU);
 
         List<ItemDTO> GetAllItems();
     }
