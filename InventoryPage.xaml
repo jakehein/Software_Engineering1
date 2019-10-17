@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="FinalProject1.InventoryPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FinalProject1"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="#FFF1F1F1">
+        <ListBox x:Name="InventoryListBox" HorizontalAlignment="Left" Height="351" Margin="451,66,0,0" VerticalAlignment="Top" Width="312" FontSize="15" SelectionChanged="InventoryListBox_SelectionChanged">
+
+        </ListBox>
+        <ComboBox x:Name="InventoryListCombo" HorizontalAlignment="Left" Margin="451,17,0,0" VerticalAlignment="Top" Width="312" Height="44" BorderBrush="White" Foreground="White" Background="White" SelectionChanged="InventoryListCombo_SelectionChanged"/>
+        <Label x:Name="UPCLabel" Content="UPC:" HorizontalAlignment="Left" Margin="93,62,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <TextBox x:Name="UPCText" HorizontalAlignment="Left" Height="24" Margin="141,66,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="259" FontSize="16"/>
+        <Label x:Name="NameLabel" Content="Name:" HorizontalAlignment="Left" Margin="80,94,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <TextBox x:Name="NameText" HorizontalAlignment="Left" Height="24" Margin="141,98,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="259" FontSize="16"/>
+        <Label x:Name="QuantityLabel" Content="Quantity:" HorizontalAlignment="Left" Margin="64,225,0,0" VerticalAlignment="Top" Width="78" FontSize="16"/>
+        <TextBox x:Name="QuantityText" HorizontalAlignment="Left" Height="24" Margin="141,230,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="259" FontSize="16"/>
+        <Label x:Name="PriceLabel" Content="Price:" HorizontalAlignment="Left" Margin="88,193,0,0" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="0.483,1.443"/>
+        <TextBox x:Name="PriceText" HorizontalAlignment="Left" Height="24" Margin="141,196,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="259" FontSize="16"/>
+        <Label x:Name="CategoryLabel" Content="Category:" HorizontalAlignment="Left" Margin="59,127,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <TextBox x:Name="CategoryText" HorizontalAlignment="Left" Height="24" Margin="141,131,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="259" FontSize="16"/>
+        <Label x:Name="IDLabel" Content="ID:" HorizontalAlignment="Left" Margin="107,158,0,0" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="0.642,-1.793"/>
+        <TextBox x:Name="IDText" HorizontalAlignment="Left" Height="24" Margin="141,164,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="259"/>
+        <Button x:Name="SaveBtn" Content="Save" HorizontalAlignment="Left" Margin="159,265,0,0" VerticalAlignment="Top" Width="83" FontSize="16" Height="41" Click="SaveBtn_Click" ClickMode="Press"/>
+        <Button x:Name="UpdateBtn" Content="Update" HorizontalAlignment="Left" Margin="280,265,0,0" VerticalAlignment="Top" Width="83" FontSize="16" Height="41" Click="UpdateBtn_Click" ClickMode="Press"/>
+        <Button x:Name="DeleteBtn" Content="Delete" HorizontalAlignment="Left" Margin="159,322,0,0" VerticalAlignment="Top" Width="83" Height="41" FontSize="16" Click="DeleteBtn_Click" ClickMode="Press"/>
+        <Button x:Name="ExitBtn" Content="Exit" HorizontalAlignment="Left" Margin="280,322,0,0" VerticalAlignment="Top" Width="83" Height="41" FontSize="16" Click="ExitBtn_Click" ClickMode="Press"/>
+        <Button x:Name="LogOutBtn" Content="Logout" HorizontalAlignment="Left" Margin="27,398,0,0" VerticalAlignment="Top" Width="75" FontSize="16" Click="LogOutBtn_Click" ClickMode="Press"/>
+
+    </Grid>
+</UserControl>
