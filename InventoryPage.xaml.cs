@@ -27,8 +27,8 @@ namespace FinalProject1
             public InventoryPage()
         {
                 InitializeComponent();
-                FillItemCombo();
-                FillItemList();
+                //FillItemCombo();
+                //FillItemList();
                 inventoryControl = new InventoryController(iDA);
             }
 
@@ -65,8 +65,7 @@ namespace FinalProject1
             /// </summary>
             private void InventoryListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
             {
-            string text = InventoryListBox.SelectedItem.ToString();
-            //string text = InventoryListBox.SelectedItem.ToString();
+                string text = InventoryListBox.SelectedItem.ToString();
                 ItemDTO itm = inventoryControl.GetItem(text);
 
                 UPCText.Text = itm.UPC;

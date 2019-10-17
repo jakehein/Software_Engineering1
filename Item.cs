@@ -70,7 +70,7 @@ namespace FinalProject1
             dto.Quantity = item.Quantity;
             dto.Price = item.Price;
             dto.Category = item.Category;
-            dto.Category = item.CategoryID;
+            dto.CategoryID = item.CategoryID;
             return dto;
         }
     }
