@@ -20,16 +20,16 @@ namespace FinalProject1
     /// </summary>
     public partial class InventoryPage : UserControl
     {
-        // what is InventoryDataAccess iDA variable for??
         IInventoryDataAccess iDA = new InventoryDataAccess();
-        //InventoryDataAccess iDA = new IInventoryDataAccess();
-        InventoryController inventoryControl = new InventoryController(iDA);
+        //InventoryController inventoryControl = new InventoryController(iDA);
+        InventoryController inventoryControl;
 
         public InventoryPage()
         {
             InitializeComponent();
             FillItemCombo();
             FillItemList();
+            inventoryControl = new InventoryController(iDA);
         }
 
         /// <summary>
@@ -37,11 +37,11 @@ namespace FinalProject1
         /// </summary>
         void FillItemList()
         {
-            List<Item> itemList = inventoryControl.GetAllItems();
+            List<ItemDTO> itemList = inventoryControl.GetAllItems();
 
-            foreach (Item item in itemList)
+            foreach (ItemDTO item in itemList)
             {
-                InventoryListBox.Items.Add(item);
+                InventoryListBox.Items.Add(item.UPC);
             }
         }
 
@@ -51,11 +51,11 @@ namespace FinalProject1
         void FillItemCombo()
         {
             {
-                List<Item> itemList = inventoryControl.GetAllItems();
+                List<ItemDTO> itemList = inventoryControl.GetAllItems();
 
-                foreach (Item item in itemList)
+                foreach (ItemDTO item in itemList)
                 {
-                    InventoryListCombo.Items.Add(item);
+                    InventoryListCombo.Items.Add(item.UPC);
                 }
             }
         }
@@ -66,7 +66,7 @@ namespace FinalProject1
         private void InventoryListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string text = InventoryListBox.SelectedItem.ToString();
-            Item itm = inventoryControl.GetItem(text);
+            ItemDTO itm = inventoryControl.GetItem(text);
 
             UPCText.Text = itm.UPC;
             NameText.Text = itm.Name;
@@ -82,7 +82,7 @@ namespace FinalProject1
         private void InventoryListCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string text = InventoryListCombo.Text;
-            Item itm = inventoryControl.GetItem(text);
+            ItemDTO itm = inventoryControl.GetItem(text);
 
             UPCText.Text = itm.UPC;
             NameText.Text = itm.Name;
@@ -98,7 +98,7 @@ namespace FinalProject1
         /// </summary>
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
-            Item create = GetItemObj();
+            ItemDTO create = GetItemObj();
             Boolean created = inventoryControl.CreateItem(create);
             Boolean valid = Valid(create);
 
@@ -119,7 +119,7 @@ namespace FinalProject1
         /// </summary>
         private void UpdateBtn_Click(object sender, RoutedEventArgs e)
         {
-            Item update = GetItemObj();
+            ItemDTO update = GetItemObj();
             string uPC = UPCText.Text;
 
             Boolean updated = inventoryControl.UpdateItem(uPC, update);
@@ -195,9 +195,9 @@ namespace FinalProject1
         /// This method takes information from the text boxs and converts them into an item object.
         /// </summary>
         /// <returns></returns> Item based of inputs within the information section of the GUI
-        private Item GetItemObj()
+        private ItemDTO GetItemObj()
         {
-            Item itm = new Item();
+            ItemDTO itm = new ItemDTO();
             Category category = new Category();
             category.Name = CategoryText.Text;
 
@@ -223,7 +223,7 @@ namespace FinalProject1
         /// </summary>
         /// <param name="itm"></param> itm we are checking the parameters of
         /// <returns></returns> true if inputs for parameters are all good
-        private bool Valid(Item itm)
+        private bool Valid(ItemDTO itm)
         {
             List<bool> val = new List<bool>();
 
