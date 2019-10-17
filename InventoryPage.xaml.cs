@@ -21,15 +21,14 @@ namespace FinalProject1
     public partial class InventoryPage : Page
     {
 
-            IInventoryDataAccess iDA = new InventoryDataAccess();
-            //InventoryController inventoryControl = new InventoryController(iDA);
-            InventoryController inventoryControl;
+        //InventoryController inventoryControl = new InventoryController(iDA);
+        InventoryController inventoryControl;
             public InventoryPage()
         {
                 InitializeComponent();
                 FillItemCombo();
                 FillItemList();
-                inventoryControl = new InventoryController(iDA);
+                inventoryControl = new InventoryController(new InventoryDataAccess());
             }
 
             /// <summary>
@@ -65,7 +64,7 @@ namespace FinalProject1
             /// </summary>
             private void InventoryListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
             {
-            string text = InventoryListBox.SelectedItem.ToString();
+            ItemDTO itemDTO = (ItemDTO)InventoryListBox.SelectedItem;
             //string text = InventoryListBox.SelectedItem.ToString();
                 ItemDTO itm = inventoryControl.GetItem(text);
 

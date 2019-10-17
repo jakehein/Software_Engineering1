@@ -38,7 +38,7 @@ namespace FinalProject1
                     _price = 0.0m;
                     DataWarnings.Add("Price cannot be less than 0");
                 }
-                else;
+                else
                 {
                     _price = value;
                 }
@@ -70,7 +70,7 @@ namespace FinalProject1
             dto.Quantity = item.Quantity;
             dto.Price = item.Price;
             dto.Category = item.Category;
-            dto.Category = item.CategoryID;
+            dto.CategoryID = item.CategoryID;
             return dto;
         }
     }
