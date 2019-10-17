@@ -64,7 +64,7 @@ namespace FinalProject1
             /// </summary>
             private void InventoryListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
             {
-            ItemDTO itemDTO = (ItemDTO)InventoryListBox.SelectedItem;
+            string text = InventoryListBox.SelectedItem.ToString();
             //string text = InventoryListBox.SelectedItem.ToString();
                 ItemDTO itm = inventoryControl.GetItem(text);
 
