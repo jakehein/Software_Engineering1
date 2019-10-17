@@ -8,54 +8,61 @@ using System.Configuration;
 
 namespace FinalProject1
 {
-    class InventoryDataAccess : IInventoryDataAccess
+    class InventoryDataAccess : SQLDB, IInventoryDataAccess
     {
-        // Table and Column identifiers
+        // Table identifiers
         private const string ItemTableName = "Item",
-                             CategoryColumn = "CategoryID",
+                             CategoryTableName = "Category";
+
+        // Column identifiers
+        private const string CategoryColumn = "CategoryID",
                              ItemIDColumn = "ItemID",
                              NameColumn = "Name",
                              PriceColumn = "Price",
                              QuantityColumn = "Quantity",
-                             UPCColumn = "UPC";
+                             UPCColumn = "UPC",
+                             CategoryNameColumn = "Name";
 
-        private string connectionStringToDB = ConfigurationManager.ConnectionStrings["MySQLDB"].ConnectionString;
-        private MySqlConnection OpenConnection()
+        //private string connectionStringToDB = ConfigurationManager.ConnectionStrings["MySQLDB"].ConnectionString;
+        //private MySqlConnection OpenConnection()
+        //{
+        //    MySqlConnection conn = new MySqlConnection(connectionStringToDB);
+        //    conn.Open();
+        //    return conn;
+        //}
+
+
+        /// <summary>
+        /// Check if an Item with the passed in UPC already exists
+        /// </summary>
+        /// <param name="upc">UPC to check</param>
+        /// <returns>True if UPC Exists in database</returns>
+        private bool DoesUPCExist(string uPC)
         {
-            MySqlConnection conn = new MySqlConnection(connectionStringToDB);
-            conn.Open();
-            return conn;
+            //bool result = false;
+            string commandString = "SELECT EXISTS(SELECT 1 FROM " + ItemTableName +
+                                    " WHERE " + UPCColumn + " = '" + uPC + "' LIMIT 1)";
+            //MySqlConnection conn = OpenConnection();
+            //MySqlCommand cmd = new MySqlCommand(commandString, conn);
+            //result = int.Parse(cmd.ExecuteScalar().ToString()) == 1;
+            //cmd.Dispose();
+            //conn.Close();
+            return int.Parse(ExecuteScalar(commandString).ToString()) == 0;
         }
 
-        /*
-         * Check if an item with the given upc already exists in the database
-         * Returns true if the item exists
-         */
-        private bool DoesUPCExist(string upc)
-        {
-            bool result = false;
-            string commandString = "SELECT EXISTS(SELECT 1 FROM " + TableName +
-                                    " WHERE " + UPCColumn + " = '" + upc + "' LIMIT 1)";
-            MySqlConnection conn = OpenConnection();
-            MySqlCommand cmd = new MySqlCommand(commandString, conn);
-            result = int.Parse(cmd.ExecuteScalar().ToString()) == 1;
-            cmd.Dispose();
-            conn.Close();
-            return result;
-        }
-
-        /*
-         * Add the passed in Item to the DB if it doesn't already exist
-         * Returns true if Item is successfully added
-         */
+        /// <summary>
+        /// Add a new Item to the database if it doesn't already exist
+        /// </summary>
+        /// <param name="item">Item to be added</param>
+        /// <returns>True if Item added successfully</returns>
         public bool CreateItem(Item item)
         {
             int result = -1;
-            if (!DoesUPCExist(/*item.UPC*/""))
+            if (!DoesUPCExist(item.UPC))
             {
-                MySqlConnection conn = OpenConnection();
+                //MySqlConnection conn = OpenConnection();
 
-                string commandString = "INSERT INTO " + TableName +
+                string commandString = "INSERT INTO " + ItemTableName +
                                         "(" + CategoryColumn + ", " +
                                         "(" + NameColumn + ", " +
                                         "(" + PriceColumn + ", " +
@@ -67,126 +74,152 @@ namespace FinalProject1
                                         item.Price + ", " +
                                         item.Quantity + ", '" +
                                         item.UPC + "')";
-                MySqlCommand cmd = new MySqlCommand(commandString, conn);
-                result = cmd.ExecuteNonQuery();
-                cmd.Dispose();
-                conn.Close();
+                //MySqlCommand cmd = new MySqlCommand(commandString, conn);
+                //result = cmd.ExecuteNonQuery();
+                //cmd.Dispose();
+                //conn.Close();
+                result = ExecuteNonQuery(commandString);
             }
             return result > 0;
         }
 
-        /*
-         * Update the DB table values of an Item
-         * returns true if the Item is successfully updated
-         */
-        public bool UpdateItem(string pLU, Item item)
+        /// <summary>
+        /// Update the values of a passed in Item
+        /// </summary>
+        /// <param name="uPC">Original UPC of item</param>
+        /// <param name="item">Item with new values</param>
+        /// <returns>True if Item updated</returns>
+        public bool UpdateItem(string uPC, Item item)
         {
-            if (DoesUPCExist(item.UPC))
-            {
-                MySqlConnection conn = OpenConnection();
-                string commandString = "UPDATE " + TableName + " SET " + 
+                //MySqlConnection conn = OpenConnection();
+                string commandString = "UPDATE " + ItemTableName + " SET " + 
                                        CategoryColumn + " = " + item.Category.CategoryID +
                                        ", " + NameColumn  + " = '" + item.Name +
                                        "', " + PriceColumn + " = " + item.Price +
                                        ", " + QuantityColumn + " = " + item.Quantity + 
                                        ", '" + UPCColumn + " = '" + item.UPC +
                                        "' WHERE " + ItemIDColumn + " = " + item.ItemID;
-                MySqlCommand cmd = new MySqlCommand(commandString, conn);
-                cmd.ExecuteNonQuery();
-                cmd.Dispose();
-                conn.Close();
-                return true;
-            }
-            return false;
+                //MySqlCommand cmd = new MySqlCommand(commandString, conn);
+                //cmd.ExecuteNonQuery();
+                //cmd.Dispose();
+                //conn.Close();
+                return ExecuteNonQuery(commandString) > 0;
         }
 
-        /*
-         * Delete an Item from the DB table if it exists
-         * Returns true if the item is removed
-         */
-        public bool DeleteItem(string pLU)
+        /// <summary>
+        /// Delete an Item with the passed in UPC from the database
+        /// </summary>
+        /// <param name="uPC">UPC of Item to be deleted</param>
+        /// <returns>True if Item deleted</returns>
+        public bool DeleteItem(string uPC)
         {
-            int result = -1;
-            MySqlConnection conn = OpenConnection();
-            string commandString = "DELETE FROM " + TableName +
-                                   " WHERE " + UPCColumn + " = '" + pLU + "'";
-            MySqlCommand cmd = new MySqlCommand(commandString, conn);
-            result = cmd.ExecuteNonQuery();
-            cmd.Dispose();
-            conn.Close();
-            return result > 0;
+            //int result = -1;
+            //MySqlConnection conn = OpenConnection();
+            string commandString = "DELETE FROM " + ItemTableName +
+                                   " WHERE " + UPCColumn + " = '" + uPC + "'";
+            //MySqlCommand cmd = new MySqlCommand(commandString, conn);
+            //result = cmd.ExecuteNonQuery();
+            //cmd.Dispose();
+            //conn.Close();
+            //return result > 0;
+            return ExecuteNonQuery(commandString) > 0;
         }
 
-        /*
-         * Returns an Item if it exists otherwise returns null
-         */
-        public Item GetItem(string pLU)
+        /// <summary>
+        /// Get Item corresponding with passed in UPC
+        /// </summary>
+        /// <param name="uPC">Item UPC</param>
+        /// <returns>Item associated with UPC</returns>
+        public Item GetItem(string uPC)
         {
             Item item = null;
-            string commandString = "SELECT * FROM " + TableName +
-                                   " WHERE " + UPCColumn + " = '" + pLU + "' LIMIT 1";
-            MySqlConnection conn = OpenConnection();
-            MySqlCommand cmd = new MySqlCommand(commandString, conn);
-            MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            string commandString = "SELECT * FROM " + ItemTableName +
+                                   " INNER JOIN " + CategoryTableName +
+                                   " ON " + ItemTableName + "." + CategoryColumn + 
+                                   " = " + CategoryTableName + "."  + CategoryColumn +
+                                   " WHERE " + UPCColumn + " = '" + uPC + "' LIMIT 1";
+            //MySqlConnection conn = OpenConnection();
+            //MySqlCommand cmd = new MySqlCommand(commandString, conn);
+            //MySqlDataReader reader = cmd.ExecuteReader();
+            ExecuteReader(commandString);
+            while (Reader.Read())
             {
-                item = ReadInItem(reader);
+                item = ReadInItem();
             }
-            reader.Close();
-            cmd.Dispose();
-            conn.Close();
+            CleanUp();
+            //reader.Close();
+            //cmd.Dispose();
+            //conn.Close();
             return item;
         }
 
-        /*
-         * Returns a List containing all Items in the DB
-         */
+        /// <summary>
+        /// Get all Items stored in the database
+        /// </summary>
+        /// <returns>List containing all Items</returns>
         public List<Item> GetAllItems()
         {
             List<Item> items = new List<Item>();
-            string commandString = "SELECT * FROM " + TableName;
-            MySqlConnection conn = OpenConnection();
-            MySqlCommand cmd = new MySqlCommand(commandString, conn);
-            MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            string commandString = "SELECT * FROM " + ItemTableName + 
+                                   " INNER JOIN " + CategoryTableName +
+                                   " ON " + ItemTableName + "." + CategoryColumn +
+                                   " = " + CategoryTableName + "." + CategoryColumn;
+            //MySqlConnection conn = OpenConnection();
+            //MySqlCommand cmd = new MySqlCommand(commandString, conn);
+            //MySqlDataReader reader = cmd.ExecuteReader();
+            ExecuteReader(commandString);
+            while (Reader.Read())
             {
-                items.Add(ReadInItem(reader));
+                items.Add(ReadInItem());
             }
-            reader.Close();
-            cmd.Dispose();
-            conn.Close();
+            CleanUp();
+            //reader.Close();
+            //cmd.Dispose();
+            //conn.Close();
             return items;
         }
 
-        /*
-         * Returns a List containing all PLUs
-         */
-        public List<string> GetAllPLUs()
+        /// <summary>
+        /// Get all UPCs stored in the database
+        /// </summary>
+        /// <returns>List containing all UPCs</returns>
+        public List<string> GetAllUPCs()
         {
-            List<string> pLUs = new List<string>();
-            string commandString = "SELECT " + UPCColumn + " FROM " + TableName;
-            MySqlConnection conn = OpenConnection();
-            MySqlCommand cmd = new MySqlCommand(commandString, conn);
-            MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            List<string> uPCs = new List<string>();
+            string commandString = "SELECT " + UPCColumn + " FROM " + ItemTableName;
+            //MySqlConnection conn = OpenConnection();
+            //MySqlCommand cmd = new MySqlCommand(commandString, conn);
+            //MySqlDataReader reader = cmd.ExecuteReader();
+            ExecuteReader(commandString);
+            while (Reader.Read())
             {
-                pLUs.Add(reader.GetValue(0).ToString());
+                uPCs.Add(Reader.GetString(UPCColumn));
             }
-            return pLUs;
+            return uPCs;
         }
 
-        /*
-         * Read in a single Item from the DB
-         */
-        private Item ReadInItem(MySqlDataReader reader)
+        /// <summary>
+        /// Read in a single Item using the MySQLDataReader
+        /// </summary>
+        /// <returns>The Item created with the read in values</returns>
+        private Item ReadInItem()
         {
-            Item item = new Item();
-            item.ItemID = reader.GetInt64(ItemIDColumn);
-            item.UPC = reader.GetString(UPCColumn);
-            item.Name = reader.GetString(NameColumn);
-            item.Quantity = reader.GetInt32(QuantityColumn);
-            item.Price = reader.GetFloat(PriceColumn);
-            item.Category = null;
+            Category category = new Category
+            {
+                CategoryID = Reader.GetInt64(CategoryTableName + "." + CategoryColumn),
+                Name = Reader.GetString(CategoryTableName + "." + CategoryNameColumn),
+                Items = null
+            };
+
+            Item item = new Item
+            {
+                ItemID = Reader.GetInt64(ItemIDColumn),
+                UPC = Reader.GetString(UPCColumn),
+                Name = Reader.GetString(NameColumn),
+                Quantity = Reader.GetInt32(QuantityColumn),
+                Price = (decimal)Reader.GetFloat(PriceColumn),
+                Category = category
+            };
             return item;
         }
     }

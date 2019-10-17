@@ -26,6 +26,7 @@ namespace FinalProject1
         public bool CreateItem(Item item)
         {
             //InventoryDataAccess iDA = new IInventoryDataAccess();
+
             if (GetItem(item.GetPLU) != item.GetPLU)
             {
                 iDA.CreateItem(item);
