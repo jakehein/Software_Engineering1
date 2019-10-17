@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace FinalProject1
 {
     /// <summary>
-    /// Interaction logic for UserControl1.xaml
+    /// Interaction logic for Login_Page.xaml
     /// </summary>
-    public partial class LoginPage : UserControl
+    public partial class Login_Page : Page
     {
-        public LoginPage()
+        public Login_Page()
         {
             InitializeComponent();
         }
@@ -45,3 +45,4 @@ namespace FinalProject1
         }
     }
 }
+

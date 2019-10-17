@@ -75,13 +75,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="InventoryPage.xaml.cs">
-      <DependentUpon>InventoryPage.xaml</DependentUpon>
+    <Compile Include="Inventory_Page.xaml.cs">
+      <DependentUpon>Inventory_Page.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LoginPage.xaml.cs">
-      <DependentUpon>LoginPage.xaml</DependentUpon>
-    </Compile>
-    <Page Include="InventoryPage.xaml">
+    <Page Include="Inventory_Page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Login_Page.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -100,6 +101,9 @@
     <Compile Include="ICategoryController.cs" />
     <Compile Include="ICategoryDataAccess.cs" />
     <Compile Include="ItemDTO.cs" />
+    <Compile Include="Login_Page.xaml.cs">
+      <DependentUpon>Login_Page.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SQLDB.cs" />
     <Compile Include="IInventoryController.cs" />
     <Compile Include="IInventoryDataAccess.cs" />
@@ -110,10 +114,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="LoginPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
