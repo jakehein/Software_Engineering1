@@ -23,13 +23,14 @@ namespace FinalProject1
         // what is InventoryDataAccess iDA variable for??
         IInventoryDataAccess iDA = new InventoryDataAccess();
         //InventoryDataAccess iDA = new IInventoryDataAccess();
-        InventoryController inventoryControl = new InventoryController(iDA);
+        
 
         public InventoryPage()
         {
             InitializeComponent();
             FillItemCombo();
             FillItemList();
+            InventoryController inventoryControl = new InventoryController(iDA);
         }
 
         /// <summary>
