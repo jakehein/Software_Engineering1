@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FinalProject1
 {
-    class CategoryController
+    class CategoryController : ICategoryController
     {
         private const int NameLength = 50;
         private ICategoryDataAccess categoryDataAccess = null;

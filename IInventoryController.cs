@@ -10,13 +10,13 @@ namespace FinalProject1
     {
         bool CreateItem(ItemDTO item);
 
-        bool UpdateItem(string pLU, ItemDTO item);
+        bool UpdateItem(string uPC, ItemDTO item);
 
-        bool DeleteItem(string pLU);
+        bool DeleteItem(string uPC);
 
-        List<string> AllPLUs { get; }
+        List<string> AllUPCs { get; }
 
-        ItemDTO GetItem(string pLU);
+        ItemDTO GetItem(string uPC);
 
         List<ItemDTO> GetAllItems();
     }
