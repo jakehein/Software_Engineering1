@@ -8,9 +8,9 @@ namespace FinalProject1
 {
     interface ICategoryController
     {
-        bool CreateCategory(Category category);
-        Category GetCategory(long categoryID);
-        List<Category> GetAllCategories();
-        List<Category> GetAllCategoriesWithItems();
+        bool CreateCategory(CategoryDTO category);
+        CategoryDTO GetCategory(long categoryID);
+        List<CategoryDTO> GetAllCategories();
+        List<CategoryDTO> GetAllCategoriesWithItems();
     }
 }

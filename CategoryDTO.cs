@@ -17,5 +17,12 @@ namespace FinalProject1
         {
             return Name;
         }
+
+        override
+            public bool Equals(Object obj)
+        {
+            CategoryDTO c = obj as CategoryDTO;
+            return c != null && c.CategoryID == CategoryID;
+        }
     }
 }

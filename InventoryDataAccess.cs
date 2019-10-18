@@ -52,7 +52,7 @@ namespace FinalProject1
             //result = int.Parse(cmd.ExecuteScalar().ToString()) == 1;
             //cmd.Dispose();
             //conn.Close();
-            return int.Parse(ExecuteScalar(commandString).ToString()) == 0;
+            return int.Parse(ExecuteScalar(commandString).ToString()) > 0;
         }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace FinalProject1
                                        ", " + NameColumn  + " = '" + item.Name +
                                        "', " + PriceColumn + " = " + item.Price +
                                        ", " + QuantityColumn + " = " + item.Quantity + 
-                                       ", '" + UPCColumn + " = '" + item.UPC +
+                                       ", " + UPCColumn + " = '" + item.UPC +
                                        "' WHERE " + ItemIDColumn + " = " + item.ItemID;
                 //MySqlCommand cmd = new MySqlCommand(commandString, conn);
                 //cmd.ExecuteNonQuery();

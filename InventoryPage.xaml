@@ -9,26 +9,22 @@
       Title="Inventory_Page">
 
     <Grid Background="#FFF1F1F1">
-        <ListBox x:Name="InventoryListBox" HorizontalAlignment="Left" Height="351" Margin="451,66,0,0" VerticalAlignment="Top" Width="312" FontSize="15" SelectionChanged="InventoryListBox_SelectionChanged">
+        <ListBox x:Name="InventoryListBox" Margin="451,66,37,33" FontSize="15" SelectionChanged="InventoryListBox_SelectionChanged"/>
+        <ComboBox x:Name="InventoryListCombo" Margin="451,17,37,0" VerticalAlignment="Top" Height="44" BorderBrush="White" Foreground="White" Background="White" SelectionChanged="InventoryListCombo_SelectionChanged"/>
+        <Label x:Name="UPCLabel" Content="UPC:" HorizontalAlignment="Left" Margin="93,62,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <TextBox x:Name="UPCText" HorizontalAlignment="Left" Height="24" Margin="141,66,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="259" FontSize="16"/>
+        <Label x:Name="NameLabel" Content="Name:" HorizontalAlignment="Left" Margin="80,94,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <TextBox x:Name="NameText" HorizontalAlignment="Left" Height="24" Margin="141,98,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="259" FontSize="16"/>
+        <Label x:Name="QuantityLabel" Content="Quantity:" HorizontalAlignment="Left" Margin="64,193,0,0" VerticalAlignment="Top" Width="78" FontSize="16"/>
+        <TextBox x:Name="QuantityText" HorizontalAlignment="Left" Height="24" Margin="141,198,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="259" FontSize="16"/>
+        <Label x:Name="PriceLabel" Content="Price:" HorizontalAlignment="Left" Margin="88,161,0,0" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="0.483,1.443"/>
+        <TextBox x:Name="PriceText" HorizontalAlignment="Left" Height="24" Margin="141,164,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="259" FontSize="16"/>
+        <Label x:Name="CategoryLabel" Content="Category:" HorizontalAlignment="Left" Margin="59,127,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Button x:Name="SaveBtn" Content="Save" HorizontalAlignment="Left" Margin="159,233,0,0" VerticalAlignment="Top" Width="83" FontSize="16" Height="41" Click="SaveBtn_Click" ClickMode="Press"/>
+        <Button x:Name="UpdateBtn" Content="Update" HorizontalAlignment="Left" Margin="280,233,0,0" VerticalAlignment="Top" Width="83" FontSize="16" Height="41" Click="UpdateBtn_Click" ClickMode="Press"/>
+        <Button x:Name="DeleteBtn" Content="Delete" HorizontalAlignment="Left" Margin="159,290,0,0" VerticalAlignment="Top" Width="83" Height="41" FontSize="16" Click="DeleteBtn_Click" ClickMode="Press"/>
+        <Button x:Name="ExitBtn" Content="Exit" HorizontalAlignment="Left" Margin="280,290,0,0" VerticalAlignment="Top" Width="83" Height="41" FontSize="16" Click="ExitBtn_Click" ClickMode="Press"/>
+        <ComboBox x:Name="CategoryListCombo" HorizontalAlignment="Left" Margin="141,131,0,0" VerticalAlignment="Top" Width="259" Height="24"/>
 
-            </ListBox>
-            <ComboBox x:Name="InventoryListCombo" HorizontalAlignment="Left" Margin="451,17,0,0" VerticalAlignment="Top" Width="312" Height="44" BorderBrush="White" Foreground="White" Background="White" SelectionChanged="InventoryListCombo_SelectionChanged"/>
-            <Label x:Name="UPCLabel" Content="UPC:" HorizontalAlignment="Left" Margin="93,62,0,0" VerticalAlignment="Top" FontSize="16"/>
-            <TextBox x:Name="UPCText" HorizontalAlignment="Left" Height="24" Margin="141,66,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="259" FontSize="16"/>
-            <Label x:Name="NameLabel" Content="Name:" HorizontalAlignment="Left" Margin="80,94,0,0" VerticalAlignment="Top" FontSize="16"/>
-            <TextBox x:Name="NameText" HorizontalAlignment="Left" Height="24" Margin="141,98,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="259" FontSize="16"/>
-            <Label x:Name="QuantityLabel" Content="Quantity:" HorizontalAlignment="Left" Margin="64,225,0,0" VerticalAlignment="Top" Width="78" FontSize="16"/>
-            <TextBox x:Name="QuantityText" HorizontalAlignment="Left" Height="24" Margin="141,230,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="259" FontSize="16"/>
-            <Label x:Name="PriceLabel" Content="Price:" HorizontalAlignment="Left" Margin="88,193,0,0" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="0.483,1.443"/>
-            <TextBox x:Name="PriceText" HorizontalAlignment="Left" Height="24" Margin="141,196,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="259" FontSize="16"/>
-            <Label x:Name="CategoryLabel" Content="Category:" HorizontalAlignment="Left" Margin="59,127,0,0" VerticalAlignment="Top" FontSize="16"/>
-            <TextBox x:Name="CategoryText" HorizontalAlignment="Left" Height="24" Margin="141,131,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="259" FontSize="16"/>
-            <Label x:Name="IDLabel" Content="ID:" HorizontalAlignment="Left" Margin="107,158,0,0" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="0.642,-1.793"/>
-            <TextBox x:Name="IDText" HorizontalAlignment="Left" Height="24" Margin="141,164,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="259"/>
-            <Button x:Name="SaveBtn" Content="Save" HorizontalAlignment="Left" Margin="159,265,0,0" VerticalAlignment="Top" Width="83" FontSize="16" Height="41" Click="SaveBtn_Click" ClickMode="Press"/>
-            <Button x:Name="UpdateBtn" Content="Update" HorizontalAlignment="Left" Margin="280,265,0,0" VerticalAlignment="Top" Width="83" FontSize="16" Height="41" Click="UpdateBtn_Click" ClickMode="Press"/>
-            <Button x:Name="DeleteBtn" Content="Delete" HorizontalAlignment="Left" Margin="159,322,0,0" VerticalAlignment="Top" Width="83" Height="41" FontSize="16" Click="DeleteBtn_Click" ClickMode="Press"/>
-            <Button x:Name="ExitBtn" Content="Exit" HorizontalAlignment="Left" Margin="280,322,0,0" VerticalAlignment="Top" Width="83" Height="41" FontSize="16" Click="ExitBtn_Click" ClickMode="Press"/>
-
-        </Grid>
+    </Grid>
 </Page>
