@@ -21,7 +21,7 @@ namespace FinalProject1
     public partial class InventoryPage : Page
     {
 
-            IInventoryDataAccess iDA = new InventoryDataAccess();
+            IInventoryDataAccess iDA = new InventoryDataAccess(new CategoryDataAccess());
             InventoryController inventoryControl;
             public InventoryPage()
         {
