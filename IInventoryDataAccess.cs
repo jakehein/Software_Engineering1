@@ -8,16 +8,16 @@ namespace FinalProject1
 {
     interface IInventoryDataAccess
     {
-        bool CreateItem(Item item);
+        bool CreateItem(ItemDTO item);
 
-        bool UpdateItem(string uPC, Item item);
+        bool UpdateItem(string uPC, ItemDTO item);
 
         bool DeleteItem(string uPC);
 
         List<string> GetAllUPCs();
 
-        Item GetItem(string uPC);
+        ItemDTO GetItem(string uPC);
 
-        List<Item> GetAllItems();
+        List<ItemDTO> GetAllItems();
     }
 }

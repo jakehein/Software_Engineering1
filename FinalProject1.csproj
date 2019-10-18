@@ -79,8 +79,10 @@
     <Compile Include="Category.cs" />
     <Compile Include="CategoryController.cs" />
     <Compile Include="CategoryDataAccess.cs" />
+    <Compile Include="CategoryDTO.cs" />
     <Compile Include="ICategoryController.cs" />
     <Compile Include="ICategoryDataAccess.cs" />
+    <Compile Include="ItemDTO.cs" />
     <Compile Include="SQLDB.cs" />
     <Compile Include="IInventoryController.cs" />
     <Compile Include="IInventoryDataAccess.cs" />

@@ -11,7 +11,7 @@ namespace FinalProject1
         /**
          * private global iDA with constructor
          */
-         private IInventoryDataAccess iDA;
+         private IInventoryDataAccess iDA = new InventoryDataAccess();
          public InventoryController(IInventoryDataAccess iDA)
          {
              this.iDA = iDA;
@@ -23,11 +23,13 @@ namespace FinalProject1
          * @param item object being created in iDA
          * @return boolean detailing if operation was carried out
          */
-        public bool CreateItem(Item item)
+        public bool CreateItem(ItemDTO item)
         {
             //InventoryDataAccess iDA = new IInventoryDataAccess();
 
-            if (GetItem(item.GetPLU) != item.GetPLU)
+            Item newItem = Item.createItemFromDTO(item);
+
+            if (GetItem(item.UPC).UPC != item.UPC && newItem.DataWarnings.Count == 0)
             {
                 iDA.CreateItem(item);
                 return true;
@@ -68,9 +70,10 @@ namespace FinalProject1
             {
                 //InventoryDataAccess iDA = new IInventoryDataAccess();
                 List<string> allPLUs = new List<string>();
-                foreach (Item item in iDA)
+                List<ItemDTO> items = new List<ItemDTO>();
+                foreach (ItemDTO item in items)
                 {
-                    allPLUs.Add(item.GetPLU);
+                    allPLUs.Add(item.UPC);
                 }
                 return allPLUs;
                 //throw new NotImplementedException();
@@ -81,15 +84,11 @@ namespace FinalProject1
 * This method creates a list of all Item objects contained in iDA
 * @return List<Item> of all Item objects contained in iDA
 */
-        public List<Item> GetAllItems()
+        public List<ItemDTO> GetAllItems()
         {
             //InventoryDataAccess iDA = new IInventoryDataAccess();
-            List<Item> allPLUs = new List<Item>();
-            foreach (Item item in iDA)
-            {
-                allPLUs.Add(item);
-            }
-            return allPLUs;
+            return iDA.GetAllItems();
+
             //throw new NotImplementedException();
         }
         /**
@@ -97,15 +96,10 @@ namespace FinalProject1
          * @param pLU value being searched for in iDA
          * @return Item object contained in iDA
          */
-        public Item GetItem(string pLU)
+        public ItemDTO GetItem(string uPC)
         {
-            //InventoryDataAccess iDA = new IInventoryDataAccess();
-            foreach (Item item in iDA)
-            {
-                if (item.GetPLU.equals(pLU))
-                    return item;
-            }
-            throw new Exception("ERROR: Item doesn't exist!");
+            IInventoryDataAccess iDA = new InventoryDataAccess();
+            return iDA.GetItem(uPC);
             //throw new NotImplementedException();
         }
         /**
@@ -115,12 +109,16 @@ namespace FinalProject1
          * @param item object being updated
          * @return boolean detailing if operation was carried out
          */
-        public bool UpdateItem(string pLU, Item item)
+        public bool UpdateItem(string pLU, ItemDTO itemDTO)
         {
             //InventoryDataAccess iDA = new IInventoryDataAccess();
-            if (AllPLUs.Contains(pLU) && GetItem(item.GetPLU) != item.GetPLU)
+            List<string> existingUPCs = iDA.GetAllUPCs();
+
+            Item item = Item.createItemFromDTO(itemDTO);
+
+            if (existingUPCs.Contains(pLU) && item.DataWarnings.Count == 0)
             {
-                iDA.UpdateItem(pLU, item);
+                iDA.UpdateItem(pLU, itemDTO);
                 return true;
             }
             else

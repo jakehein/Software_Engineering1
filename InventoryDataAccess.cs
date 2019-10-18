@@ -62,7 +62,7 @@ namespace FinalProject1
         /// </summary>
         /// <param name="item">Item to be added</param>
         /// <returns>True if Item added successfully</returns>
-        public bool CreateItem(Item item)
+        public bool CreateItem(ItemDTO item)
         {
             int result = -1;
             if (!DoesUPCExist(item.UPC))
@@ -96,7 +96,7 @@ namespace FinalProject1
         /// <param name="uPC">Original UPC of item</param>
         /// <param name="item">Item with new values</param>
         /// <returns>True if Item updated</returns>
-        public bool UpdateItem(string uPC, Item item)
+        public bool UpdateItem(string uPC, ItemDTO item)
         {
                 //MySqlConnection conn = OpenConnection();
                 string commandString = "UPDATE " + ItemTableName + " SET " + 
@@ -137,9 +137,9 @@ namespace FinalProject1
         /// </summary>
         /// <param name="uPC">Item UPC</param>
         /// <returns>Item associated with UPC</returns>
-        public Item GetItem(string uPC)
+        public ItemDTO GetItem(string uPC)
         {
-            Item item = null;
+            ItemDTO item = null;
             //string commandString = "SELECT * FROM " + ItemTableName +
             //                       " INNER JOIN " + CategoryTableName +
             //                       " ON " + ItemTableName + "." + CategoryColumn + 
@@ -167,9 +167,9 @@ namespace FinalProject1
         /// Get all Items stored in the database
         /// </summary>
         /// <returns>List containing all Items</returns>
-        public List<Item> GetAllItems()
+        public List<ItemDTO> GetAllItems()
         {
-            List<Item> items = new List<Item>();
+            List<ItemDTO> items = new List<ItemDTO>();
             //string commandString = "SELECT * FROM " + ItemTableName + 
             //                       " INNER JOIN " + CategoryTableName +
             //                       " ON " + ItemTableName + "." + CategoryColumn +
@@ -214,7 +214,7 @@ namespace FinalProject1
         /// Read in a single Item using the MySQLDataReader
         /// </summary>
         /// <returns>The Item created with the read in values</returns>
-        private Item ReadInItem()
+        private ItemDTO ReadInItem()
         {
             //Category category = new Category
             //{
@@ -223,7 +223,7 @@ namespace FinalProject1
             //    Items = null
             //};
 
-            Item item = new Item
+            ItemDTO item = new ItemDTO
             {
                 ItemID = Reader.GetInt64(ItemIDColumn),
                 UPC = Reader.GetString(UPCColumn),

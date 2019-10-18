@@ -8,9 +8,9 @@ namespace FinalProject1
 {
     interface IInventoryController
     {
-        bool CreateItem(Item item);
+        bool CreateItem(ItemDTO item);
 
-        bool UpdateItem(string pLU, Item item);
+        bool UpdateItem(string pLU, ItemDTO item);
 
         bool DeleteItem(string pLU);
 
@@ -18,6 +18,6 @@ namespace FinalProject1
 
         Item GetItem(string pLU);
 
-        List<Item> GetAllItems();
+        List<ItemDTO> GetAllItems();
     }
 }
