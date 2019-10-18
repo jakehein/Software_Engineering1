@@ -21,16 +21,16 @@ namespace FinalProject1
     public partial class InventoryPage : Page
     {
 
-            IInventoryDataAccess iDA = new InventoryDataAccess();
+            IInventoryDataAccess iDA = new InventoryDataAccess(new CategoryDataAccess());
             //InventoryController inventoryControl = new InventoryController(iDA);
-            InventoryController inventoryControl;
+            IInventoryController inventoryControl;
             public InventoryPage()
         {
                 InitializeComponent();
-                //FillItemCombo();
-                //FillItemList();
-                inventoryControl = new InventoryController(iDA);
-            }
+            inventoryControl = new InventoryController(iDA);
+            //FillItemCombo();
+            //FillItemList();
+        }
 
             /// <summary>
             /// This method populates the items scrollable list based on items in the inventory database.

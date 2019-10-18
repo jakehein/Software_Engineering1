@@ -15,5 +15,11 @@ namespace FinalProject1
         public decimal? Price { get; set; }
         public Category Category { get; set; }
         public long CategoryID { get; set; }
+
+        override
+        public string ToString()
+        {
+            return Name;
+        }
     }
 }

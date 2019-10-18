@@ -24,8 +24,6 @@ namespace FinalProject1
                              CategoryNameColumn = "Name";
 
         private ICategoryDataAccess categoryDataAccess = null;
-
-        public InventoryDataAccess() { }
         public InventoryDataAccess(ICategoryDataAccess categoryDataAccess)
         {
             this.categoryDataAccess = categoryDataAccess;
@@ -71,10 +69,10 @@ namespace FinalProject1
 
                 string commandString = "INSERT INTO " + ItemTableName +
                                         "(" + CategoryColumn + ", " +
-                                        "(" + NameColumn + ", " +
-                                        "(" + PriceColumn + ", " +
-                                        "(" + QuantityColumn + ", " +
-                                        "(" + UPCColumn + ")" +
+                                        " " + NameColumn + ", " +
+                                        " " + PriceColumn + ", " +
+                                        " " + QuantityColumn + ", " +
+                                        " " + UPCColumn + ")" +
                                         " VALUES(" +
                                         item.Category.CategoryID + ", '" +
                                         item.Name + "', " +
@@ -231,7 +229,7 @@ namespace FinalProject1
                 Quantity = Reader.GetInt32(QuantityColumn),
                 Price = (decimal)Reader.GetFloat(PriceColumn),
                 //Category = category
-                Category = Category.createCategoryFromDTO(categoryDataAccess.GetCategory((long)Reader.GetDecimal(CategoryColumn)))
+                Category = Category.createCategoryFromDTO(categoryDataAccess.GetCategory((long)Reader.GetInt64(CategoryColumn)))
             };
             return item;
         }

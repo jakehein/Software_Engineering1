@@ -11,7 +11,7 @@ namespace FinalProject1
         /**
          * private global iDA with constructor
          */
-         private IInventoryDataAccess iDA = new InventoryDataAccess();
+         private IInventoryDataAccess iDA;
          public InventoryController(IInventoryDataAccess iDA)
          {
              this.iDA = iDA;
@@ -29,7 +29,7 @@ namespace FinalProject1
 
             Item newItem = Item.createItemFromDTO(item);
 
-            if (GetItem(item.UPC).UPC == null && newItem.DataWarnings.Count == 0)
+            if (GetItem(item.UPC) == null && newItem.DataWarnings.Count == 0)
             {
                 iDA.CreateItem(item);
                 return true;
@@ -98,7 +98,6 @@ namespace FinalProject1
          */
         public ItemDTO GetItem(string uPC)
         {
-            IInventoryDataAccess iDA = new InventoryDataAccess();
             return iDA.GetItem(uPC);
             //throw new NotImplementedException();
         }

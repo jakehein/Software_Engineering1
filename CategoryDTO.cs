@@ -11,5 +11,11 @@ namespace FinalProject1
         public long CategoryID { get; set; }
         public string Name { get; set; }
         public List<Item> Items { get; set; }
+
+        override
+        public string ToString()
+        {
+            return Name;
+        }
     }
 }
