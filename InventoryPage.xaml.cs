@@ -197,6 +197,9 @@ namespace FinalProject1
             private ItemDTO GetItemObj()
             {
                 ItemDTO itm = new ItemDTO();
+                
+            try
+            {
                 Category category = new Category();
                 category.Name = CategoryText.Text;
 
@@ -207,12 +210,18 @@ namespace FinalProject1
 
                 itm.UPC = uPC;
                 itm.Name = name;
+                itm.Category = category;
                 itm.Quantity = quantity;
                 itm.Price = price;
-                itm.Category = category;
 
                 return itm;
             }
+            catch (System.FormatException ex)
+            {
+                MessageBox.Show("Format is invald. Please try again");
+            }
+                return new ItemDTO();
+        }
 
             /// <summary>
             /// This method we validate the user input against specifications for neccessary item values.
