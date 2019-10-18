@@ -21,16 +21,15 @@ namespace FinalProject1
     public partial class InventoryPage : Page
     {
 
-            IInventoryDataAccess iDA = new InventoryDataAccess(new CategoryDataAccess());
-            //InventoryController inventoryControl = new InventoryController(iDA);
-            IInventoryController inventoryControl;
+            IInventoryDataAccess iDA = new InventoryDataAccess();
+            InventoryController inventoryControl;
             public InventoryPage()
         {
                 InitializeComponent();
-            inventoryControl = new InventoryController(iDA);
-            //FillItemCombo();
-            //FillItemList();
-        }
+                //FillItemCombo();
+                //FillItemList();
+                inventoryControl = new InventoryController(iDA);
+            }
 
             /// <summary>
             /// This method populates the items scrollable list based on items in the inventory database.
@@ -162,7 +161,7 @@ namespace FinalProject1
             /// </summary>
             private void ExitBtn_Click(object sender, RoutedEventArgs e)
             {
-                Window.GetWindow(this).Close();
+                this.NavigationService.Navigate(new MainMenu());
             }
 
             /// <summary>
@@ -205,11 +204,8 @@ namespace FinalProject1
                 string name = NameText.Text;
                 int quantity = int.Parse(QuantityText.Text);
                 decimal price = decimal.Parse(PriceText.Text);
-                string iDStr = IDText.Text;
-                long iD = long.Parse(iDStr);
 
                 itm.UPC = uPC;
-                itm.ItemID = iD;
                 itm.Name = name;
                 itm.Quantity = quantity;
                 itm.Price = price;
