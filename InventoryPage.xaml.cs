@@ -22,7 +22,6 @@ namespace FinalProject1
     {
 
             IInventoryDataAccess iDA = new InventoryDataAccess();
-            //InventoryController inventoryControl = new InventoryController(iDA);
             InventoryController inventoryControl;
             public InventoryPage()
         {
@@ -162,7 +161,7 @@ namespace FinalProject1
             /// </summary>
             private void ExitBtn_Click(object sender, RoutedEventArgs e)
             {
-                Window.GetWindow(this).Close();
+                this.NavigationService.Navigate(new MainMenu());
             }
 
             /// <summary>
@@ -205,11 +204,8 @@ namespace FinalProject1
                 string name = NameText.Text;
                 int quantity = int.Parse(QuantityText.Text);
                 decimal price = decimal.Parse(PriceText.Text);
-                string iDStr = IDText.Text;
-                long iD = long.Parse(iDStr);
 
                 itm.UPC = uPC;
-                itm.ItemID = iD;
                 itm.Name = name;
                 itm.Quantity = quantity;
                 itm.Price = price;
