@@ -23,6 +23,32 @@ namespace FinalProject1
         public MainWindow()
         {
             InitializeComponent();
+
+            // Initializes Login Page
+            MainMenuUI.Content = new LoginPage();
+        }
+
+        /// <summary>
+        /// Logout the original user and allow for a new user to sign in to the system.
+        /// </summary>
+        private void LogoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainMenuUI.Content = new LoginPage();
+        }
+
+        private void InventoryButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainMenuUI.Content = new InventoryPage();
+        }
+
+        private void SalesButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ReturnButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
