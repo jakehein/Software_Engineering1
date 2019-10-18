@@ -81,9 +81,9 @@ namespace FinalProject1
         }
 
         /**
-* This method creates a list of all Item objects contained in iDA
-* @return List<Item> of all Item objects contained in iDA
-*/
+        * This method creates a list of all Item objects contained in iDA
+        * @return List<Item> of all Item objects contained in iDA
+        */
         public List<ItemDTO> GetAllItems()
         {
             //InventoryDataAccess iDA = new IInventoryDataAccess();

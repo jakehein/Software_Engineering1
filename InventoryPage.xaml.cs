@@ -21,10 +21,10 @@ namespace FinalProject1
     public partial class InventoryPage : Page
     {
 
-            IInventoryDataAccess iDA = new InventoryDataAccess(new CategoryDataAccess());
+            InventoryDataAccess iDA = new InventoryDataAccess(new CategoryDataAccess());
             InventoryController inventoryControl;
             public InventoryPage()
-        {
+            {
                 InitializeComponent();
                 //FillItemCombo();
                 //FillItemList();
@@ -40,7 +40,7 @@ namespace FinalProject1
 
                 foreach (ItemDTO item in itemList)
                 {
-                    InventoryListBox.Items.Add(item.UPC);
+                    InventoryListBox.Items.Add(item.ToString());
                 }
             }
 
@@ -50,11 +50,14 @@ namespace FinalProject1
             void FillItemCombo()
             {
                 {
+                    // is it failing due to empty?
                     List<ItemDTO> itemList = inventoryControl.GetAllItems();
-
+                    ItemDTO itm = new ItemDTO();
+                    itm.Name = "coffee";
+                    itemList.Add(itm);
                     foreach (ItemDTO item in itemList)
                     {
-                        InventoryListCombo.Items.Add(item.UPC);
+                        InventoryListCombo.Items.Add(item.ToString());
                     }
                 }
             }
@@ -98,6 +101,11 @@ namespace FinalProject1
             private void SaveBtn_Click(object sender, RoutedEventArgs e)
             {
                 ItemDTO create = GetItemObj();
+
+            bool empty = EmptyInputs();
+            // check if any values are null
+            if (!empty)
+            {
                 Boolean created = inventoryControl.CreateItem(create);
                 Boolean valid = Valid(create);
 
@@ -111,6 +119,12 @@ namespace FinalProject1
                     MessageBox.Show("UPC is already in use or invalid data. Please try again.");
                 }
             }
+            else
+            {
+
+            }
+                
+            }
 
             /// <summary>
             /// This method verifies that the UPC previously exists then updates the product with the
@@ -120,19 +134,28 @@ namespace FinalProject1
             {
                 ItemDTO update = GetItemObj();
                 string uPC = UPCText.Text;
-
-                Boolean updated = inventoryControl.UpdateItem(uPC, update);
-                Boolean valid = Valid(update);
-
-                if (updated && valid)
+                Boolean ifExists = EmptyInputs();
+                if (!ifExists)
                 {
-                    MessageBox.Show("Item was successfully updated.");
-                    ClearInputs();
+                    Boolean updated = inventoryControl.UpdateItem(uPC, update);
+                    Boolean valid = Valid(update);
+
+                    if (updated && valid)
+                    {
+                        MessageBox.Show("Item was successfully updated.");
+                        ClearInputs();
+                    }
+                    else
+                    {
+                        MessageBox.Show("UPC is invalid. Please try again.");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("UPC is invalid. Please try again.");
+                    MessageBox.Show("Empty Inputs. Please try again.");
                 }
+
+                
             }
 
             /// <summary>
@@ -142,6 +165,7 @@ namespace FinalProject1
             private void DeleteBtn_Click(object sender, RoutedEventArgs e)
             {
                 string uPC = UPCText.Text;
+
                 Boolean deleted = inventoryControl.DeleteItem(uPC);
                 Boolean valid = CheckDigits(uPC);
 
@@ -313,5 +337,38 @@ namespace FinalProject1
                 // what needs to be verified here?? Is the ItemID the same as the CategoryID ?
                 return true;
             }
+
+        private Boolean EmptyInputs()
+        {
+            if (UPCText.Text == "")
+            {
+                return true;
+            }
+            else if(NameText.Text == "")
+            {
+                return true;
+            }
+            else if (QuantityText.Text == "")
+            {
+                return true;
+            }
+            else if (PriceText.Text == "")
+            {
+                return true;
+            }
+            else if (CategoryText.Text == "")
+            {
+                return true;
+            }
+            else if(IDText.Text == "")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         }
     }
