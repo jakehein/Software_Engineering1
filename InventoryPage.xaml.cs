@@ -102,13 +102,19 @@ namespace FinalProject1
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
             ItemDTO create = GetItemObj();
-            Boolean created = inventoryControl.CreateItem(create);
-            Boolean valid = Valid(create);
 
-            if (created && valid)
+            if (Valid())
             {
-                MessageBox.Show("Item was successfully created.");
-                ClearInputs();
+                Boolean created = inventoryControl.CreateItem(create);
+                if (created)
+                {
+                    MessageBox.Show("Item was successfully created.");
+                    ClearInputs();
+                }
+                else
+                {
+                    MessageBox.Show("Item could not be created. Please try again.");
+                }
             }
             else
             {
@@ -125,18 +131,22 @@ namespace FinalProject1
             ItemDTO update = GetItemObj();
             string uPC = UPCText.Text;
 
-            //Boolean updated = inventoryControl.UpdateItem(uPC, update);
-            //Boolean valid = Valid(update);
-
-            //if (updated && valid)
-            if( update != null && Valid(update) && inventoryControl.UpdateItem(uPC, update))
+            if (Valid())
             {
-                MessageBox.Show("Item was successfully updated.");
-                ClearInputs();
+                bool updated = inventoryControl.UpdateItem(uPC, update);
+                if (updated)
+                {
+                    MessageBox.Show("Item was successfully updated.");
+                    ClearInputs();
+                }
+                else
+                {
+                    MessageBox.Show("Item could not be updated. Please try again.");
+                }
             }
             else
             {
-                MessageBox.Show("UPC is invalid. Please try again.");
+                MessageBox.Show("Invalid Inputs. Please try again.");
             }
         }
 
@@ -148,9 +158,8 @@ namespace FinalProject1
         {
             string uPC = UPCText.Text;
             Boolean deleted = inventoryControl.DeleteItem(uPC);
-            Boolean valid = CheckDigits(uPC);
 
-            if (deleted && valid)
+            if (deleted)
             {
                 MessageBox.Show("Item was successfully deleted.");
                 ClearInputs();
@@ -211,7 +220,7 @@ namespace FinalProject1
                 string name = NameText.Text;
                 int quantity = int.Parse(QuantityText.Text);
                 decimal price = decimal.Parse(PriceText.Text);
-                itm.ItemID = ((ItemDTO)InventoryListBox.SelectedItem).ItemID;
+                //itm.ItemID = ((ItemDTO)InventoryListBox.SelectedItem).ItemID;
                 itm.UPC = uPC;
                 itm.Name = name;
                 itm.Category = category;
@@ -232,12 +241,40 @@ namespace FinalProject1
         /// </summary>
         /// <param name="itm"></param> itm we are checking the parameters of
         /// <returns></returns> true if inputs for parameters are all good
-        private bool Valid(ItemDTO itm)
+        private bool Valid()
         {
             List<bool> val = new List<bool>();
 
-            // Verify UPC is all Digits
-            val.Add(CheckDigits(itm.UPC));
+            //check if any values are null
+            if (UPCText.Text == null)
+            {
+                val.Add(false);
+            }
+            else if (NameText.Text == null)
+            {
+                val.Add(false);
+            }
+            else if (PriceText.Text == null)
+            {
+                val.Add(false);
+            }
+            else if (QuantityText.Text == null)
+            {
+                val.Add(false);
+            }
+
+            foreach (bool c in val)
+            {
+                if (!c)
+                {
+                    return false;
+                }
+            }
+
+            //check the formats
+            val.Clear();
+
+            val.Add(CheckDigits(UPCText.Text));
 
             // Verify Quantity is all Digits
             val.Add(CheckDigits(QuantityText.Text));
@@ -246,7 +283,7 @@ namespace FinalProject1
             val.Add(CheckPrice(PriceText.Text));
 
             // Verify the Category is valid
-            val.Add(CheckCategory(itm.Category));
+            //val.Add(CheckCategory(itm.Category));
 
             foreach (bool c in val)
             {
@@ -286,11 +323,23 @@ namespace FinalProject1
         {
             char[] charArr = price.ToCharArray();
 
+            if (CheckDigits(price))
+            {
+                return true;
+            }
+
             for (int pos = 0; pos < charArr.Length; pos++)
             {
                 if (pos == (charArr.Length - 3))
                 {
-                    if (charArr[pos] != '.')
+                    if (charArr[pos] != '.' && !Char.IsNumber(charArr[pos]))
+                    {
+                        return false;
+                    }
+                }
+                else if (pos == (charArr.Length - 2))
+                {
+                    if (charArr[pos] != '.' && !Char.IsNumber(charArr[pos]))
                     {
                         return false;
                     }
@@ -311,7 +360,7 @@ namespace FinalProject1
         private Boolean CheckCategory(Category category)
         {
 
-            // what needs to be verified here?? Is the ItemID the same as the CategoryID ?
+            // what needs to be verified here??
             return true;
         }
     }
