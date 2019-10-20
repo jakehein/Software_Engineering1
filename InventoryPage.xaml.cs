@@ -53,12 +53,6 @@ namespace FinalProject1
         void FillItemCombo()
         {
             {
-                //List<ItemDTO> itemList = inventoryControl.GetAllItems();
-
-                //foreach (ItemDTO item in itemList)
-                //{
-                //    InventoryListCombo.Items.Add(item.UPC);
-                //}
                 CategoryListCombo.ItemsSource = categoryControl.GetAllCategories();
             }
         }
@@ -101,7 +95,7 @@ namespace FinalProject1
         /// </summary>
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
-            ItemDTO create = GetItemObj();
+            ItemDTO create = CreateItemObj();
 
             if (Valid())
             {
@@ -220,7 +214,39 @@ namespace FinalProject1
                 string name = NameText.Text;
                 int quantity = int.Parse(QuantityText.Text);
                 decimal price = decimal.Parse(PriceText.Text);
-                //itm.ItemID = ((ItemDTO)InventoryListBox.SelectedItem).ItemID;
+                itm.ItemID = ((ItemDTO)InventoryListBox.SelectedItem).ItemID; 
+                itm.UPC = uPC;
+                itm.Name = name;
+                itm.Category = category;
+                itm.Quantity = quantity;
+                itm.Price = price;
+
+                return itm;
+            }
+            catch (System.FormatException ex)
+            {
+                MessageBox.Show("Format is invald. Please try again");
+            }
+            return itm;
+        }
+
+
+        /// <summary>
+        /// This method helps create an Item Object specifically for creating 
+        /// </summary>
+        /// <returns></returns> Item based of inputs of the user
+        private ItemDTO CreateItemObj()
+        {
+            ItemDTO itm = new ItemDTO();
+
+            try
+            {
+                Category category = Category.createCategoryFromDTO((CategoryDTO)CategoryListCombo.SelectedItem);
+
+                string uPC = UPCText.Text;
+                string name = NameText.Text;
+                int quantity = int.Parse(QuantityText.Text);
+                decimal price = decimal.Parse(PriceText.Text);
                 itm.UPC = uPC;
                 itm.Name = name;
                 itm.Category = category;
