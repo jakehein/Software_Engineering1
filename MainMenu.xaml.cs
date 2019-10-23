@@ -40,12 +40,12 @@ namespace FinalProject1
 
         private void SalesButton_Click(object sender, RoutedEventArgs e)
         {
-
+            this.NavigationService.Navigate(new SalesPage());
         }
 
         private void ReturnButton_Click(object sender, RoutedEventArgs e)
         {
-
+            this.NavigationService.Navigate(new ReturnPage());
         }
     }
 }
