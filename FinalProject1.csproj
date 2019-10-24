@@ -75,6 +75,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ICartController.cs" />
     <Compile Include="InventoryPage.xaml.cs">
       <DependentUpon>InventoryPage.xaml</DependentUpon>
     </Compile>
@@ -105,6 +106,7 @@
     <Compile Include="ICategoryController.cs" />
     <Compile Include="ICategoryDataAccess.cs" />
     <Compile Include="ItemDTO.cs" />
+    <Compile Include="IUserController.cs" />
     <Compile Include="Login_Page.xaml.cs">
       <DependentUpon>Login_Page.xaml</DependentUpon>
     </Compile>
