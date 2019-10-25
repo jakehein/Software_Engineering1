@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:FinalProject1"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Inventory_Page">
+      Title="Inventory_Page" TextInput="Page_TextInput">
 
     <Grid Background="#FFF1F1F1">
         <ListBox x:Name="InventoryListBox" Margin="451,66,37,33" FontSize="15" SelectionChanged="InventoryListBox_SelectionChanged"/>

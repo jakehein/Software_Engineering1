@@ -24,5 +24,11 @@ namespace FinalProject1
             CategoryDTO c = obj as CategoryDTO;
             return c != null && c.CategoryID == CategoryID;
         }
+
+        override
+            public int GetHashCode()
+        {
+            return CategoryID.ToString().GetHashCode();
+        }
     }
 }

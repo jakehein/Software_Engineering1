@@ -61,6 +61,25 @@ namespace FinalProject1
             return result;
         }
 
+        protected string HandleApostrophe(string inString)
+        {
+            string s = "";
+            string[] split = inString.Split('\'');
+            if(split.Length > 1)
+            {
+                for(int i = 0; i < split.Length - 1; i++)
+                {
+                    s += split[i] + "\\\'";
+                }
+                s += split[split.Length - 1];
+                return s;
+            }
+            else
+            {
+                return inString;
+            }
+        }
+
         /// <summary>
         /// Call the buildSqlCommand and set the reader
         /// </summary>

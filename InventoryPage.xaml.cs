@@ -23,13 +23,14 @@ namespace FinalProject1
 
         IInventoryController inventoryControl;
         ICategoryController categoryControl;
+        bool reading = false;
 
         public InventoryPage()
         {
             InitializeComponent();
             categoryControl = new CategoryController(new CategoryDataAccess());
             inventoryControl = new InventoryController(new InventoryDataAccess(new CategoryDataAccess()));
-
+            UPCText.Focus();
             FillItemCombo();
             FillItemList();
         }
@@ -381,13 +382,58 @@ namespace FinalProject1
         /// <summary>
         /// This method verifies the contents of category
         /// </summary>
-        /// <param name="category"></param> category is the category we are checking
-        /// <returns></returns> true if category is valid
+        /// <param name="category">category is the category we are checking</param>
+        /// <returns>true if category is valid</returns>
         private Boolean CheckCategory(Category category)
         {
 
             // what needs to be verified here??
             return true;
+        }
+
+        /// <summary>
+        /// Check for barcode reader key combinations when textcomposition is entered
+        /// </summary>
+        /// <param name="sender">Object that triggered the event</param>
+        /// <param name="e">Event details</param>
+        private void Page_TextInput(object sender, TextCompositionEventArgs e)
+        {
+            // leftCtrl + B focus upcText and set reading to true
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.B))
+            {
+                UPCText.Text = "";
+                UPCText.Focus();
+                reading = true;
+            }
+            // leftCtrl + J take the UPC from UPCText and find the item if it exists
+            // otherwise clear fields and prepare for new item entry
+            else if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.J))
+            {
+                if (reading)
+                {
+                    // find the item associated with the upc entered
+                    ItemDTO lItem = InventoryListBox.Items
+                                    .Cast<ItemDTO>()
+                                    .Where(item => item.UPC.Equals(UPCText.Text)).FirstOrDefault();
+                    if (lItem != null)
+                    {
+                        InventoryListBox.SelectedIndex = InventoryListBox.Items.IndexOf(lItem);
+                    }
+                    else
+                    {
+                        InventoryListBox.SelectedIndex = -1;
+                        string upc = UPCText.Text;
+                        UPCText.Text = "";
+                        NameText.Text = "";
+                        QuantityText.Text = "";
+                        PriceText.Text = "";
+                        CategoryListCombo.SelectedIndex = -1;
+                        InventoryListBox.SelectedIndex = -1;
+                        UPCText.Text = upc;
+                    }
+                }
+                reading = false;
+            }
         }
     }
 }

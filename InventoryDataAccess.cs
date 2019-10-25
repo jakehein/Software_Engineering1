@@ -75,7 +75,7 @@ namespace FinalProject1
                                         " " + UPCColumn + ")" +
                                         " VALUES(" +
                                         item.Category.CategoryID + ", '" +
-                                        item.Name + "', " +
+                                        HandleApostrophe(item.Name) + "', " +
                                         item.Price + ", " +
                                         item.Quantity + ", '" +
                                         item.UPC + "')";
@@ -99,7 +99,7 @@ namespace FinalProject1
                 //MySqlConnection conn = OpenConnection();
                 string commandString = "UPDATE " + ItemTableName + " SET " + 
                                        CategoryColumn + " = " + item.Category.CategoryID +
-                                       ", " + NameColumn  + " = '" + item.Name +
+                                       ", " + NameColumn  + " = '" + HandleApostrophe(item.Name) +
                                        "', " + PriceColumn + " = " + item.Price +
                                        ", " + QuantityColumn + " = " + item.Quantity + 
                                        ", " + UPCColumn + " = '" + item.UPC +
@@ -172,7 +172,8 @@ namespace FinalProject1
             //                       " INNER JOIN " + CategoryTableName +
             //                       " ON " + ItemTableName + "." + CategoryColumn +
             //                       " = " + CategoryTableName + "." + CategoryColumn;
-            string commandString = "SELECT * FROM " + ItemTableName;
+            string commandString = "SELECT * FROM " + ItemTableName + " " + 
+                                   "ORDER BY " + NameColumn;
 
             //MySqlConnection conn = OpenConnection();
             //MySqlCommand cmd = new MySqlCommand(commandString, conn);
