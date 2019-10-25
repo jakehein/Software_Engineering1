@@ -12,15 +12,15 @@ namespace FinalProject1
 
         bool ChangeQuantity(int quantity, ItemDTO item);
 
-        bool RemoveItem(string uPC);
+        bool RemoveItem(ItemDTO item);
 
         //List<string> AllUPCs { get; }
 
-        ItemDTO GetItem(string uPC);
+        //ItemDTO GetItem(string uPC);
 
         List<ItemDTO> GetAllItems();
 
-        decimal GetTotal { get; }
+        decimal? GetTotal { get; }
 
         void Checkout();
 
