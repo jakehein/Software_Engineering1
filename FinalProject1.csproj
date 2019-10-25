@@ -75,6 +75,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Cart.cs" />
     <Compile Include="CartController.cs" />
     <Compile Include="ICartController.cs" />
     <Compile Include="InventoryPage.xaml.cs">

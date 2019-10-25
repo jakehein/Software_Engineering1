@@ -27,8 +27,8 @@ namespace FinalProject1
         }
         public int? Quantity { get; set; }
 
-        private decimal? _price = null;
-        public decimal? Price
+        private decimal _price = 0.0m;
+        public decimal Price
         {
             get => _price;
             set
