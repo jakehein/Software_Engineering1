@@ -7,10 +7,6 @@
         mc:Ignorable="d"
         Title="Register" Height="450" Width="800" FontSize="24">
     <Grid Background="#FFF1F1F1">
-        <Frame x:Name="MainMenuUI" Content="" HorizontalAlignment="Left" Height="420" Margin="0,0,-0.4,0" VerticalAlignment="Top" Width="794"/>
-        <Button x:Name="LogoutButton" Content="Logout" HorizontalAlignment="Left" Margin="31,358,0,0" VerticalAlignment="Top" Width="105" Click="LogoutButton_Click" ClickMode="Press"/>
-        <Button x:Name="InventoryButton" Content="Inventory" HorizontalAlignment="Left" Margin="312,123,0,0" VerticalAlignment="Top" Width="158" Height="139" Click="InventoryButton_Click" ClickMode="Press"/>
-        <Button x:Name="SalesButton" Content="Sales" HorizontalAlignment="Left" Margin="107,123,0,0" VerticalAlignment="Top" Width="163" Height="139" Click="SalesButton_Click" ClickMode="Press"/>
-        <Button x:Name="ReturnButton" Content="Return" HorizontalAlignment="Left" Margin="511,123,0,0" VerticalAlignment="Top" Width="161" Height="139" Click="ReturnButton_Click" ClickMode="Press"/>
-    </Grid>
+        <Frame x:Name="MainMenuUI" Content="" HorizontalAlignment="Left" Height="420" Margin="0,0,-0.4,0" VerticalAlignment="Top" Width="794" NavigationUIVisibility="Hidden"/>
+        </Grid>
 </Window>

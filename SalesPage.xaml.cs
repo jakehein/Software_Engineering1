@@ -16,14 +16,13 @@ using System.Windows.Shapes;
 namespace FinalProject1
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for SalesPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class SalesPage : Page
     {
-        public MainWindow()
+        public SalesPage()
         {
             InitializeComponent();
-            MainMenuUI.Navigate(new Login_Page());
         }
     }
 }

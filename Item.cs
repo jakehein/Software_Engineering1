@@ -45,19 +45,20 @@ namespace FinalProject1
             }
         }
         public Category Category { get; set; }
-        public long CategoryID { get; set; }
+        //public long CategoryID { get; set; }
         public List<string> DataWarnings { get; set; }
 
         public static Item createItemFromDTO(ItemDTO dto)
         {
             Item item = new Item();
+            item.DataWarnings = new List<string>();
             item.ItemID = dto.ItemID;
             item.UPC = dto.UPC;
             item.Name = dto.Name;
             item.Quantity = dto.Quantity;
             item.Price = dto.Price;
             item.Category = dto.Category;
-            item.CategoryID = dto.CategoryID;
+            //item.CategoryID = dto.CategoryID;
             return item;
         }
         
@@ -70,7 +71,7 @@ namespace FinalProject1
             dto.Quantity = item.Quantity;
             dto.Price = item.Price;
             dto.Category = item.Category;
-            dto.CategoryID = item.CategoryID;
+            //dto.CategoryID = item.CategoryID;
             return dto;
         }
     }

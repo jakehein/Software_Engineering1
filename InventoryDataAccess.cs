@@ -24,8 +24,6 @@ namespace FinalProject1
                              CategoryNameColumn = "Name";
 
         private ICategoryDataAccess categoryDataAccess = null;
-
-        public InventoryDataAccess() { }
         public InventoryDataAccess(ICategoryDataAccess categoryDataAccess)
         {
             this.categoryDataAccess = categoryDataAccess;
@@ -54,7 +52,7 @@ namespace FinalProject1
             //result = int.Parse(cmd.ExecuteScalar().ToString()) == 1;
             //cmd.Dispose();
             //conn.Close();
-            return int.Parse(ExecuteScalar(commandString).ToString()) == 0;
+            return int.Parse(ExecuteScalar(commandString).ToString()) > 0;
         }
 
         /// <summary>
@@ -71,13 +69,13 @@ namespace FinalProject1
 
                 string commandString = "INSERT INTO " + ItemTableName +
                                         "(" + CategoryColumn + ", " +
-                                        "(" + NameColumn + ", " +
-                                        "(" + PriceColumn + ", " +
-                                        "(" + QuantityColumn + ", " +
-                                        "(" + UPCColumn + ")" +
+                                        " " + NameColumn + ", " +
+                                        " " + PriceColumn + ", " +
+                                        " " + QuantityColumn + ", " +
+                                        " " + UPCColumn + ")" +
                                         " VALUES(" +
                                         item.Category.CategoryID + ", '" +
-                                        item.Name + "', " +
+                                        HandleApostrophe(item.Name) + "', " +
                                         item.Price + ", " +
                                         item.Quantity + ", '" +
                                         item.UPC + "')";
@@ -101,10 +99,10 @@ namespace FinalProject1
                 //MySqlConnection conn = OpenConnection();
                 string commandString = "UPDATE " + ItemTableName + " SET " + 
                                        CategoryColumn + " = " + item.Category.CategoryID +
-                                       ", " + NameColumn  + " = '" + item.Name +
+                                       ", " + NameColumn  + " = '" + HandleApostrophe(item.Name) +
                                        "', " + PriceColumn + " = " + item.Price +
                                        ", " + QuantityColumn + " = " + item.Quantity + 
-                                       ", '" + UPCColumn + " = '" + item.UPC +
+                                       ", " + UPCColumn + " = '" + item.UPC +
                                        "' WHERE " + ItemIDColumn + " = " + item.ItemID;
                 //MySqlCommand cmd = new MySqlCommand(commandString, conn);
                 //cmd.ExecuteNonQuery();
@@ -174,7 +172,8 @@ namespace FinalProject1
             //                       " INNER JOIN " + CategoryTableName +
             //                       " ON " + ItemTableName + "." + CategoryColumn +
             //                       " = " + CategoryTableName + "." + CategoryColumn;
-            string commandString = "SELECT * FROM " + ItemTableName;
+            string commandString = "SELECT * FROM " + ItemTableName + " " + 
+                                   "ORDER BY " + NameColumn;
 
             //MySqlConnection conn = OpenConnection();
             //MySqlCommand cmd = new MySqlCommand(commandString, conn);
@@ -231,7 +230,7 @@ namespace FinalProject1
                 Quantity = Reader.GetInt32(QuantityColumn),
                 Price = (decimal)Reader.GetFloat(PriceColumn),
                 //Category = category
-                Category = Category.createCategoryFromDTO(categoryDataAccess.GetCategory((long)Reader.GetDecimal(CategoryColumn)))
+                Category = Category.createCategoryFromDTO(categoryDataAccess.GetCategory((long)Reader.GetInt64(CategoryColumn)))
             };
             return item;
         }

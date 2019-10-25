@@ -35,13 +35,12 @@ namespace FinalProject1
             // get the username and password and store as a string to check against database of users
             string username = UsernameBox.Text;
             string password = PasswordBox.Password.ToString();
-            //Boolean loginValidity = false;
 
             // at this point it does not validate the legitimacy of the user but rather 
             // forwards it onto the MainMenu page
 
             // Close Current Window... This will be done after validating if the credentials are good or not
-            
+            this.NavigationService.Navigate(new MainMenu());
         }
     }
 }

@@ -11,11 +11,11 @@ namespace FinalProject1
         /**
          * private global iDA with constructor
          */
-         private IInventoryDataAccess iDA = new InventoryDataAccess();
-         public InventoryController(IInventoryDataAccess iDA)
-         {
-             this.iDA = iDA;
-         }
+        private IInventoryDataAccess iDA;
+        public InventoryController(IInventoryDataAccess iDA)
+        {
+            this.iDA = iDA;
+        }
         //private InventoryDataAccess iDA = new InventoryDataAccess();
         /**
          * This method checks to see if an item is valid for insertion into the iDA. If so,
@@ -29,10 +29,9 @@ namespace FinalProject1
 
             Item newItem = Item.createItemFromDTO(item);
 
-            if (GetItem(item.UPC).UPC == null && newItem.DataWarnings.Count == 0)
+            if (GetItem(item.UPC) == null && newItem.DataWarnings.Count == 0)
             {
-                iDA.CreateItem(item);
-                return true;
+                return iDA.CreateItem(item);
             }
             else
             {
@@ -46,44 +45,41 @@ namespace FinalProject1
          * @param pLU string value being checked for before carrying out deletion
          * @return boolean detailing if operation was carried out
          */
-        public bool DeleteItem(string pLU)
+        public bool DeleteItem(string uPC)
         {
             //InventoryDataAccess iDA = new IInventoryDataAccess();
-            if (!AllPLUs.Contains(pLU))
+            if (AllUPCs.Contains(uPC))
             {
-                iDA.DeleteItem(pLU);
-                return true;
+                return iDA.DeleteItem(uPC);
             }
-            else
-            {
-                return false;
-            }
+            return false;
             //throw new NotImplementedException();
         }
         /**
          * This method creates a list of PLUs for the calling method to act on. 
          * @return List<string> of all PLU values contained in iDA
          */
-        public List<string> AllPLUs
+        public List<string> AllUPCs
         {
             get
             {
-                //InventoryDataAccess iDA = new IInventoryDataAccess();
-                List<string> allPLUs = new List<string>();
-                List<ItemDTO> items = new List<ItemDTO>();
-                foreach (ItemDTO item in items)
-                {
-                    allPLUs.Add(item.UPC);
-                }
-                return allPLUs;
-                //throw new NotImplementedException();
+                return iDA.GetAllUPCs();
+                ////InventoryDataAccess iDA = new IInventoryDataAccess();
+                //List<string> allPLUs = new List<string>();
+                //List<ItemDTO> items = new List<ItemDTO>();
+                //foreach (ItemDTO item in items)
+                //{
+                //    allPLUs.Add(item.UPC);
+                //}
+                //return allPLUs;
+                ////throw new NotImplementedException();
             }
         }
 
         /**
-* This method creates a list of all Item objects contained in iDA
-* @return List<Item> of all Item objects contained in iDA
-*/
+        * This method creates a list of all Item objects contained in iDA
+        * @return List<Item> of all Item objects contained in iDA
+        */
         public List<ItemDTO> GetAllItems()
         {
             //InventoryDataAccess iDA = new IInventoryDataAccess();
@@ -98,7 +94,6 @@ namespace FinalProject1
          */
         public ItemDTO GetItem(string uPC)
         {
-            IInventoryDataAccess iDA = new InventoryDataAccess();
             return iDA.GetItem(uPC);
             //throw new NotImplementedException();
         }
@@ -112,19 +107,15 @@ namespace FinalProject1
         public bool UpdateItem(string pLU, ItemDTO itemDTO)
         {
             //InventoryDataAccess iDA = new IInventoryDataAccess();
-            List<string> existingUPCs = iDA.GetAllUPCs();
+            //List<string> existingUPCs = iDA.GetAllUPCs();
 
-            Item item = Item.createItemFromDTO(itemDTO);
+            //Item item = Item.createItemFromDTO(itemDTO);
 
-            if (existingUPCs.Contains(pLU) && item.DataWarnings.Count == 0)
-            {
-                iDA.UpdateItem(pLU, itemDTO);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            //if (existingUPCs.Contains(pLU) && item.DataWarnings.Count == 0)
+            //{
+                return iDA.UpdateItem(pLU, itemDTO);
+            //}
+            //return false;
             //throw new NotImplementedException();
         }
     }
