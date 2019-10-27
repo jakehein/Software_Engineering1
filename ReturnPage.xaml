@@ -9,7 +9,7 @@
       Title="ReturnPage">
 
     <Grid Background="#FFF1F1F1">
-        <Button x:Name="MainMenu" Content="MainMenu" HorizontalAlignment="Left" Margin="56,373,0,0" VerticalAlignment="Top" Width="91" FontSize="16" Click="MainMenu_Click" ClickMode="Press"/>
-        
+        <Button x:Name="MainMenu" Content="Main Menu" HorizontalAlignment="Left" Margin="56,373,0,0" VerticalAlignment="Top" Width="99" FontSize="16" Click="MainMenu_Click" ClickMode="Press" Height="28"/>
+
     </Grid>
 </Page>
