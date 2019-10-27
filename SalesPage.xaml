@@ -9,6 +9,7 @@
       Title="SalesPage">
 
     <Grid Background="#FFF1F1F1">
-        
+        <Button x:Name="MainMenu" Content="MainMenu" HorizontalAlignment="Left" Margin="55,370,0,0" VerticalAlignment="Top" Width="91" FontSize="16" Click="MainMenu_Click" ClickMode="Press"/>
+
     </Grid>
 </Page>

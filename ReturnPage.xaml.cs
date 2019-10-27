@@ -24,5 +24,10 @@ namespace FinalProject1
         {
             InitializeComponent();
         }
+
+        private void MainMenu_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new MainMenu());
+        }
     }
 }
