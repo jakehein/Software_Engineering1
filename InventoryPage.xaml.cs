@@ -384,7 +384,7 @@ namespace FinalProject1
         /// </summary>
         /// <param name="category">category is the category we are checking</param>
         /// <returns>true if category is valid</returns>
-        private Boolean CheckCategory(Category category)
+        private bool CheckCategory(Category category)
         {
 
             // what needs to be verified here??
