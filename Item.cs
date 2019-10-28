@@ -9,7 +9,7 @@ namespace FinalProject1
     class Item
     {
         public long ItemID { get; set; }
-        public string UPC { get; set; }
+        public string UPC { get; set; } = "999999999999";
 
         private string _name;
         public string Name
@@ -73,6 +73,29 @@ namespace FinalProject1
             dto.Category = item.Category;
             //dto.CategoryID = item.CategoryID;
             return dto;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if(obj == null)
+            {
+                return false;
+            }
+            if (!(obj is Item))
+            {
+                return false;
+            }
+            return this.UPC == (obj as Item).UPC;
+        }
+
+
+        /// <summary>
+        /// TODO
+        /// </summary>
+        /// <returns></returns>
+        public override int GetHashCode()
+        {
+            throw new NotImplementedException();
         }
     }
 }
