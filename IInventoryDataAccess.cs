@@ -20,6 +20,6 @@ namespace FinalProject1
 
         List<ItemDTO> GetAllItems();
 
-        bool ChangeAmount(string uPC, int amount);
+        bool ChangeQuantity(string uPC, int amount);
     }
 }

@@ -76,7 +76,7 @@ namespace FinalProject1
             {
                 ItemDTO itemDTO = inventoryDataAccess.GetItem(itemAmount.Key.UPC);
 
-                inventoryDataAccess.ChangeAmount(itemDTO.UPC, itemDTO.Quantity - itemAmount.Value);
+                inventoryDataAccess.ChangeQuantity(itemDTO.UPC, itemDTO.Quantity - itemAmount.Value);
             }
         }
     }

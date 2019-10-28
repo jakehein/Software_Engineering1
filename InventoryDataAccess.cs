@@ -211,7 +211,13 @@ namespace FinalProject1
             return uPCs;
         }
 
-        public bool ChangeAmount(string uPC, int amount)
+        /// <summary>
+        /// Updates the quantity of the item with the given UPC
+        /// </summary>
+        /// <param name="uPC">The UPC of the item to Update</param>
+        /// <param name="amount">The new amount to set</param>
+        /// <returns>True if the item was updated, otherwise false</returns>
+        public bool ChangeQuantity(string uPC, int amount)
         {
             string cmdString = $@"UPDATE {ItemTableName} 
                                     SET {QuantityColumn} = @Amount

@@ -13,16 +13,20 @@ namespace FinalProject1
         public List<Item> Items { get; set; }
         public List<int> ItemIDs { get; set; }
 
-        public void FillWithItems()
-        {
-
-        }
-
         public static Category createCategoryFromDTO(CategoryDTO dto)
         {
             Category category = new Category();
             category.CategoryID = dto.CategoryID;
             category.Name = dto.Name;
+
+            if(dto.Items != null)
+            {
+                foreach(ItemDTO itemDTO in dto.Items)
+                {
+                    category.Items.Add(Item.createItemFromDTO(itemDTO));
+                }
+            }
+
             return category;
         }
 
@@ -31,6 +35,14 @@ namespace FinalProject1
             CategoryDTO categoryDTO = new CategoryDTO();
             categoryDTO.CategoryID = category.CategoryID;
             categoryDTO.Name = category.Name;
+
+            if(category.Items != null)
+            {
+                foreach(Item item in category.Items)
+                {
+                    categoryDTO.Items.Add(Item.createDTOfromItem(item));
+                }
+            }
             return categoryDTO;
         }
     }

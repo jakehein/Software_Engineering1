@@ -10,7 +10,7 @@ namespace FinalProject1
     {
         public long CategoryID { get; set; }
         public string Name { get; set; }
-        public List<Item> Items { get; set; }
+        public List<ItemDTO> Items { get; set; }
 
         override
         public string ToString()
