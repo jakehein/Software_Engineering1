@@ -211,7 +211,7 @@ namespace FinalProject1
             return uPCs;
         }
 
-        bool ChangeAmount(string uPC, int amount)
+        public bool ChangeAmount(string uPC, int amount)
         {
             string cmdString = $@"UPDATE {ItemTableName} 
                                     SET {QuantityColumn} = @Amount
