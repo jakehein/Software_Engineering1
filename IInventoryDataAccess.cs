@@ -19,5 +19,7 @@ namespace FinalProject1
         ItemDTO GetItem(string uPC);
 
         List<ItemDTO> GetAllItems();
+
+        bool ChangeAmount(string uPC, int amount);
     }
 }

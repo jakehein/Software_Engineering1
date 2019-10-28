@@ -25,7 +25,7 @@ namespace FinalProject1
                 else _name = value;
             } 
         }
-        public int? Quantity { get; set; }
+        public int Quantity { get; set; }
 
         private decimal _price = 0.0m;
         public decimal Price
@@ -88,14 +88,9 @@ namespace FinalProject1
             return this.UPC == (obj as Item).UPC;
         }
 
-
-        /// <summary>
-        /// TODO
-        /// </summary>
-        /// <returns></returns>
         public override int GetHashCode()
         {
-            throw new NotImplementedException();
+            return UPC.GetHashCode();
         }
     }
 }

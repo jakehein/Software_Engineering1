@@ -28,7 +28,9 @@ namespace FinalProject1
         {
             this.categoryDataAccess = categoryDataAccess;
         }
-        //private string connectionStringToDB = ConfigurationManager.ConnectionStrings["MySQLDB"].ConnectionString;
+        
+        private string connectionStringToDB = ConfigurationManager.ConnectionStrings["MySQLDB"].ConnectionString;
+        
         //private MySqlConnection OpenConnection()
         //{
         //    MySqlConnection conn = new MySqlConnection(connectionStringToDB);
@@ -96,19 +98,19 @@ namespace FinalProject1
         /// <returns>True if Item updated</returns>
         public bool UpdateItem(string uPC, ItemDTO item)
         {
-                //MySqlConnection conn = OpenConnection();
-                string commandString = "UPDATE " + ItemTableName + " SET " + 
-                                       CategoryColumn + " = " + item.Category.CategoryID +
-                                       ", " + NameColumn  + " = '" + HandleApostrophe(item.Name) +
-                                       "', " + PriceColumn + " = " + item.Price +
-                                       ", " + QuantityColumn + " = " + item.Quantity + 
-                                       ", " + UPCColumn + " = '" + item.UPC +
-                                       "' WHERE " + ItemIDColumn + " = " + item.ItemID;
-                //MySqlCommand cmd = new MySqlCommand(commandString, conn);
-                //cmd.ExecuteNonQuery();
-                //cmd.Dispose();
-                //conn.Close();
-                return ExecuteNonQuery(commandString) > 0;
+            //MySqlConnection conn = OpenConnection();
+            string commandString = "UPDATE " + ItemTableName + " SET " +
+                                   CategoryColumn + " = " + item.Category.CategoryID +
+                                   ", " + NameColumn + " = '" + HandleApostrophe(item.Name) +
+                                   "', " + PriceColumn + " = " + item.Price +
+                                   ", " + QuantityColumn + " = " + item.Quantity +
+                                   ", " + UPCColumn + " = '" + item.UPC +
+                                   "' WHERE " + ItemIDColumn + " = " + item.ItemID;
+            //MySqlCommand cmd = new MySqlCommand(commandString, conn);
+            //cmd.ExecuteNonQuery();
+            //cmd.Dispose();
+            //conn.Close();
+            return ExecuteNonQuery(commandString) > 0;
         }
 
         /// <summary>
@@ -172,7 +174,7 @@ namespace FinalProject1
             //                       " INNER JOIN " + CategoryTableName +
             //                       " ON " + ItemTableName + "." + CategoryColumn +
             //                       " = " + CategoryTableName + "." + CategoryColumn;
-            string commandString = "SELECT * FROM " + ItemTableName + " " + 
+            string commandString = "SELECT * FROM " + ItemTableName + " " +
                                    "ORDER BY " + NameColumn;
 
             //MySqlConnection conn = OpenConnection();
@@ -207,6 +209,21 @@ namespace FinalProject1
                 uPCs.Add(Reader.GetString(UPCColumn));
             }
             return uPCs;
+        }
+
+        bool ChangeAmount(string uPC, int amount)
+        {
+            string cmdString = $@"UPDATE {ItemTableName} 
+                                    SET {QuantityColumn} = @Amount
+                                    WHERE {UPCColumn} = @UPC";
+            using (MySqlConnection conn = new MySqlConnection(connectionStringToDB))
+            {
+                MySqlCommand cmd = new MySqlCommand(cmdString, conn);
+                cmd.Parameters.AddWithValue("@Amount", amount);
+                cmd.Parameters.AddWithValue("@UPC", uPC);
+                cmd.ExecuteNonQuery();
+            }
+            return true;
         }
 
         /// <summary>

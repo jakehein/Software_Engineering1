@@ -54,9 +54,30 @@ namespace FinalProject1
             return itemRemoved;
         }
 
-        //public bool RemoveAllItems(Item item)
-        //{
-        //    if()
-        //}
+        /// <summary>
+        /// Removes all of a given item from the cart
+        /// </summary>
+        /// <param name="item">The item to remove all of</param>
+        /// <returns>True if items were removed, otherwise false</returns>
+        public bool RemoveAllItems(Item item)
+        {
+            bool itemsRemoved = false;
+            if (Items.ContainsKey(item))
+            {
+                Items.Remove(item);
+                itemsRemoved = true;
+            }
+            return itemsRemoved;
+        }
+
+        public void Checkout(IInventoryDataAccess inventoryDataAccess)
+        {
+            foreach(KeyValuePair<Item, int> itemAmount in Items)
+            {
+                ItemDTO itemDTO = inventoryDataAccess.GetItem(itemAmount.Key.UPC);
+
+                inventoryDataAccess.ChangeAmount(itemDTO.UPC, itemDTO.Quantity - itemAmount.Value);
+            }
+        }
     }
 }
