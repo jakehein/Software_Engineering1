@@ -104,7 +104,7 @@ namespace FinalProject1
          * @param item object being updated
          * @return boolean detailing if operation was carried out
          */
-        public bool UpdateItem(string pLU, ItemDTO itemDTO)
+        public bool UpdateItem(string uPC, ItemDTO itemDTO)
         {
             //InventoryDataAccess iDA = new IInventoryDataAccess();
             //List<string> existingUPCs = iDA.GetAllUPCs();
@@ -113,7 +113,7 @@ namespace FinalProject1
 
             //if (existingUPCs.Contains(pLU) && item.DataWarnings.Count == 0)
             //{
-                return iDA.UpdateItem(pLU, itemDTO);
+                return iDA.UpdateItem(uPC, itemDTO);
             //}
             //return false;
             //throw new NotImplementedException();
