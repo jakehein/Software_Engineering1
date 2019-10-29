@@ -39,5 +39,30 @@ namespace FinalProject1
         {
 
         }
+
+        private void AddItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void QuantityUp_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void QuantityDown_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RemoveItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void UpCButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
