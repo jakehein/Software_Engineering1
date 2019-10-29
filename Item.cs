@@ -46,8 +46,18 @@ namespace FinalProject1
         }
         public Category Category { get; set; }
         //public long CategoryID { get; set; }
+
+        /// <summary>
+        /// Holds any data warnings created when this object's attributes were assinged values
+        /// </summary>
         public List<string> DataWarnings { get; set; }
 
+
+        /// <summary>
+        /// Creates an Item from the ItemDTO
+        /// </summary>
+        /// <param name="dto">The DTO to be converted</param>
+        /// <returns>The created Item</returns>
         public static Item createItemFromDTO(ItemDTO dto)
         {
             Item item = new Item();
@@ -62,6 +72,11 @@ namespace FinalProject1
             return item;
         }
         
+        /// <summary>
+        /// Creates an Item DTO from the Item
+        /// </summary>
+        /// <param name="item">The item to be converted</param>
+        /// <returns>The created ItemDTO</returns>
         public static ItemDTO createDTOfromItem(Item item)
         {
             ItemDTO dto = new ItemDTO();

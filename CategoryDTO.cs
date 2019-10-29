@@ -6,27 +6,27 @@ using System.Threading.Tasks;
 
 namespace FinalProject1
 {
+    /// <summary>
+    /// Data transfer object for the Category class
+    /// </summary>
     class CategoryDTO
     {
         public long CategoryID { get; set; }
         public string Name { get; set; }
         public List<ItemDTO> Items { get; set; }
-
-        override
-        public string ToString()
+        
+        public override string ToString()
         {
             return Name;
         }
 
-        override
-            public bool Equals(Object obj)
+        public override bool Equals(Object obj)
         {
             CategoryDTO c = obj as CategoryDTO;
             return c != null && c.CategoryID == CategoryID;
         }
 
-        override
-            public int GetHashCode()
+        public override int GetHashCode()
         {
             return CategoryID.ToString().GetHashCode();
         }

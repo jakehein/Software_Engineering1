@@ -10,6 +10,9 @@ namespace FinalProject1
     {
         public Dictionary<Item, int> Items { get; set; }
 
+        /// <summary>
+        /// The total cost of all Items in the Cart
+        /// </summary>
         public decimal TotalCost 
         {
             get
