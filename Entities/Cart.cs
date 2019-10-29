@@ -73,6 +73,26 @@ namespace FinalProject1
             return itemsRemoved;
         }
 
+        public bool ChangeQuantity(int quantity, Item item)
+        {
+            if (quantity == 0)
+            {
+                RemoveAllItems(item);
+            }
+            else
+            {
+                if (Items.ContainsKey(item))
+                {
+                    Items[item] = quantity;
+                }
+                else
+                {
+                    Items.Add(item, quantity);
+                }
+            }
+            return true;
+        }
+
         public void Checkout(IInventoryDataAccess inventoryDataAccess)
         {
             foreach(KeyValuePair<Item, int> itemAmount in Items)

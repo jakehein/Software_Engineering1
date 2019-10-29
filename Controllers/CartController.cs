@@ -8,7 +8,9 @@ namespace FinalProject1
 {
     class CartController : ICartController
     {
-        Dictionary<ItemDTO, int> cart = null;
+        Cart cart;
+        
+        IInventoryDataAccess inventoryDataAccess = new InventoryDataAccess(new CategoryDataAccess());
         public decimal? GetTotal { get; private set; }
 
         /// <summary>
@@ -16,8 +18,7 @@ namespace FinalProject1
         /// </summary>
         public CartController()
         {
-            cart = new Dictionary<ItemDTO, int>();
-            GetTotal = 0.0M;
+            cart = new Cart();
         }
 
         /// <summary>
@@ -25,20 +26,18 @@ namespace FinalProject1
         /// </summary>
         /// <param name="item">The item to add to the cart</param>
         /// <returns>true if the item is successfully added</returns>
-        public bool AddItem(ItemDTO item)
+        public bool AddItem(ItemDTO itemDTO)
         {
-            // if the cart already contains an instance of the item the quantity is incremented
-            if (cart.ContainsKey(item))
+            bool success = false;
+
+            Item item = Item.createItemFromDTO(itemDTO);
+            if(item.DataWarnings.Count == 0)
             {
-                cart.TryGetValue(item, out int value);
-                cart[item] = value++;
+                cart.AddItem(item);
+                success = true;
             }
-            else // else add an instance
-            {
-                cart.Add(item, 1);
-            }
-            GetTotal += item.Price;
-            return true;
+
+            return success;
         }
 
         /// <summary>
@@ -47,26 +46,17 @@ namespace FinalProject1
         /// <param name="quantity">quantity to set for item</param>
         /// <param name="item">item to change quantity of</param>
         /// <returns>true if quantity changed successfully</returns>
-        public bool ChangeQuantity(int quantity, ItemDTO item)
+        public bool ChangeQuantity(int quantity, ItemDTO itemDTO)
         {
-            if (quantity == 0)
+            bool success = false;
+
+            Item item = Item.createItemFromDTO(itemDTO);
+            if (item.DataWarnings.Count == 0)
             {
-                RemoveItem(item);
+                success = cart.ChangeQuantity(quantity, item);
             }
-            else
-            {
-                if (cart.ContainsKey(item))
-                {
-                    GetTotal += (quantity - cart[item]) * item.Price;
-                    cart[item] = quantity;
-                }
-                else
-                {
-                    cart.Add(item, quantity);
-                    GetTotal += quantity * item.Price;
-                }
-            }
-            return true;
+
+            return success;
         }
 
         /// <summary>
@@ -74,15 +64,17 @@ namespace FinalProject1
         /// </summary>
         /// <param name="item">Item to remove from the cart</param>
         /// <returns>true if item is removed successfully</returns>
-        public bool RemoveItem(ItemDTO item)
+        public bool RemoveItem(ItemDTO itemDTO)
         {
-            if (cart.ContainsKey(item))
-            {
-                GetTotal -= item.Price * cart[item];
-                cart.Remove(item);
+            bool success = false;
 
+            Item item = Item.createItemFromDTO(itemDTO);
+            if (item.DataWarnings.Count == 0)
+            {
+                success = cart.RemoveSingleItem(item);
             }
-            return true;
+
+            return success;
         }
 
         //ItemDTO GetItem(string uPC)
@@ -97,33 +89,28 @@ namespace FinalProject1
         public List<ItemDTO> GetAllItems()
         {
             List<ItemDTO> items = new List<ItemDTO>();
-            foreach(KeyValuePair<ItemDTO, int> kvp in cart)
+            foreach(KeyValuePair<Item, int> kvp in cart.Items)
             {
                 for(int i = 0; i < kvp.Value; i++)
                 {
-                    items.Add(kvp.Key);
+                    items.Add(Item.createDTOfromItem(kvp.Key));
                 }
             }
             return items;
         }
 
         /// <summary>
-        /// 
+        /// Checks out the cart of items
         /// </summary>
         public void Checkout()
         {
-            //Remove items from inventory?
-            //Add items to the sales table?
-            DeleteCart();
+            cart.Checkout(inventoryDataAccess);
+            cart = new Cart();
         }
 
-        /// <summary>
-        /// empty the cart and reset the cost total
-        /// </summary>
-        public void DeleteCart()
+        public void CancelTransaction()
         {
-            cart.Clear();
-            GetTotal = 0.0M;
+            cart = new Cart();
         }
     }
 }

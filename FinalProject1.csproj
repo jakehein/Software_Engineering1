@@ -75,6 +75,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controllers\DrawerController.cs" />
+    <Compile Include="Controllers\IDrawerController.cs" />
     <Compile Include="Entities\Cart.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\ICartController.cs" />

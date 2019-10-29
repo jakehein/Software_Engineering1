@@ -24,6 +24,6 @@ namespace FinalProject1
 
         void Checkout();
 
-        void DeleteCart();
+        void CancelTransaction();
     }
 }
