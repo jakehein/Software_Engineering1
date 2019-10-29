@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FinalProject1"
         mc:Ignorable="d"
-        Title="Register" Height="450" Width="800" FontSize="24" ResizeMode="NoResize">
+        Title="Register" Height="450" Width="800" FontSize="24" >
     <Grid Background="#FFF1F1F1">
         <Frame x:Name="MainMenuUI" Content="" HorizontalAlignment="Left" Height="420" Margin="0,0,-0.4,0" VerticalAlignment="Top" Width="794" NavigationUIVisibility="Hidden"/>
         </Grid>

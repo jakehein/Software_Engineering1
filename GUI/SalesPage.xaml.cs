@@ -27,7 +27,8 @@ namespace FinalProject1
 
         private void MainMenu_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new MainMenu());
+            //this.NavigationService.Navigate(new MainMenu());
+            this.NavigationService.GoBack();
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
