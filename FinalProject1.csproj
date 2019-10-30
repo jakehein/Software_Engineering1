@@ -77,6 +77,8 @@
     </ApplicationDefinition>
     <Compile Include="Controllers\DrawerController.cs" />
     <Compile Include="Controllers\IDrawerController.cs" />
+    <Compile Include="DataAccess\BusinessInfoDataAccess.cs" />
+    <Compile Include="DataAccess\IBusinessInfoDataAccess.cs" />
     <Compile Include="Entities\Cart.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\ICartController.cs" />

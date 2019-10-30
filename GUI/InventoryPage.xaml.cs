@@ -21,9 +21,10 @@ namespace FinalProject1
     public partial class InventoryPage : Page
     {
 
-        IInventoryController inventoryControl;
-        ICategoryController categoryControl;
-        bool reading = false;
+        private IInventoryController inventoryControl;
+        private ICategoryController categoryControl;
+        private bool reading = false;
+        private List<ItemDTO> itemDTOs = new List<ItemDTO>();
 
         public InventoryPage()
         {
@@ -31,31 +32,35 @@ namespace FinalProject1
             categoryControl = new CategoryController(new CategoryDataAccess());
             inventoryControl = new InventoryController(new InventoryDataAccess(new CategoryDataAccess()));
             UPCText.Focus();
-            FillItemCombo();
-            FillItemList();
+            PopulateItemList();
+            FillCategoryCombo();
+            FillItemList(itemDTOs);
         }
 
+
+        private void PopulateItemList()
+        { 
+            itemDTOs = inventoryControl.GetAllItems();
+        }
         /// <summary>
         /// This method populates the items scrollable list based on items in the inventory database.
         /// </summary>
-        void FillItemList()
-        {
-            List<ItemDTO> itemList = inventoryControl.GetAllItems();
-
-            foreach (ItemDTO item in itemList)
-            {
-                InventoryListBox.Items.Add(item);
-            }
+        void FillItemList(IEnumerable<ItemDTO> items)
+        { 
+            InventoryListBox.ItemsSource = items;
         }
 
         /// <summary>
         /// This method populates the combo item list in the inventory database. 
         /// </summary>
-        void FillItemCombo()
+        void FillCategoryCombo()
         {
-            {
-                CategoryListCombo.ItemsSource = categoryControl.GetAllCategories();
-            }
+            List<CategoryDTO> categories = categoryControl.GetAllCategories();
+            CategoryListCombo.ItemsSource = categoryControl.GetAllCategories();
+            categories.Add(new CategoryDTO { CategoryID = 0, Items = null, Name = "All"});
+            categories.Sort();
+            InventoryListCombo.ItemsSource = categories;
+            InventoryListCombo.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -79,15 +84,15 @@ namespace FinalProject1
         /// </summary>
         private void InventoryListCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string text = InventoryListCombo.Text;
-            ItemDTO itm = inventoryControl.GetItem(text);
-
-            UPCText.Text = itm.UPC;
-            NameText.Text = itm.Name;
-            QuantityText.Text = itm.Quantity.ToString();
-            PriceText.Text = itm.Price.ToString();
-
-            CategoryListCombo.SelectedItem = itm.Category;
+            if (e.AddedItems.Count == 0 || ((CategoryDTO)e.AddedItems[0]).CategoryID == 0)
+            {
+                FillItemList(itemDTOs);
+            }
+            else
+            {
+                var items = itemDTOs.Cast<ItemDTO>().Where(item => item.Category.CategoryID == ((CategoryDTO)e.AddedItems[0]).CategoryID);
+                FillItemList(items);
+            }
         }
 
         /// <summary>
@@ -105,6 +110,7 @@ namespace FinalProject1
                 {
                     MessageBox.Show("Item was successfully created.");
                     ClearInputs();
+                    UpdateList();
                 }
                 else
                 {
@@ -133,6 +139,7 @@ namespace FinalProject1
                 {
                     MessageBox.Show("Item was successfully updated.");
                     ClearInputs();
+                    UpdateList();
                 }
                 else
                 {
@@ -152,12 +159,13 @@ namespace FinalProject1
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
             string uPC = UPCText.Text;
-            Boolean deleted = inventoryControl.DeleteItem(uPC);
-
+            bool deleted = inventoryControl.DeleteItem(uPC);
+            
             if (deleted)
             {
                 MessageBox.Show("Item was successfully deleted.");
                 ClearInputs();
+                UpdateList();
             }
             else
             {
@@ -170,7 +178,8 @@ namespace FinalProject1
         /// </summary>
         private void ExitBtn_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new MainMenu());
+            //this.NavigationService.Navigate(new MainMenu());
+            this.NavigationService.GoBack();
         }
 
         /// <summary>
@@ -183,9 +192,9 @@ namespace FinalProject1
             NameText.Text = "";
             QuantityText.Text = "";
             PriceText.Text = "";
+            InventoryListCombo.SelectedIndex = 0;
             CategoryListCombo.SelectedIndex = -1;
             InventoryListBox.SelectedIndex = -1;
-            UpdateList();
         }
 
         /// <summary>
@@ -193,10 +202,11 @@ namespace FinalProject1
         /// </summary>
         private void UpdateList()
         {
-            InventoryListBox.Items.Clear();
-            FillItemList();
-            InventoryListCombo.Items.Clear();
-            FillItemCombo();
+            PopulateItemList();
+            //InventoryListBox.Items.Clear();
+            FillItemList(itemDTOs);
+            //InventoryListCombo.Items.Clear();
+            //FillCategoryCombo();
         }
 
         /// <summary>
@@ -206,11 +216,13 @@ namespace FinalProject1
         private ItemDTO GetItemObj()
         {
             ItemDTO itm = new ItemDTO();
-
             try
             {
-                Category category = Category.createCategoryFromDTO((CategoryDTO)CategoryListCombo.SelectedItem);
-
+                Category category = null;
+                if (CategoryListCombo.SelectedIndex != -1)
+                {
+                    category = Category.createCategoryFromDTO((CategoryDTO)CategoryListCombo.SelectedItem);
+                }
                 string uPC = UPCText.Text;
                 string name = NameText.Text;
                 int quantity = int.Parse(QuantityText.Text);
@@ -224,7 +236,7 @@ namespace FinalProject1
 
                 return itm;
             }
-            catch (System.FormatException ex)
+            catch (FormatException)
             {
                 MessageBox.Show("Format is invald. Please try again");
             }
@@ -242,8 +254,11 @@ namespace FinalProject1
 
             try
             {
-                Category category = Category.createCategoryFromDTO((CategoryDTO)CategoryListCombo.SelectedItem);
-
+                Category category = null;
+                if (CategoryListCombo.SelectedIndex != -1)
+                {
+                    category = Category.createCategoryFromDTO((CategoryDTO)CategoryListCombo.SelectedItem);
+                }
                 string uPC = UPCText.Text;
                 string name = NameText.Text;
                 int quantity = int.Parse(QuantityText.Text);
@@ -256,7 +271,7 @@ namespace FinalProject1
 
                 return itm;
             }
-            catch (System.FormatException ex)
+            catch (FormatException)
             {
                 MessageBox.Show("Format is invald. Please try again");
             }
@@ -271,7 +286,6 @@ namespace FinalProject1
         private bool Valid()
         {
             List<bool> val = new List<bool>();
-
             //check if any values are null
             if (UPCText.Text == null)
             {
@@ -310,7 +324,7 @@ namespace FinalProject1
             val.Add(CheckPrice(PriceText.Text));
 
             // Verify the Category is valid
-            //val.Add(CheckCategory(itm.Category));
+            val.Add(CheckCategory((CategoryDTO)CategoryListCombo.SelectedItem));
 
             foreach (bool c in val)
             {
@@ -384,11 +398,9 @@ namespace FinalProject1
         /// </summary>
         /// <param name="category">category is the category we are checking</param>
         /// <returns>true if category is valid</returns>
-        private bool CheckCategory(Category category)
+        private bool CheckCategory(CategoryDTO category)
         {
-
-            // what needs to be verified here??
-            return true;
+            return category != null;
         }
 
         /// <summary>
@@ -412,23 +424,19 @@ namespace FinalProject1
                 if (reading)
                 {
                     // find the item associated with the upc entered
-                    ItemDTO lItem = InventoryListBox.Items
+                    ItemDTO lItem = itemDTOs
                                     .Cast<ItemDTO>()
                                     .Where(item => item.UPC.Equals(UPCText.Text)).FirstOrDefault();
                     if (lItem != null)
                     {
+                        InventoryListCombo.SelectedIndex = InventoryListCombo.Items.IndexOf(Category.createDTOFromCategory(lItem.Category));
                         InventoryListBox.SelectedIndex = InventoryListBox.Items.IndexOf(lItem);
                     }
                     else
                     {
                         InventoryListBox.SelectedIndex = -1;
                         string upc = UPCText.Text;
-                        UPCText.Text = "";
-                        NameText.Text = "";
-                        QuantityText.Text = "";
-                        PriceText.Text = "";
-                        CategoryListCombo.SelectedIndex = -1;
-                        InventoryListBox.SelectedIndex = -1;
+                        ClearInputs();
                         UPCText.Text = upc;
                     }
                 }
