@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:FinalProject1"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="800" MinHeight="450" MinWidth="800"
       Title="SalesPage">
 
     <Grid Background="#FFF1F1F1">
@@ -34,23 +34,34 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Label x:Name="PoS" Content="Point of Sale" Grid.ColumnSpan="2" FontSize="20" FontWeight="Bold" Margin="0,5" />
+        <Viewbox Grid.ColumnSpan="3">
+            <TextBlock x:Name="PoS" Text="Point of Sale" FontWeight="Bold" Margin="0,5" />
+        </Viewbox>
         <Button x:Name="MainMenu" Content="Main Menu" Grid.Row="9" Grid.Column="9" Margin="0,0" FontSize="14" Click="MainMenu_Click" ClickMode="Press"/>
         <Button x:Name="Cancel" Content="Cancel" Grid.Row="9" Grid.Column="6" Margin="0,0" FontSize="16" Click="Cancel_Click" ClickMode="Press"/>
         <Button x:Name="Pay" Content="Pay" Grid.Row="9" Grid.Column="3" Grid.ColumnSpan="2" Margin="0,0" FontSize="32" Click="Pay_Click" ClickMode="Press"/>
-        <TextBlock x:Name="PayTotal" Text="00.00" Grid.Row="9" Grid.Column="1" Background="Ivory" Grid.ColumnSpan="2" FontSize="32" Margin="0,0" TextWrapping="Wrap"/>
-        <Label x:Name="TotalLabel" Content="Total = $" Grid.Row="9" Grid.Column="0" FontSize="18" Margin="0,5" />
+        <Viewbox Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0" HorizontalAlignment="Left">
+            <TextBlock x:Name="PayTotal" Text="00.00" Background="Ivory" TextWrapping="Wrap" Padding="5,0,0,0"/>
+        </Viewbox>
+        <Viewbox Grid.Row="9" Grid.Column="0" Margin="0,0" >
+            <TextBlock x:Name="TotalLabel" Text="Total = $" />
+        </Viewbox>
         <ListBox x:Name="Transaction" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="8" Background="Ivory" FontSize="16" />
         <ListBox x:Name="Inventory" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="6" Grid.RowSpan="7" Background="Ivory" FontSize="16" />
         <Button x:Name="AddItem" Content="Add" Grid.Row="3" Grid.Column="3" Margin="0,0" FontSize="20" Click="AddItem_Click" ClickMode="Press"/>
         <Button x:Name="QuantityUp" Content="+" Grid.Row="4" Grid.Column="3" Margin="0,0" FontSize="32" Click="QuantityUp_Click" ClickMode="Press"/>
         <Button x:Name="QuantityDown" Content="-" Grid.Row="5" Grid.Column="3" Margin="0,0" FontSize="32" Click="QuantityDown_Click" ClickMode="Press"/>
         <Button x:Name="RemoveItem" Content="Remove" Grid.Row="6" Grid.Column="3" Margin="0,0" FontSize="20" Click="RemoveItem_Click" ClickMode="Press"/>
-        <TextBox x:Name="UpC" Text="***" Grid.Row="8" Grid.Column="4" Background="Ivory" Grid.ColumnSpan="3" FontSize="32" Margin="5,5" TextWrapping="Wrap"/>
-        <Label x:Name="UpCLabel" Content="UPC:" Grid.Row="8" Grid.Column="3" FontSize="20" Margin="25,5,0,5" />
+        <Viewbox Grid.Row="8" Grid.Column="4"  Grid.ColumnSpan="3" Margin="0,0" HorizontalAlignment="Left" >
+            <TextBox x:Name="UpC" Text="***" Background="Ivory" TextWrapping="Wrap"/>
+        </Viewbox>
+        <Viewbox Grid.Row="8" Grid.Column="3" Margin="0,0,0,0">
+            <TextBlock x:Name="UpCLabel" Text="UPC: " />
+        </Viewbox>
         <Button x:Name="UpCButton" Content="Look Up" Grid.Row="8" Grid.Column="7" Margin="0,0" FontSize="20" Click="UpCButton_Click" ClickMode="Press"/>
         <ComboBox x:Name="Category" Grid.ColumnSpan="4" Grid.Column="6" Margin="0,0,0,0" Grid.RowSpan="1" />
-        <Label x:Name="CategoryLabel" Content="Category:" Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" FontSize="20" Margin="50,0,0,0" />
-
+        <Viewbox Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Margin="0,0,0,0">
+            <TextBlock x:Name="CategoryLabel" Text="Category: "  />
+        </Viewbox>
     </Grid>
 </Page>

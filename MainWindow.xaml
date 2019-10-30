@@ -4,9 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FinalProject1"
-        mc:Ignorable="d"
-        Title="Register" Height="450" Width="800" FontSize="24" >
+        mc:Ignorable="d" WindowState="Maximized"
+        Title="Register" MinHeight="450" MinWidth="800" FontSize="24" d:DesignHeight="450" d:DesignWidth="800" >
     <Grid Background="#FFF1F1F1">
-        <Frame x:Name="MainMenuUI" Content="" HorizontalAlignment="Left" Height="420" Margin="0,0,-0.4,0" VerticalAlignment="Top" Width="794" NavigationUIVisibility="Hidden"/>
+        <Frame x:Name="MainMenuUI" Content=""  MinHeight="450" Margin="0,0,-0.4,0"  MinWidth="800" NavigationUIVisibility="Hidden"/>
         </Grid>
 </Window>
