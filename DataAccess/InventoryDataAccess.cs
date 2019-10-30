@@ -8,11 +8,10 @@ using System.Configuration;
 
 namespace FinalProject1
 {
-    class InventoryDataAccess : SQLDB, IInventoryDataAccess
+    class InventoryDataAccess : IInventoryDataAccess
     {
         // Table identifiers
-        private const string ItemTableName = "Item",
-                             CategoryTableName = "Category";
+        private const string ItemTableName = "Item";
 
         // Column identifiers
         private const string CategoryColumn = "CategoryID",
@@ -20,17 +19,16 @@ namespace FinalProject1
                              NameColumn = "Name",
                              PriceColumn = "Price",
                              QuantityColumn = "Quantity",
-                             UPCColumn = "UPC",
-                             CategoryNameColumn = "Name";
+                             UPCColumn = "UPC";
 
         private ICategoryDataAccess categoryDataAccess = null;
         public InventoryDataAccess(ICategoryDataAccess categoryDataAccess)
         {
             this.categoryDataAccess = categoryDataAccess;
         }
-        
+
         private string connectionStringToDB = ConfigurationManager.ConnectionStrings["MySQLDB"].ConnectionString;
-        
+
         //private MySqlConnection OpenConnection()
         //{
         //    MySqlConnection conn = new MySqlConnection(connectionStringToDB);
@@ -46,15 +44,19 @@ namespace FinalProject1
         /// <returns>True if UPC Exists in database</returns>
         private bool DoesUPCExist(string uPC)
         {
-            //bool result = false;
-            string commandString = "SELECT EXISTS(SELECT 1 FROM " + ItemTableName +
-                                    " WHERE " + UPCColumn + " = '" + uPC + "' LIMIT 1)";
-            //MySqlConnection conn = OpenConnection();
-            //MySqlCommand cmd = new MySqlCommand(commandString, conn);
-            //result = int.Parse(cmd.ExecuteScalar().ToString()) == 1;
-            //cmd.Dispose();
-            //conn.Close();
-            return int.Parse(ExecuteScalar(commandString).ToString()) > 0;
+            int result = -1;
+            string commandString = $@"SELECT EXISTS(SELECT 1 
+                                      FROM { ItemTableName} 
+                                      WHERE {UPCColumn} = @UPC 
+                                      LIMIT 1)";
+            using (MySqlConnection conn = new MySqlConnection(connectionStringToDB))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand(commandString, conn);
+                cmd.Parameters.AddWithValue("@UPC", uPC);
+                result = int.Parse(cmd.ExecuteScalar().ToString());
+            }
+            return result > 0;
         }
 
         /// <summary>
@@ -67,25 +69,21 @@ namespace FinalProject1
             int result = -1;
             if (!DoesUPCExist(item.UPC))
             {
-                //MySqlConnection conn = OpenConnection();
-
-                string commandString = "INSERT INTO " + ItemTableName +
-                                        "(" + CategoryColumn + ", " +
-                                        " " + NameColumn + ", " +
-                                        " " + PriceColumn + ", " +
-                                        " " + QuantityColumn + ", " +
-                                        " " + UPCColumn + ")" +
-                                        " VALUES(" +
-                                        item.Category.CategoryID + ", '" +
-                                        HandleApostrophe(item.Name) + "', " +
-                                        item.Price + ", " +
-                                        item.Quantity + ", '" +
-                                        item.UPC + "')";
-                //MySqlCommand cmd = new MySqlCommand(commandString, conn);
-                //result = cmd.ExecuteNonQuery();
-                //cmd.Dispose();
-                //conn.Close();
-                result = ExecuteNonQuery(commandString);
+                string commandString = $@"INSERT INTO {ItemTableName} ({CategoryColumn}, {NameColumn}, {PriceColumn}, {QuantityColumn}, {UPCColumn})
+                                       VALUES(@CategoryID, @Name, @Price, @Quantity, @UPC)";
+ 
+                using (MySqlConnection conn = new MySqlConnection(connectionStringToDB))
+                {
+                    conn.Open();
+                    MySqlCommand cmd = new MySqlCommand(commandString, conn);
+                    cmd.Parameters.AddWithValue("@CategoryId", item.Category.CategoryID);
+                    cmd.Parameters.AddWithValue("@Name", item.Name);
+                    cmd.Parameters.AddWithValue("@Price", item.Price);
+                    cmd.Parameters.AddWithValue("@Quantity", item.Quantity);
+                    cmd.Parameters.AddWithValue("@UPC", item.UPC);
+                    result = int.Parse(cmd.ExecuteNonQuery().ToString());
+                    cmd.Dispose();
+                }
             }
             return result > 0;
         }
@@ -98,19 +96,24 @@ namespace FinalProject1
         /// <returns>True if Item updated</returns>
         public bool UpdateItem(string uPC, ItemDTO item)
         {
-            //MySqlConnection conn = OpenConnection();
-            string commandString = "UPDATE " + ItemTableName + " SET " +
-                                   CategoryColumn + " = " + item.Category.CategoryID +
-                                   ", " + NameColumn + " = '" + HandleApostrophe(item.Name) +
-                                   "', " + PriceColumn + " = " + item.Price +
-                                   ", " + QuantityColumn + " = " + item.Quantity +
-                                   ", " + UPCColumn + " = '" + item.UPC +
-                                   "' WHERE " + ItemIDColumn + " = " + item.ItemID;
-            //MySqlCommand cmd = new MySqlCommand(commandString, conn);
-            //cmd.ExecuteNonQuery();
-            //cmd.Dispose();
-            //conn.Close();
-            return ExecuteNonQuery(commandString) > 0;
+            int result = -1;
+            string commandString = $@"UPDATE {ItemTableName}
+                                   SET {CategoryColumn} = @CategoryID, {NameColumn} = @Name, {PriceColumn} = @Price, {QuantityColumn} = @Quantity, {UPCColumn} = @UPC
+                                   WHERE {ItemIDColumn} = @ItemID";
+            using (MySqlConnection conn = new MySqlConnection(connectionStringToDB))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand(commandString, conn);
+                cmd.Parameters.AddWithValue("@CategoryId", item.Category.CategoryID);
+                cmd.Parameters.AddWithValue("@Name", item.Name);
+                cmd.Parameters.AddWithValue("@Price", item.Price);
+                cmd.Parameters.AddWithValue("@Quantity", item.Quantity);
+                cmd.Parameters.AddWithValue("@UPC", item.UPC);
+                cmd.Parameters.AddWithValue("@ItemID", item.ItemID);
+                result = int.Parse(cmd.ExecuteNonQuery().ToString());
+                cmd.Dispose();
+            }
+            return result > 0;
         }
 
         /// <summary>
@@ -120,16 +123,18 @@ namespace FinalProject1
         /// <returns>True if Item deleted</returns>
         public bool DeleteItem(string uPC)
         {
-            //int result = -1;
-            //MySqlConnection conn = OpenConnection();
-            string commandString = "DELETE FROM " + ItemTableName +
-                                   " WHERE " + UPCColumn + " = '" + uPC + "'";
-            //MySqlCommand cmd = new MySqlCommand(commandString, conn);
-            //result = cmd.ExecuteNonQuery();
-            //cmd.Dispose();
-            //conn.Close();
-            //return result > 0;
-            return ExecuteNonQuery(commandString) > 0;
+            int result = -1;
+            string commandString = $@"DELETE FROM {ItemTableName}
+                                   WHERE {UPCColumn} = @UPC";
+            using (MySqlConnection conn = new MySqlConnection(connectionStringToDB))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand(commandString, conn);
+                cmd.Parameters.AddWithValue("@UPC", uPC);
+                result = int.Parse(cmd.ExecuteNonQuery().ToString());
+                cmd.Dispose();
+            }
+            return result > 0;
         }
 
         /// <summary>
@@ -140,26 +145,22 @@ namespace FinalProject1
         public ItemDTO GetItem(string uPC)
         {
             ItemDTO item = null;
-            //string commandString = "SELECT * FROM " + ItemTableName +
-            //                       " INNER JOIN " + CategoryTableName +
-            //                       " ON " + ItemTableName + "." + CategoryColumn + 
-            //                       " = " + CategoryTableName + "."  + CategoryColumn +
-            //                       " WHERE " + UPCColumn + " = '" + uPC + "' LIMIT 1";
-            string commandString = "SELECT * FROM " + ItemTableName +
-                                   " WHERE " + UPCColumn + " = '" + uPC + "' LIMIT 1";
+            string commandString = $@"SELECT * FROM {ItemTableName}
+                                      WHERE {UPCColumn} = @UPC
+                                      LIMIT 1";
 
-            //MySqlConnection conn = OpenConnection();
-            //MySqlCommand cmd = new MySqlCommand(commandString, conn);
-            //MySqlDataReader reader = cmd.ExecuteReader();
-            ExecuteReader(commandString);
-            while (Reader.Read())
+            using (MySqlConnection conn = new MySqlConnection(connectionStringToDB))
             {
-                item = ReadInItem();
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand(commandString, conn);
+                cmd.Parameters.AddWithValue("@UPC", uPC);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    item = ReadInItem(reader);
+                }
+                cmd.Dispose();
             }
-            CleanUp();
-            //reader.Close();
-            //cmd.Dispose();
-            //conn.Close();
             return item;
         }
 
@@ -170,25 +171,20 @@ namespace FinalProject1
         public List<ItemDTO> GetAllItems()
         {
             List<ItemDTO> items = new List<ItemDTO>();
-            //string commandString = "SELECT * FROM " + ItemTableName + 
-            //                       " INNER JOIN " + CategoryTableName +
-            //                       " ON " + ItemTableName + "." + CategoryColumn +
-            //                       " = " + CategoryTableName + "." + CategoryColumn;
-            string commandString = "SELECT * FROM " + ItemTableName + " " +
-                                   "ORDER BY " + NameColumn;
+            string commandString = $@"SELECT * FROM {ItemTableName}
+                                      ORDER BY {NameColumn}";
 
-            //MySqlConnection conn = OpenConnection();
-            //MySqlCommand cmd = new MySqlCommand(commandString, conn);
-            //MySqlDataReader reader = cmd.ExecuteReader();
-            ExecuteReader(commandString);
-            while (Reader.Read())
+            using (MySqlConnection conn = new MySqlConnection(connectionStringToDB))
             {
-                items.Add(ReadInItem());
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand(commandString, conn);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    items.Add(ReadInItem(reader));
+                }
+                cmd.Dispose();
             }
-            CleanUp();
-            //reader.Close();
-            //cmd.Dispose();
-            //conn.Close();
             return items;
         }
 
@@ -199,14 +195,18 @@ namespace FinalProject1
         public List<string> GetAllUPCs()
         {
             List<string> uPCs = new List<string>();
-            string commandString = "SELECT " + UPCColumn + " FROM " + ItemTableName;
-            //MySqlConnection conn = OpenConnection();
-            //MySqlCommand cmd = new MySqlCommand(commandString, conn);
-            //MySqlDataReader reader = cmd.ExecuteReader();
-            ExecuteReader(commandString);
-            while (Reader.Read())
+            string commandString = $@"SELECT {UPCColumn}
+                                      FROM {ItemTableName}";
+            using (MySqlConnection conn = new MySqlConnection(connectionStringToDB))
             {
-                uPCs.Add(Reader.GetString(UPCColumn));
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand(commandString, conn);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    uPCs.Add(reader.GetString(UPCColumn));
+                }
+                cmd.Dispose();
             }
             return uPCs;
         }
@@ -236,24 +236,16 @@ namespace FinalProject1
         /// Read in a single Item using the MySQLDataReader
         /// </summary>
         /// <returns>The Item created with the read in values</returns>
-        private ItemDTO ReadInItem()
+        private ItemDTO ReadInItem(MySqlDataReader reader)
         {
-            //Category category = new Category
-            //{
-            //    CategoryID = Reader.GetInt64(CategoryTableName + "." + CategoryColumn),
-            //    Name = Reader.GetString(CategoryTableName + "." + CategoryNameColumn),
-            //    Items = null
-            //};
-
             ItemDTO item = new ItemDTO
             {
-                ItemID = Reader.GetInt64(ItemIDColumn),
-                UPC = Reader.GetString(UPCColumn),
-                Name = Reader.GetString(NameColumn),
-                Quantity = Reader.GetInt32(QuantityColumn),
-                Price = (decimal)Reader.GetFloat(PriceColumn),
-                //Category = category
-                Category = Category.createCategoryFromDTO(categoryDataAccess.GetCategory((long)Reader.GetInt64(CategoryColumn)))
+                ItemID = reader.GetInt64(ItemIDColumn),
+                UPC = reader.GetString(UPCColumn),
+                Name = reader.GetString(NameColumn),
+                Quantity = reader.GetInt32(QuantityColumn),
+                Price = (decimal)reader.GetFloat(PriceColumn),
+                Category = Category.createCategoryFromDTO(categoryDataAccess.GetCategory((long)reader.GetInt64(CategoryColumn)))
             };
             return item;
         }
