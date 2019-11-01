@@ -9,7 +9,7 @@ namespace FinalProject1
     /// <summary>
     /// Data transfer object for the Category class
     /// </summary>
-    class CategoryDTO
+    class CategoryDTO: IComparable
     {
         public long CategoryID { get; set; }
         public string Name { get; set; }
@@ -22,10 +22,14 @@ namespace FinalProject1
 
         public override bool Equals(Object obj)
         {
-            CategoryDTO c = obj as CategoryDTO;
-            return c != null && c.CategoryID == CategoryID;
+            return obj is CategoryDTO c && c.CategoryID == CategoryID;
         }
 
+        public int CompareTo(Object obj)
+        {
+            CategoryDTO c = obj as CategoryDTO;
+            return (int)(CategoryID - c.CategoryID);
+        }
         public override int GetHashCode()
         {
             return CategoryID.ToString().GetHashCode();

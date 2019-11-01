@@ -21,21 +21,14 @@ namespace FinalProject1
                              QuantityColumn = "Quantity",
                              UPCColumn = "UPC";
 
+        // database connection string
+        private string connectionStringToDB = ConfigurationManager.ConnectionStrings["MySQLDB"].ConnectionString;
+
         private ICategoryDataAccess categoryDataAccess = null;
         public InventoryDataAccess(ICategoryDataAccess categoryDataAccess)
         {
             this.categoryDataAccess = categoryDataAccess;
         }
-
-        private string connectionStringToDB = ConfigurationManager.ConnectionStrings["MySQLDB"].ConnectionString;
-
-        //private MySqlConnection OpenConnection()
-        //{
-        //    MySqlConnection conn = new MySqlConnection(connectionStringToDB);
-        //    conn.Open();
-        //    return conn;
-        //}
-
 
         /// <summary>
         /// Check if an Item with the passed in UPC already exists
@@ -110,6 +103,7 @@ namespace FinalProject1
                 cmd.Parameters.AddWithValue("@Quantity", item.Quantity);
                 cmd.Parameters.AddWithValue("@UPC", item.UPC);
                 cmd.Parameters.AddWithValue("@ItemID", item.ItemID);
+                cmd.Parameters.AddWithValue("@OriginalUPC", uPC);
                 result = int.Parse(cmd.ExecuteNonQuery().ToString());
                 cmd.Dispose();
             }
@@ -228,6 +222,7 @@ namespace FinalProject1
                 cmd.Parameters.AddWithValue("@Amount", amount);
                 cmd.Parameters.AddWithValue("@UPC", uPC);
                 cmd.ExecuteNonQuery();
+                cmd.Dispose();
             }
             return true;
         }
