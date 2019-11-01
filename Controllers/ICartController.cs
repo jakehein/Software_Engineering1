@@ -16,7 +16,7 @@ namespace FinalProject1
 
         //List<string> AllUPCs { get; }
 
-        //ItemDTO GetItem(string uPC);
+        ItemDTO GetItem(string uPC);
 
         List<ItemDTO> GetAllItems();
 

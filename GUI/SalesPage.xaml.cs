@@ -55,7 +55,6 @@ namespace FinalProject1
         }
         private void MainMenu_Click(object sender, RoutedEventArgs e)
         {
-            //this.NavigationService.Navigate(new MainMenu());
             this.NavigationService.GoBack();
         }
 
@@ -99,8 +98,17 @@ namespace FinalProject1
 
         }
 
+        /// <summary>
+        /// This method takes the UPC and searches to see if it is avaliable.
+        /// </summary>
         private void UpCButton_Click(object sender, RoutedEventArgs e)
         {
+            string upC = UpC.Text;
+            ItemDTO itm = cartController.GetItem(upC);
+            //var items = itm.Cast<ItemDTO>();//.Where(item => item.Category.CategoryID == ((CategoryDTO)e.AddedItems[0]).CategoryID);
+            //IEnumerable<ItemDTO> item = itm;
+            //Inventory.Items.Clear();
+            //Inventory.Items.Add(itm);
 
         }
 
@@ -112,6 +120,35 @@ namespace FinalProject1
         private void PayTotal_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             ((TextBlock)sender).FontSize = ((TextBlock)sender).ActualHeight / 1.5;
+        }
+
+        /// <summary>
+        /// This method takes the selected item and adds it to the cart list
+        /// </summary>
+        private void Inventory_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ItemDTO itm = (ItemDTO)Inventory.SelectedItem;
+            if (itm != null)
+            {
+                //CategoryListCombo.SelectedIndex = CategoryListCombo.Items.IndexOf(Category.createDTOFromCategory(itm.Category));
+                //Transaction.Add(itm);
+            }
+        }
+
+        /// <summary>
+        /// This method populates the items list with the selected category. 
+        /// </summary>
+        private void Category_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count == 0 || ((CategoryDTO)e.AddedItems[0]).CategoryID == 0)
+            {
+                FillItemList(itemDTOs);
+            }
+            else
+            {
+                var items = itemDTOs.Cast<ItemDTO>().Where(item => item.Category.CategoryID == ((CategoryDTO)e.AddedItems[0]).CategoryID);
+                FillItemList(items);
+            }
         }
 
         /*private void Inventory_SelectionChanged(object sender, SelectionChangedEventArgs e)

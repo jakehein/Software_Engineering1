@@ -77,10 +77,13 @@ namespace FinalProject1
             return success;
         }
 
-        //ItemDTO GetItem(string uPC)
-        //{
-        //    return null;
-        //}
+        /// <summary>
+        /// This method takes a UPC and returns the ItemDTO
+        /// </summary>
+        public ItemDTO GetItem(string uPC)
+        {
+            return inventoryDataAccess.GetItem(uPC);
+        }
 
         /// <summary>
         /// Get all the items contained in the cart in a List

@@ -47,7 +47,7 @@
             <TextBlock x:Name="TotalLabel" Text="Total = $" />
         </Viewbox>
         <ListBox x:Name="Transaction" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="8" Background="Ivory" FontSize="16" />
-        <ListBox x:Name="Inventory" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="6" Grid.RowSpan="7" Background="Ivory" FontSize="16" />
+        <ListBox x:Name="Inventory" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="6" Grid.RowSpan="7" Background="Ivory" FontSize="16" SelectionChanged="Inventory_SelectionChanged" />
         <Button x:Name="AddItem" Content="Add" Grid.Row="3" Grid.Column="3" Margin="0,0" FontSize="20" Click="AddItem_Click" ClickMode="Press"/>
         <Button x:Name="QuantityUp" Content="+" Grid.Row="4" Grid.Column="3" Margin="0,0" FontSize="32" Click="QuantityUp_Click" ClickMode="Press"/>
         <Button x:Name="QuantityDown" Content="-" Grid.Row="5" Grid.Column="3" Margin="0,0" FontSize="32" Click="QuantityDown_Click" ClickMode="Press"/>
@@ -59,7 +59,7 @@
             <TextBlock x:Name="UpCLabel" Text="UPC: " />
         </Viewbox>
         <Button x:Name="UpCButton" Content="Look Up" Grid.Row="8" Grid.Column="7" Margin="0,0" FontSize="20" Click="UpCButton_Click" ClickMode="Press"/>
-        <ComboBox x:Name="Category" Grid.ColumnSpan="4" Grid.Column="6" Margin="0,0,0,0" Grid.RowSpan="1" />
+        <ComboBox x:Name="Category" Grid.ColumnSpan="4" Grid.Column="6" Margin="0,0,0,0" Grid.RowSpan="1" SelectionChanged="Category_SelectionChanged" />
         <Viewbox Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Margin="0,0,0,0">
             <TextBlock x:Name="CategoryLabel" Text="Category: "  />
         </Viewbox>
