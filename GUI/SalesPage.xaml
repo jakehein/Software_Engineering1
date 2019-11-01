@@ -40,9 +40,9 @@
         <Button x:Name="MainMenu" Content="Main Menu" Grid.Row="9" Grid.Column="9" Margin="0,0" FontSize="14" Click="MainMenu_Click" ClickMode="Press"/>
         <Button x:Name="Cancel" Content="Cancel" Grid.Row="9" Grid.Column="6" Margin="0,0" FontSize="16" Click="Cancel_Click" ClickMode="Press"/>
         <Button x:Name="Pay" Content="Pay" Grid.Row="9" Grid.Column="3" Grid.ColumnSpan="2" Margin="0,0" FontSize="32" Click="Pay_Click" ClickMode="Press"/>
-        <Viewbox Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0" HorizontalAlignment="Left">
-            <TextBlock x:Name="PayTotal" Text="00.00" Background="Ivory" TextWrapping="Wrap" Padding="5,0,0,0"/>
-        </Viewbox>
+        
+            <TextBlock x:Name="PayTotal" Text="00.00" Background="Ivory" SizeChanged="PayTotal_SizeChanged" Padding="5,0,0,0" Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0"/>
+        
         <Viewbox Grid.Row="9" Grid.Column="0" Margin="0,0" >
             <TextBlock x:Name="TotalLabel" Text="Total = $" />
         </Viewbox>
@@ -52,9 +52,9 @@
         <Button x:Name="QuantityUp" Content="+" Grid.Row="4" Grid.Column="3" Margin="0,0" FontSize="32" Click="QuantityUp_Click" ClickMode="Press"/>
         <Button x:Name="QuantityDown" Content="-" Grid.Row="5" Grid.Column="3" Margin="0,0" FontSize="32" Click="QuantityDown_Click" ClickMode="Press"/>
         <Button x:Name="RemoveItem" Content="Remove" Grid.Row="6" Grid.Column="3" Margin="0,0" FontSize="20" Click="RemoveItem_Click" ClickMode="Press"/>
-        <Viewbox Grid.Row="8" Grid.Column="4"  Grid.ColumnSpan="3" Margin="0,0" HorizontalAlignment="Left" >
-            <TextBox x:Name="UpC" Text="***" Background="Ivory" TextWrapping="Wrap"/>
-        </Viewbox>
+
+            <TextBox x:Name="UpC" Text=""  Background="Ivory" SizeChanged="UpC_SizeChanged" Grid.Row="8" MaxLength="12" Grid.Column="4" Grid.ColumnSpan="3" Margin="0,0" FontSize="32"/>
+
         <Viewbox Grid.Row="8" Grid.Column="3" Margin="0,0,0,0">
             <TextBlock x:Name="UpCLabel" Text="UPC: " />
         </Viewbox>
