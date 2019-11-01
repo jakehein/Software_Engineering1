@@ -8,7 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Inventory_Page" TextInput="Page_TextInput">
 
-    <Grid Background="#FFF1F1F1">
+    <Grid Background="#FFF1F1F1" Margin="0,0,0,-0.4">
         <ListBox x:Name="InventoryListBox" Margin="451,66,37,33" FontSize="15" SelectionChanged="InventoryListBox_SelectionChanged"/>
         <ComboBox x:Name="InventoryListCombo" Margin="451,17,37,0" VerticalAlignment="Top" Height="44" BorderBrush="White" Foreground="White" Background="White" SelectionChanged="InventoryListCombo_SelectionChanged"/>
         <Label x:Name="UPCLabel" Content="UPC:" HorizontalAlignment="Left" Margin="93,62,0,0" VerticalAlignment="Top" FontSize="16"/>
@@ -25,7 +25,6 @@
         <Button x:Name="UpdateBtn" Content="Update" HorizontalAlignment="Left" Margin="280,233,0,0" VerticalAlignment="Top" Width="83" FontSize="16" Height="41" Click="UpdateBtn_Click" ClickMode="Press"/>
         <Button x:Name="DeleteBtn" Content="Delete" HorizontalAlignment="Left" Margin="159,290,0,0" VerticalAlignment="Top" Width="83" Height="41" FontSize="16" Click="DeleteBtn_Click" ClickMode="Press"/>
         <Button x:Name="ExitBtn" Content="Exit" HorizontalAlignment="Left" Margin="280,290,0,0" VerticalAlignment="Top" Width="83" Height="41" FontSize="16" Click="ExitBtn_Click" ClickMode="Press"/>
-        
 
     </Grid>
 </Page>
