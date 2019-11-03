@@ -58,9 +58,14 @@ namespace FinalProject1
             this.NavigationService.GoBack();
         }
 
+        /// <summary>
+        /// This method clears the transaction from the cart.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-
+            Transaction.Items.Clear();
         }
 
         private void Pay_Click(object sender, RoutedEventArgs e)
@@ -108,7 +113,7 @@ namespace FinalProject1
             //var items = itm.Cast<ItemDTO>();//.Where(item => item.Category.CategoryID == ((CategoryDTO)e.AddedItems[0]).CategoryID);
             //IEnumerable<ItemDTO> item = itm;
             //Inventory.Items.Clear();
-            //Inventory.Items.Add(itm);
+            //Inventory.Items.Add(itm);1
 
         }
 
@@ -127,11 +132,21 @@ namespace FinalProject1
         /// </summary>
         private void Inventory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
             ItemDTO itm = (ItemDTO)Inventory.SelectedItem;
             if (itm != null)
             {
-                //CategoryListCombo.SelectedIndex = CategoryListCombo.Items.IndexOf(Category.createDTOFromCategory(itm.Category));
-                //Transaction.Add(itm);
+                try
+                {
+                    cartController.AddItem(itm);
+                    MessageBox.Show("Item added to cart");
+                    Transaction.Items.Add(itm);
+
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show(":( Add Items still throws Exception");
+                }
             }
         }
 
@@ -152,7 +167,7 @@ namespace FinalProject1
         }
 
         /*private void Inventory_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+        {+
             ItemDTO itm = (ItemDTO)Inventory.SelectedItem;
             if (itm != null)
             {

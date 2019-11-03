@@ -27,9 +27,24 @@ namespace FinalProject1
         /// <param name="item">The item to be added</param>
         public void AddItem(Item item)
         {
+            /* //ORIGINAL
             int currentCount = 0;
             Items.TryGetValue(item, out currentCount);
-            Items.Add(item, currentCount + 1);
+            Items.Add(item, currentCount + 1); // ORIGINAL*/
+
+            //TEST
+            int currentCount = 0;
+            bool result = Items.TryGetValue(item, out currentCount);
+            if (result)
+            {
+                Items.Add(item, currentCount + 1);
+            }
+            else
+            {
+                //MessageBox.Show("eek");
+            }
+            
+            //TEST
         }
 
         /// <summary>
