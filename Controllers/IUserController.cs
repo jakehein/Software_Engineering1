@@ -8,13 +8,15 @@ namespace FinalProject1
 {
     interface IUserController
     {
-        //User CurrentUser { get; }
+        User CurrentUser { get; }
 
         string LogIn(string userName, string password);
 
         bool Override(string pin);
-            
-        string LogOut();
+
+        bool CurrentUserHasInventoryAccess();
+
+        void LogOut();
 
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinalProject1.DataAccess
+namespace FinalProject1
 {
     interface IUserDataAccess
     {

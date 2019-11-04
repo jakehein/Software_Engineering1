@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinalProject1.DataAccess
+namespace FinalProject1
 {
     class UserDataAccess : IUserDataAccess
     {
@@ -63,7 +63,7 @@ namespace FinalProject1.DataAccess
             }
         }
 
-        public bool DoesUserHaveInvntoryAccess(string username)
+        public bool DoesUserHaveInvetoryAccess(string username)
         {
             string commandString = $@"SELECT {hasInventoryAccessColumn}
                                       FROM {userTable}
