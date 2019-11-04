@@ -139,7 +139,6 @@ namespace FinalProject1
                 try
                 {
                     cartController.AddItem(itm);
-                    MessageBox.Show("Item added to cart");
                     Transaction.Items.Add(itm);
 
                 }

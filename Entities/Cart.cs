@@ -10,6 +10,11 @@ namespace FinalProject1
     {
         public Dictionary<Item, int> Items { get; set; }
 
+
+        public Cart()
+        {
+            Items = new Dictionary<Item, int>();
+        }
         /// <summary>
         /// The total cost of all Items in the Cart
         /// </summary>
@@ -41,7 +46,7 @@ namespace FinalProject1
             }
             else
             {
-                //MessageBox.Show("eek");
+                Items.Add(item, 1);
             }
             
             //TEST
