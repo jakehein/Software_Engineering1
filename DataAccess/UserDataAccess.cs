@@ -33,7 +33,7 @@ namespace FinalProject1.DataAccess
             }
         }
 
-        public string GetPassword(string username)
+        public string GetPin(string username)
         {
             string commandString = $@"SELECT {pinColumn}
                                       FROM {userTable}
@@ -48,9 +48,33 @@ namespace FinalProject1.DataAccess
             }
         }
 
-        public void UpdatePassword(string username, string password)
+        public void UpdatePin(string username, string pin)
         {
-            throw new NotImplementedException();
+            string commandString = $@"UPDATE {userTable}
+                                      SET {pinColumn} = @Pin
+                                      WHERE {usernameColumn} = @Username;";
+            using (MySqlConnection conn = new MySqlConnection(connectionStringToDB))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand(commandString, conn);
+                cmd.Parameters.AddWithValue("@Pin", pin);
+                cmd.Parameters.AddWithValue("@Username", username);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public bool DoesUserHaveInvntoryAccess(string username)
+        {
+            string commandString = $@"SELECT {hasInventoryAccessColumn}
+                                      FROM {userTable}
+                                      WHERE {usernameColumn} = @Username";
+            using (MySqlConnection conn = new MySqlConnection(connectionStringToDB))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand(commandString, conn);
+                cmd.Parameters.AddWithValue("@Username", username);
+                return (bool)cmd.ExecuteScalar();
+            }
         }
     }
 }

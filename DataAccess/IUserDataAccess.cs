@@ -9,7 +9,8 @@ namespace FinalProject1.DataAccess
     interface IUserDataAccess
     {
         void CreateUser(string username, string pin, bool hasInventoryAccess);
-        void GetPassword(string username);
-        void UpdatePassword(string username, string password);
+        string GetPin(string username);
+        bool DoesUserHaveInvetoryAccess(string username);
+        void UpdatePin(string username, string pin);
     }
 }

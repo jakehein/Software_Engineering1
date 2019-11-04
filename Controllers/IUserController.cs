@@ -8,7 +8,7 @@ namespace FinalProject1
 {
     interface IUserController
     {
-        //UserDTO CurrentUser { get; }
+        //User CurrentUser { get; }
 
         string LogIn(string userName, string password);
 
