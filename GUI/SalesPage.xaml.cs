@@ -66,6 +66,7 @@ namespace FinalProject1
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             Transaction.Items.Clear();
+            cartController.CancelTransaction();
         }
 
         private void Pay_Click(object sender, RoutedEventArgs e)
@@ -98,9 +99,22 @@ namespace FinalProject1
 
         }
 
+        /// <summary>
+        /// This method takes the selected item from the Transaction box and removes it.
+        /// </summary>
         private void RemoveItem_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                ItemDTO itm = (ItemDTO)Transaction.SelectedItem;
+                cartController.RemoveItem(itm);
+                Transaction.ItemsSource = cartController.GetAllItems();
 
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Exception in cartController.RemoveItem(itm).");
+            }
         }
 
         /// <summary>
@@ -113,7 +127,7 @@ namespace FinalProject1
             //var items = itm.Cast<ItemDTO>();//.Where(item => item.Category.CategoryID == ((CategoryDTO)e.AddedItems[0]).CategoryID);
             //IEnumerable<ItemDTO> item = itm;
             //Inventory.Items.Clear();
-            //Inventory.Items.Add(itm);1
+            //Inventory.Items.Add(itm);
 
         }
 
