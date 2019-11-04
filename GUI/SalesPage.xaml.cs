@@ -23,6 +23,7 @@ namespace FinalProject1
         private IInventoryController inventoryControl;
         private ICategoryController categoryControl;
         private ICartController cartController;
+        private IDrawerController drawerController;
         private bool reading = false;
         private List<ItemDTO> itemDTOs = new List<ItemDTO>();
         public SalesPage()
@@ -31,6 +32,7 @@ namespace FinalProject1
             categoryControl = new CategoryController(new CategoryDataAccess());
             inventoryControl = new InventoryController(new InventoryDataAccess(new CategoryDataAccess()));
             cartController = new CartController();
+            drawerController = new DrawerController();
             //UPCText.Focus();
             PopulateItemList();
             FillCategoryCombo();
@@ -65,7 +67,9 @@ namespace FinalProject1
         /// <param name="e"></param>
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
+            cartController.CancelTransaction();
             Transaction.Items.Clear();
+            UpdateTotal();
         }
 
         private void Pay_Click(object sender, RoutedEventArgs e)
@@ -90,7 +94,17 @@ namespace FinalProject1
 
         private void QuantityUp_Click(object sender, RoutedEventArgs e)
         {
-
+            ItemDTO itm = (ItemDTO)Transaction.SelectedItem;
+            if (itm != null)
+            {
+                cartController.AddItem(itm);
+                Transaction.Items.Add(itm);
+                UpdateTotal();
+            }
+            else
+            {
+                MessageBox.Show("Select an Item from the transaction to increase the quantity")
+            }
         }
 
         private void QuantityDown_Click(object sender, RoutedEventArgs e)
@@ -140,6 +154,7 @@ namespace FinalProject1
                 {
                     cartController.AddItem(itm);
                     Transaction.Items.Add(itm);
+                    UpdateTotal();
 
                 }
                 catch (Exception)
@@ -163,6 +178,11 @@ namespace FinalProject1
                 var items = itemDTOs.Cast<ItemDTO>().Where(item => item.Category.CategoryID == ((CategoryDTO)e.AddedItems[0]).CategoryID);
                 FillItemList(items);
             }
+        }
+
+        private void UpdateTotal()
+        {
+            PayTotal.Text = cartController.GetTotal().ToString();
         }
 
         /*private void Inventory_SelectionChanged(object sender, SelectionChangedEventArgs e)

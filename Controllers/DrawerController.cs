@@ -4,11 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinalProject1.Controllers
+namespace FinalProject1
 {
     class DrawerController : IDrawerController
     {
-        Drawer drawer = new Drawer();
+        Drawer drawer;
+        public DrawerController()
+        {
+            drawer = new Drawer();
+        }
 
         /// <summary>
         /// Cashes out a purchase for the given total and provides the correct change

@@ -11,7 +11,10 @@ namespace FinalProject1
         Cart cart;
         
         IInventoryDataAccess inventoryDataAccess = new InventoryDataAccess(new CategoryDataAccess());
-        public decimal? GetTotal { get; private set; }
+        public decimal? GetTotal()
+        {
+            return cart.TotalCost;
+        }
 
         /// <summary>
         /// Create an instance of the CartController
@@ -111,6 +114,9 @@ namespace FinalProject1
             cart = new Cart();
         }
 
+        /// <summary>
+        /// Ends the current transaction and refreshes the cart
+        /// </summary>
         public void CancelTransaction()
         {
             cart = new Cart();

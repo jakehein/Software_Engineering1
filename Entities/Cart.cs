@@ -42,7 +42,7 @@ namespace FinalProject1
             bool result = Items.TryGetValue(item, out currentCount);
             if (result)
             {
-                Items.Add(item, currentCount + 1);
+                Items[item] = currentCount + 1;
             }
             else
             {
