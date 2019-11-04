@@ -85,6 +85,7 @@
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\ICartController.cs" />
     <Compile Include="Entities\Drawer.cs" />
+    <Compile Include="Entities\User.cs" />
     <Compile Include="GUI\InventoryPage.xaml.cs">
       <DependentUpon>InventoryPage.xaml</DependentUpon>
     </Compile>
