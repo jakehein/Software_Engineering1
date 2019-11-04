@@ -20,7 +20,7 @@ namespace FinalProject1
 
         List<ItemDTO> GetAllItems();
 
-        decimal? GetTotal { get; }
+        decimal? GetTotal();
 
         void Checkout();
 
