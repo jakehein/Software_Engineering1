@@ -103,7 +103,7 @@ namespace FinalProject1
             }
             else
             {
-                MessageBox.Show("Select an Item from the transaction to increase the quantity")
+                MessageBox.Show("Select an Item from the transaction to increase the quantity");
             }
         }
 
