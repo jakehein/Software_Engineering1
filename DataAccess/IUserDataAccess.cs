@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinalProject1.DataAccess
+namespace FinalProject1
 {
     interface IUserDataAccess
     {
-        void CreateUser(string userName, string password);
-        void GetPassword(string username);
-        void UpdatePassword(string username, string password);
+        void CreateUser(string username, string pin, bool hasInventoryAccess);
+        string GetPin(string username);
+        bool DoesUserHaveInvetoryAccess(string username);
+        void UpdatePin(string username, string pin);
     }
 }

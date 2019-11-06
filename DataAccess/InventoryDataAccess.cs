@@ -92,7 +92,7 @@ namespace FinalProject1
             int result = -1;
             string commandString = $@"UPDATE {ItemTableName}
                                    SET {CategoryColumn} = @CategoryID, {NameColumn} = @Name, {PriceColumn} = @Price, {QuantityColumn} = @Quantity, {UPCColumn} = @UPC
-                                   WHERE {ItemIDColumn} = @ItemID";
+                                   WHERE {UPCColumn} = @OriginalUPC";
             using (MySqlConnection conn = new MySqlConnection(connectionStringToDB))
             {
                 conn.Open();
