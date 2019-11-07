@@ -6,17 +6,17 @@
       xmlns:local="clr-namespace:FinalProject1"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Inventory_Page" TextInput="Page_TextInput">
+      Title="Inventory_Page" TextInput="HandleBarcodeScan">
 
     <Grid Background="#FFF1F1F1" Margin="0,0,0,-0.4">
         <ListBox x:Name="InventoryListBox" Margin="451,66,37,33" FontSize="15" SelectionChanged="InventoryListBox_SelectionChanged"/>
-        <ComboBox x:Name="InventoryListCombo" Margin="451,17,37,0" VerticalAlignment="Top" Height="44" BorderBrush="White" Background="White" SelectionChanged="InventoryListCombo_SelectionChanged"/>
+        <ComboBox x:Name="CategoryListComboBox" Margin="451,17,37,0" VerticalAlignment="Top" Height="44" BorderBrush="White" Background="White" SelectionChanged="CategoryListComboBox_SelectionChanged"/>
         <Label x:Name="UPCLabel" Content="UPC:" HorizontalAlignment="Left" Margin="93,62,0,0" VerticalAlignment="Top" FontSize="16"/>
         <TextBox x:Name="UPCText" HorizontalAlignment="Left" Height="24" Margin="141,66,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="259" FontSize="16"/>
         <Label x:Name="NameLabel" Content="Name:" HorizontalAlignment="Left" Margin="80,94,0,0" VerticalAlignment="Top" FontSize="16"/>
         <TextBox x:Name="NameText" HorizontalAlignment="Left" Height="24" Margin="141,98,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="259" FontSize="16"/>
         <Label x:Name="CategoryLabel" Content="Category:" HorizontalAlignment="Left" Margin="59,127,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <ComboBox x:Name="CategoryListCombo" HorizontalAlignment="Left" Margin="141,131,0,0" VerticalAlignment="Top" Width="259" Height="24"/>
+        <ComboBox x:Name="CategoryListComboBoxInput" HorizontalAlignment="Left" Margin="141,131,0,0" VerticalAlignment="Top" Width="259" Height="24"/>
         <Label x:Name="PriceLabel" Content="Price:" HorizontalAlignment="Left" Margin="88,161,0,0" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="0.483,1.443"/>
         <TextBox x:Name="PriceText" HorizontalAlignment="Left" Height="24" Margin="141,164,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="259" FontSize="16"/>
         <Label x:Name="QuantityLabel" Content="Quantity:" HorizontalAlignment="Left" Margin="64,193,0,0" VerticalAlignment="Top" Width="78" FontSize="16"/>

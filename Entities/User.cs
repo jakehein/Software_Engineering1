@@ -12,6 +12,6 @@ namespace FinalProject1
 
         public string PIN { get; set; }
 
-        public string HasInventoryAccess { get; set; }
+        public bool HasInventoryAccess { get; set; }
     }
 }

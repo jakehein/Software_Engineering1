@@ -124,10 +124,9 @@ namespace FinalProject1
         {
             string upC = UpC.Text;
             ItemDTO itm = cartController.GetItem(upC);
-            //var items = itm.Cast<ItemDTO>();//.Where(item => item.Category.CategoryID == ((CategoryDTO)e.AddedItems[0]).CategoryID);
-            //IEnumerable<ItemDTO> item = itm;
-            //Inventory.Items.Clear();
-            //Inventory.Items.Add(itm);1
+            //var items = item.Cast<ItemDTO>().Where(item => item.Category.CategoryID == ((CategoryDTO)e.AddedItems[0]).CategoryID);
+            //IEnumerable<ItemDTO> item;
+            //FillItemList(item);
 
         }
 
@@ -159,7 +158,7 @@ namespace FinalProject1
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show(":( Add Items still throws Exception");
+                    MessageBox.Show("Error. Please try again");
                 }
             }
         }

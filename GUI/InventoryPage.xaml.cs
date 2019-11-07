@@ -33,7 +33,7 @@ namespace FinalProject1
             inventoryControl = new InventoryController(new InventoryDataAccess(new CategoryDataAccess()));
             UPCText.Focus();
             PopulateItemList();
-            FillCategoryCombo();
+            FillCategoryComboBox();
             FillItemList(itemDTOs);
         }
 
@@ -53,14 +53,14 @@ namespace FinalProject1
         /// <summary>
         /// This method populates the combo item list in the inventory database. 
         /// </summary>
-        void FillCategoryCombo()
+        void FillCategoryComboBox()
         {
             List<CategoryDTO> categories = categoryControl.GetAllCategories();
-            CategoryListCombo.ItemsSource = categoryControl.GetAllCategories();
+            CategoryListComboBoxInput.ItemsSource = categoryControl.GetAllCategories();
             categories.Add(new CategoryDTO { CategoryID = 0, Items = null, Name = "All"});
             categories.Sort();
-            InventoryListCombo.ItemsSource = categories;
-            InventoryListCombo.SelectedIndex = 0;
+            CategoryListComboBox.ItemsSource = categories;
+            CategoryListComboBox.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -75,14 +75,14 @@ namespace FinalProject1
                 NameText.Text = itm.Name;
                 QuantityText.Text = itm.Quantity.ToString();
                 PriceText.Text = itm.Price.ToString();
-                CategoryListCombo.SelectedIndex = CategoryListCombo.Items.IndexOf(Category.createDTOFromCategory(itm.Category));
+                CategoryListComboBoxInput.SelectedIndex = CategoryListComboBoxInput.Items.IndexOf(Category.createDTOFromCategory(itm.Category));
             }
         }
 
         /// <summary>
         /// This method sets the information with the data from the Item object
         /// </summary>
-        private void InventoryListCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CategoryListComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count == 0 || ((CategoryDTO)e.AddedItems[0]).CategoryID == 0)
             {
@@ -103,14 +103,14 @@ namespace FinalProject1
         {
             ItemDTO create = CreateItemObj();
 
-            if (Valid())
+            if (IsEnteredInventoryItemValid())
             {
                 Boolean created = inventoryControl.CreateItem(create);
                 if (created)
                 {
                     MessageBox.Show("Item was successfully created.");
                     ClearInputs();
-                    UpdateList();
+                    UpdateInventoryList();
                 }
                 else
                 {
@@ -132,14 +132,14 @@ namespace FinalProject1
             ItemDTO update = GetItemObj();
             string uPC = UPCText.Text;
 
-            if (Valid())
+            if (IsEnteredInventoryItemValid())
             {
                 bool updated = inventoryControl.UpdateItem(uPC, update);
                 if (updated)
                 {
                     MessageBox.Show("Item was successfully updated.");
                     ClearInputs();
-                    UpdateList();
+                    UpdateInventoryList();
                 }
                 else
                 {
@@ -165,7 +165,7 @@ namespace FinalProject1
             {
                 MessageBox.Show("Item was successfully deleted.");
                 ClearInputs();
-                UpdateList();
+                UpdateInventoryList();
             }
             else
             {
@@ -178,7 +178,6 @@ namespace FinalProject1
         /// </summary>
         private void ExitBtn_Click(object sender, RoutedEventArgs e)
         {
-            //this.NavigationService.Navigate(new MainMenu());
             this.NavigationService.GoBack();
         }
 
@@ -192,15 +191,15 @@ namespace FinalProject1
             NameText.Text = "";
             QuantityText.Text = "";
             PriceText.Text = "";
-            InventoryListCombo.SelectedIndex = 0;
-            CategoryListCombo.SelectedIndex = -1;
+            CategoryListComboBox.SelectedIndex = 0;
+            CategoryListComboBoxInput.SelectedIndex = -1;
             InventoryListBox.SelectedIndex = -1;
         }
 
         /// <summary>
         /// This method updates all items in the ListBox and List Combo.
         /// </summary>
-        private void UpdateList()
+        private void UpdateInventoryList()
         {
             PopulateItemList();
             //InventoryListBox.Items.Clear();
@@ -219,9 +218,9 @@ namespace FinalProject1
             try
             {
                 Category category = null;
-                if (CategoryListCombo.SelectedIndex != -1)
+                if (CategoryListComboBoxInput.SelectedIndex != -1)
                 {
-                    category = Category.createCategoryFromDTO((CategoryDTO)CategoryListCombo.SelectedItem);
+                    category = Category.createCategoryFromDTO((CategoryDTO)CategoryListComboBoxInput.SelectedItem);
                 }
                 string uPC = UPCText.Text;
                 string name = NameText.Text;
@@ -255,9 +254,9 @@ namespace FinalProject1
             try
             {
                 Category category = null;
-                if (CategoryListCombo.SelectedIndex != -1)
+                if (CategoryListComboBoxInput.SelectedIndex != -1)
                 {
-                    category = Category.createCategoryFromDTO((CategoryDTO)CategoryListCombo.SelectedItem);
+                    category = Category.createCategoryFromDTO((CategoryDTO)CategoryListComboBoxInput.SelectedItem);
                 }
                 string uPC = UPCText.Text;
                 string name = NameText.Text;
@@ -283,7 +282,7 @@ namespace FinalProject1
         /// </summary>
         /// <param name="itm"></param> itm we are checking the parameters of
         /// <returns></returns> true if inputs for parameters are all good
-        private bool Valid()
+        private bool IsEnteredInventoryItemValid()
         {
             List<bool> val = new List<bool>();
             //check if any values are null
@@ -304,9 +303,9 @@ namespace FinalProject1
                 val.Add(false);
             }
 
-            foreach (bool c in val)
+            foreach (bool value in val)
             {
-                if (!c)
+                if (!value)
                 {
                     return false;
                 }
@@ -315,20 +314,20 @@ namespace FinalProject1
             //check the formats
             val.Clear();
 
-            val.Add(CheckDigits(UPCText.Text));
+            val.Add(AreAllDigits(UPCText.Text));
 
             // Verify Quantity is all Digits
-            val.Add(CheckDigits(QuantityText.Text));
+            val.Add(AreAllDigits(QuantityText.Text));
 
             // Verify Price follows a Valid format
-            val.Add(CheckPrice(PriceText.Text));
+            val.Add(IsValidPriceFormat(PriceText.Text));
 
             // Verify the Category is valid
-            val.Add(CheckCategory((CategoryDTO)CategoryListCombo.SelectedItem));
+            val.Add(IsValidCategory((CategoryDTO)CategoryListComboBoxInput.SelectedItem));
 
-            foreach (bool c in val)
+            foreach (bool value in val)
             {
-                if (!c)
+                if (!value)
                 {
                     return false;
                 }
@@ -341,13 +340,13 @@ namespace FinalProject1
         /// </summary>
         /// <param name="digits"></param> string from the information box to see if digits 
         /// <returns></returns> true if all characters are digits
-        private bool CheckDigits(string digits)
+        private bool AreAllDigits(string digits)
         {
             char[] charArr = digits.ToCharArray();
 
-            foreach (char c in charArr)
+            foreach (char character in charArr)
             {
-                if (!Char.IsNumber(c))
+                if (!Char.IsNumber(character))
                 {
                     return false;
                 }
@@ -360,11 +359,11 @@ namespace FinalProject1
         /// </summary>
         /// <param name="price"></param> is the string value of the price
         /// <returns></returns> true if the format is followed. false if not
-        private bool CheckPrice(string price)
+        private bool IsValidPriceFormat(string price)
         {
             char[] charArr = price.ToCharArray();
 
-            if (CheckDigits(price))
+            if (AreAllDigits(price))
             {
                 return true;
             }
@@ -398,7 +397,7 @@ namespace FinalProject1
         /// </summary>
         /// <param name="category">category is the category we are checking</param>
         /// <returns>true if category is valid</returns>
-        private bool CheckCategory(CategoryDTO category)
+        private bool IsValidCategory(CategoryDTO category)
         {
             return category != null;
         }
@@ -408,7 +407,7 @@ namespace FinalProject1
         /// </summary>
         /// <param name="sender">Object that triggered the event</param>
         /// <param name="e">Event details</param>
-        private void Page_TextInput(object sender, TextCompositionEventArgs e)
+        private void HandleBarcodeScan(object sender, TextCompositionEventArgs e)
         {
             // leftCtrl + B focus upcText and set reading to true
             if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.B))
@@ -429,7 +428,7 @@ namespace FinalProject1
                                     .Where(item => item.UPC.Equals(UPCText.Text)).FirstOrDefault();
                     if (lItem != null)
                     {
-                        InventoryListCombo.SelectedIndex = InventoryListCombo.Items.IndexOf(Category.createDTOFromCategory(lItem.Category));
+                        CategoryListComboBox.SelectedIndex = CategoryListComboBox.Items.IndexOf(Category.createDTOFromCategory(lItem.Category));
                         InventoryListBox.SelectedIndex = InventoryListBox.Items.IndexOf(lItem);
                     }
                     else
