@@ -23,7 +23,9 @@ namespace FinalProject1
         public MainWindow()
         {
             InitializeComponent();
-//            MainMenuUI.Navigate(new SalesPage());
+            // Initialize static BusinessInfo
+            _ = new BusinessInfo(new BusinessInfoDataAccess());
+            // MainMenuUI.Navigate(new SalesPage());
             MainMenuUI.Navigate(new Login_Page());
         }
     }
