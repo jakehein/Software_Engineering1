@@ -9,22 +9,59 @@
       Title="Inventory_Page" TextInput="HandleBarcodeScan">
 
     <Grid Background="#FFF1F1F1" Margin="0,0,0,-0.4">
-        <ListBox x:Name="InventoryListBox" Margin="451,66,37,33" FontSize="15" SelectionChanged="InventoryListBox_SelectionChanged"/>
-        <ComboBox x:Name="CategoryListComboBox" Margin="451,17,37,0" VerticalAlignment="Top" Height="44" BorderBrush="White" Background="White" SelectionChanged="CategoryListComboBox_SelectionChanged"/>
-        <Label x:Name="UPCLabel" Content="UPC:" HorizontalAlignment="Left" Margin="93,62,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <TextBox x:Name="UPCText" HorizontalAlignment="Left" Height="24" Margin="141,66,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="259" FontSize="16"/>
-        <Label x:Name="NameLabel" Content="Name:" HorizontalAlignment="Left" Margin="80,94,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <TextBox x:Name="NameText" HorizontalAlignment="Left" Height="24" Margin="141,98,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="259" FontSize="16"/>
-        <Label x:Name="CategoryLabel" Content="Category:" HorizontalAlignment="Left" Margin="59,127,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <ComboBox x:Name="CategoryListComboBoxInput" HorizontalAlignment="Left" Margin="141,131,0,0" VerticalAlignment="Top" Width="259" Height="24"/>
-        <Label x:Name="PriceLabel" Content="Price:" HorizontalAlignment="Left" Margin="88,161,0,0" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="0.483,1.443"/>
-        <TextBox x:Name="PriceText" HorizontalAlignment="Left" Height="24" Margin="141,164,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="259" FontSize="16"/>
-        <Label x:Name="QuantityLabel" Content="Quantity:" HorizontalAlignment="Left" Margin="64,193,0,0" VerticalAlignment="Top" Width="78" FontSize="16"/>
-        <TextBox x:Name="QuantityText" HorizontalAlignment="Left" Height="24" Margin="141,198,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="259" FontSize="16"/>
-        <Button x:Name="SaveBtn" Content="Save" HorizontalAlignment="Left" Margin="159,233,0,0" VerticalAlignment="Top" Width="83" FontSize="16" Height="41" Click="SaveBtn_Click" ClickMode="Press"/>
-        <Button x:Name="UpdateBtn" Content="Update" HorizontalAlignment="Left" Margin="280,233,0,0" VerticalAlignment="Top" Width="83" FontSize="16" Height="41" Click="UpdateBtn_Click" ClickMode="Press"/>
-        <Button x:Name="DeleteBtn" Content="Delete" HorizontalAlignment="Left" Margin="159,290,0,0" VerticalAlignment="Top" Width="83" Height="41" FontSize="16" Click="DeleteBtn_Click" ClickMode="Press"/>
-        <Button x:Name="ExitBtn" Content="Exit" HorizontalAlignment="Left" Margin="280,290,0,0" VerticalAlignment="Top" Width="83" Height="41" FontSize="16" Click="ExitBtn_Click" ClickMode="Press"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <ListBox x:Name="InventoryListBox" Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="6" Grid.RowSpan="7" Background="Ivory" FontSize="16" SelectionChanged="InventoryListBox_SelectionChanged"/>
+        <ComboBox x:Name="CategoryListComboBox" Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="6" BorderBrush="White" Background="White" SelectionChanged="CategoryListComboBox_SelectionChanged"/>
+        <Viewbox Grid.Row="2" Grid.Column="1" Margin="0,0" >
+            <TextBlock x:Name="UPCLabel" Text="UPC:" FontSize="16"/>
+        </Viewbox>
+        <TextBox x:Name="UPCText" Text="" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" FontSize="16"/>
+        <Viewbox Grid.Row="3" Grid.Column="1" Margin="0,0" >
+            <TextBlock x:Name="NameLabel" Text="Name:" FontSize="16"/>
+        </Viewbox>
+        <TextBox x:Name="NameText" Text="" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" FontSize="16"/>
+        <Viewbox Grid.Row="4" Grid.Column="1" Margin="0,0" >
+            <TextBlock x:Name="CategoryLabel" Text="Category:" FontSize="16"/>
+        </Viewbox>
+        <ComboBox x:Name="CategoryListComboBoxInput" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2"/>
+        <Viewbox Grid.Row="5" Grid.Column="1" Margin="0,0" >
+            <TextBlock x:Name="PriceLabel" Text="Price:" FontSize="16" />
+        </Viewbox>
+        <TextBox x:Name="PriceText" Text="" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" FontSize="16"/>
+
+        <Viewbox Grid.Row="6" Grid.Column="1" Margin="0,0" >
+            <TextBlock x:Name="QuantityLabel" Text="Quantity:" FontSize="16"/>
+        </Viewbox>
+        <TextBox x:Name="QuantityText" Text="" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" FontSize="16"/>
+
+        <Button x:Name="SaveBtn" Content="Save" Grid.Row="7" Grid.Column="2" FontSize="16" Click="SaveBtn_Click" ClickMode="Press"/>
+        <Button x:Name="UpdateBtn" Content="Update" Grid.Row="7" Grid.Column="3" FontSize="16" Click="UpdateBtn_Click" ClickMode="Press"/>
+        <Button x:Name="DeleteBtn" Content="Delete" Grid.Row="8" Grid.Column="2" FontSize="16" Click="DeleteBtn_Click" ClickMode="Press"/>
+        <Button x:Name="ExitBtn" Content="Exit" Grid.Row="8" Grid.Column="3" FontSize="16" Click="ExitBtn_Click" ClickMode="Press"/>
 
     </Grid>
 </Page>
