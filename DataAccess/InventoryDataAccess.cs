@@ -218,6 +218,7 @@ namespace FinalProject1
                                     WHERE {UPCColumn} = @UPC";
             using (MySqlConnection conn = new MySqlConnection(connectionStringToDB))
             {
+                conn.Open();
                 MySqlCommand cmd = new MySqlCommand(cmdString, conn);
                 cmd.Parameters.AddWithValue("@Amount", amount);
                 cmd.Parameters.AddWithValue("@UPC", uPC);

@@ -65,6 +65,8 @@ namespace FinalProject1
             {
                 if(count > 1)
                 {
+                    //Items.Add(item, count - 1);
+                    Items.Remove(item);
                     Items.Add(item, count - 1);
                 }
                 else

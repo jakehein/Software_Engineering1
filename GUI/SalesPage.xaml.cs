@@ -24,7 +24,7 @@ namespace FinalProject1
         private ICategoryController categoryControl;
         private ICartController cartController;
         private IDrawerController drawerController;
-        private bool reading = false;
+        //private bool reading = false;
         private List<ItemDTO> itemDTOs = new List<ItemDTO>();
         public SalesPage()
         {
@@ -77,13 +77,21 @@ namespace FinalProject1
         /// <param name="e"></param>
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            cartController.CancelTransaction();
-            Transaction.Items.Clear();
+            //cartController.CancelTransaction();
+            Transaction.ItemsSource = cartController.CancelTransaction();
+            //Transaction.Items.Clear();
             UpdateTotal();
         }
 
         private void Pay_Click(object sender, RoutedEventArgs e)
         {
+            //cartController.CancelTransaction();
+            //Transaction.Items.Clear();
+            //cartController.Checkout();
+            string total = PayTotal.Text;
+            Transaction.ItemsSource = cartController.Checkout();
+            //Cancel_Click(sender, e);
+            MessageBox.Show("Total is: " + total);
 
         }
 
@@ -91,9 +99,11 @@ namespace FinalProject1
         {
             try
             {
+                //Inventory.Focus();
                 ItemDTO itm = (ItemDTO)Inventory.SelectedItem;
                 cartController.AddItem(itm);
                 Transaction.ItemsSource = cartController.GetAllItems();
+                UpdateTotal();
                 
             }
             catch (Exception)
@@ -108,7 +118,8 @@ namespace FinalProject1
             if (itm != null)
             {
                 cartController.AddItem(itm);
-                Transaction.Items.Add(itm);
+                Transaction.ItemsSource = cartController.GetAllItems();
+                //Transaction.Items.Add(itm);
                 UpdateTotal();
             }
             else
@@ -119,7 +130,18 @@ namespace FinalProject1
 
         private void QuantityDown_Click(object sender, RoutedEventArgs e)
         {
-
+            ItemDTO itm = (ItemDTO)Transaction.SelectedItem;
+            if (itm != null)
+            {
+                cartController.RemoveItem(itm);
+                Transaction.ItemsSource = cartController.GetAllItems();
+                //Transaction.Items.Remove(itm);
+                UpdateTotal();
+            }
+            else
+            {
+                MessageBox.Show("Select an Item from the transaction to remove");
+            }
         }
 
         /// <summary>
@@ -134,9 +156,13 @@ namespace FinalProject1
             if (itm != null)
             {
                 cartController.RemoveItem(itm);
-                FillCartList(cartController.GetAllItems());
-                //Transaction.ItemsSource = cartController.GetAllItems(); // excep
+                Transaction.ItemsSource = cartController.GetAllItems();
+                //Transaction.Items.Remove(itm);
                 UpdateTotal();
+            }
+            else
+            {
+                MessageBox.Show("Select an Item from the transaction to remove");
             }
         }
 
@@ -168,14 +194,14 @@ namespace FinalProject1
         /// </summary>
         private void Inventory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            /*
             ItemDTO itm = (ItemDTO)Inventory.SelectedItem;
             if (itm != null)
             {
                 try
                 {
                     cartController.AddItem(itm);
-                    FillCartList(cartController.GetAllItems());
+                    Transaction.Items.Add(itm);
                     UpdateTotal();
 
                 }
@@ -184,6 +210,7 @@ namespace FinalProject1
                     MessageBox.Show("Error. Please try again");
                 }
             }
+            */
         }
 
         /// <summary>
@@ -204,7 +231,29 @@ namespace FinalProject1
 
         private void UpdateTotal()
         {
-            PayTotal.Text = cartController.GetTotal().ToString();
+            //PayTotal.Text = cartController.GetTotal().ToString();
+            string total = cartController.GetTotal().ToString();
+            if (total.Contains("."))
+            {
+                int precision = total.Length - total.IndexOf(".");
+                switch (precision)
+                {
+                    //case (1):
+                    //    total = total + "00";
+                    //    break;
+                    case (2):
+                        total = total + "0";
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                total = total + ".00";
+            }
+            PayTotal.Text = total;
+            //if (total.IndexOf(".")
         }
 
         /*private void Inventory_SelectionChanged(object sender, SelectionChangedEventArgs e)
