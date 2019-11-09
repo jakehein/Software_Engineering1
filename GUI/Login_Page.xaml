@@ -37,11 +37,11 @@
         <PasswordBox x:Name="PasswordBox" Background="Ivory" Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="4" FontSize="16"/>
 
         <Viewbox Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Margin="0,0,0,0">
-            <TextBlock x:Name="UsernameLabel" Text="Username: " />
+            <TextBlock x:Name="UsernameLabel" Text="Username: "/>
         </Viewbox>
 
         <Viewbox Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Margin="0,0,0,0">
-            <TextBlock x:Name="PasswordLabel" Text="Password:" />
+            <TextBlock x:Name="PasswordLabel" Text="Password:"/>
         </Viewbox>
 
         <TextBox x:Name="UsernameBox" Text="" Background="Ivory" Grid.Row="3" MaxLength="12" Grid.Column="4" Grid.ColumnSpan="4" Margin="0,0" FontSize="32"/>

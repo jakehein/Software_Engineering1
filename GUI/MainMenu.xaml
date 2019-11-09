@@ -5,12 +5,37 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:FinalProject1"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800" 
+      d:DesignHeight="450" d:DesignWidth="800" MinHeight="450" MinWidth="800"
       Title="Register" Height="450" Width="800" FontSize="24" >
     <Grid Background="#FFF1F1F1">
-        <Button x:Name="LogoutButton" Content="Logout" HorizontalAlignment="Left" Margin="31,358,0,0" VerticalAlignment="Top" Width="105" Click="LogoutButton_Click" ClickMode="Press" Height="35"/>
-        <Button x:Name="InventoryButton" Content="Inventory" HorizontalAlignment="Left" Margin="313,123,0,0" VerticalAlignment="Top" Width="158" Height="139" Click="InventoryButton_Click" ClickMode="Press"/>
-        <Button x:Name="SalesButton" Content="Sales" HorizontalAlignment="Left" Margin="107,123,0,0" VerticalAlignment="Top" Width="163" Height="139" Click="SalesButton_Click" ClickMode="Press"/>
-        <Button x:Name="ReturnButton" Content="Return" Margin="517,123,122,0" VerticalAlignment="Top" Height="139" Click="ReturnButton_Click" ClickMode="Press"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Button x:Name="LogoutButton" Content="Logout" Margin="0,0" Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" Click="LogoutButton_Click" ClickMode="Press"/>
+        <Button x:Name="InventoryButton" Content="Inventory" Margin="0,0" Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="2" Grid.RowSpan="3" Click="InventoryButton_Click" ClickMode="Press"/>
+        <Button x:Name="SalesButton" Content="Sales" Margin="0,0" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="3" Click="SalesButton_Click" ClickMode="Press"/>
+        <Button x:Name="ReturnButton" Content="Return" Margin="0,0" Grid.Row="3" Grid.Column="7" Grid.ColumnSpan="2" Grid.RowSpan="3" Click="ReturnButton_Click" ClickMode="Press"/>
     </Grid>
 </Page>
