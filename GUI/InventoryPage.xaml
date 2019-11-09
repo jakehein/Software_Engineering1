@@ -37,26 +37,26 @@
         <ListBox x:Name="InventoryListBox" Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="6" Grid.RowSpan="7" Background="Ivory" FontSize="16" SelectionChanged="InventoryListBox_SelectionChanged"/>
         <ComboBox x:Name="CategoryListComboBox" Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="6" BorderBrush="White" Background="White" SelectionChanged="CategoryListComboBox_SelectionChanged"/>
         <Viewbox Grid.Row="2" Grid.Column="1" Margin="0,0" >
-            <TextBlock x:Name="UPCLabel" Text="UPC:" FontSize="16"/>
+            <TextBlock x:Name="UPCLabel" Text="UPC:" FontSize="32"/>
         </Viewbox>
-        <TextBox x:Name="UPCText" Text="" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" FontSize="16"/>
+        <TextBox x:Name="UPCText" Text="" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" FontSize="32"/>
         <Viewbox Grid.Row="3" Grid.Column="1" Margin="0,0" >
             <TextBlock x:Name="NameLabel" Text="Name:" FontSize="16"/>
         </Viewbox>
-        <TextBox x:Name="NameText" Text="" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" FontSize="16"/>
+        <TextBox x:Name="NameText" Text="" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" FontSize="32"/>
         <Viewbox Grid.Row="4" Grid.Column="1" Margin="0,0" >
-            <TextBlock x:Name="CategoryLabel" Text="Category:" FontSize="16"/>
+            <TextBlock x:Name="CategoryLabel" Text="Category:" FontSize="32"/>
         </Viewbox>
-        <ComboBox x:Name="CategoryListComboBoxInput" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2"/>
+        <ComboBox x:Name="CategoryListComboBoxInput" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" FontSize="25"/>
         <Viewbox Grid.Row="5" Grid.Column="1" Margin="0,0" >
             <TextBlock x:Name="PriceLabel" Text="Price:" FontSize="16" />
         </Viewbox>
-        <TextBox x:Name="PriceText" Text="" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" FontSize="16"/>
+        <TextBox x:Name="PriceText" Text="" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" FontSize="32"/>
 
         <Viewbox Grid.Row="6" Grid.Column="1" Margin="0,0" >
             <TextBlock x:Name="QuantityLabel" Text="Quantity:" FontSize="16"/>
         </Viewbox>
-        <TextBox x:Name="QuantityText" Text="" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" FontSize="16"/>
+        <TextBox x:Name="QuantityText" Text="" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" FontSize="32"/>
 
         <Button x:Name="SaveBtn" Content="Save" Grid.Row="7" Grid.Column="2" FontSize="16" Click="SaveBtn_Click" ClickMode="Press"/>
         <Button x:Name="UpdateBtn" Content="Update" Grid.Row="7" Grid.Column="3" FontSize="16" Click="UpdateBtn_Click" ClickMode="Press"/>
