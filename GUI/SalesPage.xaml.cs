@@ -46,6 +46,16 @@ namespace FinalProject1
         {
             Inventory.ItemsSource = items;
         }
+
+        /// <summary>
+        /// This method fills the cart list 
+        /// </summary>
+        /// <param name="items"></param>
+        void FillCartList(IEnumerable<ItemDTO> items)
+        {
+            Transaction.ItemsSource = items;
+        }
+
         void FillCategoryCombo()
         {
             List<CategoryDTO> categories = categoryControl.GetAllCategories();
@@ -134,6 +144,12 @@ namespace FinalProject1
             }
         }
 
+        /// <summary>
+        /// This method takes the selected item from the transaction window and removes it from the transaction. From there
+        /// the item is removed and the price is decremented.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param> selected item in the transaction
         private void RemoveItem_Click(object sender, RoutedEventArgs e)
         {
             ItemDTO itm = (ItemDTO)Transaction.SelectedItem;
