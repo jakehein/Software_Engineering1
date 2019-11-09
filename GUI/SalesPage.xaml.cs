@@ -156,8 +156,7 @@ namespace FinalProject1
             if (itm != null)
             {
                 cartController.RemoveItem(itm);
-                Transaction.ItemsSource = cartController.GetAllItems();
-                //Transaction.Items.Remove(itm);
+                FillCartList(cartController.GetAllItems());
                 UpdateTotal();
             }
             else
@@ -194,14 +193,14 @@ namespace FinalProject1
         /// </summary>
         private void Inventory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            /*
+            
             ItemDTO itm = (ItemDTO)Inventory.SelectedItem;
             if (itm != null)
             {
                 try
                 {
                     cartController.AddItem(itm);
-                    Transaction.Items.Add(itm);
+                    FillCartList(cartController.GetAllItems());
                     UpdateTotal();
 
                 }
@@ -210,7 +209,7 @@ namespace FinalProject1
                     MessageBox.Show("Error. Please try again");
                 }
             }
-            */
+            
         }
 
         /// <summary>
