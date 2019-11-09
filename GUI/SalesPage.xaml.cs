@@ -134,7 +134,8 @@ namespace FinalProject1
             if (itm != null)
             {
                 cartController.RemoveItem(itm);
-                Transaction.ItemsSource = cartController.GetAllItems(); // excep
+                FillCartList(cartController.GetAllItems());
+                //Transaction.ItemsSource = cartController.GetAllItems(); // excep
                 UpdateTotal();
             }
         }
@@ -174,7 +175,7 @@ namespace FinalProject1
                 try
                 {
                     cartController.AddItem(itm);
-                    Transaction.Items.Add(itm);
+                    FillCartList(cartController.GetAllItems());
                     UpdateTotal();
 
                 }
