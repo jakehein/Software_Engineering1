@@ -38,10 +38,18 @@ namespace FinalProject1
             FillCategoryCombo();
             FillItemList(itemDTOs);
         }
+        /// <summary>
+        /// Fills the items list with all avaliable inventory items
+        /// </summary>
         private void PopulateItemList()
         {
             itemDTOs = inventoryControl.GetAllItems();
         }
+
+        /// <summary>
+        /// Fills the transaction list with items present in the cart
+        /// </summary>
+        /// <param name="items"></param>
         void FillItemList(IEnumerable<ItemDTO> items)
         {
             Inventory.ItemsSource = items;
@@ -56,6 +64,9 @@ namespace FinalProject1
             Transaction.ItemsSource = items;
         }
 
+        /// <summary>
+        /// This method populates the category combo box
+        /// </summary>
         void FillCategoryCombo()
         {
             List<CategoryDTO> categories = categoryControl.GetAllCategories();
@@ -65,6 +76,11 @@ namespace FinalProject1
             Category.ItemsSource = categories;
             Category.SelectedIndex = 0;
         }
+        /// <summary>
+        /// Routes the user back to the main menu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainMenu_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.GoBack();
@@ -166,15 +182,16 @@ namespace FinalProject1
         }
 
         /// <summary>
-        /// This method takes the UPC and searches to see if it is avaliable.
+        /// This method takes the UPC and searches to see if it is avaliable. If avaliable it displays 
+        /// in the Inventory List.
         /// </summary>
         private void UpCButton_Click(object sender, RoutedEventArgs e)
         {
             string upC = UpC.Text;
             ItemDTO itm = cartController.GetItem(upC);
-            //var items = item.Cast<ItemDTO>().Where(item => item.Category.CategoryID == ((CategoryDTO)e.AddedItems[0]).CategoryID);
-            //IEnumerable<ItemDTO> item;
-            //FillItemList(item);
+            List<ItemDTO> items = new List<ItemDTO>();
+            items.Add(itm);
+            Inventory.ItemsSource = items;
 
         }
 
@@ -254,20 +271,5 @@ namespace FinalProject1
             PayTotal.Text = total;
             //if (total.IndexOf(".")
         }
-
-        /*private void Inventory_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {+
-            ItemDTO itm = (ItemDTO)Inventory.SelectedItem;
-            if (itm != null)
-            {
-                
-                //UPCText.Text = itm.UPC;
-                //NameText.Text = itm.Name;
-                //QuantityText.Text = itm.Quantity.ToString();
-                //PriceText.Text = itm.Price.ToString();
-                //CategoryListCombo.SelectedIndex = CategoryListCombo.Items.IndexOf(Category.createDTOFromCategory(itm.Category));
-            }
-        }*/
-
     }
 }
