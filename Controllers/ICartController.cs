@@ -22,8 +22,8 @@ namespace FinalProject1
 
         decimal? GetTotal();
 
-        void Checkout();
+        List<ItemDTO> Checkout();
 
-        void CancelTransaction();
+        List<ItemDTO> CancelTransaction();
     }
 }

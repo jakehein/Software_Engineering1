@@ -79,6 +79,17 @@ namespace FinalProject1
 
             return success;
         }
+        /// <summary>
+        /// This method returns true if CartController contains itemDTO
+        /// </summary>
+        /// <param name="itemDTO">Item being check</param>
+        /// <returns></returns>
+        public bool ContainsItem(ItemDTO itemDTO)
+        {
+            List<ItemDTO> items = new List<ItemDTO>();
+            bool contains = items.Contains(itemDTO);
+            return contains;
+        }
 
         /// <summary>
         /// This method takes a UPC and returns the ItemDTO
@@ -108,18 +119,21 @@ namespace FinalProject1
         /// <summary>
         /// Checks out the cart of items
         /// </summary>
-        public void Checkout()
+        public List<ItemDTO> Checkout()
         {
             cart.Checkout(inventoryDataAccess);
             cart = new Cart();
+            return new List<ItemDTO>();
         }
 
         /// <summary>
         /// Ends the current transaction and refreshes the cart
+        /// <returns>List<ItemDTO> containing a new empty list</returns>
         /// </summary>
-        public void CancelTransaction()
+        public List<ItemDTO> CancelTransaction()
         {
             cart = new Cart();
+            return new List<ItemDTO>();
         }
     }
 }
