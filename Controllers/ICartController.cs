@@ -18,7 +18,8 @@ namespace FinalProject1
 
         ItemDTO GetItem(string uPC);
 
-        List<ItemDTO> GetAllItems();
+        //List<ItemDTO> GetAllItems();
+        List<Cart.SalesItem> GetAllItems();
 
         decimal? GetTotal();
 

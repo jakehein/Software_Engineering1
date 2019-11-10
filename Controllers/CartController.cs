@@ -34,9 +34,9 @@ namespace FinalProject1
             bool success = false;
 
             Item item = Item.createItemFromDTO(itemDTO);
-            if(item.DataWarnings.Count == 0)
+            if (item.DataWarnings.Count == 0)
             {
-                cart.AddItem(item);
+                cart.AddItem(itemDTO);
                 success = true;
             }
 
@@ -56,7 +56,7 @@ namespace FinalProject1
             Item item = Item.createItemFromDTO(itemDTO);
             if (item.DataWarnings.Count == 0)
             {
-                success = cart.ChangeQuantity(quantity, item);
+                success = cart.ChangeQuantity(quantity, itemDTO);
             }
 
             return success;
@@ -74,7 +74,7 @@ namespace FinalProject1
             Item item = Item.createItemFromDTO(itemDTO);
             if (item.DataWarnings.Count == 0)
             {
-                success = cart.RemoveSingleItem(item);
+                success = cart.RemoveAllItems(itemDTO);
             }
 
             return success;
@@ -103,15 +103,22 @@ namespace FinalProject1
         /// Get all the items contained in the cart in a List
         /// </summary>
         /// <returns>List<ItemDTO> containing all cart items</returns>
-        public List<ItemDTO> GetAllItems()
+        public List<Cart.SalesItem> GetAllItems()
+        //public Dictionary<Item, int> GetAllItems()
         {
-            List<ItemDTO> items = new List<ItemDTO>();
-            foreach(KeyValuePair<Item, int> kvp in cart.Items)
+            //List<ItemDTO> items = new List<ItemDTO>();
+            //foreach(KeyValuePair<Item, int> kvp in cart.Items)
+            //{
+            //    for(int i = 0; i < kvp.Value; i++)
+            //    {
+            //        items.Add(Item.createDTOfromItem(kvp.Key));
+            //    }
+            //}
+            //return items;
+            List<Cart.SalesItem> items = new List<Cart.SalesItem>();
+            foreach(Cart.SalesItem si in cart.Items)
             {
-                for(int i = 0; i < kvp.Value; i++)
-                {
-                    items.Add(Item.createDTOfromItem(kvp.Key));
-                }
+                items.Add(new Cart.SalesItem { Item = si.Item, Quantity = si.Quantity });
             }
             return items;
         }

@@ -21,5 +21,15 @@ namespace FinalProject1
         {
             return Name;
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is ItemDTO && ((ItemDTO)obj).UPC.Equals(UPC);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }
