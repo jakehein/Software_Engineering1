@@ -75,6 +75,9 @@ namespace FinalProject1
 
         private void Pay_Click(object sender, RoutedEventArgs e)
         {
+            string total = PayTotal.Text;
+            Transaction.ItemsSource = cartController.Checkout();
+            MessageBox.Show("Total is: " + total);
 
         }
 
@@ -215,6 +218,7 @@ namespace FinalProject1
                     cartController.AddItem(itm);
                     UpdateTransactionView();
                     UpdateTotal();
+                    Inventory.SelectedItem = null;
 
                 }
                 catch (Exception)
