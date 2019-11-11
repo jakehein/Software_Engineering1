@@ -75,7 +75,9 @@ namespace FinalProject1
 
         private void Pay_Click(object sender, RoutedEventArgs e)
         {
-
+            string total = PayTotal.Text;
+            Transaction.ItemsSource = cartController.Checkout();
+            MessageBox.Show("Total is: " + total);
         }
 
         private void AddItem_Click(object sender, RoutedEventArgs e)
