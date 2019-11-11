@@ -80,6 +80,7 @@ namespace FinalProject1
             MessageBox.Show("Total is: " + total);
         }
 
+        /*
         private void AddItem_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -93,7 +94,7 @@ namespace FinalProject1
             {
                 MessageBox.Show("Select an item to add to the transaction.");
             }
-        }
+        }*/
 
         private void QuantityUp_Click(object sender, RoutedEventArgs e)
         {
@@ -292,5 +293,11 @@ namespace FinalProject1
                 scannerUPCString += e.Key.ToString()[1];
             }
         }
+
+        private void ChangeQuantity_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }

@@ -444,5 +444,10 @@ namespace FinalProject1
                 reading = false;
             }
         }
+
+        private void AddCategory_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
