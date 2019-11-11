@@ -43,7 +43,7 @@ namespace FinalProject1
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand(commandString, conn);
                 cmd.Parameters.AddWithValue("@Username", username);
-                return cmd.ExecuteScalar().ToString();
+                return cmd.ExecuteScalar()?.ToString();
             }
         }
 

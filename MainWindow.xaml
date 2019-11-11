@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FinalProject1"
         mc:Ignorable="d" WindowState="Maximized"
-        Title="Register" MinHeight="450" MinWidth="800" FontSize="24" d:DesignHeight="450" d:DesignWidth="800" >
+        Title="Register" MinHeight="450" MinWidth="800" FontSize="24" d:DesignHeight="450" d:DesignWidth="800" IsTabStop="False" >
     <Grid Background="#FFF1F1F1">
-        <Frame x:Name="MainMenuUI" Content=""  MinHeight="450" Margin="0,0,-0.4,0"  MinWidth="800" NavigationUIVisibility="Hidden"/>
+        <Frame x:Name="MainMenuUI" Content=""  MinHeight="450" Margin="0,0,-0.4,0"  MinWidth="800" NavigationUIVisibility="Hidden" IsTabStop="False"/>
         </Grid>
 </Window>

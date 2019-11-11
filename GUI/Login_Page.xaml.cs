@@ -26,6 +26,7 @@ namespace FinalProject1
         {
             InitializeComponent();
             userController = new UserController();
+            UsernameBox.Focus();
         }
 
         /// <summary>
@@ -58,6 +59,16 @@ namespace FinalProject1
         private void CreateUserButton_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new CreateUserPage(this.userController));
+        }
+
+        private void UsernameBox_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            ((TextBox)sender).FontSize = ((TextBox)sender).ActualHeight * .7;
+        }
+
+        private void PasswordBox_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            ((PasswordBox)sender).FontSize = ((PasswordBox)sender).ActualHeight * .7;
         }
     }
 }
