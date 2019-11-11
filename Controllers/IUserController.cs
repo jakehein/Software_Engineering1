@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace FinalProject1
 {
-    interface IUserController
+    public interface IUserController
     {
         User CurrentUser { get; }
 
         string LogIn(string userName, string pin);
 
         bool Override(string pin);
+
+        bool CreateUser(string username, string pin, bool hasInventoryAccess);
 
         bool CurrentUserHasInventoryAccess();
 

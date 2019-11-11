@@ -54,6 +54,11 @@ namespace FinalProject1
 
             // Close Current Window... This will be done after validating if the credentials are good or not
         }
+
+        private void CreateUserButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new CreateUserPage(this.userController));
+        }
     }
 }
 

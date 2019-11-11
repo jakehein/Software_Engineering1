@@ -33,6 +33,21 @@ namespace FinalProject1
 
         }
 
+        public bool CreateUser(string username, string pin, bool hasInventoryAccess)
+        {
+            bool validUser = false;
+            User newUser = new User() { Username = username, PIN = pin, HasInventoryAccess = hasInventoryAccess };
+
+            if(newUser.DataErrors.Count == 0)
+            {
+                validUser = true;
+                userDataAccess.CreateUser(newUser.Username, newUser.PIN, newUser.HasInventoryAccess);
+                this.CurrentUser = newUser;
+            }
+
+            return validUser;
+        }
+
         public void LogOut()
         {
             CurrentUser = null;

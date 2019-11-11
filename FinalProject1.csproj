@@ -88,9 +88,16 @@
     <Compile Include="Controllers\ICartController.cs" />
     <Compile Include="Entities\Drawer.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="GUI\CreateUserPage.xaml.cs">
+      <DependentUpon>CreateUserPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\InventoryPage.xaml.cs">
       <DependentUpon>InventoryPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="GUI\CreateUserPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GUI\InventoryPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
