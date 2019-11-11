@@ -131,7 +131,8 @@ namespace FinalProject1
         private void UpdateBtn_Click(object sender, RoutedEventArgs e)
         {
             ItemDTO update = GetItemObj();
-            string uPC = UPCText.Text;
+            //string uPC = UPCText.Text;
+            string uPC = ((ItemDTO)InventoryListBox.SelectedItem).UPC;
 
             if (IsEnteredInventoryItemValid())
             {
