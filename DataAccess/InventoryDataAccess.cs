@@ -90,22 +90,25 @@ namespace FinalProject1
         public bool UpdateItem(string uPC, ItemDTO item)
         {
             int result = -1;
-            string commandString = $@"UPDATE {ItemTableName}
+            if (uPC.Equals(item.UPC) || !DoesUPCExist(item.UPC))
+            {
+                string commandString = $@"UPDATE {ItemTableName}
                                    SET {CategoryColumn} = @CategoryID, {NameColumn} = @Name, {PriceColumn} = @Price, {QuantityColumn} = @Quantity, {UPCColumn} = @UPC
                                    WHERE {UPCColumn} = @OriginalUPC";
-            using (MySqlConnection conn = new MySqlConnection(connectionStringToDB))
-            {
-                conn.Open();
-                MySqlCommand cmd = new MySqlCommand(commandString, conn);
-                cmd.Parameters.AddWithValue("@CategoryId", item.Category.CategoryID);
-                cmd.Parameters.AddWithValue("@Name", item.Name);
-                cmd.Parameters.AddWithValue("@Price", item.Price);
-                cmd.Parameters.AddWithValue("@Quantity", item.Quantity);
-                cmd.Parameters.AddWithValue("@UPC", item.UPC);
-                cmd.Parameters.AddWithValue("@ItemID", item.ItemID);
-                cmd.Parameters.AddWithValue("@OriginalUPC", uPC);
-                result = int.Parse(cmd.ExecuteNonQuery().ToString());
-                cmd.Dispose();
+                using (MySqlConnection conn = new MySqlConnection(connectionStringToDB))
+                {
+                    conn.Open();
+                    MySqlCommand cmd = new MySqlCommand(commandString, conn);
+                    cmd.Parameters.AddWithValue("@CategoryId", item.Category.CategoryID);
+                    cmd.Parameters.AddWithValue("@Name", item.Name);
+                    cmd.Parameters.AddWithValue("@Price", item.Price);
+                    cmd.Parameters.AddWithValue("@Quantity", item.Quantity);
+                    cmd.Parameters.AddWithValue("@UPC", item.UPC);
+                    cmd.Parameters.AddWithValue("@ItemID", item.ItemID);
+                    cmd.Parameters.AddWithValue("@OriginalUPC", uPC);
+                    result = int.Parse(cmd.ExecuteNonQuery().ToString());
+                    cmd.Dispose();
+                }
             }
             return result > 0;
         }
