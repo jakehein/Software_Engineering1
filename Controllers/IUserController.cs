@@ -10,7 +10,7 @@ namespace FinalProject1
     {
         User CurrentUser { get; }
 
-        string LogIn(string userName, string password);
+        string LogIn(string userName, string pin);
 
         bool Override(string pin);
 

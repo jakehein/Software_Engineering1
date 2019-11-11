@@ -43,7 +43,6 @@ namespace FinalProject1
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand(commandString, conn);
                 cmd.Parameters.AddWithValue("@Username", username);
-                MySqlDataReader rdr = cmd.ExecuteReader();
                 return cmd.ExecuteScalar().ToString();
             }
         }
@@ -73,7 +72,8 @@ namespace FinalProject1
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand(commandString, conn);
                 cmd.Parameters.AddWithValue("@Username", username);
-                return (bool)cmd.ExecuteScalar();
+                Object obj = cmd.ExecuteScalar();
+                return (bool)obj;
             }
         }
     }

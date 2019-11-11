@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,11 @@ namespace FinalProject1
     /// </summary>
     public partial class Login_Page : Page
     {
+        IUserController userController;
         public Login_Page()
         {
             InitializeComponent();
+            userController = new UserController();
         }
 
         /// <summary>
@@ -34,13 +37,22 @@ namespace FinalProject1
         {
             // get the username and password and store as a string to check against database of users
             string username = UsernameBox.Text;
-            string password = PasswordBox.Password.ToString();
+            string pin = PasswordBox.Password.ToString();
 
+            string errors = userController.LogIn(username, pin);
+
+            if(errors.Length > 0)
+            {
+                errorLabel.Content = errors;
+            }
+            else
+            {
+                this.NavigationService.Navigate(new MainMenu());
+            }
             // at this point it does not validate the legitimacy of the user but rather 
             // forwards it onto the MainMenu page
 
             // Close Current Window... This will be done after validating if the credentials are good or not
-            this.NavigationService.Navigate(new MainMenu());
         }
     }
 }

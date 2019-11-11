@@ -8,6 +8,8 @@ namespace FinalProject1
 {
     class Drawer
     {
-        public decimal Money { get; private set; }
+        public decimal Money { get; set; }
+
+
     }
 }

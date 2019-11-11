@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinalProject1.Controllers
+namespace FinalProject1
 {
     class UserController : IUserController
     {
