@@ -217,6 +217,7 @@ namespace FinalProject1
                     cartController.AddItem(itm);
                     UpdateTransactionView();
                     UpdateTotal();
+                    Inventory.SelectedItem = null;
 
                 }
                 catch (Exception)
