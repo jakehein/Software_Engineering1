@@ -58,6 +58,7 @@ namespace FinalProject1
         {
             List<CategoryDTO> categories = categoryControl.GetAllCategories();
             CategoryListComboBoxInput.ItemsSource = categoryControl.GetAllCategories();
+            CategoryListComboBoxInput.Items.Add("New Category");
             categories.Add(new CategoryDTO { CategoryID = 0, Items = null, Name = "All"});
             categories.Sort();
             CategoryListComboBox.ItemsSource = categories;

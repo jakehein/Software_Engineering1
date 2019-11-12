@@ -12,7 +12,12 @@ namespace FinalProject1
 
         public void AddToDrawer(decimal moneyIn)
         {
-            Money += moneyIn
+            Money += moneyIn;
+        }
+
+        public void TakeFromDrawer(decimal moneyOut)
+        {
+            Money -= moneyOut;
         }
     }
 }
