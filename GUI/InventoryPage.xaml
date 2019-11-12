@@ -47,7 +47,7 @@
         <Viewbox Grid.Row="4" Grid.Column="1" Margin="0,0" >
             <TextBlock x:Name="CategoryLabel" Text="Category:" FontSize="32"/>
         </Viewbox>
-        <ComboBox x:Name="CategoryListComboBoxInput" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" FontSize="25"/>
+        <ComboBox x:Name="CategoryListComboBoxInput" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" FontSize="25" SelectionChanged="CategoryListComboBoxInput_SelectionChanged"/>
         <Viewbox Grid.Row="5" Grid.Column="1" Margin="0,0" >
             <TextBlock x:Name="PriceLabel" Text="Price:" FontSize="16" />
         </Viewbox>
@@ -62,7 +62,6 @@
         <Button x:Name="UpdateBtn" Content="Update" Grid.Row="7" Grid.Column="3" FontSize="16" Click="UpdateBtn_Click" ClickMode="Press"/>
         <Button x:Name="DeleteBtn" Content="Delete" Grid.Row="8" Grid.Column="2" FontSize="16" Click="DeleteBtn_Click" ClickMode="Press"/>
         <Button x:Name="ExitBtn" Content="Exit" Grid.Row="8" Grid.Column="3" FontSize="16" Click="ExitBtn_Click" ClickMode="Press"/>
-        <Button x:Name="AddCategory" Content="New Category" Grid.Column="4" Grid.Row="4" Click="AddCategory_Click" />
-
+        
     </Grid>
 </Page>

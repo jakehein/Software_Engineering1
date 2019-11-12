@@ -51,14 +51,16 @@ namespace FinalProject1
             if (!CategoryExists(category.CategoryID))
             {
                 string commandString = $@"INSERT INTO {CategoryTableName}({CategoryIDColumn}, {CategoryNameColumn})
-                                        VALUES(@CategoryID, @CategoryName";
+                                        VALUES(@CategoryID, @CategoryName)";
                 using (MySqlConnection conn = new MySqlConnection(connectionStringToDB))
                 {
                     conn.Open();
                     MySqlCommand cmd = new MySqlCommand(commandString, conn);
                     cmd.Parameters.AddWithValue("@CategoryID", category.CategoryID);
                     cmd.Parameters.AddWithValue("@CategoryName", category.Name);
-                    result = int.Parse(cmd.ExecuteScalar().ToString());
+                    //result = int.Parse(cmd.ExecuteScalar().ToString()); // breaks on this line
+                    cmd.ExecuteScalar(); 
+                    result = 1;// this worked
                     cmd.Dispose();
                 }
             }

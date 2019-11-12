@@ -57,12 +57,26 @@ namespace FinalProject1
         void FillCategoryComboBox()
         {
             List<CategoryDTO> categories = categoryControl.GetAllCategories();
-            CategoryListComboBoxInput.ItemsSource = categoryControl.GetAllCategories();
-            CategoryListComboBoxInput.Items.Add("New Category");
+            //CategoryListComboBoxInput.ItemsSource = categoryControl.GetAllCategories();
+
+            // create new category option
+            UpdateCategoryListComboBoxInput();
+
             categories.Add(new CategoryDTO { CategoryID = 0, Items = null, Name = "All"});
             categories.Sort();
             CategoryListComboBox.ItemsSource = categories;
             CategoryListComboBox.SelectedIndex = 0;
+        }
+
+        /// <summary>
+        /// This method updates/initalizes the comboBoxInput with all avaliable categories and one
+        /// new category option
+        /// </summary>
+        void UpdateCategoryListComboBoxInput()
+        {
+            List<CategoryDTO> categories = categoryControl.GetAllCategories();
+            categories.Add(new CategoryDTO { CategoryID = 0, Items = null, Name = "New Category" });
+            CategoryListComboBoxInput.ItemsSource = categories;
         }
 
         /// <summary>
@@ -402,7 +416,7 @@ namespace FinalProject1
         /// <returns>true if category is valid</returns>
         private bool IsValidCategory(CategoryDTO category)
         {
-            return category != null;
+            return ((category != null) && (category.Name != "New"));
         }
 
         /// <summary>
@@ -446,9 +460,37 @@ namespace FinalProject1
             }
         }
 
-        private void AddCategory_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CategoryListComboBoxInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            CategoryDTO category = (CategoryDTO)CategoryListComboBoxInput.SelectedItem;
+            if (category.Name == "New Category")
+            {
+                Category newCategory = new Category();
+                newCategory.Name = "Office";
+                //Popup
+                MessageBox.Show("Category with name office will be made... pop up box is later");
 
+                // Create Category
+                CategoryDTO newCategoryDTO = Category.createDTOFromCategory(newCategory);
+                bool created = categoryControl.CreateCategory(newCategoryDTO);
+                UpdateCategoryListComboBoxInput();
+
+                if (created)
+                {
+                    CategoryListComboBoxInput.SelectedItem = newCategory.Name;
+                    MessageBox.Show("Category was successfully created");
+                }
+                else
+                {
+                    CategoryListComboBoxInput.SelectedItem = null;
+                }
+            }
+            
         }
     }
 }
