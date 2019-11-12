@@ -10,6 +10,9 @@ namespace FinalProject1
     {
         public decimal Money { get; set; }
 
-
+        public void AddToDrawer(decimal moneyIn)
+        {
+            Money += moneyIn
+        }
     }
 }
