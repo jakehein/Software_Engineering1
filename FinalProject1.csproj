@@ -75,6 +75,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GUI\CategoryManager.xaml.cs">
+      <DependentUpon>CategoryManager.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\DrawerController.cs" />
     <Compile Include="Controllers\IDrawerController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -94,6 +97,10 @@
     <Compile Include="GUI\InventoryPage.xaml.cs">
       <DependentUpon>InventoryPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="GUI\CategoryManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GUI\CreateUserPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

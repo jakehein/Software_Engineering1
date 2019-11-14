@@ -9,6 +9,8 @@ namespace FinalProject1
     interface ICategoryController
     {
         bool CreateCategory(CategoryDTO category);
+
+        bool UpdateCategory(long iD, string category);
         CategoryDTO GetCategory(long categoryID);
         List<CategoryDTO> GetAllCategories();
         List<CategoryDTO> GetAllCategoriesWithItems();

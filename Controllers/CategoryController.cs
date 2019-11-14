@@ -28,6 +28,17 @@ namespace FinalProject1
         }
 
         /// <summary>
+        /// Update the passed in Category to the data source is valid
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns></returns>
+        public bool UpdateCategory(long iD, string category)
+        {
+            return ValidateName(category) &&
+                  categoryDataAccess.UpdateCategory(iD, category);
+        }
+
+        /// <summary>
         /// Get the Category that corresponds with the passed in id 
         /// </summary>
         /// <param name="categoryID">Category ID</param>

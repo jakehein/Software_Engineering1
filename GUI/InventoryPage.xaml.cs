@@ -75,7 +75,7 @@ namespace FinalProject1
         void UpdateCategoryListComboBoxInput()
         {
             List<CategoryDTO> categories = categoryControl.GetAllCategories();
-            categories.Add(new CategoryDTO { CategoryID = 0, Items = null, Name = "New Category" });
+            //categories.Add(new CategoryDTO { CategoryID = 0, Items = null, Name = "New Category" });
             CategoryListComboBoxInput.ItemsSource = categories;
         }
 
@@ -416,7 +416,7 @@ namespace FinalProject1
         /// <returns>true if category is valid</returns>
         private bool IsValidCategory(CategoryDTO category)
         {
-            return ((category != null) && (category.Name != "New"));
+            return (category != null);
         }
 
         /// <summary>
@@ -461,36 +461,14 @@ namespace FinalProject1
         }
 
         /// <summary>
-        /// 
+        /// This method pops up a category manager which allows the manager to create, update, and delete categories
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CategoryListComboBoxInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CategoryManagerBtn_Click(object sender, RoutedEventArgs e)
         {
-            CategoryDTO category = (CategoryDTO)CategoryListComboBoxInput.SelectedItem;
-            if (category.Name == "New Category")
-            {
-                Category newCategory = new Category();
-                newCategory.Name = "Office";
-                //Popup
-                MessageBox.Show("Category with name office will be made... pop up box is later");
-
-                // Create Category
-                CategoryDTO newCategoryDTO = Category.createDTOFromCategory(newCategory);
-                bool created = categoryControl.CreateCategory(newCategoryDTO);
-                UpdateCategoryListComboBoxInput();
-
-                if (created)
-                {
-                    CategoryListComboBoxInput.SelectedItem = newCategory.Name;
-                    MessageBox.Show("Category was successfully created");
-                }
-                else
-                {
-                    CategoryListComboBoxInput.SelectedItem = null;
-                }
-            }
-            
+            var formPopup = new CategoryManager();
+            formPopup.Show();
         }
     }
 }

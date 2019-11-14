@@ -9,6 +9,8 @@ namespace FinalProject1
     interface ICategoryDataAccess
     {
         bool CreateCategory(CategoryDTO category);
+
+        bool UpdateCategory(long iD, string category);
         CategoryDTO GetCategory(long categoryID);
         List<CategoryDTO> GetCategories();
     }

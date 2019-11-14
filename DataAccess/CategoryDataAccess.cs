@@ -35,7 +35,8 @@ namespace FinalProject1
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand(commandString, conn);
                 cmd.Parameters.AddWithValue("@CategoryID", categoryID);
-                result = int.Parse(cmd.ExecuteScalar().ToString());
+                //result = int.Parse(cmd.ExecuteScalar().ToString());
+                result = int.Parse(cmd.ExecuteNonQuery().ToString());
             }
             return result > 0;
         }
@@ -58,13 +59,39 @@ namespace FinalProject1
                     MySqlCommand cmd = new MySqlCommand(commandString, conn);
                     cmd.Parameters.AddWithValue("@CategoryID", category.CategoryID);
                     cmd.Parameters.AddWithValue("@CategoryName", category.Name);
-                    //result = int.Parse(cmd.ExecuteScalar().ToString()); // breaks on this line
-                    cmd.ExecuteScalar(); 
-                    result = 1;// this worked
+                    //result = int.Parse(cmd.ExecuteScalar().ToString());
+                    result = int.Parse(cmd.ExecuteNonQuery().ToString());
                     cmd.Dispose();
                 }
             }
             return result > 0;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="iD"></param>
+        /// <param name="category">Category to Update To</param>
+        /// <returns></returns>
+        public bool UpdateCategory(long iD, string category)
+        {
+            int result = -1;
+
+            string commandString = $@"UPDATE {CategoryTableName}
+                                   SET {CategoryIDColumn} = @CategoryID, {CategoryNameColumn} = @Name
+                                   WHERE {CategoryIDColumn} = @CategoryID";
+            using (MySqlConnection conn = new MySqlConnection(connectionStringToDB))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand(commandString, conn);
+                cmd.Parameters.AddWithValue("@Name", category);
+                cmd.Parameters.AddWithValue("@CategoryID", iD);
+                result = int.Parse(cmd.ExecuteNonQuery().ToString());
+                cmd.Dispose();
+            }
+        
+            return result > 0;
+
         }
 
         /// <summary>
