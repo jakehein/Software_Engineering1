@@ -10,20 +10,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-
 
 namespace FinalProject1
 {
     /// <summary>
-    /// Interaction logic for CategoryManager.xaml
+    /// Interaction logic for CategoryManager1.xaml
     /// </summary>
-    public partial class CategoryManager : Window
+    public partial class CategoryManager : Page
     {
         private ICategoryController categoryControl;
         private IInventoryController inventoryControl;
         private readonly string uncatagorized = "Uncategorized";
-        private bool isClosed = false;
+
         public CategoryManager()
         {
             InitializeComponent();
@@ -137,6 +137,10 @@ namespace FinalProject1
                     MessageBox.Show("Category was unable to be deleted");
                 }
             }
+            else
+            {
+                MessageBox.Show(uncatagorized + " is not avaliable to delete");
+            }
         }
 
         /// <summary>
@@ -158,7 +162,7 @@ namespace FinalProject1
             return true;
         }
 
-        
+
         /// <summary>
         /// This method sets all items within the deleted category to 'unclassified'
         /// </summary>
@@ -167,7 +171,7 @@ namespace FinalProject1
         private bool itemsSetToUnclassified(CategoryDTO category)
         {
             List<ItemDTO> itemsList = inventoryControl.GetAllItemsFromCategory(category.CategoryID);
-            CategoryDTO unclassifiedCategory =  categoryControl.GetCategoryByName(uncatagorized); // we are getting a null category that is passed
+            CategoryDTO unclassifiedCategory = categoryControl.GetCategoryByName(uncatagorized); // we are getting a null category that is passed
             foreach (ItemDTO item in itemsList)
             {
                 bool updated = inventoryControl.UpdateItemCategory(item, unclassifiedCategory);
@@ -176,17 +180,12 @@ namespace FinalProject1
                     return false;
                 }
             }
-                return true;
+            return true;
         }
 
-        public bool isFormClosed()
+        private void ExitBtn_Click(object sender, RoutedEventArgs e)
         {
-            return isClosed;
-        }
-
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            isClosed = true;
+            this.NavigationService.Navigate(new InventoryPage());
         }
     }
 }

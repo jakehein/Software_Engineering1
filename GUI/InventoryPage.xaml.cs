@@ -196,7 +196,7 @@ namespace FinalProject1
         /// </summary>
         private void ExitBtn_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.GoBack();
+            this.NavigationService.Navigate(new MainMenu());
         }
 
         /// <summary>
@@ -469,12 +469,8 @@ namespace FinalProject1
         /// <param name="e"></param>
         private void CategoryManagerBtn_Click(object sender, RoutedEventArgs e)
         {
-            var formPopup = new CategoryManager();
-            formPopup.Show();
+            this.NavigationService.Navigate(new CategoryManager());
 
-            //once the form is closed update the categories 
-            UpdateCategoryListComboBoxInput();
-            FillCategoryComboBox();
         }
     }
 }
