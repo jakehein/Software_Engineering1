@@ -65,7 +65,8 @@ namespace FinalProject1
 
             categories.Add(new CategoryDTO { CategoryID = 0, Items = null, Name = "All"});
             categories.Sort();
-            CategoryListComboBox.ItemsSource = categories;
+            var sortedCategories = categories.OrderBy(x => x.Name);
+            CategoryListComboBox.ItemsSource = sortedCategories;
             CategoryListComboBox.SelectedIndex = 0;
         }
 
@@ -76,8 +77,8 @@ namespace FinalProject1
         void UpdateCategoryListComboBoxInput()
         {
             List<CategoryDTO> categories = categoryControl.GetAllCategories();
-            //categories.Add(new CategoryDTO { CategoryID = 0, Items = null, Name = "New Category" });
-            CategoryListComboBoxInput.ItemsSource = categories;
+            var sortedCategories = categories.OrderBy(x => x.Name);
+            CategoryListComboBoxInput.ItemsSource = sortedCategories;
         }
 
         /// <summary>

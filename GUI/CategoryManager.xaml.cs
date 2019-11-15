@@ -39,7 +39,8 @@ namespace FinalProject1
         {
             List<CategoryDTO> categories = categoryControl.GetAllCategories();
             categories.Sort();
-            CategoryListBox.ItemsSource = categories;
+            var sortedCategories = categories.OrderBy(x => x.Name);
+            CategoryListBox.ItemsSource = sortedCategories;
         }
 
         /// <summary>
