@@ -248,5 +248,58 @@ namespace FinalProject1
             };
             return item;
         }
+        
+
+        /// <summary>
+        /// Get all items in a specific category specified by the ID
+        /// </summary>
+        /// <param name="iD">specified category ID</param>
+        /// <returns>List containing all Items with a categoryiD of iD</returns>
+        public List<ItemDTO> GetAllItemsFromCategory(long iD)
+        {
+            //SELECT * FROM `Item` WHERE `CategoryID`
+            List<ItemDTO> items = new List<ItemDTO>();
+            string commandString = $@"SELECT * FROM {ItemTableName}
+                                      WHERE {CategoryColumn} = @CategoryID";
+
+            using (MySqlConnection conn = new MySqlConnection(connectionStringToDB))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand(commandString, conn);
+                cmd.Parameters.AddWithValue("@CategoryID", iD);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    items.Add(ReadInItem(reader));
+                }
+                cmd.Dispose();
+            }
+            return items;
+        }
+
+        /// <summary>
+        /// This method updates the passed items category to the category specified in 'category' variable
+        /// </summary>
+        /// <param name="item">item thats category is being updated</param>
+        /// <param name="category">is the category that is being updated to</param>
+        /// <returns></returns>
+        public bool UpdateItemCategory(ItemDTO item, CategoryDTO category)
+        {
+
+            int result = -1;
+            string commandString = $@"UPDATE {ItemTableName}
+                                   SET {CategoryColumn} = @CategoryID
+                                   WHERE {UPCColumn} = @UPC";
+            using (MySqlConnection conn = new MySqlConnection(connectionStringToDB))
+            {
+            conn.Open();
+            MySqlCommand cmd = new MySqlCommand(commandString, conn);
+             cmd.Parameters.AddWithValue("@CategoryId", category.CategoryID);
+             cmd.Parameters.AddWithValue("@UPC", item.UPC);
+             result = int.Parse(cmd.ExecuteNonQuery().ToString());
+             cmd.Dispose();
+            }
+            return result > 0;
+        }
     }
 }

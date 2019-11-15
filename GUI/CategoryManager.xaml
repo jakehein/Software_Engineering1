@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FinalProject1"
         mc:Ignorable="d"
-        Title="CategoryManager" Height="450" Width="800">
+        Title="CategoryManager" Height="450" Width="800" Closed="Window_Closed">
     <Grid Background="#FFF1F1F1" >
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -20,27 +20,28 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="72*"/>
+            <ColumnDefinition Width="79*"/>
+            <ColumnDefinition Width="79*"/>
+            <ColumnDefinition Width="79*"/>
+            <ColumnDefinition Width="79*"/>
+            <ColumnDefinition Width="79*"/>
+            <ColumnDefinition Width="79*"/>
+            <ColumnDefinition Width="79*"/>
+            <ColumnDefinition Width="79*"/>
+            <ColumnDefinition Width="80*"/>
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="CategoryListBox" Grid.ColumnSpan="4" Grid.Column="5" Grid.Row="1" Grid.RowSpan="8" SelectionChanged="CategoryListBox_SelectionChanged" />
+        <ListBox x:Name="CategoryListBox" Grid.ColumnSpan="5" Grid.Column="6" Grid.RowSpan="9" SelectionChanged="CategoryListBox_SelectionChanged" Margin="0.2,42,79.6,0.4" />
 
-        <TextBox x:Name="CategoryText" Text="" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" FontSize="20"/>
-        <Viewbox Grid.Row="2" Grid.Column="1" Margin="0,0" >
+        <TextBox x:Name="CategoryText" Text="" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="4" FontSize="20" Margin="79,0.2,78.8,41.6" Grid.RowSpan="2"/>
+        <Viewbox Grid.Row="2" Grid.Column="2" Margin="0,0.2,0.2,0.2" >
             <TextBlock x:Name="CategoryLabel" Text="Category:"/>
         </Viewbox>
 
-        <Button x:Name="SaveBtn" Content="Save" Grid.Row="4" Grid.Column="1" FontSize="16" Click="SaveBtn_Click" ClickMode="Press" Grid.ColumnSpan="2" Height="42" Margin="79,0,0.4,0" VerticalAlignment="Bottom"/>
-        <Button x:Name="UpdateBtn" Content="Update" Grid.Row="4" Grid.Column="3" FontSize="16" Click="UpdateBtn_Click" ClickMode="Press"/>
-        <Button x:Name="DeleteBtn" Content="Delete" Grid.Row="5" Grid.Column="2" FontSize="16" Click="DeleteBtn_Click" ClickMode="Press"/>
+        <Button x:Name="SaveBtn" Content="Save" Grid.Row="4" Grid.Column="2" FontSize="16" Click="SaveBtn_Click" ClickMode="Press" Grid.ColumnSpan="2" Height="42" Margin="79,0,0.4,0" VerticalAlignment="Bottom"/>
+        <Button x:Name="UpdateBtn" Content="Update" Grid.Row="4" Grid.Column="3" FontSize="16" Click="UpdateBtn_Click" ClickMode="Press" Grid.ColumnSpan="3" Margin="78.8,0.4,78.8,0"/>
+        <Button x:Name="DeleteBtn" Content="Delete" Grid.Row="5" Grid.Column="2" FontSize="16" Click="DeleteBtn_Click" ClickMode="Press" Grid.ColumnSpan="2" Margin="79,0,0.4,41.2" Grid.RowSpan="2"/>
 
     </Grid>
 </Window>

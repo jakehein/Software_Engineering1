@@ -19,5 +19,9 @@ namespace FinalProject1
         ItemDTO GetItem(string uPC);
 
         List<ItemDTO> GetAllItems();
+
+        List<ItemDTO> GetAllItemsFromCategory(long iD);
+
+        bool UpdateItemCategory(ItemDTO item, CategoryDTO category);
     }
 }

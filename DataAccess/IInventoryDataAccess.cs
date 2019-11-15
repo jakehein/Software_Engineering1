@@ -21,5 +21,9 @@ namespace FinalProject1
         List<ItemDTO> GetAllItems();
 
         bool ChangeQuantity(string uPC, int amount);
+
+        List<ItemDTO> GetAllItemsFromCategory(long iD);
+
+        bool UpdateItemCategory(ItemDTO item, CategoryDTO category);
     }
 }

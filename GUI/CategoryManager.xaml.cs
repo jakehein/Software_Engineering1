@@ -20,11 +20,14 @@ namespace FinalProject1
     public partial class CategoryManager : Window
     {
         private ICategoryController categoryControl;
-        private readonly string uncatagorized = "Uncatagorized";
+        private IInventoryController inventoryControl;
+        private readonly string uncatagorized = "Uncategorized";
+        private bool isClosed = false;
         public CategoryManager()
         {
             InitializeComponent();
             categoryControl = new CategoryController(new CategoryDataAccess());
+            inventoryControl = new InventoryController(new InventoryDataAccess(new CategoryDataAccess()));
             FillCategoryListBox();
         }
 
@@ -34,6 +37,7 @@ namespace FinalProject1
         private void FillCategoryListBox()
         {
             List<CategoryDTO> categories = categoryControl.GetAllCategories();
+            categories.Sort();
             CategoryListBox.ItemsSource = categories;
         }
 
@@ -45,7 +49,14 @@ namespace FinalProject1
         private void CategoryListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             CategoryDTO category = (CategoryDTO)CategoryListBox.SelectedItem;
-            CategoryText.Text = category.Name;
+            if (category != null)
+            {
+                CategoryText.Text = category.Name;
+            }
+            else
+            {
+                CategoryText.Text = "";
+            }
         }
 
         /// <summary>
@@ -65,8 +76,9 @@ namespace FinalProject1
                 if (created)
                 {
                     MessageBox.Show("Category Successfully Created");
+                    CategoryText.Text = "";
+                    FillCategoryListBox();
                 }
-                FillCategoryListBox();
             }
             else
             {
@@ -89,6 +101,7 @@ namespace FinalProject1
                 {
                     MessageBox.Show("Category Successfully Updated");
                 }
+                CategoryText.Text = "";
                 FillCategoryListBox();
             }
             else
@@ -106,13 +119,30 @@ namespace FinalProject1
         /// <param name="e"></param>
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
-            CategoryDTO category = (CategoryDTO)CategoryListBox.SelectedItem;
+            CategoryDTO category = (CategoryDTO)CategoryListBox.SelectedItem; // this is null
+            CategoryText.Text = "";
+
             if (category.Name != uncatagorized)
             {
-
+                itemsSetToUnclassified(category);
+                bool deleted = categoryControl.DeleteCategory(category);
+                if (deleted)
+                {
+                    MessageBox.Show("Category has been deleted");
+                    FillCategoryListBox();
+                }
+                else
+                {
+                    MessageBox.Show("Category was unable to be deleted");
+                }
             }
         }
 
+        /// <summary>
+        /// This method verifes that the typed category is unique in comparrison to all other categories
+        /// </summary>
+        /// <param name="name"> string name of category we are comparing</param>
+        /// <returns>true if unique</returns>
         private bool nameIsUnique(string name)
         {
             List<CategoryDTO> categories = categoryControl.GetAllCategories();
@@ -125,6 +155,37 @@ namespace FinalProject1
                 }
             }
             return true;
+        }
+
+        
+        /// <summary>
+        /// This method sets all items within the deleted category to 'unclassified'
+        /// </summary>
+        /// <param name="category">DTO object of the category getting deleted</param>
+        /// <returns></returns>
+        private bool itemsSetToUnclassified(CategoryDTO category)
+        {
+            List<ItemDTO> itemsList = inventoryControl.GetAllItemsFromCategory(category.CategoryID);
+            CategoryDTO unclassifiedCategory =  categoryControl.GetCategoryByName(uncatagorized); // we are getting a null category that is passed
+            foreach (ItemDTO item in itemsList)
+            {
+                bool updated = inventoryControl.UpdateItemCategory(item, unclassifiedCategory);
+                if (!updated)
+                {
+                    return false;
+                }
+            }
+                return true;
+        }
+
+        public bool isFormClosed()
+        {
+            return isClosed;
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            isClosed = true;
         }
     }
 }

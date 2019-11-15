@@ -51,6 +51,7 @@ namespace FinalProject1
             InventoryListBox.ItemsSource = items;
         }
 
+        
         /// <summary>
         /// This method populates the combo item list in the inventory database. 
         /// </summary>
@@ -469,6 +470,10 @@ namespace FinalProject1
         {
             var formPopup = new CategoryManager();
             formPopup.Show();
+
+            //once the form is closed update the categories 
+            UpdateCategoryListComboBoxInput();
+            FillCategoryComboBox();
         }
     }
 }

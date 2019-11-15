@@ -68,7 +68,7 @@ namespace FinalProject1
         }
 
         /// <summary>
-        /// 
+        /// This method updates the category with a new title
         /// </summary>
         /// <param name="iD"></param>
         /// <param name="category">Category to Update To</param>
@@ -92,6 +92,28 @@ namespace FinalProject1
         
             return result > 0;
 
+        }
+
+        /// <summary>
+        /// This method allows for the deletion of a category. The items within the deleted category will be recatagorized as
+        /// unclassified.
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns></returns>
+        public bool DeleteCategory(CategoryDTO category)
+        {
+            int result = -1;
+            string commandString = $@"DELETE FROM {CategoryTableName}
+                                   WHERE {CategoryIDColumn} = @CategoryID";
+            using (MySqlConnection conn = new MySqlConnection(connectionStringToDB))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand(commandString, conn);
+                cmd.Parameters.AddWithValue("@CategoryID", category.CategoryID);
+                result = int.Parse(cmd.ExecuteNonQuery().ToString());
+                cmd.Dispose();
+            }
+            return result > 0;
         }
 
         /// <summary>
@@ -156,5 +178,33 @@ namespace FinalProject1
                 Name = reader.GetString(CategoryNameColumn)
             };
         }
+
+        /// <summary>
+        /// Get a category that corresponds with the provided name
+        /// </summary>
+        /// <param name="categoryName"> name of the category we wish to get the DTO from</param>
+        /// <returns> CategoryDTO of the category that corresponds to the name</returns>
+        public CategoryDTO GetCategoryByName(string categoryName)
+        {
+            CategoryDTO category = null;
+            string commandString = $@"SELECT * FROM {CategoryTableName}
+                                      WHERE {CategoryNameColumn} = @CategoryName
+                                      LIMIT 1";
+            using (MySqlConnection conn = new MySqlConnection(connectionStringToDB))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand(commandString, conn);
+                cmd.Parameters.AddWithValue("@CategoryName", categoryName);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    category = ReadCategory(reader);
+                }
+                cmd.Dispose();
+            }
+
+            return category;
+        }
+
     }
 }

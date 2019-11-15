@@ -38,6 +38,12 @@ namespace FinalProject1
                   categoryDataAccess.UpdateCategory(iD, category);
         }
 
+
+        public bool DeleteCategory(CategoryDTO category)
+        {
+            return categoryDataAccess.DeleteCategory(category);
+        }
+
         /// <summary>
         /// Get the Category that corresponds with the passed in id 
         /// </summary>
@@ -61,6 +67,11 @@ namespace FinalProject1
         {
             List<CategoryDTO> categoryDTOs = new List<CategoryDTO>();
             return categoryDTOs;
+        }
+
+        public CategoryDTO GetCategoryByName(string categoryName)
+        {
+            return categoryDataAccess.GetCategoryByName(categoryName);
         }
 
         /// <summary>

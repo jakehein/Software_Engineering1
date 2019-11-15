@@ -90,5 +90,21 @@ namespace FinalProject1
         {
             return iDA.UpdateItem(uPC, itemDTO);
         }
+
+        
+        /// <summary>
+        /// This method gets all items from a specified category.
+        /// </summary>
+        /// <param name="iD">iD of the wanted category</param>
+        /// <returns>List of ItemDTOs that represents objects within a category</returns>
+        public List<ItemDTO> GetAllItemsFromCategory(long iD)
+        {
+            return iDA.GetAllItemsFromCategory(iD);
+        }
+
+        public bool UpdateItemCategory(ItemDTO item, CategoryDTO category)
+        {
+            return iDA.UpdateItemCategory(item, category);
+        }
     }
 }
