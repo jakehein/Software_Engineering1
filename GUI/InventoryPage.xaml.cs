@@ -461,6 +461,7 @@ namespace FinalProject1
             }
         }
 
+
         /// <summary>
         /// This method pops up a category manager which allows the manager to create, update, and delete categories
         /// </summary>
