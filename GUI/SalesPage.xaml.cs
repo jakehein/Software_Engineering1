@@ -53,7 +53,8 @@ namespace FinalProject1
             //CategoryListCombo.ItemsSource = categoryControl.GetAllCategories();
             categories.Add(new CategoryDTO { CategoryID = 0, Items = null, Name = "All" });
             categories.Sort();
-            Category.ItemsSource = categories;
+            var sortedCategories = categories.OrderBy(x => x.Name);
+            Category.ItemsSource = sortedCategories;
             Category.SelectedIndex = 0;
         }
         private void MainMenu_Click(object sender, RoutedEventArgs e)
