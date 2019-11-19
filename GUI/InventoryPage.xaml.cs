@@ -119,20 +119,22 @@ namespace FinalProject1
         /// </summary>
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
-            ItemDTO create = CreateItemObj();
-
             if (IsEnteredInventoryItemValid())
             {
-                Boolean created = inventoryControl.CreateItem(create);
-                if (created)
+                ItemDTO create = CreateItemObj();
+                if (create != null) // how to make sure we dont break when there isnt input
                 {
-                    MessageBox.Show("Item was successfully created.");
-                    ClearInputs();
-                    UpdateInventoryList();
-                }
-                else
-                {
-                    MessageBox.Show("Item could not be created. Please try again.");
+                    Boolean created = inventoryControl.CreateItem(create);
+                    if (created)
+                    {
+                        MessageBox.Show("Item was successfully created.");
+                        ClearInputs();
+                        UpdateInventoryList();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Item could not be created. Please try again.");
+                    }
                 }
             }
             else
@@ -149,21 +151,23 @@ namespace FinalProject1
         {
             ItemDTO update = GetItemObj();
             //string uPC = UPCText.Text;
-            string uPC = ((ItemDTO)InventoryListBox.SelectedItem).UPC;
 
             if (IsEnteredInventoryItemValid())
             {
-                bool updated = inventoryControl.UpdateItem(uPC, update);
-                if (updated)
-                {
-                    MessageBox.Show("Item was successfully updated.");
-                    ClearInputs();
-                    UpdateInventoryList();
-                }
-                else
-                {
-                    MessageBox.Show("Item could not be updated. Please try again.");
-                }
+                if (((ItemDTO)InventoryListBox.SelectedItem) != null){
+                    string uPC = ((ItemDTO)InventoryListBox.SelectedItem).UPC;
+                    bool updated = inventoryControl.UpdateItem(uPC, update);
+                    if (updated)
+                    {
+                        MessageBox.Show("Item was successfully updated.");
+                        ClearInputs();
+                        UpdateInventoryList();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Item could not be updated. Please try again.");
+                    }
+                } 
             }
             else
             {
@@ -304,34 +308,24 @@ namespace FinalProject1
         private bool IsEnteredInventoryItemValid()
         {
             List<bool> val = new List<bool>();
+            string nullText = "";
             //check if any values are null
-            if (UPCText.Text == null)
+            if (UPCText.Text == nullText)
             {
-                val.Add(false);
+                return false;
             }
-            else if (NameText.Text == null)
+            else if (NameText.Text == nullText)
             {
-                val.Add(false);
+                return false;
             }
-            else if (PriceText.Text == null)
+            else if (PriceText.Text == nullText)
             {
-                val.Add(false);
+                return false;
             }
-            else if (QuantityText.Text == null)
+            else if (QuantityText.Text == nullText)
             {
-                val.Add(false);
+                return false;
             }
-
-            foreach (bool value in val)
-            {
-                if (!value)
-                {
-                    return false;
-                }
-            }
-
-            //check the formats
-            val.Clear();
 
             val.Add(AreAllDigits(UPCText.Text));
 

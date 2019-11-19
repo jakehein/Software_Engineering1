@@ -95,20 +95,31 @@ namespace FinalProject1
         /// <param name="e"></param>
         private void UpdateBtn_Click(object sender, RoutedEventArgs e)
         {
-            CategoryDTO category = (CategoryDTO)CategoryListBox.SelectedItem;
-            if (category.Name != uncatagorized && nameIsUnique(CategoryText.Text))
+            if ((CategoryDTO)CategoryListBox.SelectedItem != null)
             {
-                bool updated = categoryControl.UpdateCategory(category.CategoryID, CategoryText.Text);
-                if (updated)
+                CategoryDTO category = (CategoryDTO)CategoryListBox.SelectedItem;
+                if (category.Name != uncatagorized && nameIsUnique(CategoryText.Text))
                 {
-                    MessageBox.Show("Category Successfully Updated");
+                    bool updated = categoryControl.UpdateCategory(category.CategoryID, CategoryText.Text);
+                    if (updated)
+                    {
+                        MessageBox.Show("Category Successfully Updated");
+                    }
+                    CategoryText.Text = "";
+                    FillCategoryListBox();
                 }
-                CategoryText.Text = "";
-                FillCategoryListBox();
+                else if (category.Name == uncatagorized)
+                {
+                    MessageBox.Show("Cannot Update Uncatagorized. Please try again.");
+                }
+                else
+                {
+                    MessageBox.Show("Name is not valid. Please try again.");
+                }
             }
             else
             {
-                MessageBox.Show("Name is not unique. Please try again.");
+                MessageBox.Show("Please select category to update.");
             }
         }
 
@@ -159,6 +170,10 @@ namespace FinalProject1
                 {
                     return false;
                 }
+            }
+            if (name == "")
+            {
+                return false;
             }
             return true;
         }
