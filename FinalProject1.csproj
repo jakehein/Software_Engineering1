@@ -117,6 +117,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="GUI\OnScreenKeyboard\KeyboardABC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\OnScreenKeyboard\OnScreenKeyboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -138,6 +146,12 @@
     </Compile>
     <Compile Include="GUI\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\OnScreenKeyboard\KeyboardABC.xaml.cs">
+      <DependentUpon>KeyboardABC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\OnScreenKeyboard\OnScreenKeyboard.xaml.cs">
+      <DependentUpon>OnScreenKeyboard.xaml</DependentUpon>
     </Compile>
     <Compile Include="GUI\ReturnPage.xaml.cs">
       <DependentUpon>ReturnPage.xaml</DependentUpon>

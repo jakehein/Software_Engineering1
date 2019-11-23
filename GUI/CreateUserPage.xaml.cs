@@ -98,5 +98,27 @@ namespace FinalProject1
         {
             ((PasswordBox)sender).FontSize = ((PasswordBox)sender).ActualHeight * .7;
         }
+
+        private void UsernameBox_TouchUp(object sender, TouchEventArgs e)
+        {
+            GUI.OnScreenKeyboard.OnScreenKeyboard keyboard = new GUI.OnScreenKeyboard.OnScreenKeyboard(GUI.OnScreenKeyboard.OnScreenKeyboard.InputType.TEXT, Window.GetWindow(this), UsernameBox.Text);
+            keyboard.ShowDialog();
+            UsernameBox.Text = keyboard.GetResult();
+            UsernameBox.CaretIndex = UsernameBox.Text.Length;
+        }
+
+        private void PasswordBox_TouchUp(object sender, TouchEventArgs e)
+        {
+            GUI.OnScreenKeyboard.OnScreenKeyboard keyboard = new GUI.OnScreenKeyboard.OnScreenKeyboard(GUI.OnScreenKeyboard.OnScreenKeyboard.InputType.PASSWORD, Window.GetWindow(this), PasswordBox.Password);
+            keyboard.ShowDialog();
+            PasswordBox.Password = keyboard.GetResult();
+        }
+
+        private void ReEnterPasswordBox_TouchUp(object sender, TouchEventArgs e)
+        {
+            GUI.OnScreenKeyboard.OnScreenKeyboard keyboard = new GUI.OnScreenKeyboard.OnScreenKeyboard(GUI.OnScreenKeyboard.OnScreenKeyboard.InputType.PASSWORD, Window.GetWindow(this), ReEnterPasswordBox.Password);
+            keyboard.ShowDialog();
+            ReEnterPasswordBox.Password = keyboard.GetResult();
+        }
     }
 }

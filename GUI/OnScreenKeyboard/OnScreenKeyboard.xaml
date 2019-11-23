@@ -1,0 +1,22 @@
+﻿<Window x:Class="FinalProject1.GUI.OnScreenKeyboard.OnScreenKeyboard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FinalProject1.GUI.OnScreenKeyboard"
+        mc:Ignorable="d"
+        Title="Keyboard" Height="300" Width="800" Background="#FFFFFF" Cursor="None" ResizeMode="NoResize" SizeChanged="Window_SizeChanged">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+        <TextBox Name="txtTempInput" Text="" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" Margin="4" SizeChanged="TxtTempInput_SizeChanged"/>
+        <PasswordBox Name="passTempInput" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" Margin="4" Visibility="Hidden" SizeChanged="PassTempInput_SizeChanged"/>
+        <Frame Name="keyboardFrame" Grid.Column="0" Grid.Row="1" Margin="4,4,4,4" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" NavigationUIVisibility="Hidden"/>
+    </Grid>
+</Window>
