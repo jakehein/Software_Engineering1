@@ -297,7 +297,23 @@ namespace FinalProject1
 
         private void ChangeQuantity_Click(object sender, RoutedEventArgs e)
         {
-
+            if (Transaction.SelectedItem != null)
+            {
+                GUI.ChangeQuantityOnClickDialog dialog = new GUI.ChangeQuantityOnClickDialog();
+                bool? result = dialog.ShowDialog();
+                if (result != null && (bool)result)
+                {
+                    ItemDTO item = ((Cart.SalesItem)Transaction.SelectedItem).Item;
+                    int quantity = ((Cart.SalesItem)Transaction.SelectedItem).Quantity;
+                    cartController.ChangeQuantity(int.Parse(dialog.Result), item);
+                    UpdateTransactionView();
+                    UpdateTotal();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Select an Item from the transaction to change the quantity");
+            }
         }
 
     }

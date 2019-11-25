@@ -1,0 +1,23 @@
+﻿<Window x:Class="FinalProject1.GUI.ChangeQuantityOnClickDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FinalProject1.GUI"
+        mc:Ignorable="d"
+        Title="Change Quantity" Height="168.609" Width="517.1" ResizeMode="NoResize" SizeChanged="ResizeFonts">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label Name="lblPrompt" Content="Enter the new Quantity:" VerticalContentAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="25" Margin="4"/>
+        <TextBox x:Name="txtNewQuantity" Grid.Row="1" Grid.Column="0" FontSize="25" Margin="4" TextChanged="TxtNewQuantity_TextChanged"/>
+        <Button x:Name="btnEnter" Grid.Row="1" Grid.Column="1" Content="Enter Quantity" FontSize="20" Margin="4" Click="BtnEnter_Click"/>
+    </Grid>
+</Window>

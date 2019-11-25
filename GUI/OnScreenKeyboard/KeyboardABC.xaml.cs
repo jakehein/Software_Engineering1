@@ -112,6 +112,8 @@ namespace FinalProject1.GUI.OnScreenKeyboard
             if(isUpperCase && !isCapsLock)
             {
                 SwapKeyCase();
+                btnLeftShift.Background = Brushes.Gray;
+                btnRightShift.Background = Brushes.Gray;
             }
         }
         
@@ -212,7 +214,8 @@ namespace FinalProject1.GUI.OnScreenKeyboard
                 }
                 else
                 {
-                    ((Label)sender).Background = Brushes.Gray;
+                    btnLeftShift.Background = Brushes.Gray;
+                    btnRightShift.Background = Brushes.Gray;
                 }                
             }
             else
