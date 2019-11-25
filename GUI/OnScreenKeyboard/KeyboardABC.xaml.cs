@@ -28,7 +28,7 @@ namespace FinalProject1.GUI.OnScreenKeyboard
         bool isUpperCase = false;
         bool isCapsLock = false;
         long shiftLastPressedTime;
-        List<Button> letterButtons = new List<Button>();
+        List<Label> letterButtons = new List<Label>();
 
 
         public KeyboardABC(OnScreenKeyboard inKeyboard, Frame inFrame, Control inEditField)
@@ -78,10 +78,10 @@ namespace FinalProject1.GUI.OnScreenKeyboard
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Button_TouchUp(object sender, TouchEventArgs e)
+        private void SymbolsKeyPress(object sender, TouchEventArgs e)
         {
-           //keyboardFrame.Navigate(new KeyboardNum(keyboardFrame));
-
+            ((Label)sender).Background = Brushes.Gray;
+           keyboardFrame.Navigate(new KeyboardSymbols(owner, keyboardFrame, editField));
         }
 
         /// <summary>
@@ -103,16 +103,28 @@ namespace FinalProject1.GUI.OnScreenKeyboard
         {
             if (editField is TextBox)
             {
-                ((TextBox)editField).Text += ((Button)sender).Content.ToString();
+                ((TextBox)editField).Text += ((Label)sender).Content.ToString();
             }
             else
             {
-                ((PasswordBox)editField).Password += ((Button)sender).Content.ToString();
+                ((PasswordBox)editField).Password += ((Label)sender).Content.ToString();
             }
             if(isUpperCase && !isCapsLock)
             {
                 SwapKeyCase();
             }
+            ((Label)sender).Background = Brushes.Gray;
+        }
+        
+        /// <summary>
+        /// Update label color when touch enters bounds
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void InputKeyDown(object sender, TouchEventArgs e)
+        {
+            ((Label)sender).Background = Brushes.CadetBlue;
+            
         }
 
         /// <summary>
@@ -135,16 +147,16 @@ namespace FinalProject1.GUI.OnScreenKeyboard
             if (isUpperCase)
             {
                 offset = 32;
-                btnLeftShift.Background = (Brush)bc.ConvertFrom("#6666FF");
-                btnRightShift.Background = (Brush)bc.ConvertFrom("#6666FF");
+                btnLeftShift.Background = Brushes.Gray;
+                btnRightShift.Background = Brushes.Gray;
             }
             else
             {
-                offset = -32;
-                btnLeftShift.Background = (Brush)bc.ConvertFrom("#666666");
-                btnRightShift.Background = (Brush)bc.ConvertFrom("#666666");
+                btnLeftShift.Background = Brushes.LightBlue;
+                btnRightShift.Background = Brushes.LightBlue;
+                offset = -32;                
             }
-            foreach (Button btn in letterButtons)
+            foreach (Label btn in letterButtons)
             {
                 btn.Content = (char)(btn.Content.ToString()[0] + offset);
             }
@@ -159,20 +171,60 @@ namespace FinalProject1.GUI.OnScreenKeyboard
         private void ShiftKeyPressed(object sender, TouchEventArgs e)
         {
             long currentShiftTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+
             if (isCapsLock)
             {
                 isCapsLock = false;
+                shiftLastPressedTime = 0;
                 SwapKeyCase();
             }
             else if (currentShiftTime - shiftLastPressedTime < CapsLockKeyPressTime)
             {
                 isCapsLock = true;
+                btnLeftShift.Background = Brushes.Blue;
+                btnRightShift.Background = Brushes.Blue;
+                shiftLastPressedTime = currentShiftTime;
+                if (!isUpperCase)
+                {
+                    SwapKeyCase();
+                }
             }
             else
             {
                 SwapKeyCase();
+                shiftLastPressedTime = currentShiftTime;
             }
-            shiftLastPressedTime = currentShiftTime;
+            
+        }
+
+        /// <summary>
+        /// Update label colors when touch leaves label bounds
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void TouchLeftKey(object sender, TouchEventArgs e)
+        {
+            if (sender == btnLeftShift || sender == btnRightShift)
+            {
+                if (isCapsLock)
+                {
+                    btnLeftShift.Background = Brushes.Blue;
+                    btnRightShift.Background = Brushes.Blue;
+                }
+                else if(isUpperCase)
+                {
+                    btnLeftShift.Background = Brushes.LightBlue;
+                    btnRightShift.Background = Brushes.LightBlue;
+                }
+                else
+                {
+                    ((Label)sender).Background = Brushes.Gray;
+                }                
+            }
+            else
+            {
+                ((Label)sender).Background = Brushes.Gray;
+            }
         }
 
         /// <summary>
@@ -202,6 +254,7 @@ namespace FinalProject1.GUI.OnScreenKeyboard
             {
                 SwapKeyCase();
             }
+            ((Label)sender).Background = Brushes.Gray;
         }
     }
 }
