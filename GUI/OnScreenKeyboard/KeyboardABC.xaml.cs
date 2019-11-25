@@ -20,7 +20,7 @@ namespace FinalProject1.GUI.OnScreenKeyboard
     /// </summary>
     public partial class KeyboardABC : Page
     {
-        private const long CapsLockKeyPressTime = 500;
+        private const long CapsLockKeyPressTime = 400;
 
         OnScreenKeyboard owner;
         Frame keyboardFrame;
@@ -113,7 +113,6 @@ namespace FinalProject1.GUI.OnScreenKeyboard
             {
                 SwapKeyCase();
             }
-            ((Label)sender).Background = Brushes.Gray;
         }
         
         /// <summary>
@@ -142,18 +141,13 @@ namespace FinalProject1.GUI.OnScreenKeyboard
         /// </summary>
         private void SwapKeyCase()
         {        
-            BrushConverter bc = new BrushConverter();
             int offset;
             if (isUpperCase)
             {
                 offset = 32;
-                btnLeftShift.Background = Brushes.Gray;
-                btnRightShift.Background = Brushes.Gray;
             }
             else
             {
-                btnLeftShift.Background = Brushes.LightBlue;
-                btnRightShift.Background = Brushes.LightBlue;
                 offset = -32;                
             }
             foreach (Label btn in letterButtons)
@@ -181,8 +175,6 @@ namespace FinalProject1.GUI.OnScreenKeyboard
             else if (currentShiftTime - shiftLastPressedTime < CapsLockKeyPressTime)
             {
                 isCapsLock = true;
-                btnLeftShift.Background = Brushes.Blue;
-                btnRightShift.Background = Brushes.Blue;
                 shiftLastPressedTime = currentShiftTime;
                 if (!isUpperCase)
                 {
@@ -206,6 +198,8 @@ namespace FinalProject1.GUI.OnScreenKeyboard
         {
             if (sender == btnLeftShift || sender == btnRightShift)
             {
+
+                BrushConverter bc = new BrushConverter();
                 if (isCapsLock)
                 {
                     btnLeftShift.Background = Brushes.Blue;
@@ -223,7 +217,7 @@ namespace FinalProject1.GUI.OnScreenKeyboard
             }
             else
             {
-                ((Label)sender).Background = Brushes.Gray;
+                ((Label)sender).Background = Brushes.LightGray;
             }
         }
 

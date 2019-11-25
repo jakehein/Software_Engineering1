@@ -69,7 +69,7 @@ namespace FinalProject1.GUI.OnScreenKeyboard
             {
                 ((PasswordBox)editField).Password += ((Label)sender).Content.ToString();
             }
-            ((Label)sender).Background = Brushes.Gray;
+            ((Label)sender).Background = Brushes.LightGray;
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace FinalProject1.GUI.OnScreenKeyboard
         /// <param name="e"></param>
       public void TouchLeftKey(object sender, TouchEventArgs e)
         {
-            ((Label)sender).Background = Brushes.Gray;
+            ((Label)sender).Background = Brushes.LightGray;
         }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace FinalProject1.GUI.OnScreenKeyboard
                     ((PasswordBox)editField).Password = text.Substring(0, text.Length - 1);
                 }
             }
-            ((Label)sender).Background = Brushes.Gray;
+            ((Label)sender).Background = Brushes.LightGray;
         }
     }
 }

@@ -73,10 +73,10 @@ namespace FinalProject1.GUI.OnScreenKeyboard
         {
             double ownerWidth = Owner.ActualWidth;
             double ownerHeight = Owner.ActualHeight;
-            Width = ownerWidth * .6;
+            Width = SystemParameters.PrimaryScreenWidth * .6;
             Height = ActualWidth * .4;
-            Left = ownerWidth * .5 - ActualWidth * .5;
-            Top = ownerHeight - ActualHeight - 30;
+            Left = SystemParameters.PrimaryScreenWidth * .5 - ActualWidth * .5;
+            Top = SystemParameters.PrimaryScreenHeight - ActualHeight - 30;
         }
 
         /// <summary>
