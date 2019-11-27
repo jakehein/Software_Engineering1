@@ -9,7 +9,7 @@ namespace FinalProject1
     class CartController : ICartController
     {
         Cart cart;
-        
+
         IInventoryDataAccess inventoryDataAccess = new InventoryDataAccess(new CategoryDataAccess());
         public decimal? GetTotal()
         {
@@ -116,7 +116,7 @@ namespace FinalProject1
             //}
             //return items;
             List<Cart.SalesItem> items = new List<Cart.SalesItem>();
-            foreach(Cart.SalesItem si in cart.Items)
+            foreach (Cart.SalesItem si in cart.Items)
             {
                 items.Add(new Cart.SalesItem { Item = si.Item, Quantity = si.Quantity });
             }
@@ -129,6 +129,13 @@ namespace FinalProject1
         public List<ItemDTO> Checkout()
         {
             cart.Checkout(inventoryDataAccess);
+            cart = new Cart();
+            return new List<ItemDTO>();
+        }
+
+        public List<ItemDTO> ReturnItems()
+        {
+            cart.ReturnItems(inventoryDataAccess);
             cart = new Cart();
             return new List<ItemDTO>();
         }

@@ -183,5 +183,14 @@ namespace FinalProject1
                 inventoryDataAccess.ChangeQuantity(itemDTO.UPC, itemDTO.Quantity - si.Quantity);
             }
         }
+
+        public void ReturnItems(IInventoryDataAccess inventoryDataAccess)
+        {
+            foreach (SalesItem si in Items)
+            {
+                ItemDTO itemDTO = inventoryDataAccess.GetItem(si.Item.UPC);
+                inventoryDataAccess.ChangeQuantity(itemDTO.UPC, itemDTO.Quantity + si.Quantity);
+            }
+        }
     }
 }

@@ -195,9 +195,9 @@ namespace FinalProject1
 
         private void Transaction_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            TransactionItemColumn.Width = ((ListView)sender).ActualWidth * .6;
+            TransactionItemColumn.Width = ((ListView)sender).ActualWidth * .65;
             TransactionPriceColumn.Width = ((ListView)sender).ActualHeight * .15;
-            TransactionQuantityColumn.Width = ((ListView)sender).ActualWidth * .15;
+            TransactionQuantityColumn.Width = ((ListView)sender).ActualWidth * .1;
         }
 
         private void Category_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -220,7 +220,6 @@ namespace FinalProject1
                     UpdateTransactionView();
                     UpdateTotal();
                     Inventory.SelectedItem = null;
-
                 }
                 catch (Exception)
                 {

@@ -65,7 +65,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn x:Name="TransactionQuantityColumn" Header="Quantity">
+                    <GridViewColumn x:Name="TransactionQuantityColumn" Header="Qty">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock TextAlignment="Center" Text="{Binding Path=Quantity}"/>

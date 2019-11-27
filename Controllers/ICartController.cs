@@ -25,6 +25,8 @@ namespace FinalProject1
 
         List<ItemDTO> Checkout();
 
+        List<ItemDTO> ReturnItems();
+
         List<ItemDTO> CancelTransaction();
     }
 }
