@@ -29,12 +29,22 @@ namespace FinalProject1.GUI
             txtNewQuantity.Focus();
         }
 
+        /// <summary>
+        /// Adjust the font sizes with window resize
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ResizeFonts(object sender, SizeChangedEventArgs e)
         {
             lblPrompt.FontSize = lblPrompt.ActualHeight * .7;
             txtNewQuantity.FontSize = txtNewQuantity.ActualHeight * .7;
         }
 
+        /// <summary>
+        /// Store the textbox value set result to true and close
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnEnter_Click(object sender, RoutedEventArgs e)
         {
             _result = txtNewQuantity.Text;
@@ -42,13 +52,25 @@ namespace FinalProject1.GUI
             Close();
         }
 
+        /// <summary>
+        /// Restrict text entry to numbers and set carretIndex to appropiate position
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TxtNewQuantity_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!float.TryParse(txtNewQuantity.Text, out float parsedValue))
+            if (!int.TryParse(txtNewQuantity.Text, out int parsedValue))
             {
                 int carretPos = txtNewQuantity.CaretIndex;
                 txtNewQuantity.Text = _result;
-                txtNewQuantity.CaretIndex = carretPos > txtNewQuantity.Text.Length ? txtNewQuantity.Text.Length : carretPos - 1;
+                if(carretPos == 0)
+                {
+                    txtNewQuantity.CaretIndex = 0;
+                }
+                else
+                {
+                    txtNewQuantity.CaretIndex = carretPos > txtNewQuantity.Text.Length ? txtNewQuantity.Text.Length : carretPos - 1;
+                }
             }
             else
             {

@@ -18,6 +18,6 @@
 
         <Label Name="lblPrompt" Content="Enter the new Quantity:" VerticalContentAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="25" Margin="4"/>
         <TextBox x:Name="txtNewQuantity" Grid.Row="1" Grid.Column="0" FontSize="25" Margin="4" TextChanged="TxtNewQuantity_TextChanged"/>
-        <Button x:Name="btnEnter" Grid.Row="1" Grid.Column="1" Content="Enter Quantity" FontSize="20" Margin="4" Click="BtnEnter_Click"/>
+        <Button x:Name="btnEnter" Grid.Row="1" Grid.Column="1" Content="Enter Quantity" FontSize="20" Margin="4" Click="BtnEnter_Click" IsDefault="True"/>
     </Grid>
 </Window>
