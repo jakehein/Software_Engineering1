@@ -374,35 +374,17 @@ namespace FinalProject1
         /// <returns></returns> true if the format is followed. false if not
         private bool IsValidPriceFormat(string price)
         {
-            char[] charArr = price.ToCharArray();
+            decimal cashDecimal;
+            bool isDecimal = decimal.TryParse(price, out cashDecimal);
 
-            if (AreAllDigits(price))
+            if (isDecimal && (cashDecimal >= 0) && (cashDecimal * 100 == Math.Floor(cashDecimal * 100)))
             {
                 return true;
             }
-
-            for (int pos = 0; pos < charArr.Length; pos++)
+            else
             {
-                if (pos == (charArr.Length - 3))
-                {
-                    if (charArr[pos] != '.' && !Char.IsNumber(charArr[pos]))
-                    {
-                        return false;
-                    }
-                }
-                else if (pos == (charArr.Length - 2))
-                {
-                    if (charArr[pos] != '.' && !Char.IsNumber(charArr[pos]))
-                    {
-                        return false;
-                    }
-                }
-                else if (!Char.IsNumber(charArr[pos]))
-                {
-                    return false;
-                }
+                return false;
             }
-            return true;
         }
 
         /// <summary>

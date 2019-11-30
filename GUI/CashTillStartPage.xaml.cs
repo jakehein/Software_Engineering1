@@ -24,24 +24,48 @@ namespace FinalProject1
         {
             InitializeComponent();
         }
-
+        
+        /// <summary>
+        /// Takes the entered amount and sets up the drawer to that amount and then navigates to the MainMenu.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EnterButton_Click(object sender, RoutedEventArgs e)
         {
             decimal cashDecimal;
             string cashAmount = CashAmountText.Text;
             bool isDecimal = decimal.TryParse(cashAmount, out cashDecimal);
 
-            if (isDecimal)
-            {
+            if (isValidAmount())
+            { 
                 Drawer drawer = new Drawer();
                 drawer.Money = cashDecimal;
-                //MessageBox.Show(cashDecimal + "");
                 this.NavigationService.Navigate(new MainMenu());
             }
             else
             {
                 MessageBox.Show("Not a valid starting Amount. Please Try Again.");
                 CashAmountText.Text = "";
+            }
+        }
+
+        /// <summary>
+        /// Checks that the entered amount is a valid input.
+        /// </summary>
+        /// <returns></returns>
+        public bool isValidAmount()
+        {
+            decimal cashDecimal;
+            string cashAmount = CashAmountText.Text;
+            bool isDecimal = decimal.TryParse(cashAmount, out cashDecimal);
+
+            if (isDecimal && (cashDecimal >= 0) && (cashDecimal * 100 == Math.Floor(cashDecimal * 100)))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }
