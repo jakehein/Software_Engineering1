@@ -75,6 +75,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GUI\CashTillStartPage.xaml.cs">
+      <DependentUpon>CashTillStartPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\CashTillPage.xaml.cs">
+      <DependentUpon>CashTillPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\CategoryManager.xaml.cs">
       <DependentUpon>CategoryManager.xaml</DependentUpon>
     </Compile>
@@ -100,6 +106,14 @@
     <Compile Include="GUI\InventoryPage.xaml.cs">
       <DependentUpon>InventoryPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="GUI\CashTillStartPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\CashTillPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GUI\CategoryManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

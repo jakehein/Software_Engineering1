@@ -48,7 +48,8 @@ namespace FinalProject1
             }
             else
             {
-                this.NavigationService.Navigate(new MainMenu());
+                this.NavigationService.Navigate(new CashTillStartPage());
+               // this.NavigationService.Navigate(new s)
             }
             // at this point it does not validate the legitimacy of the user but rather 
             // forwards it onto the MainMenu page
