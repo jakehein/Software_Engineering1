@@ -42,5 +42,11 @@ namespace FinalProject1
         /// <returns>The new total amount of money in the drawer</returns>
         decimal WithdrawlFromDrawer(decimal moneyToTake);
 
+        /// <summary>
+        /// This method determines if the cash in the drawer is low.
+        /// </summary>
+        /// <returns>True if the cash in the drawer is less than or equal to the amount set as low</returns>
+        bool cashIsLow();
+
     }
 }

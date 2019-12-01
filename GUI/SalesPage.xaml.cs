@@ -79,23 +79,10 @@ namespace FinalProject1
             string total = PayTotal.Text;
             Transaction.ItemsSource = cartController.Checkout();
             MessageBox.Show("Total is: " + total);
-        }
 
-        /*
-        private void AddItem_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                ItemDTO itm = (ItemDTO)Inventory.SelectedItem;
-                cartController.AddItem(itm);
-                UpdateTransactionView();
-                UpdateTotal();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Select an item to add to the transaction.");
-            }
-        }*/
+            // After cash is taken out this will determine if the cash left in the drawer is low
+            LowCashWarningCheck();
+        }
 
         private void QuantityUp_Click(object sender, RoutedEventArgs e)
         {
@@ -315,5 +302,17 @@ namespace FinalProject1
             }
         }
 
+        /// <summary>
+        /// This method checks the amount of money present in the till and displays a warning to the user if it is determined
+        /// as low.
+        /// </summary>
+        public void LowCashWarningCheck()
+        {
+            if (drawerController.cashIsLow())
+            {
+                decimal amountInDrawer = drawerController.CurrentCashInDrawer();
+                MessageBox.Show("Cash Till is Running Low. Amount is currently: $" + amountInDrawer + ". Please Deposit More.");
+            }
+        }
     }
 }

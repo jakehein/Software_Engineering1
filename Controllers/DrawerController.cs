@@ -8,10 +8,9 @@ namespace FinalProject1
 {
     class DrawerController : IDrawerController
     {
-        Drawer drawer;
         public DrawerController()
         {
-            drawer = new Drawer();
+
         }
 
         /// <summary>
@@ -23,8 +22,8 @@ namespace FinalProject1
         {
             if(moneyToAdd > 0)
             {
-                drawer.AddToDrawer(moneyToAdd);
-                return drawer.Money;
+                Drawer.drawer.AddToDrawer(moneyToAdd);
+                return Drawer.drawer.Money;
             }
             return -1.0m;
         }
@@ -36,10 +35,10 @@ namespace FinalProject1
         /// <returns>The new total amount of money in the drawer or -1.0 if the take was invalid</returns>
         public decimal WithdrawlFromDrawer(decimal moneyToTake)
         {
-            if (moneyToTake > 0)
+            if (moneyToTake > 0 && moneyToTake <= Drawer.drawer.Money)
             {
-                drawer.TakeFromDrawer(moneyToTake);
-                return drawer.Money;
+                Drawer.drawer.TakeFromDrawer(moneyToTake);
+                return Drawer.drawer.Money;
             }
             return -1.0m;
         }
@@ -56,7 +55,7 @@ namespace FinalProject1
             if(cashIn >= purchaseTotal)
             {
                 change = cashIn - purchaseTotal;
-                drawer.AddToDrawer(purchaseTotal);
+                Drawer.drawer.AddToDrawer(purchaseTotal);
             }
             return change;
         }
@@ -67,7 +66,7 @@ namespace FinalProject1
         /// <returns>The amount of money currently in the drawer</returns>
         public decimal CurrentCashInDrawer()
         {
-            return drawer.Money;
+            return Drawer.drawer.Money;
         }
 
         /// <summary>
@@ -75,7 +74,24 @@ namespace FinalProject1
         /// </summary>
         public void ResetDrawer()
         {
-            drawer = new Drawer();
+            Drawer.drawer = new Drawer();
+        }
+
+        /// <summary>
+        /// This method determines if cash is low in the drawer.
+        /// </summary>
+        /// <returns>true if the cash amount is below the specified lowCashAmount</returns>
+        public bool cashIsLow()
+        {
+            decimal lowCashAmount = 50;
+            if (Drawer.drawer.Money <= lowCashAmount)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

@@ -8,6 +8,7 @@ namespace FinalProject1
 {
     class Drawer
     {
+        public static Drawer drawer = new Drawer();
         public decimal Money { get; set; }
 
         public void AddToDrawer(decimal moneyIn)

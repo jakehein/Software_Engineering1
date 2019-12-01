@@ -36,6 +36,7 @@ namespace FinalProject1
         {
             decimal currentAmount = drawerController.CurrentCashInDrawer();
             CashLabel.Text = "$" + currentAmount;
+            CashAmountText.Text = "";
         }
 
         /// <summary>
