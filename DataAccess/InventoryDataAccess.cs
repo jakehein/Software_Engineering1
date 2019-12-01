@@ -24,11 +24,7 @@ namespace FinalProject1
         // database connection string
         private string connectionStringToDB = ConfigurationManager.ConnectionStrings["MySQLDB"].ConnectionString;
 
-        private ICategoryDataAccess categoryDataAccess = null;
-        public InventoryDataAccess(ICategoryDataAccess categoryDataAccess)
-        {
-            this.categoryDataAccess = categoryDataAccess;
-        }
+        private ICategoryDataAccess categoryDataAccess => DataAccessContainer.Instance.CategoryDataAccess;
 
         /// <summary>
         /// Check if an Item with the passed in UPC already exists

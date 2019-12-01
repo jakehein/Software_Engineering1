@@ -20,12 +20,11 @@ namespace FinalProject1
     /// </summary>
     public partial class CashTillPage : Page
     {
-        private IDrawerController drawerController;
+        private IDrawerController drawerController => ControllerContainer.Instance.DrawerController;
 
         public CashTillPage()
         {
             InitializeComponent();
-            drawerController = new DrawerController();
             UpdateTillDisplay();
         }
 

@@ -8,10 +8,6 @@ namespace FinalProject1
 {
     class DrawerController : IDrawerController
     {
-        public DrawerController()
-        {
-
-        }
 
         /// <summary>
         /// Adds the given amount of money to the Drawer and returns the new total

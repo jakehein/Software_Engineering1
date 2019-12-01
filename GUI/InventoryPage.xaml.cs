@@ -21,16 +21,14 @@ namespace FinalProject1
     /// </summary>
     public partial class InventoryPage : Page
     {
-        private IInventoryController inventoryControl;
-        private ICategoryController categoryControl;
+        private IInventoryController inventoryControl => ControllerContainer.Instance.InventoryController;
+        private ICategoryController categoryControl => ControllerContainer.Instance.CategoryController;
         private bool reading = false;
         private List<ItemDTO> itemDTOs = new List<ItemDTO>();
 
         public InventoryPage()
         {
             InitializeComponent();
-            categoryControl = new CategoryController(new CategoryDataAccess());
-            inventoryControl = new InventoryController(new InventoryDataAccess(new CategoryDataAccess()));
             UPCText.Focus();
             PopulateItemList();
             FillCategoryComboBox();

@@ -8,14 +8,7 @@ namespace FinalProject1
 {
     class InventoryController : IInventoryController
     {
-        /**
-         * private global iDA with constructor
-         */
-        private readonly IInventoryDataAccess iDA;
-        public InventoryController(IInventoryDataAccess iDA)
-        {
-            this.iDA = iDA;
-        }
+        private IInventoryDataAccess iDA => DataAccessContainer.Instance.InventoryDataAccess;
 
         /**
          * This method checks to see if an item is valid for insertion into the iDA. If so,
