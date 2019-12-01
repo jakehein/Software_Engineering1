@@ -13,5 +13,19 @@ namespace FinalProject1
     /// </summary>
     public partial class App : Application
     {
+
+        
+        /**
+         * Main method to set up the concrete classes of the application
+         */
+        [STAThread]
+        public static void Main()
+        {
+
+            var application = new App();
+            application.InitializeComponent();
+            application.Run();
+        }
     }
 }
+

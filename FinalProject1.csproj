@@ -71,10 +71,11 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </ApplicationDefinition>
+    </Page>
+    <Compile Include="Controllers\ControllerContainer.cs" />
     <Compile Include="GUI\CashTillStartPage.xaml.cs">
       <DependentUpon>CashTillStartPage.xaml</DependentUpon>
     </Compile>
