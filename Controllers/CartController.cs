@@ -82,8 +82,8 @@ namespace FinalProject1
         /// <summary>
         /// This method returns true if CartController contains itemDTO
         /// </summary>
-        /// <param name="itemDTO">Item being check</param>
-        /// <returns></returns>
+        /// <param name="itemDTO">Item being checked</param>
+        /// <returns> true if the item is contained</returns>
         public bool ContainsItem(ItemDTO itemDTO)
         {
             List<ItemDTO> items = new List<ItemDTO>();
@@ -94,6 +94,8 @@ namespace FinalProject1
         /// <summary>
         /// This method takes a UPC and returns the ItemDTO
         /// </summary>
+        /// <param name="uPC"> is the name of the UPC being queried</param>
+        /// <returns>ItemDTO of the item with the specified UPC</returns>
         public ItemDTO GetItem(string uPC)
         {
             return inventoryDataAccess.GetItem(uPC);
@@ -133,6 +135,10 @@ namespace FinalProject1
             return new List<ItemDTO>();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public List<ItemDTO> ReturnItems()
         {
             cart.ReturnItems(inventoryDataAccess);

@@ -33,21 +33,41 @@ namespace FinalProject1
             this.NavigationService.Navigate(new Login_Page());
         }
 
+        /// <summary>
+        /// Navigates the user from the MainMenu page to the Inventory Page
+        /// </summary>
+        /// <param name="sender">Object that triggered the event</param>
+        /// <param name="e">Event details</param>
         private void InventoryButton_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new InventoryPage());
         }
 
+        /// <summary>
+        /// Navigates the user from the MainMenu page to the Sales Page
+        /// </summary>
+        /// <param name="sender">Object that triggered the event</param>
+        /// <param name="e">Event details</param>
         private void SalesButton_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new SalesPage());
         }
 
+        /// <summary>
+        /// Navigates the user from the MainMenu page to the Return Page
+        /// </summary>
+        /// <param name="sender">Object that triggered the event</param>
+        /// <param name="e">Event details</param>
         private void ReturnButton_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new ReturnPage());
         }
 
+        /// <summary>
+        /// Navigates the user from the MainMenu page to the CashTillPage
+        /// </summary>
+        /// <param name="sender">Object that triggered the event</param>
+        /// <param name="e">Event details</param>
         private void CashButton_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new CashTillPage());

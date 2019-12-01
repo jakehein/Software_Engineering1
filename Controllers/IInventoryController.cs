@@ -14,7 +14,7 @@ namespace FinalProject1
 
         bool DeleteItem(string uPC);
 
-        List<string> AllUPCs { get; }
+        List<string> AllUPCs {get;}
 
         ItemDTO GetItem(string uPC);
 

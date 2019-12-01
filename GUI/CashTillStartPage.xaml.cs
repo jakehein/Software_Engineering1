@@ -55,7 +55,7 @@ namespace FinalProject1
         /// <summary>
         /// Checks that the entered amount is a valid input.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if the amount within CashAmountText confroms to valid decimal format</returns>
         public bool IsValidAmount()
         {
             decimal cashDecimal;

@@ -89,7 +89,7 @@ namespace FinalProject1
         public bool RemoveSingleItem(ItemDTO item)
         {
             bool itemRemoved = false;
-            int count;
+            //int count;
             //if(Items.TryGetValue(item, out count))
             //{
             //    if(count > 1)

@@ -60,8 +60,8 @@ namespace FinalProject1
         /// <summary>
         /// Switch to the create user page
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Object that triggered the event</param>
+        /// <param name="e">Event details</param>
         private void CreateUserButton_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new CreateUserPage(this.userController));
@@ -70,8 +70,8 @@ namespace FinalProject1
         /// <summary>
         /// resize the username box on screen size change
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Object that triggered the event</param>
+        /// <param name="e">Event details</param>
         private void UsernameBox_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             ((TextBox)sender).FontSize = ((TextBox)sender).ActualHeight * .7;
@@ -80,8 +80,8 @@ namespace FinalProject1
         /// <summary>
         /// Resize the password box on screen size change
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Object that triggered the event</param>
+        /// <param name="e">Event details</param>
         private void PasswordBox_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             ((PasswordBox)sender).FontSize = ((PasswordBox)sender).ActualHeight * .7;
@@ -90,8 +90,8 @@ namespace FinalProject1
         /// <summary>
         /// Show the onscreen keyboard for the user name field
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Object that triggered the event</param>
+        /// <param name="e">Event details</param>
         private void EnableTouchKeyboardForUserName(object sender, TouchEventArgs e)
         {
             GUI.OnScreenKeyboard.OnScreenKeyboard keyboard = new GUI.OnScreenKeyboard.OnScreenKeyboard(GUI.OnScreenKeyboard.OnScreenKeyboard.InputType.TEXT, Window.GetWindow(this), UsernameBox.Text);
@@ -103,8 +103,8 @@ namespace FinalProject1
         /// <summary>
         /// Show the onscreen keyboard for the password fields input
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Object that triggered the event</param>
+        /// <param name="e">Event details</param>
         private void EnableTouchKeyboardForPassword(object sender, TouchEventArgs e)
         {
             GUI.OnScreenKeyboard.OnScreenKeyboard keyboard = new GUI.OnScreenKeyboard.OnScreenKeyboard(GUI.OnScreenKeyboard.OnScreenKeyboard.InputType.PASSWORD, Window.GetWindow(this), PasswordBox.Password);

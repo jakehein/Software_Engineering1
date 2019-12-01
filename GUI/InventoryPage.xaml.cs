@@ -21,7 +21,6 @@ namespace FinalProject1
     /// </summary>
     public partial class InventoryPage : Page
     {
-
         private IInventoryController inventoryControl;
         private ICategoryController categoryControl;
         private bool reading = false;
@@ -38,11 +37,14 @@ namespace FinalProject1
             FillItemList(itemDTOs);
         }
 
-
+        /// <summary>
+        /// Populates the item list with all the items within the inventory
+        /// </summary>
         private void PopulateItemList()
         { 
             itemDTOs = inventoryControl.GetAllItems();
         }
+
         /// <summary>
         /// This method populates the items scrollable list based on items in the inventory database.
         /// </summary>
@@ -50,7 +52,6 @@ namespace FinalProject1
         { 
             InventoryListBox.ItemsSource = items;
         }
-
         
         /// <summary>
         /// This method populates the combo item list in the inventory database. 
@@ -62,7 +63,6 @@ namespace FinalProject1
 
             // create new category option
             UpdateCategoryListComboBoxInput();
-
             categories.Add(new CategoryDTO { CategoryID = 0, Items = null, Name = "All"});
             categories.Sort();
             var sortedCategories = categories.OrderBy(x => x.Name);
@@ -72,7 +72,7 @@ namespace FinalProject1
 
         /// <summary>
         /// This method updates/initalizes the comboBoxInput with all avaliable categories and one
-        /// new category option
+        /// new category option.
         /// </summary>
         void UpdateCategoryListComboBoxInput()
         {
@@ -82,7 +82,7 @@ namespace FinalProject1
         }
 
         /// <summary>
-        /// This method sets the information section with the data from the Item object
+        /// This method sets the information section with the data from the selected Item object
         /// </summary>
         private void InventoryListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -98,7 +98,7 @@ namespace FinalProject1
         }
 
         /// <summary>
-        /// This method sets the information with the data from the Item object
+        /// When the category is changed the InventoryListBox is populated with items within the selected category.
         /// </summary>
         private void CategoryListComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -115,16 +115,16 @@ namespace FinalProject1
 
         /// <summary>
         /// This method verifies that the UPC does not previously exists then creates a new item 
-        /// with the item information.
+        /// with the written item information.
         /// </summary>
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
             if (IsEnteredInventoryItemValid())
             {
                 ItemDTO create = CreateItemObj();
-                if (create != null) // how to make sure we dont break when there isnt input
+                if (create != null) 
                 {
-                    Boolean created = inventoryControl.CreateItem(create);
+                     bool created = inventoryControl.CreateItem(create);
                     if (created)
                     {
                         MessageBox.Show("Item was successfully created.");
@@ -150,7 +150,6 @@ namespace FinalProject1
         private void UpdateBtn_Click(object sender, RoutedEventArgs e)
         {
             ItemDTO update = GetItemObj();
-            //string uPC = UPCText.Text;
 
             if (IsEnteredInventoryItemValid())
             {
@@ -179,6 +178,8 @@ namespace FinalProject1
         /// This method verifies that the UPC previously exists then deletes the product from the inventory.
         /// Then updates the item list to reflect these changes.
         /// </summary>
+        /// <param name="sender">Object that triggered the event</param>
+        /// <param name="e">Event details</param>
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
             string uPC = UPCText.Text;
@@ -197,7 +198,7 @@ namespace FinalProject1
         }
 
         /// <summary>
-        /// This method exits the inventory view and returns to the Main Menu.
+        /// This method navigates the user from the inventory page to the Main Menu.
         /// </summary>
         private void ExitBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -220,15 +221,12 @@ namespace FinalProject1
         }
 
         /// <summary>
-        /// This method updates all items in the ListBox and List Combo.
+        /// This method updates all items in the ListBox and ListCombo.
         /// </summary>
         private void UpdateInventoryList()
         {
             PopulateItemList();
-            //InventoryListBox.Items.Clear();
             FillItemList(itemDTOs);
-            //InventoryListCombo.Items.Clear();
-            //FillCategoryCombo();
         }
 
         /// <summary>
@@ -267,9 +265,9 @@ namespace FinalProject1
 
 
         /// <summary>
-        /// This method helps create an Item Object specifically for creating 
+        /// This method creates an Item Object specifically for creating 
         /// </summary>
-        /// <returns></returns> Item based of inputs of the user
+        /// <returns> ItemDTO based of inputs of the user </returns> 
         private ItemDTO CreateItemObj()
         {
             ItemDTO itm = new ItemDTO();
@@ -304,7 +302,7 @@ namespace FinalProject1
         /// This method we validate the user input against specifications for neccessary item values.
         /// </summary>
         /// <param name="itm"></param> itm we are checking the parameters of
-        /// <returns></returns> true if inputs for parameters are all good
+        /// <returns>true if inputs for parameters are all valid</returns> 
         private bool IsEnteredInventoryItemValid()
         {
             List<bool> val = new List<bool>();
@@ -349,10 +347,10 @@ namespace FinalProject1
         }
 
         /// <summary>
-        /// Check the string to see if all characters present are digits. Returns true if all characters are digits
+        /// Check the string to see if all characters present are digits. Returns true if all characters are digits.
         /// </summary>
-        /// <param name="digits"></param> string from the information box to see if digits 
-        /// <returns></returns> true if all characters are digits
+        /// <param name="digits"> string from the information box to see if all characters are digits </param> 
+        /// <returns> true if all characters are digits </returns> 
         private bool AreAllDigits(string digits)
         {
             char[] charArr = digits.ToCharArray();
@@ -370,8 +368,8 @@ namespace FinalProject1
         /// <summary>
         /// This method checks the string price to see if follows the format of a valid price. i.e. xxx.xx
         /// </summary>
-        /// <param name="price"></param> is the string value of the price
-        /// <returns></returns> true if the format is followed. false if not
+        /// <param name="price"> The string value of the price </param>
+        /// <returns> True if the format is valid. </returns>
         private bool IsValidPriceFormat(string price)
         {
             decimal cashDecimal;
@@ -440,14 +438,14 @@ namespace FinalProject1
 
 
         /// <summary>
-        /// This method pops up a category manager which allows the manager to create, update, and delete categories
+        /// Navigates from Inventory Page to the Category Manager which allows the manager to 
+        /// create, update, and delete categories.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Object that triggered the event</param>
+        /// <param name="e">Event details</param>
         private void CategoryManagerBtn_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new CategoryManager());
-
         }
     }
 }

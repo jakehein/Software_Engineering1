@@ -13,12 +13,13 @@ namespace FinalProject1
         bool UpdateCategory(long iD, string category);
 
         bool DeleteCategory(CategoryDTO category);
+
         CategoryDTO GetCategory(long categoryID);
+
         List<CategoryDTO> GetAllCategories();
+
         List<CategoryDTO> GetAllCategoriesWithItems();
 
         CategoryDTO GetCategoryByName(string categoryName);
-
-
     }
 }

@@ -45,7 +45,7 @@ namespace FinalProject1
         /// <summary>
         /// This method determines if the cash in the drawer is low.
         /// </summary>
-        /// <returns>True if the cash in the drawer is less than or equal to the amount set as low</returns>
+        /// <returns>true if the cash in the drawer is less than or equal to the amount set as low</returns>
         bool cashIsLow();
 
     }

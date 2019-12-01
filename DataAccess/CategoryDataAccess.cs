@@ -68,11 +68,11 @@ namespace FinalProject1
         }
 
         /// <summary>
-        /// This method updates the category with a new title
+        /// This method updates the category with a new title specified
         /// </summary>
-        /// <param name="iD"></param>
-        /// <param name="category">Category to Update To</param>
-        /// <returns></returns>
+        /// <param name="iD"> iD of the original category</param>
+        /// <param name="category">Category to Update To // name of new category</param>
+        /// <returns> true if the category is successfully updated</returns>
         public bool UpdateCategory(long iD, string category)
         {
             int result = -1;
@@ -95,11 +95,11 @@ namespace FinalProject1
         }
 
         /// <summary>
-        /// This method allows for the deletion of a category. The items within the deleted category will be recatagorized as
-        /// unclassified.
+        /// This method allows for the deletion of a category. The items within the deleted category will 
+        /// be recatagorized as unclassified.
         /// </summary>
-        /// <param name="category"></param>
-        /// <returns></returns>
+        /// <param name="category"> is the category to be deleted</param>
+        /// <returns> true if the category is successfully deleted.</returns>
         public bool DeleteCategory(CategoryDTO category)
         {
             int result = -1;
@@ -117,7 +117,7 @@ namespace FinalProject1
         }
 
         /// <summary>
-        /// Get a Category that corrisponds with passed in id
+        /// Get a Category that corresponds with passed in id
         /// </summary>
         /// <param name="categoryID">ID of the Category</param>
         /// <returns>Category associated with id</returns>

@@ -39,14 +39,20 @@ namespace FinalProject1
             FillCategoryCombo();
             FillItemList(itemDTOs);
         }
+
+        /// <summary>
+        /// This method populates the items list with all items within the inventory.
+        /// </summary>
         private void PopulateItemList()
         {
             itemDTOs = inventoryControl.GetAllItems();
         }
+
         void FillItemList(IEnumerable<ItemDTO> items)
         {
             Inventory.ItemsSource = items;
         }
+
         void FillCategoryCombo()
         {
             List<CategoryDTO> categories = categoryControl.GetAllCategories();
@@ -57,6 +63,12 @@ namespace FinalProject1
             Category.ItemsSource = sortedCategories;
             Category.SelectedIndex = 0;
         }
+
+        /// <summary>
+        /// This method directs the user to the MainMenu.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainMenu_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.GoBack();
@@ -84,6 +96,11 @@ namespace FinalProject1
             LowCashWarningCheck();
         }
 
+        /// <summary>
+        /// Increases the quantity of an item in the Transaction ListView by 1
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void QuantityUp_Click(object sender, RoutedEventArgs e)
         {
             if (Transaction.SelectedItem != null)
@@ -131,6 +148,11 @@ namespace FinalProject1
             }
         }
 
+        /// <summary>
+        /// Removes all instances of an item from the Transaction ListView
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RemoveItem_Click(object sender, RoutedEventArgs e)
         {
             if (Transaction.SelectedItem != null)
@@ -147,7 +169,8 @@ namespace FinalProject1
         }
 
         /// <summary>
-        /// This method takes the UPC and searches to see if it is avaliable.
+        /// This method takes the UPC and searches to see if it is avaliable. If so, the item is displayed within the
+        /// ItemList
         /// </summary>
         private void UpCButton_Click(object sender, RoutedEventArgs e)
         {
@@ -193,7 +216,7 @@ namespace FinalProject1
         }
 
         /// <summary>
-        /// This method takes the selected item and adds it to the cart list
+        /// This method takes the selected item and adds it to the Transaction list
         /// </summary>
         private void Inventory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -216,7 +239,7 @@ namespace FinalProject1
         }
 
         /// <summary>
-        /// This method populates the items list with the selected category. 
+        /// This method populates the items list with the items present in the selected category. 
         /// </summary>
         private void Category_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

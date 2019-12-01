@@ -33,7 +33,7 @@ namespace FinalProject1
         }
 
         /// <summary>
-        /// This method fills the CategoryListBox with all avaliable categories
+        /// This method fills the CategoryListBox with all avaliable categories.
         /// </summary>
         private void FillCategoryListBox()
         {
@@ -44,10 +44,10 @@ namespace FinalProject1
         }
 
         /// <summary>
-        /// This method takes the selection and places the item within the category box
+        /// This method takes the selected item in the CategoryListBox and places the item within the CategoryText.Text 
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Object that triggered the event</param>
+        /// <param name="e">Event details</param>
         private void CategoryListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             CategoryDTO category = (CategoryDTO)CategoryListBox.SelectedItem;
@@ -64,8 +64,8 @@ namespace FinalProject1
         /// <summary>
         /// This method saves new categories to the category list
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Object that triggered the event</param>
+        /// <param name="e">Event details</param>
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
             CategoryDTO category = (CategoryDTO)CategoryListBox.SelectedItem;
@@ -90,10 +90,10 @@ namespace FinalProject1
         }
 
         /// <summary>
-        /// This method updates the category with the new text
+        /// This method updates the category with the new text specified
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Object that triggered the event</param>
+        /// <param name="e">Event details</param>
         private void UpdateBtn_Click(object sender, RoutedEventArgs e)
         {
             if ((CategoryDTO)CategoryListBox.SelectedItem != null)
@@ -130,8 +130,8 @@ namespace FinalProject1
         /// Categories containing items will be reassigned a category of 'Uncatagorized'
         /// 'Uncatagorized' may not be deleted
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Object that triggered the event</param>
+        /// <param name="e">Event details</param>
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
             CategoryDTO category = (CategoryDTO)CategoryListBox.SelectedItem; // this is null
@@ -158,10 +158,10 @@ namespace FinalProject1
         }
 
         /// <summary>
-        /// This method verifes that the typed category is unique in comparrison to all other categories
+        /// This method verifes that the typed category is unique in comparison to all other categories
         /// </summary>
         /// <param name="name"> string name of category we are comparing</param>
-        /// <returns>true if unique</returns>
+        /// <returns>true if name is unique from all other categories</returns>
         private bool NameIsUnique(string name)
         {
             List<CategoryDTO> categories = categoryControl.GetAllCategories();
@@ -185,7 +185,7 @@ namespace FinalProject1
         /// This method sets all items within the deleted category to 'unclassified'
         /// </summary>
         /// <param name="category">DTO object of the category getting deleted</param>
-        /// <returns></returns>
+        /// <returns> true if all items in the specified category are successfully set to unclassified</returns>
         private bool ItemsSetToUnclassified(CategoryDTO category)
         {
             List<ItemDTO> itemsList = inventoryControl.GetAllItemsFromCategory(category.CategoryID);
@@ -201,6 +201,11 @@ namespace FinalProject1
             return true;
         }
 
+        /// <summary>
+        /// Navigates the user from the Category Manager to the Inventory Page
+        /// </summary>
+        /// <param name="sender">Object that triggered the event</param>
+        /// <param name="e">Event details</param>
         private void ExitBtn_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new InventoryPage());

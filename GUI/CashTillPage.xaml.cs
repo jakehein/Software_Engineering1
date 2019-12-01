@@ -30,7 +30,7 @@ namespace FinalProject1
         }
 
         /// <summary>
-        /// Updates the amount displayed within the page 
+        /// Updates the Amount displayed so that it is equal to the amount within the drawer.
         /// </summary>
         public void UpdateTillDisplay()
         {
@@ -40,7 +40,7 @@ namespace FinalProject1
         }
 
         /// <summary>
-        /// Adds amount specified to the till
+        /// Adds amount specified within CashAmountText to the till/drawer.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -71,7 +71,7 @@ namespace FinalProject1
         }
 
         /// <summary>
-        /// Withdrawls amount specified from the till.
+        /// Withdrawls amount specified within CashAmountText from the till/drawer.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -102,7 +102,7 @@ namespace FinalProject1
         }
 
         /// <summary>
-        /// Takes the user back to the Main Menu.
+        /// Directs the user back to the Main Menu.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -114,7 +114,7 @@ namespace FinalProject1
         /// <summary>
         /// Checks that the entered amount is a valid input.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>true if the amount is in a valid decimal format</returns>
         public bool IsValidAmount()
         {
             decimal cashDecimal;

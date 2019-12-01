@@ -22,23 +22,25 @@ namespace FinalProject1
         /// <returns>True if Category added</returns>
         public bool CreateCategory(CategoryDTO category)
         {
-
-            return ValidateName(category.Name) &&
-                   categoryDataAccess.CreateCategory(category);
+            return ValidateName(category.Name) && categoryDataAccess.CreateCategory(category);
         }
 
         /// <summary>
         /// Update the passed in Category to the data source is valid
         /// </summary>
-        /// <param name="category"></param>
-        /// <returns></returns>
+        /// <param name="category">Name of category to be changed to // name of the new category</param>
+        /// <param name="iD"> iD of the original category </param>
+        /// <returns> true if the category is successfully updated</returns>
         public bool UpdateCategory(long iD, string category)
         {
-            return ValidateName(category) &&
-                  categoryDataAccess.UpdateCategory(iD, category);
+            return ValidateName(category) && categoryDataAccess.UpdateCategory(iD, category);
         }
 
-
+        /// <summary>
+        /// Delete the passed in Category within the data source
+        /// </summary>
+        /// <param name="category"> CategoryDTO of category to be deleted</param>
+        /// <returns> true if category was successfully deleted</returns>
         public bool DeleteCategory(CategoryDTO category)
         {
             return categoryDataAccess.DeleteCategory(category);
@@ -63,12 +65,21 @@ namespace FinalProject1
             return categoryDataAccess.GetCategories();
         }
 
+        /// <summary>
+        /// Gets a List of CategoryDTOS that have items
+        /// </summary>
+        /// <returns> List of Category DTOs containing items</returns>
         public List<CategoryDTO> GetAllCategoriesWithItems()
         {
             List<CategoryDTO> categoryDTOs = new List<CategoryDTO>();
             return categoryDTOs;
         }
 
+        /// <summary>
+        /// Retrives the Category Data Transfer Object of a category by looking it up by its name.
+        /// </summary>
+        /// <param name="categoryName"> string name of the category</param>
+        /// <returns> CategoryDTO of the category specified by categoryName </returns>
         public CategoryDTO GetCategoryByName(string categoryName)
         {
             return categoryDataAccess.GetCategoryByName(categoryName);
