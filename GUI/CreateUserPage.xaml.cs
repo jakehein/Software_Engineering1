@@ -21,11 +21,10 @@ namespace FinalProject1
     /// </summary>
     public partial class CreateUserPage : Page
     {
-        private IUserController userController;
+        private IUserController userController = ControllerContainer.Instance.UserController;
 
         public CreateUserPage(IUserController userController)
         {
-            this.userController = userController;
             InitializeComponent();
             UsernameBox.Focus();
         }

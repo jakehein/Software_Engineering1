@@ -20,15 +20,13 @@ namespace FinalProject1
     /// </summary>
     public partial class CategoryManager : Page
     {
-        private ICategoryController categoryControl;
-        private IInventoryController inventoryControl;
+        private ICategoryController categoryControl = ControllerContainer.Instance.CategoryController;
+        private IInventoryController inventoryControl = ControllerContainer.Instance.InventoryController;
         private readonly string uncatagorized = "Uncategorized";
 
         public CategoryManager()
         {
             InitializeComponent();
-            categoryControl = new CategoryController(new CategoryDataAccess());
-            inventoryControl = new InventoryController(new InventoryDataAccess(new CategoryDataAccess()));
             FillCategoryListBox();
         }
 

@@ -20,20 +20,16 @@ namespace FinalProject1
     /// </summary>
     public partial class SalesPage : Page
     {
-        private IInventoryController inventoryControl;
-        private ICategoryController categoryControl;
-        private ICartController cartController;
-        private IDrawerController drawerController;
+        private IInventoryController inventoryControl = ControllerContainer.Instance.InventoryController;
+        private ICategoryController categoryControl = ControllerContainer.Instance.CategoryController;
+        private ICartController cartController = ControllerContainer.Instance.CartController;
+        private IDrawerController drawerController = ControllerContainer.Instance.DrawerController;
         private bool reading = false;
         private string scannerUPCString;
         private List<ItemDTO> itemDTOs = new List<ItemDTO>();
         public SalesPage()
         {
             InitializeComponent();
-            categoryControl = new CategoryController(new CategoryDataAccess());
-            inventoryControl = new InventoryController(new InventoryDataAccess(new CategoryDataAccess()));
-            cartController = new CartController();
-            drawerController = new DrawerController();
             PageSales.Focus();
             PopulateItemList();
             FillCategoryCombo();

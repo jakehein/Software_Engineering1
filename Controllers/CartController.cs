@@ -10,7 +10,7 @@ namespace FinalProject1
     {
         Cart cart;
 
-        IInventoryDataAccess inventoryDataAccess = new InventoryDataAccess(new CategoryDataAccess());
+        IInventoryDataAccess inventoryDataAccess = DataAccessContainer.Instance.InventoryDataAccess;
         public decimal? GetTotal()
         {
             return cart.TotalCost;
