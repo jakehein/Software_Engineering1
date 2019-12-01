@@ -21,8 +21,8 @@ namespace FinalProject1
     /// </summary>
     public partial class InventoryPage : Page
     {
-        private IInventoryController inventoryControl = ControllerContainer.Instance.InventoryController;
-        private ICategoryController categoryControl = ControllerContainer.Instance.CategoryController;
+        private IInventoryController inventoryControl => ControllerContainer.Instance.InventoryController;
+        private ICategoryController categoryControl => ControllerContainer.Instance.CategoryController;
         private bool reading = false;
         private List<ItemDTO> itemDTOs = new List<ItemDTO>();
 

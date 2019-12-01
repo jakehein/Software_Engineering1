@@ -32,7 +32,7 @@ namespace FinalProject1
             {
                 if ( instance == null)
                 {
-                    return new DataAccessContainer();
+                    return  instance = new DataAccessContainer();
                 }
                 else
                 {

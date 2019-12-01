@@ -20,10 +20,10 @@ namespace FinalProject1
     /// </summary>
     public partial class SalesPage : Page
     {
-        private IInventoryController inventoryControl = ControllerContainer.Instance.InventoryController;
-        private ICategoryController categoryControl = ControllerContainer.Instance.CategoryController;
-        private ICartController cartController = ControllerContainer.Instance.CartController;
-        private IDrawerController drawerController = ControllerContainer.Instance.DrawerController;
+        private IInventoryController inventoryControl => ControllerContainer.Instance.InventoryController;
+        private ICategoryController categoryControl => ControllerContainer.Instance.CategoryController;
+        private ICartController cartController => ControllerContainer.Instance.CartController;
+        private IDrawerController drawerController => ControllerContainer.Instance.DrawerController;
         private bool reading = false;
         private string scannerUPCString;
         private List<ItemDTO> itemDTOs = new List<ItemDTO>();

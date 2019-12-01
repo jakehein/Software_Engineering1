@@ -8,7 +8,7 @@ namespace FinalProject1
 {
     class InventoryController : IInventoryController
     {
-        private readonly IInventoryDataAccess iDA = DataAccessContainer.Instance.InventoryDataAccess;
+        private IInventoryDataAccess iDA => DataAccessContainer.Instance.InventoryDataAccess;
 
         /**
          * This method checks to see if an item is valid for insertion into the iDA. If so,

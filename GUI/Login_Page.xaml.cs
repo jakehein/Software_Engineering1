@@ -21,7 +21,7 @@ namespace FinalProject1
     /// </summary>
     public partial class Login_Page : Page
     {
-        IUserController userController = ControllerContainer.Instance.UserController;
+        IUserController userController => ControllerContainer.Instance.UserController;
         public Login_Page()
         {
             InitializeComponent();

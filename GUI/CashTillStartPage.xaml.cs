@@ -20,7 +20,7 @@ namespace FinalProject1
     /// </summary>
     public partial class CashTillStartPage : Page
     {
-        private IDrawerController drawerController = ControllerContainer.Instance.DrawerController;
+        private IDrawerController drawerController => ControllerContainer.Instance.DrawerController;
 
         public CashTillStartPage()
         {

@@ -9,7 +9,7 @@ namespace FinalProject1
     class CategoryController : ICategoryController
     {
         private const int NameLength = 50;
-        private ICategoryDataAccess categoryDataAccess = DataAccessContainer.Instance.CategoryDataAccess;
+        private ICategoryDataAccess categoryDataAccess => DataAccessContainer.Instance.CategoryDataAccess;
 
         /// <summary>
         /// Add the passed in Category to the data source if valid

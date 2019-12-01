@@ -34,7 +34,7 @@ namespace FinalProject1
             {
                 if(instance == null)
                 {
-                    return new ControllerContainer();
+                    return instance = new ControllerContainer();
                 }
                 else
                 {

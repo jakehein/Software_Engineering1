@@ -21,7 +21,7 @@ namespace FinalProject1
     /// </summary>
     public partial class CreateUserPage : Page
     {
-        private IUserController userController = ControllerContainer.Instance.UserController;
+        private IUserController userController => ControllerContainer.Instance.UserController;
 
         public CreateUserPage(IUserController userController)
         {

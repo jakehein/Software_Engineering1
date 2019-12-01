@@ -8,7 +8,7 @@ namespace FinalProject1
 {
     class UserController : IUserController
     {
-        private IUserDataAccess userDataAccess = DataAccessContainer.Instance.UserDataAccess;
+        private IUserDataAccess userDataAccess => DataAccessContainer.Instance.UserDataAccess;
 
         public User CurrentUser { get; private set; }
 
