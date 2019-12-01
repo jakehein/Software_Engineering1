@@ -34,5 +34,13 @@ namespace FinalProject1
         /// Removes the current drawer and creates a new one
         /// </summary>
         void ResetDrawer();
+
+        /// <summary>
+        /// Takes the given amount of money from the Drawer and returns the new total
+        /// </summary>
+        /// <param name="moneyToTake">The amount of money to take from the drawer</param>
+        /// <returns>The new total amount of money in the drawer</returns>
+        decimal WithdrawlFromDrawer(decimal moneyToTake);
+
     }
 }

@@ -30,6 +30,21 @@ namespace FinalProject1
         }
 
         /// <summary>
+        /// Takes the given amount of money from the Drawer and returns the new total
+        /// </summary>
+        /// <param name="moneyToTake">The amount of money to take from the drawer</param>
+        /// <returns>The new total amount of money in the drawer or -1.0 if the take was invalid</returns>
+        public decimal WithdrawlFromDrawer(decimal moneyToTake)
+        {
+            if (moneyToTake > 0)
+            {
+                drawer.TakeFromDrawer(moneyToTake);
+                return drawer.Money;
+            }
+            return -1.0m;
+        }
+
+        /// <summary>
         /// Cashes out a purchase for the given total and provides the correct change
         /// </summary>
         /// <param name="cashIn">Money being put into the drawer</param>

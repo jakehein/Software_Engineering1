@@ -69,7 +69,7 @@ namespace FinalProject1
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
             CategoryDTO category = (CategoryDTO)CategoryListBox.SelectedItem;
-            if (nameIsUnique(CategoryText.Text))
+            if (NameIsUnique(CategoryText.Text))
             {
                 Category newCategory = new Category();
                 newCategory.Name = CategoryText.Text;
@@ -80,6 +80,7 @@ namespace FinalProject1
                     MessageBox.Show("Category Successfully Created");
                     CategoryText.Text = "";
                     FillCategoryListBox();
+                    CategoryListBox.SelectedItem = null;
                 }
             }
             else
@@ -98,7 +99,7 @@ namespace FinalProject1
             if ((CategoryDTO)CategoryListBox.SelectedItem != null)
             {
                 CategoryDTO category = (CategoryDTO)CategoryListBox.SelectedItem;
-                if (category.Name != uncatagorized && nameIsUnique(CategoryText.Text))
+                if (category.Name != uncatagorized && NameIsUnique(CategoryText.Text))
                 {
                     bool updated = categoryControl.UpdateCategory(category.CategoryID, CategoryText.Text);
                     if (updated)
@@ -107,6 +108,7 @@ namespace FinalProject1
                     }
                     CategoryText.Text = "";
                     FillCategoryListBox();
+                    CategoryListBox.SelectedItem = null;
                 }
                 else if (category.Name == uncatagorized)
                 {
@@ -137,7 +139,7 @@ namespace FinalProject1
 
             if (category.Name != uncatagorized)
             {
-                itemsSetToUnclassified(category);
+                ItemsSetToUnclassified(category);
                 bool deleted = categoryControl.DeleteCategory(category);
                 if (deleted)
                 {
@@ -160,7 +162,7 @@ namespace FinalProject1
         /// </summary>
         /// <param name="name"> string name of category we are comparing</param>
         /// <returns>true if unique</returns>
-        private bool nameIsUnique(string name)
+        private bool NameIsUnique(string name)
         {
             List<CategoryDTO> categories = categoryControl.GetAllCategories();
 
@@ -184,7 +186,7 @@ namespace FinalProject1
         /// </summary>
         /// <param name="category">DTO object of the category getting deleted</param>
         /// <returns></returns>
-        private bool itemsSetToUnclassified(CategoryDTO category)
+        private bool ItemsSetToUnclassified(CategoryDTO category)
         {
             List<ItemDTO> itemsList = inventoryControl.GetAllItemsFromCategory(category.CategoryID);
             CategoryDTO unclassifiedCategory = categoryControl.GetCategoryByName(uncatagorized); // we are getting a null category that is passed

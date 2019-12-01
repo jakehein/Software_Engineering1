@@ -20,9 +20,13 @@ namespace FinalProject1
     /// </summary>
     public partial class CashTillStartPage : Page
     {
+        private IDrawerController drawerController;
+
         public CashTillStartPage()
         {
             InitializeComponent();
+            drawerController = new DrawerController();
+            drawerController.ResetDrawer();
         }
         
         /// <summary>
@@ -36,15 +40,14 @@ namespace FinalProject1
             string cashAmount = CashAmountText.Text;
             bool isDecimal = decimal.TryParse(cashAmount, out cashDecimal);
 
-            if (isValidAmount())
-            { 
-                Drawer drawer = new Drawer();
-                drawer.Money = cashDecimal;
+            if (IsValidAmount())
+            {
+                drawerController.AddToDrawer(cashDecimal);
                 this.NavigationService.Navigate(new MainMenu());
             }
             else
             {
-                MessageBox.Show("Not a valid starting Amount. Please Try Again.");
+                MessageBox.Show("Not a valid starting amount. Please Try Again.");
                 CashAmountText.Text = "";
             }
         }
@@ -53,7 +56,7 @@ namespace FinalProject1
         /// Checks that the entered amount is a valid input.
         /// </summary>
         /// <returns></returns>
-        public bool isValidAmount()
+        public bool IsValidAmount()
         {
             decimal cashDecimal;
             string cashAmount = CashAmountText.Text;

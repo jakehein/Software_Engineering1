@@ -47,5 +47,10 @@ namespace FinalProject1
         {
             this.NavigationService.Navigate(new ReturnPage());
         }
+
+        private void CashButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new CashTillPage());
+        }
     }
 }

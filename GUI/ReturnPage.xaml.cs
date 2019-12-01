@@ -79,6 +79,7 @@ namespace FinalProject1
             string total = PayTotal.Text;
             Transaction.ItemsSource = cartController.ReturnItems();
             MessageBox.Show("Total is: " + total);
+            UpdateTotal();
         }
 
         private void QuantityUp_Click(object sender, RoutedEventArgs e)
@@ -159,7 +160,7 @@ namespace FinalProject1
             }
             else
             {
-                MessageBox.Show("Item with the entered UPC not found!!!");
+                MessageBox.Show("Item with the entered UPC not found.");
             }
             //var items = item.Cast<ItemDTO>().Where(item => item.Category.CategoryID == ((CategoryDTO)e.AddedItems[0]).CategoryID);
             //IEnumerable<ItemDTO> item;
