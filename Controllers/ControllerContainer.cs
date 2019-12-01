@@ -4,8 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinalProject1.Controllers
+namespace FinalProject1
 {
+    /// <summary>
+    /// Container class for controllers
+    /// </summary>
     class ControllerContainer
     {
         public ICartController CartController { get; set; }
@@ -18,5 +21,26 @@ namespace FinalProject1.Controllers
 
         public IUserController UserController { get; set; }
 
+        private ControllerContainer() {}
+
+        private static ControllerContainer instance;
+
+        /// <summary>
+        /// Gets the instance of Controller container or creates a new one if one has not yet been initialized
+        /// </summary>
+        public static ControllerContainer Instance
+        {
+            get
+            {
+                if(instance == null)
+                {
+                    return new ControllerContainer();
+                }
+                else
+                {
+                    return instance;
+                }
+            }
+        }
     }
 }

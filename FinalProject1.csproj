@@ -76,6 +76,7 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="Controllers\ControllerContainer.cs" />
+    <Compile Include="DataAccess\DataAccessContainer.cs" />
     <Compile Include="GUI\CashTillStartPage.xaml.cs">
       <DependentUpon>CashTillStartPage.xaml</DependentUpon>
     </Compile>

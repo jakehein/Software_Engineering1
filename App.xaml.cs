@@ -15,9 +15,9 @@ namespace FinalProject1
     {
 
         
-        /**
-         * Main method to set up the concrete classes of the application
-         */
+        /// <summary>
+        /// Main method for the application
+        /// </summary>
         [STAThread]
         public static void Main()
         {
