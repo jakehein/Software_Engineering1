@@ -32,21 +32,21 @@ namespace FinalProject1
         private void CreateUserButton_Click(object sender, RoutedEventArgs e)
         {
             string username = UsernameBox.Text;
-            string pin = PasswordBox.Password;
-            string reEnteredPin = ReEnterPasswordBox.Password;
+            string password = PasswordBox.Password;
+            string reEnteredPasssword = ReEnterPasswordBox.Password;
             bool hasInventoryAccess = InventoryAccessCheckbox.IsChecked.Value;
 
 
             if(ValidateUsername(username))
             {
-                if(ValidatePins(pin, reEnteredPin))
+                if(ValidatePassword(password, reEnteredPasssword))
                 {
-                    userController.CreateUser(username, pin, hasInventoryAccess);
+                    userController.CreateUser(username, password, hasInventoryAccess);
                     this.NavigationService.Navigate(new MainMenu());
                 }
                 else
                 {
-                    ErrorLabel.Content = "Invalid Pin Entered, must contain only numbers and be between 5 and 11 characters in length";
+                    ErrorLabel.Content = "Invalid Password Entered, must contain only numbers and be between 5 and 11 characters in length";
                 }
             }
             else
@@ -67,10 +67,10 @@ namespace FinalProject1
             return isValid;
         }
 
-        private bool ValidatePins(string pin, string reEnteredPin)
+        private bool ValidatePassword(string password, string reEnteredPassword)
         {
             bool isValid = false;
-            if (Regex.Matches(pin, @"^[0-9]{5,11}$").Count == 1 && pin == reEnteredPin)
+            if (Regex.Matches(password, @"^.*(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$").Count == 1 && password.Length >= 5 && password.Length <= 11 && password == reEnteredPassword)
             {
                 isValid = true;
             }
