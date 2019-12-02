@@ -10,7 +10,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace FinalProject1.GUI.OnScreenKeyboard
@@ -18,7 +17,7 @@ namespace FinalProject1.GUI.OnScreenKeyboard
     /// <summary>
     /// Interaction logic for ChangeKeyboard.xaml
     /// </summary>
-    public partial class ChangeKeyboard : Page
+    public partial class ChangeKeyboard : Window
     {
         public ChangeKeyboard()
         {
