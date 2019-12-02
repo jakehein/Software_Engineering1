@@ -45,7 +45,7 @@ namespace FinalProject1
             }
         }
 
-        public bool HasInventoryAccess { get; set; } = false;
+        public bool HasManagerAccess { get; set; } = false;
 
         public List<string> DataErrors { get; set; } = new List<string>();
     }

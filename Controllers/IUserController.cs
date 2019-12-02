@@ -14,9 +14,9 @@ namespace FinalProject1
 
         bool Override(string pin);
 
-        bool CreateUser(string username, string password, bool hasInventoryAccess);
+        bool CreateUser(string username, string password, bool hasManagerAccess);
         bool DoesUserExist(string username);
-        bool CurrentUserHasInventoryAccess();
+        bool CurrentUserHasManagerAccess();
 
         void LogOut();
 

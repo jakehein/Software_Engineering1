@@ -15,20 +15,20 @@ namespace FinalProject1
         private const string userTable = "user";
         private const string passwordColumn = "password";
         private const string usernameColumn = "username";
-        private const string hasInventoryAccessColumn = "has_inventory_access";
+        private const string hasManagerAccessColumn = "has_manager_access";
         
-        public void CreateUser(string username, string password, bool hasInventoryAccess)
+        public void CreateUser(string username, string password, bool hasManagerAccess)
         {
             string commandString = $@"INSERT INTO {userTable}
-                                      ({usernameColumn}, {passwordColumn}, {hasInventoryAccessColumn})
-                                      VALUES (@Username, @Password, @HasInventoryAccess);";
+                                      ({usernameColumn}, {passwordColumn}, {hasManagerAccessColumn})
+                                      VALUES (@Username, @Password, @HasManagerAccess);";
             using (MySqlConnection conn = new MySqlConnection(connectionStringToDB))
             {
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand(commandString, conn);
                 cmd.Parameters.AddWithValue("@Username", username);
                 cmd.Parameters.AddWithValue("@Password", password);
-                cmd.Parameters.AddWithValue("@HasInventoryAccess", hasInventoryAccess);
+                cmd.Parameters.AddWithValue("@HasManagerAccess", hasManagerAccess);
                 cmd.ExecuteNonQuery();
             }
         }
@@ -79,7 +79,7 @@ namespace FinalProject1
 
         public bool DoesUserHaveInvetoryAccess(string username)
         {
-            string commandString = $@"SELECT {hasInventoryAccessColumn}
+            string commandString = $@"SELECT {hasManagerAccessColumn}
                                       FROM {userTable}
                                       WHERE {usernameColumn} = @Username";
             using (MySqlConnection conn = new MySqlConnection(connectionStringToDB))

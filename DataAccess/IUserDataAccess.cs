@@ -8,7 +8,7 @@ namespace FinalProject1
 {
     interface IUserDataAccess
     {
-        void CreateUser(string username, string password, bool hasInventoryAccess);
+        void CreateUser(string username, string password, bool hasManagerAccess);
         string GetPassword(string username);
         bool DoesUserExist(string username);
         bool DoesUserHaveInvetoryAccess(string username);

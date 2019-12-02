@@ -26,7 +26,7 @@ namespace FinalProject1
             InitializeComponent();
 
             //Remove menu options if the user is not authorized
-            if(userController.CurrentUser.HasInventoryAccess == false)
+            if(userController.CurrentUser.HasManagerAccess == false)
             {
                 InventoryButton.IsEnabled = false;
             }

@@ -34,7 +34,7 @@ namespace FinalProject1
             string username = UsernameBox.Text;
             string password = PasswordBox.Password;
             string reEnteredPasssword = ReEnterPasswordBox.Password;
-            bool hasInventoryAccess = InventoryAccessCheckbox.IsChecked.Value;
+            bool hasManagerAccess = ManagerAccessCheckbox.IsChecked.Value;
 
 
             if(ValidateUsername(username))
@@ -45,7 +45,7 @@ namespace FinalProject1
                 }
                 else if(ValidatePassword(password, reEnteredPasssword))
                 {
-                    userController.CreateUser(username, password, hasInventoryAccess);
+                    userController.CreateUser(username, password, hasManagerAccess);
                     this.NavigationService.Navigate(new MainMenu());
                 }
                 else

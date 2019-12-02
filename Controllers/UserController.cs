@@ -12,9 +12,9 @@ namespace FinalProject1
 
         public User CurrentUser { get; private set; }
 
-        public bool CurrentUserHasInventoryAccess()
+        public bool CurrentUserHasManagerAccess()
         {
-            return CurrentUser.HasInventoryAccess;
+            return CurrentUser.HasManagerAccess;
         }
 
         public string LogIn(string username, string password)
@@ -27,21 +27,21 @@ namespace FinalProject1
             }
             else
             {
-                CurrentUser = new User() { Username = username, Password = password, HasInventoryAccess = userDataAccess.DoesUserHaveInvetoryAccess(username) };
+                CurrentUser = new User() { Username = username, Password = password, HasManagerAccess = userDataAccess.DoesUserHaveInvetoryAccess(username) };
             }
             return errorMessage;
 
         }
 
-        public bool CreateUser(string username, string password, bool hasInventoryAccess)
+        public bool CreateUser(string username, string password, bool hasManagerAccess)
         {
             bool validUser = false;
-            User newUser = new User() { Username = username, Password = password, HasInventoryAccess = hasInventoryAccess };
+            User newUser = new User() { Username = username, Password = password, HasManagerAccess = hasManagerAccess };
 
             if(newUser.DataErrors.Count == 0)
             {
                 validUser = true;
-                userDataAccess.CreateUser(newUser.Username, newUser.Password, newUser.HasInventoryAccess);
+                userDataAccess.CreateUser(newUser.Username, newUser.Password, newUser.HasManagerAccess);
                 this.CurrentUser = newUser;
             }
 
