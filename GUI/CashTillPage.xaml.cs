@@ -34,7 +34,8 @@ namespace FinalProject1
         public void UpdateTillDisplay()
         {
             decimal currentAmount = drawerController.CurrentCashInDrawer();
-            CashLabel.Text = "$" + currentAmount;
+            string cash = String.Format("{0:C}", currentAmount);
+            CashLabel.Text = cash;
             CashAmountText.Text = "";
         }
 
@@ -52,9 +53,10 @@ namespace FinalProject1
             if (IsValidAmount())
             {
                 decimal amountAdded = drawerController.AddToDrawer(cashDecimal);
+                string cash = String.Format("{0:C}", cashDecimal);
                 if (amountAdded >= 0)
                 {
-                    MessageBox.Show("$" + cashDecimal + " has been successfully added.");
+                    MessageBox.Show(cash + " has been successfully added.");
                     UpdateTillDisplay();
                 }
                 else
@@ -83,9 +85,10 @@ namespace FinalProject1
             if (IsValidAmount())
             {
                 decimal amountTaken = drawerController.WithdrawlFromDrawer(cashDecimal);
+                string cash = String.Format("{0:C}", cashDecimal);
                 if (amountTaken >= 0)
                 {
-                    MessageBox.Show("$" + cashDecimal + " has been successfully withdrawn.");
+                    MessageBox.Show(cash + " has been successfully withdrawn.");
                     UpdateTillDisplay();
                 }
                 else
