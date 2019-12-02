@@ -20,9 +20,18 @@ namespace FinalProject1
     /// </summary>
     public partial class MainMenu : Page
     {
+        IUserController userController => ControllerContainer.Instance.UserController;
         public MainMenu()
         {
             InitializeComponent();
+
+            //Remove menu options if the user is not authorized
+            if(userController.CurrentUser.HasInventoryAccess == false)
+            {
+                InventoryButton.IsEnabled = false;
+            }
+
+
         }
 
         /// <summary>

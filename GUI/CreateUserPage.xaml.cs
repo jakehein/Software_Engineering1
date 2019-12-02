@@ -39,14 +39,18 @@ namespace FinalProject1
 
             if(ValidateUsername(username))
             {
-                if(ValidatePassword(password, reEnteredPasssword))
+                if(userController.DoesUserExist(username))
+                {
+                    ErrorLabel.Content = "Username is already taken";
+                }
+                else if(ValidatePassword(password, reEnteredPasssword))
                 {
                     userController.CreateUser(username, password, hasInventoryAccess);
                     this.NavigationService.Navigate(new MainMenu());
                 }
                 else
                 {
-                    ErrorLabel.Content = "Invalid Password Entered, must contain only numbers and be between 5 and 11 characters in length";
+                    ErrorLabel.Content = "Invalid Password Entered, must contain only numbers and letters and be between 5 and 20 characters in length";
                 }
             }
             else
@@ -70,7 +74,7 @@ namespace FinalProject1
         private bool ValidatePassword(string password, string reEnteredPassword)
         {
             bool isValid = false;
-            if (Regex.Matches(password, @"^.*(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$").Count == 1 && password.Length >= 5 && password.Length <= 11 && password == reEnteredPassword)
+            if (Regex.Matches(password, @"^.*(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$").Count == 1 && password.Length >= 5 && password.Length <= 20 && password == reEnteredPassword)
             {
                 isValid = true;
             }

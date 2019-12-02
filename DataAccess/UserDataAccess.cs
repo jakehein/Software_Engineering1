@@ -13,29 +13,29 @@ namespace FinalProject1
         private string connectionStringToDB = ConfigurationManager.ConnectionStrings["MySQLDB"].ConnectionString;
 
         private const string userTable = "user";
-        private const string pinColumn = "pin";
+        private const string passwordColumn = "password";
         private const string usernameColumn = "username";
         private const string hasInventoryAccessColumn = "has_inventory_access";
         
-        public void CreateUser(string username, string pin, bool hasInventoryAccess)
+        public void CreateUser(string username, string password, bool hasInventoryAccess)
         {
             string commandString = $@"INSERT INTO {userTable}
-                                      ({usernameColumn}, {pinColumn}, {hasInventoryAccessColumn})
-                                      VALUES (@Username, @Pin, @HasInventoryAccess);";
+                                      ({usernameColumn}, {passwordColumn}, {hasInventoryAccessColumn})
+                                      VALUES (@Username, @Password, @HasInventoryAccess);";
             using (MySqlConnection conn = new MySqlConnection(connectionStringToDB))
             {
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand(commandString, conn);
                 cmd.Parameters.AddWithValue("@Username", username);
-                cmd.Parameters.AddWithValue("@Pin", pin);
+                cmd.Parameters.AddWithValue("@Password", password);
                 cmd.Parameters.AddWithValue("@HasInventoryAccess", hasInventoryAccess);
                 cmd.ExecuteNonQuery();
             }
         }
 
-        public string GetPin(string username)
+        public string GetPassword(string username)
         {
-            string commandString = $@"SELECT {pinColumn}
+            string commandString = $@"SELECT {passwordColumn}
                                       FROM {userTable}
                                       WHERE {usernameColumn} = @Username";
             using (MySqlConnection conn = new MySqlConnection(connectionStringToDB))
@@ -47,18 +47,33 @@ namespace FinalProject1
             }
         }
 
-        public void UpdatePin(string username, string pin)
+        public void UpdatePassword(string username, string password)
         {
             string commandString = $@"UPDATE {userTable}
-                                      SET {pinColumn} = @Pin
+                                      SET {passwordColumn} = @Password
                                       WHERE {usernameColumn} = @Username;";
             using (MySqlConnection conn = new MySqlConnection(connectionStringToDB))
             {
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand(commandString, conn);
-                cmd.Parameters.AddWithValue("@Pin", pin);
+                cmd.Parameters.AddWithValue("@Password", password);
                 cmd.Parameters.AddWithValue("@Username", username);
                 cmd.ExecuteNonQuery();
+            }
+        }
+
+        public bool DoesUserExist(string username)
+        {
+            string commandString = $@"SELECT {usernameColumn}
+                                      FROM {userTable}
+                                      WHERE {usernameColumn} = @Username";
+            using (MySqlConnection conn = new MySqlConnection(connectionStringToDB))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand(commandString, conn);
+                cmd.Parameters.AddWithValue("@Username", username);
+                Object obj = cmd.ExecuteScalar();
+                return obj != null;
             }
         }
 

@@ -37,9 +37,9 @@ namespace FinalProject1
         {
             // get the username and password and store as a string to check against database of users
             string username = UsernameBox.Text;
-            string pin = PasswordBox.Password.ToString();
+            string password = PasswordBox.Password.ToString();
 
-            string errors = userController.LogIn(username, pin);
+            string errors = userController.LogIn(username, password);
 
             if(errors.Length > 0)
             {

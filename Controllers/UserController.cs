@@ -17,35 +17,40 @@ namespace FinalProject1
             return CurrentUser.HasInventoryAccess;
         }
 
-        public string LogIn(string username, string pin)
+        public string LogIn(string username, string password)
         {
             string errorMessage = "";
-            string retrivedPIN = userDataAccess.GetPin(username);
-            if (retrivedPIN != pin)
+            string retrivedPassword = userDataAccess.GetPassword(username);
+            if (retrivedPassword != password)
             {
                 errorMessage = "Invalid username or password";
             }
             else
             {
-                CurrentUser = new User() { Username = username, PIN = pin, HasInventoryAccess = userDataAccess.DoesUserHaveInvetoryAccess(username) };
+                CurrentUser = new User() { Username = username, Password = password, HasInventoryAccess = userDataAccess.DoesUserHaveInvetoryAccess(username) };
             }
             return errorMessage;
 
         }
 
-        public bool CreateUser(string username, string pin, bool hasInventoryAccess)
+        public bool CreateUser(string username, string password, bool hasInventoryAccess)
         {
             bool validUser = false;
-            User newUser = new User() { Username = username, PIN = pin, HasInventoryAccess = hasInventoryAccess };
+            User newUser = new User() { Username = username, Password = password, HasInventoryAccess = hasInventoryAccess };
 
             if(newUser.DataErrors.Count == 0)
             {
                 validUser = true;
-                userDataAccess.CreateUser(newUser.Username, newUser.PIN, newUser.HasInventoryAccess);
+                userDataAccess.CreateUser(newUser.Username, newUser.Password, newUser.HasInventoryAccess);
                 this.CurrentUser = newUser;
             }
 
             return validUser;
+        }
+
+        public bool DoesUserExist(string username)
+        { 
+            return userDataAccess.DoesUserExist(username);
         }
 
         public void LogOut()
@@ -53,7 +58,7 @@ namespace FinalProject1
             CurrentUser = null;
         }
 
-        public bool Override(string pin)
+        public bool Override(string password)
         {
             throw new NotImplementedException();
         }

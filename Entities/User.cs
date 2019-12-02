@@ -26,21 +26,21 @@ namespace FinalProject1
             }
         }
 
-        private string pIN;
-        public string PIN
+        private string password;
+        public string Password
         {
-            get { return this.pIN; }
+            get { return this.password; }
             set
             {
-                if (value.Length <= 11 && 
+                if (value.Length <= 20 &&
                     value.Length >= 5 &&
-                    Regex.Matches(value, @"^[0-9]{5,11}$").Count == 1)
+                    Regex.Matches(value, @"^.*(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$").Count == 1)
                 {
-                    pIN = value;
+                    password = value;
                 }
                 else
                 {
-                    DataErrors.Add("Invalid PIN");
+                    DataErrors.Add("Invalid Password");
                 }
             }
         }

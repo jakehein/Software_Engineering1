@@ -10,12 +10,12 @@ namespace FinalProject1
     {
         User CurrentUser { get; }
 
-        string LogIn(string userName, string pin);
+        string LogIn(string userName, string password);
 
         bool Override(string pin);
 
-        bool CreateUser(string username, string pin, bool hasInventoryAccess);
-
+        bool CreateUser(string username, string password, bool hasInventoryAccess);
+        bool DoesUserExist(string username);
         bool CurrentUserHasInventoryAccess();
 
         void LogOut();
