@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace FinalProject1
 {
+    /// <summary>
+    /// A DTO representing the Item class
+    /// </summary>
     class ItemDTO
     {
         public long ItemID { get; set; }
