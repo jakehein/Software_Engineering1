@@ -85,8 +85,12 @@ namespace FinalProject1
         private void Pay_Click(object sender, RoutedEventArgs e)
         {
             string total = PayTotal.Text;
-            Transaction.ItemsSource = cartController.Checkout();
-            MessageBox.Show("Total is: " + total);
+
+            GUI.OnScreenKeyboard.ChangeKeyboard changeKeyboard = new GUI.OnScreenKeyboard.ChangeKeyboard();
+            changeKeyboard.ShowDialog();
+            //Cancelled out while testing changeKeyboard
+            //Transaction.ItemsSource = cartController.Checkout();
+            //MessageBox.Show("Total is: " + total);
 
             // After cash is taken out this will determine if the cash left in the drawer is low
             LowCashWarningCheck();

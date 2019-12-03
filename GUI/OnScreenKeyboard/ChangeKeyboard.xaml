@@ -4,9 +4,38 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FinalProject1.GUI.OnScreenKeyboard"
-        mc:Ignorable="d"
-        Title="ChangeKeyboard" Height="450" Width="800">
-    <Grid>
-        
+        mc:Ignorable="d" Title="ChangeKeyboard" 
+        d:DesignHeight="450" d:DesignWidth="800" MinHeight="450" MinWidth="800" Focusable="True">
+
+    <Grid Background="#FFF1F1F1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="TotalLabel" Background="Ivory" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Text="0.00" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" SizeChanged="Total_SizeChanged" BorderThickness="2" BorderBrush="Black"/>
+        <Label x:Name="DeleteBtn" Content="Delete" Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SizeChanged="Number_SizeChanged" Background="Linen" BorderThickness="2" BorderBrush="Black" MouseUp="DeleteBtn_MouseUp"/>
+        <Label x:Name="OneBtn" Content="1" Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SizeChanged="Number_SizeChanged" BorderThickness="2" BorderBrush="Black" MouseUp="Number_MouseUp"/>
+        <Label x:Name="FourBtn" Content="4" Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SizeChanged="Number_SizeChanged" BorderThickness="2" BorderBrush="Black" MouseUp="Number_MouseUp"/>
+        <Label x:Name="SevenBtn" Content="7" Grid.Row="3" Grid.Column="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SizeChanged="Number_SizeChanged" BorderThickness="2" BorderBrush="Black" MouseUp="Number_MouseUp"/>
+        <Label x:Name="ZeroBtn" Content="0" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SizeChanged="Number_SizeChanged" BorderThickness="2" BorderBrush="Black" MouseUp="Number_MouseUp"/>
+        <Label x:Name="TwoBtn" Content="2" Grid.Row="1" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SizeChanged="Number_SizeChanged" BorderThickness="2" BorderBrush="Black" MouseUp="Number_MouseUp"/>
+        <Label x:Name="ThreeBtn" Content="3" Grid.Row="1" Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SizeChanged="Number_SizeChanged" BorderThickness="2" BorderBrush="Black" MouseUp="Number_MouseUp"/>
+        <Label x:Name="CancelBtn" Content="Cancel" Grid.Row="1" Grid.Column="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SizeChanged="Number_SizeChanged" BorderThickness="2" BorderBrush="Black" Background="Bisque" MouseUp="CancelBtn_MouseUp"/>
+        <Label x:Name="FiveBtn" Content="5" Grid.Row="2" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SizeChanged="Number_SizeChanged" BorderThickness="2" BorderBrush="Black" MouseUp="Number_MouseUp"/>
+        <Label x:Name="SixBtn" Content="6" Grid.Row="2" Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SizeChanged="Number_SizeChanged" BorderThickness="2" BorderBrush="Black" MouseUp="Number_MouseUp"/>
+        <Label x:Name="EnterBtn" Content="" Grid.Row="2" Grid.Column="3" FontWeight="Bold" FontFamily="Courier New" Grid.RowSpan="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SizeChanged="Enter_SizeChanged" Background="Linen" BorderThickness="2" BorderBrush="Black" MouseUp="EnterBtn_MouseUp"/>
+        <Label x:Name="EightBtn" Content="8" Grid.Row="3" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SizeChanged="Number_SizeChanged" BorderThickness="2" BorderBrush="Black" MouseUp="Number_MouseUp"/>
+        <Label x:Name="NineBtn" Content="9" Grid.Row="3" Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SizeChanged="Number_SizeChanged" BorderThickness="2" BorderBrush="Black" MouseUp="Number_MouseUp"/>
+        <Label x:Name="BlankSpace" Content="" Grid.Row="4" Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SizeChanged="Number_SizeChanged" BorderThickness="2" BorderBrush="Black"/>
+
     </Grid>
 </Window>
