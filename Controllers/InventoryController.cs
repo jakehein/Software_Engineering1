@@ -9,13 +9,13 @@ namespace FinalProject1
     class InventoryController : IInventoryController
     {
         private IInventoryDataAccess iDA => DataAccessContainer.Instance.InventoryDataAccess;
-
-        /**
-         * This method checks to see if an item is valid for insertion into the iDA. If so,
-         * the item is stored into iDA via a call to CreateItem();
-         * @param item object being created in iDA
-         * @return boolean detailing if operation was carried out
-         */
+        
+        /// <summary>
+        ///  This method checks to see if an item is valid for insertion into the iDA.
+        ///  If so,the item is stored into iDA via a call to CreateItem();
+        /// </summary>
+        /// <param name="item">item object being created in iDA</param>
+        /// <returns>boolean detailing if operation was carried out</returns>
         public bool CreateItem(ItemDTO item)
         {
             Item newItem = Item.createItemFromDTO(item);
@@ -30,21 +30,20 @@ namespace FinalProject1
             }
         }
         
-        /**
-         * This method checks to see if an item is valid for deletion from the iDA. If so,
-         * the item is deleted from iDA via a call to DeleteItem();
-         * @param UPC string value being checked for before carrying out deletion
-         * @return boolean detailing if operation was carried out
-         */
+        /// <summary>
+        /// This method checks to see if an item is valid for deletion from the iDA.
+        /// If so, the item is deleted from iDA via a call to DeleteItem();
+        /// </summary>
+        /// <param name="uPC">UPC string value being checked for before carrying out deletion</param>
+        /// <returns>boolean detailing if operation was carried out</returns>
         public bool DeleteItem(string uPC)
         {
             return iDA.DeleteItem(uPC);
         }
-        
-        /**
-         * This method creates a list of UPCs for the calling method to act on. 
-         * @return List<string> of all UPC values contained in iDA
-         */
+
+        /// <summary>
+        /// All UPCs in the system
+        /// </summary>
         public List<string> AllUPCs
         {
             get
@@ -53,10 +52,10 @@ namespace FinalProject1
             }
         }
 
-        /**
-        * This method creates a list of all Item objects contained in iDA
-        * @return List<Item> of all Item objects contained in iDA
-        */
+        /// <summary>
+        /// This method creates a list of all Item objects contained in iDA
+        /// </summary>
+        /// <returns>List<Item> of all Item objects contained in iDA</returns>
         public List<ItemDTO> GetAllItems()
         {
             return iDA.GetAllItems();

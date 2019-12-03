@@ -12,11 +12,22 @@ namespace FinalProject1
 
         public User CurrentUser { get; private set; }
 
+        /// <summary>
+        /// Checks if the currently logged in user has manager access
+        /// </summary>
+        /// <returns></returns>
         public bool CurrentUserHasManagerAccess()
         {
             return CurrentUser.HasManagerAccess;
         }
 
+        /// <summary>
+        /// Attemps to log in a user
+        /// </summary>
+        /// <param name="userName">The username of a user to attempt to log in</param>
+        /// <param name="password">The password of a user to attempt to log in</param>
+        /// <returns>A list of errors that occured while trying to log the user in,
+        /// if this list is empty, it can be assumed that the user was successfully logged in</returns>
         public string LogIn(string username, string password)
         {
             string errorMessage = "";
@@ -33,6 +44,13 @@ namespace FinalProject1
 
         }
 
+        /// <summary>
+        /// Creates a user with the given properties
+        /// </summary>
+        /// <param name="username">The username of the user to create</param>
+        /// <param name="password">The password of the user to create</param>
+        /// <param name="hasManagerAccess">If the user to create should have manager access</param>
+        /// <returns></returns>
         public bool CreateUser(string username, string password, bool hasManagerAccess)
         {
             bool validUser = false;
@@ -48,19 +66,28 @@ namespace FinalProject1
             return validUser;
         }
 
+        /// <summary>
+        /// Checks if a user exists that has the given username
+        /// </summary>
+        /// <param name="username">The username to check</param>
+        /// <returns>True if the user exists, otherwise false</returns>
         public bool DoesUserExist(string username)
         { 
             return userDataAccess.DoesUserExist(username);
         }
 
+        /// <summary>
+        /// Logs out the currently logged in user
+        /// </summary>
         public void LogOut()
         {
             CurrentUser = null;
         }
 
-        public bool Override(string password)
-        {
-            throw new NotImplementedException();
-        }
+        //TODO: figure out if we are keeping this
+        //public bool Override(string password)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

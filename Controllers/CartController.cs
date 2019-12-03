@@ -11,6 +11,11 @@ namespace FinalProject1
         Cart cart;
 
         IInventoryDataAccess inventoryDataAccess => DataAccessContainer.Instance.InventoryDataAccess;
+
+        /// <summary>
+        /// Gets the total of all items in the cart
+        /// </summary>
+        /// <returns>The total of all items in the cart</returns>
         public decimal? GetTotal()
         {
             return cart.TotalCost;
@@ -79,6 +84,7 @@ namespace FinalProject1
 
             return success;
         }
+
         /// <summary>
         /// This method returns true if CartController contains itemDTO
         /// </summary>
@@ -128,6 +134,7 @@ namespace FinalProject1
         /// <summary>
         /// Checks out the cart of items
         /// </summary>
+        /// <returns>An empty list of item DTOs</returns>
         public List<ItemDTO> Checkout()
         {
             cart.Checkout(inventoryDataAccess);
@@ -136,7 +143,7 @@ namespace FinalProject1
         }
 
         /// <summary>
-        /// 
+        /// Returns the items currently in the cart
         /// </summary>
         /// <returns></returns>
         public List<ItemDTO> ReturnItems()
