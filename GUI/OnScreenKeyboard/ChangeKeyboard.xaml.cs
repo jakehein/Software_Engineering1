@@ -19,12 +19,13 @@ namespace FinalProject1.GUI.OnScreenKeyboard
     /// </summary>
     public partial class ChangeKeyboard : Window
     {
-        public ChangeKeyboard()
+        public ChangeKeyboard(string cashTotal)
         {
             InitializeComponent();
             EnterBtn.Content = EnterText;
+            this.cashTotal = cashTotal;
         }
-
+        private string cashTotal;
         private const string EnterText = "E\nN\nT\nE\nR";
 
         private void Increase_PayTotal(string value)

@@ -86,7 +86,8 @@ namespace FinalProject1
         {
             string total = PayTotal.Text;
 
-            GUI.OnScreenKeyboard.ChangeKeyboard changeKeyboard = new GUI.OnScreenKeyboard.ChangeKeyboard();
+            GUI.OnScreenKeyboard.ChangeKeyboard changeKeyboard = new GUI.OnScreenKeyboard.ChangeKeyboard(total);
+            
             changeKeyboard.ShowDialog();
             //Cancelled out while testing changeKeyboard
             //Transaction.ItemsSource = cartController.Checkout();
