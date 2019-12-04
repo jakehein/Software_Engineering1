@@ -36,7 +36,7 @@
         <Button x:Name="LogoutButton" Content="Logout" Margin="0,0" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Click="LogoutButton_Click" ClickMode="Press"/>
         <Button x:Name="SalesButton" Content="Sales" Margin="0,0" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="3" Click="SalesButton_Click" ClickMode="Press"/>
         <Button x:Name="InventoryButton" Content="Inventory" Margin="48,0,32,0.4" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="3" Grid.RowSpan="3" Click="InventoryButton_Click" ClickMode="Press"/>
-        <Button x:Name="ReturnButton" Content="Return" Margin="29,0,51,0.4" Grid.Row="3" Grid.Column="5" Grid.ColumnSpan="3" Grid.RowSpan="3" Click="ReturnButton_Click" ClickMode="Press"/>
+        <Button x:Name="ReturnButton" Content="Returns" Margin="29,0,51,0.4" Grid.Row="3" Grid.Column="5" Grid.ColumnSpan="3" Grid.RowSpan="3" Click="ReturnButton_Click" ClickMode="Press"/>
         <Button x:Name="CashButton" Content="Cash Till" Margin="0,0" Grid.Row="3" Grid.Column="8" Grid.ColumnSpan="2" Grid.RowSpan="3" Click="CashButton_Click" ClickMode="Press"/>
     </Grid>
 </Page>

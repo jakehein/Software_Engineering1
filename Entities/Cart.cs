@@ -9,27 +9,27 @@ namespace FinalProject1
     class Cart
     {
         //public Dictionary<Item, int> Items { get; set; }
-        public List<SalesItem> Items;
-        public class SalesItem
-        {
-            public ItemDTO Item { get; set; }
-            public int Quantity { get; set; }
+        public List<DTOs.SalesItemDTO> Items;
+        //public class SalesItem
+        //{
+        //    public ItemDTO Item { get; set; }
+        //    public int Quantity { get; set; }
 
-            public override bool Equals(object obj)
-            {
-                return obj is SalesItem && ((SalesItem)obj).Item.UPC.Equals(Item.UPC);
-            }
+        //    public override bool Equals(object obj)
+        //    {
+        //        return obj is SalesItem && ((SalesItem)obj).Item.UPC.Equals(Item.UPC);
+        //    }
 
-            public override int GetHashCode()
-            {
-                return base.GetHashCode();
-            }
-        }
+        //    public override int GetHashCode()
+        //    {
+        //        return base.GetHashCode();
+        //    }
+        //}
 
         public Cart()
         {
             //Items = new Dictionary<Item, int>();
-            Items = new List<SalesItem>();
+            Items = new List<DTOs.SalesItemDTO>();
         }
         /// <summary>
         /// The total cost of all Items in the Cart
@@ -67,13 +67,13 @@ namespace FinalProject1
             //    Items.Add(item, 1);
             //}
             //TEST
-            SalesItem salesItem;
+            DTOs.SalesItemDTO salesItem;
             if ((salesItem = Items.Find(x => x.Item.Equals(item))) != null){
                 salesItem.Quantity++;
             }
             else
             {
-                Items.Add(new SalesItem
+                Items.Add(new DTOs.SalesItemDTO
                 {
                     Item = item,
                     Quantity = 1
@@ -104,7 +104,7 @@ namespace FinalProject1
             //    }
             //    itemRemoved = true;
             //}
-            SalesItem salesItem;
+            DTOs.SalesItemDTO salesItem;
             if((salesItem = Items.Find(x => x.Item.Equals(item))) != null)
             {
                 itemRemoved = true;
@@ -144,14 +144,14 @@ namespace FinalProject1
             }
             else
             {
-                SalesItem salesItem;
+                DTOs.SalesItemDTO salesItem;
                 if((salesItem = Items.Find(x => x.Item.Equals(item))) != null)
                 {
                     salesItem.Quantity = quantity;
                 }
                 else
                 {
-                    Items.Add(new SalesItem
+                    Items.Add(new DTOs.SalesItemDTO
                     {
                         Item = item,
                         Quantity = quantity
@@ -177,7 +177,7 @@ namespace FinalProject1
 
             //    inventoryDataAccess.ChangeQuantity(itemDTO.UPC, itemDTO.Quantity - itemAmount.Value);
             //}
-            foreach(SalesItem si in Items)
+            foreach(DTOs.SalesItemDTO si in Items)
             {
                 ItemDTO itemDTO = inventoryDataAccess.GetItem(si.Item.UPC);
                 inventoryDataAccess.ChangeQuantity(itemDTO.UPC, itemDTO.Quantity - si.Quantity);
@@ -186,7 +186,7 @@ namespace FinalProject1
 
         public void ReturnItems(IInventoryDataAccess inventoryDataAccess)
         {
-            foreach (SalesItem si in Items)
+            foreach (DTOs.SalesItemDTO si in Items)
             {
                 ItemDTO itemDTO = inventoryDataAccess.GetItem(si.Item.UPC);
                 inventoryDataAccess.ChangeQuantity(itemDTO.UPC, itemDTO.Quantity + si.Quantity);

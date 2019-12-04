@@ -111,7 +111,7 @@ namespace FinalProject1
         /// Get all the items contained in the cart in a List
         /// </summary>
         /// <returns>List<ItemDTO> containing all cart items</returns>
-        public List<Cart.SalesItem> GetAllItems()
+        public List<DTOs.SalesItemDTO> GetAllItems()
         //public Dictionary<Item, int> GetAllItems()
         {
             //List<ItemDTO> items = new List<ItemDTO>();
@@ -123,10 +123,10 @@ namespace FinalProject1
             //    }
             //}
             //return items;
-            List<Cart.SalesItem> items = new List<Cart.SalesItem>();
-            foreach (Cart.SalesItem si in cart.Items)
+            List<DTOs.SalesItemDTO> items = new List<DTOs.SalesItemDTO>();
+            foreach (DTOs.SalesItemDTO si in cart.Items)
             {
-                items.Add(new Cart.SalesItem { Item = si.Item, Quantity = si.Quantity });
+                items.Add(new DTOs.SalesItemDTO { Item = si.Item, Quantity = si.Quantity });
             }
             return items;
         }

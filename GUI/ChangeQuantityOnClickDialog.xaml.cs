@@ -59,22 +59,29 @@ namespace FinalProject1.GUI
         /// <param name="e"></param>
         private void TxtNewQuantity_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!int.TryParse(txtNewQuantity.Text, out int parsedValue))
+            if (!txtNewQuantity.Text.Equals(""))
             {
-                int carretPos = txtNewQuantity.CaretIndex;
-                txtNewQuantity.Text = _result;
-                if(carretPos == 0)
+                if (!int.TryParse(txtNewQuantity.Text, out int parsedValue) || parsedValue < 0)
                 {
-                    txtNewQuantity.CaretIndex = 0;
+                    int carretPos = txtNewQuantity.CaretIndex;
+                    txtNewQuantity.Text = _result;
+                    if (carretPos == 0)
+                    {
+                        txtNewQuantity.CaretIndex = 0;
+                    }
+                    else
+                    {
+                        txtNewQuantity.CaretIndex = carretPos > txtNewQuantity.Text.Length ? txtNewQuantity.Text.Length : carretPos - 1;
+                    }
                 }
                 else
                 {
-                    txtNewQuantity.CaretIndex = carretPos > txtNewQuantity.Text.Length ? txtNewQuantity.Text.Length : carretPos - 1;
+                    _result = parsedValue + "";
                 }
             }
             else
             {
-                _result = parsedValue + "";
+                _result = "";
             }
         }
     }

@@ -85,7 +85,7 @@ namespace FinalProject1
         {
             if (Transaction.SelectedItem != null)
             {
-                ItemDTO itm = ((Cart.SalesItem)Transaction.SelectedItem).Item;
+                ItemDTO itm = ((DTOs.SalesItemDTO)Transaction.SelectedItem).Item;
                 cartController.AddItem(itm);
                 UpdateTransactionView();
                 UpdateTotal();
@@ -116,8 +116,8 @@ namespace FinalProject1
         {
             if (Transaction.SelectedItem != null)
             {
-                ItemDTO item = ((Cart.SalesItem)Transaction.SelectedItem).Item;
-                int quantity = ((Cart.SalesItem)Transaction.SelectedItem).Quantity;
+                ItemDTO item = ((DTOs.SalesItemDTO)Transaction.SelectedItem).Item;
+                int quantity = ((DTOs.SalesItemDTO)Transaction.SelectedItem).Quantity;
                 cartController.ChangeQuantity(quantity - 1, item);
                 UpdateTransactionView();
                 UpdateTotal();
@@ -132,7 +132,7 @@ namespace FinalProject1
         {
             if (Transaction.SelectedItem != null)
             {
-                ItemDTO item = ((Cart.SalesItem)Transaction.SelectedItem).Item;
+                ItemDTO item = ((DTOs.SalesItemDTO)Transaction.SelectedItem).Item;
                 cartController.RemoveItem(item);
                 UpdateTransactionView();
                 UpdateTotal();
@@ -287,8 +287,8 @@ namespace FinalProject1
                 bool? result = dialog.ShowDialog();
                 if (result != null && (bool)result)
                 {
-                    ItemDTO item = ((Cart.SalesItem)Transaction.SelectedItem).Item;
-                    int quantity = ((Cart.SalesItem)Transaction.SelectedItem).Quantity;
+                    ItemDTO item = ((DTOs.SalesItemDTO)Transaction.SelectedItem).Item;
+                    int quantity = ((DTOs.SalesItemDTO)Transaction.SelectedItem).Quantity;
                     cartController.ChangeQuantity(int.Parse(dialog.Result), item);
                     UpdateTransactionView();
                     UpdateTotal();

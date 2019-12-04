@@ -45,7 +45,7 @@ namespace FinalProject1
         /// Get all the items contained in the cart in a List
         /// </summary>
         /// <returns>List<ItemDTO> containing all cart items</returns>
-        List<Cart.SalesItem> GetAllItems();
+        List<DTOs.SalesItemDTO> GetAllItems();
 
         /// <summary>
         /// Gets the total of all items in the cart
