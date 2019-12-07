@@ -34,6 +34,9 @@ namespace FinalProject1
             PopulateItemList();
             FillCategoryCombo();
             FillItemList(itemDTOs);
+            //adding this to remove bug of items appearing in transaction after navigating away and then coming back to page
+            cartController.CancelTransaction();
+            //remove above if still occurs
         }
         private void PopulateItemList()
         {
@@ -73,9 +76,14 @@ namespace FinalProject1
         private void Return_Click(object sender, RoutedEventArgs e)
         {
             string total = PayTotal.Text;
-            Transaction.ItemsSource = cartController.ReturnItems();
-            MessageBox.Show("Total is: " + total);
-            UpdateTotal();
+            if (isEnoughMoneyInTill())
+            {
+                Transaction.ItemsSource = cartController.ReturnItems();
+                drawerController.WithdrawlFromDrawer(decimal.Parse(total));
+                MessageBox.Show("Refund total is: " + total);
+                //drawerController.CashOut(changeKeyboard.Total, decimal.Parse(total))
+                UpdateTotal();
+            }
 
             // After cash is taken out this will determine if the cash left in the drawer is low
             LowCashWarningCheck();
@@ -310,6 +318,26 @@ namespace FinalProject1
             {
                 decimal amountInDrawer = drawerController.CurrentCashInDrawer();
                 MessageBox.Show("Cash Till is Running Low. Amount is currently: $" + amountInDrawer + ". Please Deposit More.");
+            }
+        }
+
+        /// <summary>
+        /// This method checks the amount of money present in the till and displays a warning to the user if it is determined
+        /// as low.
+        /// </summary>
+        public bool isEnoughMoneyInTill()
+        {
+            decimal amountInDrawer = drawerController.CurrentCashInDrawer();
+            decimal refundTotal = decimal.Parse(PayTotal.Text);
+            if (amountInDrawer < refundTotal)
+            {
+                //decimal amountInDrawer = drawerController.CurrentCashInDrawer();
+                MessageBox.Show("Not enough money in the till to complete refund. Amount is currently: $" + amountInDrawer + ". Please Deposit More.");
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
     }
