@@ -100,7 +100,8 @@ namespace FinalProject1
                 //drawerController.AddToDrawer(Decimal.Parse(total));
             }
 
-            // After cash is taken out this will determine if the cash left in the drawer is low
+            // After cash is taken out this will determine if the cash left in the drawer is low or high
+            LowCashWarningCheck();
             HighCashWarningCheck();
         }
 
@@ -336,6 +337,19 @@ namespace FinalProject1
         /// <summary>
         /// This method checks the amount of money present in the till and displays a warning to the user if it is determined
         /// as low.
+        /// </summary>
+        public void LowCashWarningCheck()
+        {
+            if (drawerController.cashIsLow())
+            {
+                decimal amountInDrawer = drawerController.CurrentCashInDrawer();
+                MessageBox.Show("Cash Till is Running Low. Amount is currently: $" + amountInDrawer + ". Please Add More.");
+            }
+        }
+
+        /// <summary>
+        /// This method checks the amount of money present in the till and displays a warning to the user if it is determined
+        /// as high.
         /// </summary>
         public void HighCashWarningCheck()
         {
