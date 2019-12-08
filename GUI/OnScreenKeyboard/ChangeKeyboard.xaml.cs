@@ -19,16 +19,21 @@ namespace FinalProject1.GUI.OnScreenKeyboard
     /// </summary>
     public partial class ChangeKeyboard : Window
     {
-        public ChangeKeyboard(string cashTotal)
+        public ChangeKeyboard(string transactionTotal)
         {
             InitializeComponent();
             EnterBtn.Content = EnterText;
-            this.cashTotal = cashTotal;
+            cashTotal = transactionTotal;
             EnterBtn.IsEnabled = false;
+            IsTransactionComplete = false;
         }
-        private string cashTotal;
-        private const string EnterText = "E\nN\nT\nE\nR";
+        //private string cashTotal;
+        //private bool isTransactionComplete;
+        public string cashTotal; //{ get; set; }
+        public decimal Total { get; set; }
+        public bool IsTransactionComplete { get; set; }
 
+        private const string EnterText = "E\nN\nT\nE\nR";
         private void Increase_PayTotal(string value)
         {
             string total = (string)TotalLabel.Content;
@@ -101,12 +106,16 @@ namespace FinalProject1.GUI.OnScreenKeyboard
 
         private void CancelBtn_MouseUp(object sender, MouseButtonEventArgs e)
         {
-
+            Close();
         }
 
         private void EnterBtn_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            
+            //double result = Double.Parse((string)TotalLabel.Content) - Double.Parse(CashTotal);
+            //CashTotal = String.Format("{0:#,###0.00}", result);
+            Total = decimal.Parse((String)TotalLabel.Content);
+            IsTransactionComplete = true;
+            CancelBtn_MouseUp(sender, e);
         }
     }
 }

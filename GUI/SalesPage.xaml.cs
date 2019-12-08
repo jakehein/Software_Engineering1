@@ -34,6 +34,9 @@ namespace FinalProject1
             PopulateItemList();
             FillCategoryCombo();
             FillItemList(itemDTOs);
+            //adding this to remove bug of items appearing in transaction after navigating away and then coming back to page
+            cartController.CancelTransaction();
+            //remove above if still occurs
         }
 
         /// <summary>
@@ -89,12 +92,16 @@ namespace FinalProject1
             GUI.OnScreenKeyboard.ChangeKeyboard changeKeyboard = new GUI.OnScreenKeyboard.ChangeKeyboard(total);
             
             changeKeyboard.ShowDialog();
-            //Cancelled out while testing changeKeyboard
-            //Transaction.ItemsSource = cartController.Checkout();
-            //MessageBox.Show("Total is: " + total);
+            if (changeKeyboard.IsTransactionComplete)
+            {
+                MessageBox.Show("Change: " + drawerController.CashOut(changeKeyboard.Total, decimal.Parse(total)));
+                Transaction.ItemsSource = cartController.Checkout();
+                UpdateTotal();
+                //drawerController.AddToDrawer(Decimal.Parse(total));
+            }
 
             // After cash is taken out this will determine if the cash left in the drawer is low
-            LowCashWarningCheck();
+            HighCashWarningCheck();
         }
 
         /// <summary>
@@ -330,12 +337,12 @@ namespace FinalProject1
         /// This method checks the amount of money present in the till and displays a warning to the user if it is determined
         /// as low.
         /// </summary>
-        public void LowCashWarningCheck()
+        public void HighCashWarningCheck()
         {
-            if (drawerController.cashIsLow())
+            if (drawerController.cashIsHigh())
             {
                 decimal amountInDrawer = drawerController.CurrentCashInDrawer();
-                MessageBox.Show("Cash Till is Running Low. Amount is currently: $" + amountInDrawer + ". Please Deposit More.");
+                MessageBox.Show("Cash Till is Running High. Amount is currently: $" + amountInDrawer + ". Please Withdraw More.");
             }
         }
     }

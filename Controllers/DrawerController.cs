@@ -89,5 +89,18 @@ namespace FinalProject1
                 return false;
             }
         }
+
+        public bool cashIsHigh()
+        {
+            decimal highCashAmount = 300;
+            if (Drawer.drawer.Money >= highCashAmount)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
