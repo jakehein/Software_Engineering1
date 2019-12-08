@@ -13,5 +13,7 @@ namespace FinalProject1
         bool DoesUserExist(string username);
         bool DoesUserHaveInvetoryAccess(string username);
         void UpdatePassword(string username, string pin);
+
+        bool ValidateUser(string username, string password);
     }
 }

@@ -31,8 +31,9 @@ namespace FinalProject1
         public string LogIn(string username, string password)
         {
             string errorMessage = "";
-            string retrivedPassword = userDataAccess.GetPassword(username);
-            if (retrivedPassword != password)
+            //string retrivedPassword = userDataAccess.GetPassword(username);
+            if(!userDataAccess.ValidateUser(username, password))
+            //if (retrivedPassword != password)
             {
                 errorMessage = "Invalid username or password";
             }
