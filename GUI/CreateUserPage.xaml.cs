@@ -46,7 +46,7 @@ namespace FinalProject1
                 else if(ValidatePassword(password, reEnteredPasssword))
                 {
                     userController.CreateUser(username, password, hasManagerAccess);
-                    this.NavigationService.Navigate(new MainMenu());
+                    this.NavigationService.Navigate(new CashTillStartPage());
                 }
                 else
                 {

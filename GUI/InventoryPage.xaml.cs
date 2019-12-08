@@ -147,10 +147,10 @@ namespace FinalProject1
         /// </summary>
         private void UpdateBtn_Click(object sender, RoutedEventArgs e)
         {
-            ItemDTO update = GetItemObj();
-
             if (IsEnteredInventoryItemValid())
             {
+                ItemDTO update = GetItemObj();
+
                 if (((ItemDTO)InventoryListBox.SelectedItem) != null){
                     string uPC = ((ItemDTO)InventoryListBox.SelectedItem).UPC;
                     bool updated = inventoryControl.UpdateItem(uPC, update);
