@@ -35,7 +35,7 @@
         </Grid.ColumnDefinitions>
 
         <ListBox x:Name="InventoryListBox" Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="6" Grid.RowSpan="7" Background="Ivory" FontSize="16" SelectionChanged="InventoryListBox_SelectionChanged"/>
-        <ComboBox x:Name="CategoryListComboBox" Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="6" BorderBrush="White" Background="White" SelectionChanged="CategoryListComboBox_SelectionChanged"/>
+        <ComboBox x:Name="CategoryListComboBox" Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="6" FontSize="25" BorderBrush="White" Background="White" SelectionChanged="CategoryListComboBox_SelectionChanged"/>
         <Viewbox Grid.Row="2" Grid.Column="1" Margin="0,0" >
             <TextBlock x:Name="UPCLabel" Text="UPC:" FontSize="32"/>
         </Viewbox>

@@ -209,5 +209,10 @@ namespace FinalProject1
             NavigationService.RemoveBackEntry();
             this.NavigationService.Navigate(new InventoryPage());
         }
+
+        private void CategoryText_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            ((TextBox)sender).FontSize = ((TextBox)sender).ActualHeight * .7;
+        }
     }
 }
