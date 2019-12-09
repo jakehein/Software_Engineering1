@@ -61,7 +61,7 @@ namespace FinalProject1
             {
                 validUser = true;
                 userDataAccess.CreateUser(newUser.Username, newUser.Password, newUser.HasManagerAccess);
-                this.CurrentUser = newUser;
+                //this.CurrentUser = newUser;
             }
 
             return validUser;
