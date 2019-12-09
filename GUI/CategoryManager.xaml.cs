@@ -206,6 +206,7 @@ namespace FinalProject1
         /// <param name="e">Event details</param>
         private void ExitBtn_Click(object sender, RoutedEventArgs e)
         {
+            NavigationService.RemoveBackEntry();
             this.NavigationService.Navigate(new InventoryPage());
         }
     }

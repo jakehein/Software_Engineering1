@@ -78,7 +78,7 @@
         </ListView>
         <!--<ListBox x:Name="Transaction" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="8" Background="Ivory" FontSize="16" />-->
         <ListBox x:Name="Inventory" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="6" Grid.RowSpan="7" Background="Ivory" FontSize="16" SelectionChanged="Inventory_SelectionChanged" />
-        <Button x:Name="ChangeQuantity" Grid.Row="3" Grid.Column="3" Margin="0,0" Click="ChangeQuantity_Click" ClickMode="Press">
+        <Button x:Name="ChangeQuantity" Grid.Row="3" Grid.Column="3" Margin="0,0" PreviewMouseLeftButtonUp="ChangeQuantity_Click" TouchUp="ChangeQuantity_TouchUp" ClickMode="Press">
             <TextBlock x:Name="ChangeQuantityBlock" TextWrapping="Wrap" Text="Change Quantity"/>
         </Button>
         <Button x:Name="QuantityUp" Content="+" Grid.Row="4" Grid.Column="3" Margin="0,0" FontSize="32" Click="QuantityUp_Click" ClickMode="Press"/>

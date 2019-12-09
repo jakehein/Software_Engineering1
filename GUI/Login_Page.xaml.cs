@@ -61,9 +61,9 @@ namespace FinalProject1
         /// </summary>
         /// <param name="sender">Object that triggered the event</param>
         /// <param name="e">Event details</param>
-        private void CreateUserButton_Click(object sender, RoutedEventArgs e)
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new CreateUserPage(this.userController));
+            System.Windows.Application.Current.Shutdown();
         }
 
         /// <summary>
@@ -94,9 +94,12 @@ namespace FinalProject1
         private void EnableTouchKeyboardForUserName(object sender, TouchEventArgs e)
         {
             GUI.OnScreenKeyboard.OnScreenKeyboard keyboard = new GUI.OnScreenKeyboard.OnScreenKeyboard(GUI.OnScreenKeyboard.OnScreenKeyboard.InputType.TEXT, Window.GetWindow(this), UsernameBox.Text);
-            keyboard.ShowDialog();
-            UsernameBox.Text = keyboard.GetResult();
-            UsernameBox.CaretIndex = UsernameBox.Text.Length;
+            bool? dialogResult = keyboard.ShowDialog();
+            if (dialogResult != null && (bool)dialogResult)
+            {
+                UsernameBox.Text = keyboard.GetResult();
+                UsernameBox.CaretIndex = UsernameBox.Text.Length;
+            }
         }
 
         /// <summary>
@@ -107,8 +110,11 @@ namespace FinalProject1
         private void EnableTouchKeyboardForPassword(object sender, TouchEventArgs e)
         {
             GUI.OnScreenKeyboard.OnScreenKeyboard keyboard = new GUI.OnScreenKeyboard.OnScreenKeyboard(GUI.OnScreenKeyboard.OnScreenKeyboard.InputType.PASSWORD, Window.GetWindow(this), PasswordBox.Password);
-            keyboard.ShowDialog();
-            PasswordBox.Password = keyboard.GetResult();
+            bool? dialogResult = keyboard.ShowDialog();
+            if (dialogResult != null && (bool)dialogResult)
+            {
+                PasswordBox.Password = keyboard.GetResult();
+            }
         }
     }
 }

@@ -26,6 +26,7 @@ namespace FinalProject1
         {
             InitializeComponent();
             UpdateTillDisplay();
+            CashAmountText.Focus();
         }
 
         /// <summary>
@@ -130,6 +131,16 @@ namespace FinalProject1
             else
             {
                 return false;
+            }
+        }
+
+        private void CashAmountText_TouchUp(object sender, TouchEventArgs e)
+        {
+            GUI.OnScreenKeyboard.OnScreenNumPad numberPad = new GUI.OnScreenKeyboard.OnScreenNumPad(CashAmountText.Text);
+            bool? dialogResult = numberPad.ShowDialog();
+            if (dialogResult != null && (bool)dialogResult)
+            {
+                CashAmountText.Text = numberPad.GetResult();
             }
         }
     }

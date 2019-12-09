@@ -135,6 +135,7 @@ namespace FinalProject1.GUI.OnScreenKeyboard
         /// <param name="e"></param>
         private void EnterKeyPressed(object sender, TouchEventArgs e)
         {
+            owner.DialogResult = true;
             owner.Finish();
         }
 

@@ -47,6 +47,6 @@
         <TextBox x:Name="UsernameBox" Text="" Background="Ivory" Grid.Row="3" MaxLength="12" Grid.Column="4" Grid.ColumnSpan="4" Margin="0,0" FontSize="32" TabIndex="1" SizeChanged="UsernameBox_SizeChanged" TouchUp="EnableTouchKeyboardForUserName"/>
         <Button x:Name="LoginButton" Content="Login" Grid.Row="5" Grid.Column="4" Grid.ColumnSpan="2" FontSize="24" Click="LoginButton_Click" ClickMode="Press" Margin="0,6.4,0,0.4" TabIndex="3" IsDefault="True"/>
         <Label x:Name="errorLabel" Content="" Grid.Column="4" HorizontalAlignment="Left" Margin="0,19,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <Button x:Name="CreateUserButton" Content="Create User" Grid.Row="5" Grid.Column="6" Grid.ColumnSpan="2" FontSize="24" Click="CreateUserButton_Click" ClickMode="Press" Margin="0,6,0,1" TabIndex="4"/>
+        <Button x:Name="ExitButton" Content="Exit" Grid.Row="5" Grid.Column="6" Grid.ColumnSpan="2" FontSize="24" Click="ExitButton_Click" ClickMode="Press" Margin="0,6,0,1" TabIndex="4"/>
     </Grid>
 </Page>

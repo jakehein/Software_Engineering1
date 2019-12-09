@@ -200,7 +200,7 @@ namespace FinalProject1
         /// </summary>
         private void ExitBtn_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new MainMenu());
+            this.NavigationService.Navigate(new GUI.Management());
         }
 
         /// <summary>

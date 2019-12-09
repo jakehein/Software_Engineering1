@@ -141,6 +141,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="GUI\Management.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GUI\OnScreenKeyboard\ChangeKeyboard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -154,6 +158,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GUI\OnScreenKeyboard\OnScreenKeyboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\OnScreenKeyboard\OnScreenNumPad.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -179,6 +187,9 @@
     <Compile Include="GUI\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Management.xaml.cs">
+      <DependentUpon>Management.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\OnScreenKeyboard\ChangeKeyboard.xaml.cs">
       <DependentUpon>ChangeKeyboard.xaml</DependentUpon>
     </Compile>
@@ -190,6 +201,9 @@
     </Compile>
     <Compile Include="GUI\OnScreenKeyboard\OnScreenKeyboard.xaml.cs">
       <DependentUpon>OnScreenKeyboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\OnScreenKeyboard\OnScreenNumPad.xaml.cs">
+      <DependentUpon>OnScreenNumPad.xaml</DependentUpon>
     </Compile>
     <Compile Include="GUI\ReturnPage.xaml.cs">
       <DependentUpon>ReturnPage.xaml</DependentUpon>

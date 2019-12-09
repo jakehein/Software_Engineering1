@@ -58,7 +58,7 @@ namespace FinalProject1
         }
         private void MainMenu_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.GoBack();
+            this.NavigationService.Navigate(new MainMenu());
         }
 
         /// <summary>
@@ -338,6 +338,27 @@ namespace FinalProject1
             else
             {
                 return true;
+            }
+        }
+
+        private void ChangeQuantity_TouchUp(object sender, TouchEventArgs e)
+        {
+            if (Transaction.SelectedItem != null)
+            {
+                GUI.OnScreenKeyboard.OnScreenNumPad dialog = new GUI.OnScreenKeyboard.OnScreenNumPad("");
+                bool? result = dialog.ShowDialog();
+                if (result != null && (bool)result)
+                {
+                    ItemDTO item = ((DTOs.SalesItemDTO)Transaction.SelectedItem).Item;
+                    int quantity = ((DTOs.SalesItemDTO)Transaction.SelectedItem).Quantity;
+                    cartController.ChangeQuantity(int.Parse(dialog.GetResult()), item);
+                    UpdateTransactionView();
+                    UpdateTotal();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Select an Item from the transaction to change the quantity");
             }
         }
     }

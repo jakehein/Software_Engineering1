@@ -46,7 +46,9 @@ namespace FinalProject1
                 else if(ValidatePassword(password, reEnteredPasssword))
                 {
                     userController.CreateUser(username, password, hasManagerAccess);
-                    this.NavigationService.Navigate(new CashTillStartPage());
+                    ClearFields();
+                    ErrorLabel.Content = "User successfully created";
+                    //this.NavigationService.Navigate(new CashTillStartPage());
                 }
                 else
                 {
@@ -82,9 +84,19 @@ namespace FinalProject1
             return isValid;
         }
 
+        /// <summary>
+        /// Clear out the textboxes.
+        /// </summary>
+        private void ClearFields()
+        {
+            UsernameBox.Text = "";
+            PasswordBox.Password = "";
+            ReEnterPasswordBox.Password = "";
+        }
+
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new Login_Page());
+            this.NavigationService.Navigate(new GUI.Management());
         }
 
         private void UsernameBox_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -105,23 +117,32 @@ namespace FinalProject1
         private void UsernameBox_TouchUp(object sender, TouchEventArgs e)
         {
             GUI.OnScreenKeyboard.OnScreenKeyboard keyboard = new GUI.OnScreenKeyboard.OnScreenKeyboard(GUI.OnScreenKeyboard.OnScreenKeyboard.InputType.TEXT, Window.GetWindow(this), UsernameBox.Text);
-            keyboard.ShowDialog();
-            UsernameBox.Text = keyboard.GetResult();
-            UsernameBox.CaretIndex = UsernameBox.Text.Length;
+            bool? dialogResult = keyboard.ShowDialog();
+            if (dialogResult != null && (bool)dialogResult)
+            {
+                UsernameBox.Text = keyboard.GetResult();
+                UsernameBox.CaretIndex = UsernameBox.Text.Length;
+            }
         }
 
         private void PasswordBox_TouchUp(object sender, TouchEventArgs e)
         {
             GUI.OnScreenKeyboard.OnScreenKeyboard keyboard = new GUI.OnScreenKeyboard.OnScreenKeyboard(GUI.OnScreenKeyboard.OnScreenKeyboard.InputType.PASSWORD, Window.GetWindow(this), PasswordBox.Password);
-            keyboard.ShowDialog();
-            PasswordBox.Password = keyboard.GetResult();
+            bool? dialogResult = keyboard.ShowDialog();
+            if (dialogResult != null && (bool)dialogResult)
+            {
+                PasswordBox.Password = keyboard.GetResult();
+            }
         }
 
         private void ReEnterPasswordBox_TouchUp(object sender, TouchEventArgs e)
         {
             GUI.OnScreenKeyboard.OnScreenKeyboard keyboard = new GUI.OnScreenKeyboard.OnScreenKeyboard(GUI.OnScreenKeyboard.OnScreenKeyboard.InputType.PASSWORD, Window.GetWindow(this), ReEnterPasswordBox.Password);
-            keyboard.ShowDialog();
-            ReEnterPasswordBox.Password = keyboard.GetResult();
+            bool? dialogResult = keyboard.ShowDialog();
+            if (dialogResult != null && (bool)dialogResult)
+            {
+                ReEnterPasswordBox.Password = keyboard.GetResult();
+            }
         }
     }
 }

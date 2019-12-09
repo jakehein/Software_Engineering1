@@ -28,7 +28,7 @@ namespace FinalProject1
             //Remove menu options if the user is not authorized
             if(userController.CurrentUser.HasManagerAccess == false)
             {
-                InventoryButton.IsEnabled = false;
+                ManagementButton.IsEnabled = false;
             }
 
 
@@ -47,9 +47,9 @@ namespace FinalProject1
         /// </summary>
         /// <param name="sender">Object that triggered the event</param>
         /// <param name="e">Event details</param>
-        private void InventoryButton_Click(object sender, RoutedEventArgs e)
+        private void ManagerButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new InventoryPage());
+            this.NavigationService.Navigate(new GUI.Management());
         }
 
         /// <summary>

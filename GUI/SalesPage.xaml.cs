@@ -313,27 +313,6 @@ namespace FinalProject1
             }
         }
 
-        private void ChangeQuantity_Click(object sender, RoutedEventArgs e)
-        {
-            if (Transaction.SelectedItem != null)
-            {
-                GUI.ChangeQuantityOnClickDialog dialog = new GUI.ChangeQuantityOnClickDialog();
-                bool? result = dialog.ShowDialog();
-                if (result != null && (bool)result)
-                {
-                    ItemDTO item = ((DTOs.SalesItemDTO)Transaction.SelectedItem).Item;
-                    int quantity = ((DTOs.SalesItemDTO)Transaction.SelectedItem).Quantity;
-                    cartController.ChangeQuantity(int.Parse(dialog.Result), item);
-                    UpdateTransactionView();
-                    UpdateTotal();
-                }
-            }
-            else
-            {
-                MessageBox.Show("Select an Item from the transaction to change the quantity");
-            }
-        }
-
         /// <summary>
         /// This method checks the amount of money present in the till and displays a warning to the user if it is determined
         /// as low.
@@ -357,6 +336,48 @@ namespace FinalProject1
             {
                 decimal amountInDrawer = drawerController.CurrentCashInDrawer();
                 MessageBox.Show("Cash Till is Running High. Amount is currently: $" + amountInDrawer + ". Please Withdraw More.");
+            }
+        }
+
+        private void ChangeQuantity_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (Transaction.SelectedItem != null)
+            {
+                GUI.ChangeQuantityOnClickDialog dialog = new GUI.ChangeQuantityOnClickDialog();
+                bool? result = dialog.ShowDialog();
+                if (result != null && (bool)result)
+                {
+                    ItemDTO item = ((DTOs.SalesItemDTO)Transaction.SelectedItem).Item;
+                    int quantity = ((DTOs.SalesItemDTO)Transaction.SelectedItem).Quantity;
+                    cartController.ChangeQuantity(int.Parse(dialog.Result), item);
+                    UpdateTransactionView();
+                    UpdateTotal();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Select an Item from the transaction to change the quantity");
+            }
+        }
+
+        private void ChangeQuantity_TouchUp(object sender, TouchEventArgs e)
+        {
+            if (Transaction.SelectedItem != null)
+            {
+                GUI.OnScreenKeyboard.OnScreenNumPad numberPad = new GUI.OnScreenKeyboard.OnScreenNumPad("");
+                bool? dialogResult = numberPad.ShowDialog();
+                if (dialogResult != null && (bool)dialogResult)
+                {
+                    ItemDTO item = ((DTOs.SalesItemDTO)Transaction.SelectedItem).Item;
+                    int quantity = ((DTOs.SalesItemDTO)Transaction.SelectedItem).Quantity;
+                    cartController.ChangeQuantity(int.Parse(numberPad.GetResult()), item);
+                    UpdateTransactionView();
+                    UpdateTotal();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Select an Item from the transaction to change the quantity");
             }
         }
     }
