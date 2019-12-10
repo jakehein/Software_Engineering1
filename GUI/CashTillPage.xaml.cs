@@ -143,5 +143,15 @@ namespace FinalProject1
                 CashAmountText.Text = numberPad.GetResult();
             }
         }
+
+        /// <summary>
+        /// Update the font size on window resize
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CashAmountText_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            ((TextBox)sender).FontSize = ((TextBox)sender).ActualHeight * .7;
+        }
     }
 }
