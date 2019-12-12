@@ -37,7 +37,7 @@ namespace FinalProject1
             }
             else
             {
-                CurrentUser = new User() { Username = username, Password = password, HasManagerAccess = userDataAccess.DoesUserHaveInvetoryAccess(username) };
+                CurrentUser = new User() { Username = username, Password = password, HasManagerAccess = userDataAccess.DoesUserHaveManagerAccess(username) };
             }
             return errorMessage;
         }
