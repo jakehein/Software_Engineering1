@@ -16,6 +16,14 @@ namespace FinalProject1
         /// <returns>boolean detailing if operation was carried out</returns>
         bool CreateItem(ItemDTO item);
 
+
+        /**
+         * This method checks to see if a pLU and item are valid input for update into iDA. If so,
+         * the item is updated into iDA via a call to UpdateItem();
+         * @param UPC of item to be updated
+         * @param item object being updated
+         * @return boolean detailing if operation was carried out
+         */
         bool UpdateItem(string uPC, ItemDTO item);
 
         /// <summary>
