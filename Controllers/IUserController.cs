@@ -19,9 +19,6 @@ namespace FinalProject1
         /// if this list is empty, it can be assumed that the user was successfully logged in</returns>
         string LogIn(string userName, string password);
 
-        //TODO: figure out if we are keeping this
-       // bool Override(string pin);
-
         /// <summary>
         /// Creates a user with the given properties
         /// </summary>

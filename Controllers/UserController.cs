@@ -80,11 +80,5 @@ namespace FinalProject1
         {
             CurrentUser = null;
         }
-
-        //TODO: figure out if we are keeping this
-        //public bool Override(string password)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }
