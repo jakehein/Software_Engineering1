@@ -112,17 +112,7 @@ namespace FinalProject1
         /// </summary>
         /// <returns>List<ItemDTO> containing all cart items</returns>
         public List<DTOs.SalesItemDTO> GetAllItems()
-        //public Dictionary<Item, int> GetAllItems()
         {
-            //List<ItemDTO> items = new List<ItemDTO>();
-            //foreach(KeyValuePair<Item, int> kvp in cart.Items)
-            //{
-            //    for(int i = 0; i < kvp.Value; i++)
-            //    {
-            //        items.Add(Item.createDTOfromItem(kvp.Key));
-            //    }
-            //}
-            //return items;
             List<DTOs.SalesItemDTO> items = new List<DTOs.SalesItemDTO>();
             foreach (DTOs.SalesItemDTO si in cart.Items)
             {
