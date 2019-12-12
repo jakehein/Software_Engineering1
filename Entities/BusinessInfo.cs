@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/// <summary>
+/// Class representing the information about the business running the POS
+/// </summary>
 namespace FinalProject1
 {
     class BusinessInfo
@@ -23,6 +26,11 @@ namespace FinalProject1
         public static string Phone { get { return _phone; } }
 
         private BusinessInfo() { }
+
+        /// <summary>
+        /// Constructor taking an IBusinessInfoDataAccess to fill the objects properties with
+        /// </summary>
+        /// <param name="iBIDA">The data access class uesed to fill the business info</param>
         public BusinessInfo(IBusinessInfoDataAccess iBIDA)
         {
             _name = iBIDA.Name;

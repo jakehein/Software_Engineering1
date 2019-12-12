@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace FinalProject1
 {
+    /// <summary>
+    /// The class representing the user of a system
+    /// </summary>
     public class User
     {
         private string username;

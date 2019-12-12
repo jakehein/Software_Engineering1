@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace FinalProject1
 {
+    /// <summary>
+    /// The class represnting the cash drawer of the system
+    /// </summary>
     class Drawer
     {
         public static Drawer drawer = new Drawer();
