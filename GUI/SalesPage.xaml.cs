@@ -34,9 +34,7 @@ namespace FinalProject1
             PopulateItemList();
             FillCategoryCombo();
             FillItemList(itemDTOs);
-            //adding this to remove bug of items appearing in transaction after navigating away and then coming back to page
             cartController.CancelTransaction();
-            //remove above if still occurs
         }
 
         /// <summary>
@@ -47,15 +45,21 @@ namespace FinalProject1
             itemDTOs = inventoryControl.GetAllItems();
         }
 
-        void FillItemList(IEnumerable<ItemDTO> items)
+        /// <summary>
+        /// Sets the ItemsSource for the Inventory element to the items parameter.
+        /// </summary>
+        /// <param name="items"></param>
+        private void FillItemList(IEnumerable<ItemDTO> items)
         {
             Inventory.ItemsSource = items;
         }
 
-        void FillCategoryCombo()
+        /// <summary>
+        /// Gets all the categories and sorts them before setting them to the Category element's ItemsSource.
+        /// </summary>
+        private void FillCategoryCombo()
         {
             List<CategoryDTO> categories = categoryControl.GetAllCategories();
-            //CategoryListCombo.ItemsSource = categoryControl.GetAllCategories();
             categories.Add(new CategoryDTO { CategoryID = 0, Items = null, Name = "All" });
             categories.Sort();
             var sortedCategories = categories.OrderBy(x => x.Name);
@@ -85,10 +89,15 @@ namespace FinalProject1
             UpdateTotal();
         }
 
+        /// <summary>
+        /// Open the changeKeyboard and start calculating change for the user.
+        /// Afterwards, checks are made for low and high cash warnings.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Pay_Click(object sender, RoutedEventArgs e)
         {
             string total = PayTotal.Text;
-
             GUI.OnScreenKeyboard.ChangeKeyboard changeKeyboard = new GUI.OnScreenKeyboard.ChangeKeyboard(total);
             
             changeKeyboard.ShowDialog();
@@ -97,9 +106,7 @@ namespace FinalProject1
                 MessageBox.Show("Change: " + drawerController.CashOut(changeKeyboard.Total, decimal.Parse(total)));
                 Transaction.ItemsSource = cartController.Checkout();
                 UpdateTotal();
-                //drawerController.AddToDrawer(Decimal.Parse(total));
             }
-
             // After cash is taken out this will determine if the cash left in the drawer is low or high
             LowCashWarningCheck();
             HighCashWarningCheck();
@@ -196,10 +203,6 @@ namespace FinalProject1
             {
                 MessageBox.Show("Item with the entered UPC not found!!!");
             }
-            //var items = item.Cast<ItemDTO>().Where(item => item.Category.CategoryID == ((CategoryDTO)e.AddedItems[0]).CategoryID);
-            //IEnumerable<ItemDTO> item;
-            //FillItemList(item);
-
         }
 
         private void UpC_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -305,7 +308,6 @@ namespace FinalProject1
                 }
                 reading = false;
             }
-            //
             else if(reading && !Keyboard.IsKeyDown(Key.LeftCtrl))
             {
                 // get the character from the event item and add it to the current upc
