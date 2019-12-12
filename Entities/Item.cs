@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace FinalProject1
 {
+    /// <summary>
+    /// The class representing the items that are present in the inventory system
+    /// </summary>
     class Item
     {
         public long ItemID { get; set; }

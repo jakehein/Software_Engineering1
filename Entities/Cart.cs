@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace FinalProject1
 {
+    /// <summary>
+    /// The class representing the cart of items 
+    /// </summary>
     class Cart
     {
         public List<DTOs.SalesItemDTO> Items;
@@ -106,6 +109,10 @@ namespace FinalProject1
             return true;
         }
 
+        /// <summary>
+        /// Checks out the items currently in the cart
+        /// </summary>
+        /// <param name="inventoryDataAccess">The inventory data access to use to chekcout the items</param>
         public void Checkout(IInventoryDataAccess inventoryDataAccess)
         {
             foreach(DTOs.SalesItemDTO si in Items)
@@ -115,6 +122,10 @@ namespace FinalProject1
             }
         }
 
+        /// <summary>
+        /// Returns the items in the cart
+        /// </summary>
+        /// <param name="inventoryDataAccess">The inventory Data Access to use to checkout the items</param>
         public void ReturnItems(IInventoryDataAccess inventoryDataAccess)
         {
             foreach (DTOs.SalesItemDTO si in Items)

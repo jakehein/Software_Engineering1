@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace FinalProject1
 {
+    /// <summary>
+    /// The class represnting a Category of items in the inventory system
+    /// </summary>
     class Category
     {
         public long CategoryID { get; set; }
