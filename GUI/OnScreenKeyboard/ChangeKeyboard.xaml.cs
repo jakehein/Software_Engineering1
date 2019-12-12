@@ -165,9 +165,6 @@ namespace FinalProject1.GUI.OnScreenKeyboard
         /// <param name="e"></param>
         private void CancelBtn_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            // After cash is taken out this will determine if the cash left in the drawer is low or high
-            LowCashWarningCheck();
-            HighCashWarningCheck();
             Close();
         }
 
@@ -182,32 +179,6 @@ namespace FinalProject1.GUI.OnScreenKeyboard
             Total = decimal.Parse((String)TotalLabel.Content);
             IsTransactionComplete = true;
             CancelBtn_MouseUp(sender, e);
-        }
-
-        /// <summary>
-        /// This method checks the amount of money present in the till and displays a warning to the user if it is determined
-        /// as low.
-        /// </summary>
-        public void LowCashWarningCheck()
-        {
-            if (drawerController.cashIsLow())
-            {
-                decimal amountInDrawer = drawerController.CurrentCashInDrawer();
-                MessageBox.Show("Cash Till is Running Low. Amount is currently: $" + amountInDrawer + ". Please Add More.");
-            }
-        }
-
-        /// <summary>
-        /// This method checks the amount of money present in the till and displays a warning to the user if it is determined
-        /// as high.
-        /// </summary>
-        public void HighCashWarningCheck()
-        {
-            if (drawerController.cashIsHigh())
-            {
-                decimal amountInDrawer = drawerController.CurrentCashInDrawer();
-                MessageBox.Show("Cash Till is Running High. Amount is currently: $" + amountInDrawer + ". Please Withdraw More.");
-            }
         }
     }
 }

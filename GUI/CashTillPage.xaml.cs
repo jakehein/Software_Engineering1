@@ -73,11 +73,11 @@ namespace FinalProject1
         }
 
         /// <summary>
-        /// Withdrawls amount specified within CashAmountText from the till/drawer.
+        /// Withdrawals amount specified within CashAmountText from the till/drawer.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void WithdrawlBtn_Click(object sender, RoutedEventArgs e)
+        private void WithdrawalBtn_Click(object sender, RoutedEventArgs e)
         {
             decimal cashDecimal;
             string cashAmount = CashAmountText.Text;
@@ -85,7 +85,7 @@ namespace FinalProject1
 
             if (IsValidAmount())
             {
-                decimal amountTaken = drawerController.WithdrawlFromDrawer(cashDecimal);
+                decimal amountTaken = drawerController.WithdrawalFromDrawer(cashDecimal);
                 string cash = String.Format("{0:C}", cashDecimal);
                 if (amountTaken >= 0)
                 {

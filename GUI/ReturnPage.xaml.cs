@@ -101,7 +101,7 @@ namespace FinalProject1
             if (isEnoughMoneyInTill())
             {
                 Transaction.ItemsSource = cartController.ReturnItems();
-                drawerController.WithdrawlFromDrawer(decimal.Parse(total));
+                drawerController.WithdrawalFromDrawer(decimal.Parse(total));
                 MessageBox.Show("Refund total is: " + total);
                 UpdateTotal();
             }

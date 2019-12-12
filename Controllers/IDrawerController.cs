@@ -40,7 +40,7 @@ namespace FinalProject1
         /// </summary>
         /// <param name="moneyToTake">The amount of money to take from the drawer</param>
         /// <returns>The new total amount of money in the drawer</returns>
-        decimal WithdrawlFromDrawer(decimal moneyToTake);
+        decimal WithdrawalFromDrawer(decimal moneyToTake);
 
         /// <summary>
         /// This method determines if the cash in the drawer is low.

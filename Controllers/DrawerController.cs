@@ -29,7 +29,7 @@ namespace FinalProject1
         /// </summary>
         /// <param name="moneyToTake">The amount of money to take from the drawer</param>
         /// <returns>The new total amount of money in the drawer or -1.0 if the take was invalid</returns>
-        public decimal WithdrawlFromDrawer(decimal moneyToTake)
+        public decimal WithdrawalFromDrawer(decimal moneyToTake)
         {
             if (moneyToTake > 0 && moneyToTake <= Drawer.drawer.Money)
             {
