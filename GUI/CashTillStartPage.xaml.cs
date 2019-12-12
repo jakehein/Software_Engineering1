@@ -72,6 +72,11 @@ namespace FinalProject1
             }
         }
 
+        /// <summary>
+        /// This method handles the on screen keyboard for touch screen users
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CashAmountText_TouchUp(object sender, TouchEventArgs e)
         {
             GUI.OnScreenKeyboard.OnScreenNumPad numberPad = new GUI.OnScreenKeyboard.OnScreenNumPad(CashAmountText.Text);

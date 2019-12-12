@@ -19,6 +19,8 @@ namespace FinalProject1.GUI.OnScreenKeyboard
     /// </summary>
     public partial class ChangeKeyboard : Window
     {
+        private IDrawerController drawerController => ControllerContainer.Instance.DrawerController;
+
         public ChangeKeyboard(string transactionTotal)
         {
             InitializeComponent();
@@ -27,9 +29,8 @@ namespace FinalProject1.GUI.OnScreenKeyboard
             EnterBtn.IsEnabled = false;
             IsTransactionComplete = false;
         }
-        //private string cashTotal;
-        //private bool isTransactionComplete;
-        public string cashTotal; //{ get; set; }
+
+        public string cashTotal;
         public decimal Total { get; set; }
         public bool IsTransactionComplete { get; set; }
 
@@ -106,16 +107,43 @@ namespace FinalProject1.GUI.OnScreenKeyboard
 
         private void CancelBtn_MouseUp(object sender, MouseButtonEventArgs e)
         {
+            // After cash is taken out this will determine if the cash left in the drawer is low or high
+            LowCashWarningCheck();
+            HighCashWarningCheck();
             Close();
         }
 
         private void EnterBtn_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            //double result = Double.Parse((string)TotalLabel.Content) - Double.Parse(CashTotal);
-            //CashTotal = String.Format("{0:#,###0.00}", result);
             Total = decimal.Parse((String)TotalLabel.Content);
             IsTransactionComplete = true;
             CancelBtn_MouseUp(sender, e);
+        }
+
+        /// <summary>
+        /// This method checks the amount of money present in the till and displays a warning to the user if it is determined
+        /// as low.
+        /// </summary>
+        public void LowCashWarningCheck()
+        {
+            if (drawerController.cashIsLow())
+            {
+                decimal amountInDrawer = drawerController.CurrentCashInDrawer();
+                MessageBox.Show("Cash Till is Running Low. Amount is currently: $" + amountInDrawer + ". Please Add More.");
+            }
+        }
+
+        /// <summary>
+        /// This method checks the amount of money present in the till and displays a warning to the user if it is determined
+        /// as high.
+        /// </summary>
+        public void HighCashWarningCheck()
+        {
+            if (drawerController.cashIsHigh())
+            {
+                decimal amountInDrawer = drawerController.CurrentCashInDrawer();
+                MessageBox.Show("Cash Till is Running High. Amount is currently: $" + amountInDrawer + ". Please Withdraw More.");
+            }
         }
     }
 }

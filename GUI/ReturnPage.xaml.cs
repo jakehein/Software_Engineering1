@@ -81,10 +81,8 @@ namespace FinalProject1
                 Transaction.ItemsSource = cartController.ReturnItems();
                 drawerController.WithdrawlFromDrawer(decimal.Parse(total));
                 MessageBox.Show("Refund total is: " + total);
-                //drawerController.CashOut(changeKeyboard.Total, decimal.Parse(total))
                 UpdateTotal();
             }
-
             // After cash is taken out this will determine if the cash left in the drawer is low
             LowCashWarningCheck();
         }
@@ -169,10 +167,6 @@ namespace FinalProject1
             {
                 MessageBox.Show("Item with the entered UPC not found.");
             }
-            //var items = item.Cast<ItemDTO>().Where(item => item.Category.CategoryID == ((CategoryDTO)e.AddedItems[0]).CategoryID);
-            //IEnumerable<ItemDTO> item;
-            //FillItemList(item);
-
         }
 
         private void UpC_SizeChanged(object sender, SizeChangedEventArgs e)

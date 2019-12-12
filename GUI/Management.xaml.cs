@@ -37,7 +37,7 @@ namespace FinalProject1.GUI
         }
 
         /// <summary>
-        /// Navigates the user from the MainMenu page to the Inventory Page
+        /// Navigates the user from the Management page to the Inventory Page
         /// </summary>
         /// <param name="sender">Object that triggered the event</param>
         /// <param name="e">Event details</param>
@@ -46,6 +46,11 @@ namespace FinalProject1.GUI
             this.NavigationService.Navigate(new InventoryPage());
         }
 
+        /// <summary>
+        /// Navigates the user from the Management page to the MainMenu Page
+        /// </summary>
+        /// <param name="sender">Object that triggered the event</param>
+        /// <param name="e">Event details</param>
         private void MainMenuButton_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new MainMenu());

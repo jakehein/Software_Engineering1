@@ -35,7 +35,6 @@ namespace FinalProject1
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand(commandString, conn);
                 cmd.Parameters.AddWithValue("@CategoryID", categoryID);
-                //result = int.Parse(cmd.ExecuteScalar().ToString());
                 result = int.Parse(cmd.ExecuteNonQuery().ToString());
             }
             return result > 0;
@@ -89,9 +88,8 @@ namespace FinalProject1
                 result = int.Parse(cmd.ExecuteNonQuery().ToString());
                 cmd.Dispose();
             }
-        
-            return result > 0;
 
+            return result > 0;
         }
 
         /// <summary>
@@ -139,7 +137,6 @@ namespace FinalProject1
                 }
                 cmd.Dispose();
             }
-
             return category;
         }
 
@@ -202,7 +199,6 @@ namespace FinalProject1
                 }
                 cmd.Dispose();
             }
-
             return category;
         }
 

@@ -30,8 +30,6 @@ namespace FinalProject1
             {
                 ManagementButton.IsEnabled = false;
             }
-
-
         }
 
         /// <summary>

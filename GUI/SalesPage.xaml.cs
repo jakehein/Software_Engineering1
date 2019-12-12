@@ -34,9 +34,7 @@ namespace FinalProject1
             PopulateItemList();
             FillCategoryCombo();
             FillItemList(itemDTOs);
-            //adding this to remove bug of items appearing in transaction after navigating away and then coming back to page
             cartController.CancelTransaction();
-            //remove above if still occurs
         }
 
         /// <summary>
@@ -55,7 +53,6 @@ namespace FinalProject1
         void FillCategoryCombo()
         {
             List<CategoryDTO> categories = categoryControl.GetAllCategories();
-            //CategoryListCombo.ItemsSource = categoryControl.GetAllCategories();
             categories.Add(new CategoryDTO { CategoryID = 0, Items = null, Name = "All" });
             categories.Sort();
             var sortedCategories = categories.OrderBy(x => x.Name);
@@ -97,12 +94,7 @@ namespace FinalProject1
                 MessageBox.Show("Change: " + drawerController.CashOut(changeKeyboard.Total, decimal.Parse(total)));
                 Transaction.ItemsSource = cartController.Checkout();
                 UpdateTotal();
-                //drawerController.AddToDrawer(Decimal.Parse(total));
             }
-
-            // After cash is taken out this will determine if the cash left in the drawer is low or high
-            LowCashWarningCheck();
-            HighCashWarningCheck();
         }
 
         /// <summary>
@@ -194,12 +186,8 @@ namespace FinalProject1
             }
             else
             {
-                MessageBox.Show("Item with the entered UPC not found!!!");
+                MessageBox.Show("Item with the entered UPC not found.");
             }
-            //var items = item.Cast<ItemDTO>().Where(item => item.Category.CategoryID == ((CategoryDTO)e.AddedItems[0]).CategoryID);
-            //IEnumerable<ItemDTO> item;
-            //FillItemList(item);
-
         }
 
         private void UpC_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -305,37 +293,10 @@ namespace FinalProject1
                 }
                 reading = false;
             }
-            //
             else if(reading && !Keyboard.IsKeyDown(Key.LeftCtrl))
             {
                 // get the character from the event item and add it to the current upc
                 scannerUPCString += e.Key.ToString()[1];
-            }
-        }
-
-        /// <summary>
-        /// This method checks the amount of money present in the till and displays a warning to the user if it is determined
-        /// as low.
-        /// </summary>
-        public void LowCashWarningCheck()
-        {
-            if (drawerController.cashIsLow())
-            {
-                decimal amountInDrawer = drawerController.CurrentCashInDrawer();
-                MessageBox.Show("Cash Till is Running Low. Amount is currently: $" + amountInDrawer + ". Please Add More.");
-            }
-        }
-
-        /// <summary>
-        /// This method checks the amount of money present in the till and displays a warning to the user if it is determined
-        /// as high.
-        /// </summary>
-        public void HighCashWarningCheck()
-        {
-            if (drawerController.cashIsHigh())
-            {
-                decimal amountInDrawer = drawerController.CurrentCashInDrawer();
-                MessageBox.Show("Cash Till is Running High. Amount is currently: $" + amountInDrawer + ". Please Withdraw More.");
             }
         }
 
