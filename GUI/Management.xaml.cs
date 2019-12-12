@@ -46,6 +46,11 @@ namespace FinalProject1.GUI
             this.NavigationService.Navigate(new InventoryPage());
         }
 
+        /// <summary>
+        /// Navigates the user to a new MainMenu page.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainMenuButton_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new MainMenu());
