@@ -30,16 +30,12 @@ namespace FinalProject1
         /// <returns>true if item is removed successfully</returns>
         bool RemoveItem(ItemDTO item);
 
-        //List<string> AllUPCs { get; }
-
         /// <summary>
         /// This method takes a UPC and returns the ItemDTO
         /// </summary>
         /// <param name="uPC"> is the name of the UPC being queried</param>
         /// <returns>ItemDTO of the item with the specified UPC</returns>
         ItemDTO GetItem(string uPC);
-
-        //List<ItemDTO> GetAllItems();
 
         /// <summary>
         /// Get all the items contained in the cart in a List
