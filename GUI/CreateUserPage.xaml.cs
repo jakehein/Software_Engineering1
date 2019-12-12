@@ -28,14 +28,19 @@ namespace FinalProject1
             InitializeComponent();
             UsernameBox.Focus();
         }
-
+        
+        /// <summary>
+        /// Create a user by reading in the text fields and manager access.
+        /// Display errors in the event that a username is taken or something else is wrong.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CreateUserButton_Click(object sender, RoutedEventArgs e)
         {
             string username = UsernameBox.Text;
             string password = PasswordBox.Password;
             string reEnteredPasssword = ReEnterPasswordBox.Password;
             bool hasManagerAccess = ManagerAccessCheckbox.IsChecked.Value;
-
 
             if(ValidateUsername(username))
             {
@@ -48,7 +53,6 @@ namespace FinalProject1
                     userController.CreateUser(username, password, hasManagerAccess);
                     ClearFields();
                     ErrorLabel.Content = "User successfully created";
-                    //this.NavigationService.Navigate(new CashTillStartPage());
                 }
                 else
                 {
@@ -62,6 +66,11 @@ namespace FinalProject1
 
         }
 
+        /// <summary>
+        /// Validate that a username is the right length.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         private bool ValidateUsername(string username)
         {
             bool isValid = false;
@@ -73,6 +82,13 @@ namespace FinalProject1
             return isValid;
         }
 
+        /// <summary>
+        /// Validate that a password contains all the required characters and
+        /// that it is entered correctly two times.
+        /// </summary>
+        /// <param name="password"></param>
+        /// <param name="reEnteredPassword"></param>
+        /// <returns></returns>
         private bool ValidatePassword(string password, string reEnteredPassword)
         {
             bool isValid = false;
@@ -94,26 +110,51 @@ namespace FinalProject1
             ReEnterPasswordBox.Password = "";
         }
 
+        /// <summary>
+        /// Navigate back to the Management page.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new GUI.Management());
         }
 
+        /// <summary>
+        /// Change the font size of the Username textbox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UsernameBox_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             ((TextBox)sender).FontSize = ((TextBox)sender).ActualHeight * .7;
         }
 
+        /// <summary>
+        /// Change the font size of the Password's Passwordbox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PasswordBox_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             ((PasswordBox)sender).FontSize = ((PasswordBox)sender).ActualHeight * .7;
         }
 
+        /// <summary>
+        /// Change the font size of the second Password's PasswordBox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ReEnterPasswordBox_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             ((PasswordBox)sender).FontSize = ((PasswordBox)sender).ActualHeight * .7;
         }
 
+        /// <summary>
+        /// Display a touch keyboard if the user touches the username box.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UsernameBox_TouchUp(object sender, TouchEventArgs e)
         {
             GUI.OnScreenKeyboard.OnScreenKeyboard keyboard = new GUI.OnScreenKeyboard.OnScreenKeyboard(GUI.OnScreenKeyboard.OnScreenKeyboard.InputType.TEXT, Window.GetWindow(this), UsernameBox.Text);
@@ -125,6 +166,11 @@ namespace FinalProject1
             }
         }
 
+        /// <summary>
+        /// Display a touch keyboard if the user touches the password box.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PasswordBox_TouchUp(object sender, TouchEventArgs e)
         {
             GUI.OnScreenKeyboard.OnScreenKeyboard keyboard = new GUI.OnScreenKeyboard.OnScreenKeyboard(GUI.OnScreenKeyboard.OnScreenKeyboard.InputType.PASSWORD, Window.GetWindow(this), PasswordBox.Password);
@@ -135,6 +181,11 @@ namespace FinalProject1
             }
         }
 
+        /// <summary>
+        /// Display a touch keyboard if the user touches the second password box.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ReEnterPasswordBox_TouchUp(object sender, TouchEventArgs e)
         {
             GUI.OnScreenKeyboard.OnScreenKeyboard keyboard = new GUI.OnScreenKeyboard.OnScreenKeyboard(GUI.OnScreenKeyboard.OnScreenKeyboard.InputType.PASSWORD, Window.GetWindow(this), ReEnterPasswordBox.Password);
