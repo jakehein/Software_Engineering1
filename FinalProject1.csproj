@@ -211,7 +211,6 @@
     <Compile Include="GUI\SalesPage.xaml.cs">
       <DependentUpon>SalesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\SQLDB.cs" />
     <Compile Include="Controllers\IInventoryController.cs" />
     <Compile Include="DataAccess\IInventoryDataAccess.cs" />
     <Compile Include="Controllers\InventoryController.cs" />
