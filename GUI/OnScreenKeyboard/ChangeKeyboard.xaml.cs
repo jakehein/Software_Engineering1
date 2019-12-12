@@ -30,11 +30,31 @@ namespace FinalProject1.GUI.OnScreenKeyboard
             IsTransactionComplete = false;
         }
 
-        public string cashTotal;
+        /// <summary>
+        /// Total amount that the transaction is worth.
+        /// </summary>
+        private string cashTotal;
+
+        /// <summary>
+        /// Gets or sets the amount of money given to the user when making a purchase.
+        /// </summary>
         public decimal Total { get; set; }
+
+        /// <summary>
+        /// Returns True or False depending on whether the user has completed the transaction.
+        /// </summary>
         public bool IsTransactionComplete { get; set; }
 
+        /// <summary>
+        /// Displays "Enter" vertically on the EnterBtn.
+        /// </summary>
         private const string EnterText = "E\nN\nT\nE\nR";
+
+        /// <summary>
+        /// Takes in a string value and concatenates it to the end of TotalLabel's contents.
+        /// The decimal place is moved accordingly, and a check to IsEnterEnabled is called.
+        /// </summary>
+        /// <param name="value">string character to be inserted</param>
         private void Increase_PayTotal(string value)
         {
             string total = (string)TotalLabel.Content;
@@ -50,6 +70,10 @@ namespace FinalProject1.GUI.OnScreenKeyboard
 
         }
 
+        /// <summary>
+        /// Compares the contents of TotalLabel and cashTotal and enables
+        /// the EnterBtn if TotalLabel >= cashTotal, else it is disabled.
+        /// </summary>
         private void IsEnterEnabled()
         {
             Double a = Double.Parse((string)TotalLabel.Content);
@@ -65,6 +89,10 @@ namespace FinalProject1.GUI.OnScreenKeyboard
             }
         }
 
+        /// <summary>
+        /// The character at the end of TotalLabel's contents is removed and the
+        /// decimal place is moved accordingly. A check to IsEnterEnabled is then called.
+        /// </summary>
         private void Decrease_PayTotal()
         {
             string total = (string)TotalLabel.Content;
@@ -79,32 +107,62 @@ namespace FinalProject1.GUI.OnScreenKeyboard
             IsEnterEnabled();
         }
 
+        /// <summary>
+        /// Changes the font size of the keyboard numbers.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Number_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             ((Label)sender).FontSize = ((Label)sender).ActualHeight / 2;
         }
 
+        /// <summary>
+        /// Changes the font size of the keyboard EnterBtn.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Enter_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             ((Label)sender).FontSize = ((Label)sender).ActualWidth / 5;
             ((Label)sender).FontSize = ((Label)sender).ActualHeight / 7;
         }
 
+        /// <summary>
+        /// Changes the font size of the keyboard TotalLabel.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Total_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             ((Label)sender).FontSize = ((Label)sender).ActualHeight / 1.5;
         }
 
+        /// <summary>
+        /// Calls the Decrease_PayTotal method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeleteBtn_MouseUp(object sender, MouseButtonEventArgs e)
         {
             Decrease_PayTotal();
         }
 
+        /// <summary>
+        /// Calls the Increase_PayTotal method by passing in the sender's string value.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Number_MouseUp(object sender, MouseButtonEventArgs e)
         {
             Increase_PayTotal(((Label)sender).Content.ToString());
         }
 
+        /// <summary>
+        /// Closes the ChangeKeyboard window.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelBtn_MouseUp(object sender, MouseButtonEventArgs e)
         {
             // After cash is taken out this will determine if the cash left in the drawer is low or high
@@ -113,6 +171,12 @@ namespace FinalProject1.GUI.OnScreenKeyboard
             Close();
         }
 
+        /// <summary>
+        /// Sets Total to the TotalLabel's contents, sets IsTransactionComplete to true,
+        /// and then closes the ChangeKeyboard window.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EnterBtn_MouseUp(object sender, MouseButtonEventArgs e)
         {
             Total = decimal.Parse((String)TotalLabel.Content);

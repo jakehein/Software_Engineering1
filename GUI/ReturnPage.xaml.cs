@@ -34,28 +34,44 @@ namespace FinalProject1
             PopulateItemList();
             FillCategoryCombo();
             FillItemList(itemDTOs);
-            //adding this to remove bug of items appearing in transaction after navigating away and then coming back to page
             cartController.CancelTransaction();
-            //remove above if still occurs
         }
+
+        /// <summary>
+        /// This method populates the items list with all items within the inventory.
+        /// </summary>
         private void PopulateItemList()
         {
             itemDTOs = inventoryControl.GetAllItems();
         }
+
+        /// <summary>
+        /// Sets the ItemsSource for the Inventory element to the items parameter.
+        /// </summary>
+        /// <param name="items"></param>
         void FillItemList(IEnumerable<ItemDTO> items)
         {
             Inventory.ItemsSource = items;
         }
+
+        /// <summary>
+        /// Gets all the categories and sorts them before setting them to the Category element's ItemsSource.
+        /// </summary>
         void FillCategoryCombo()
         {
             List<CategoryDTO> categories = categoryControl.GetAllCategories();
-            //CategoryListCombo.ItemsSource = categoryControl.GetAllCategories();
             categories.Add(new CategoryDTO { CategoryID = 0, Items = null, Name = "All" });
             categories.Sort();
             var sortedCategories = categories.OrderBy(x => x.Name);
             Category.ItemsSource = sortedCategories;
             Category.SelectedIndex = 0;
         }
+
+        /// <summary>
+        /// This method directs the user to the MainMenu.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainMenu_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new MainMenu());
@@ -73,6 +89,12 @@ namespace FinalProject1
             UpdateTotal();
         }
 
+        /// <summary>
+        /// Check that there is enough money in the till to perform a return.
+        /// Afterwards, a check is made for a low cash warning.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Return_Click(object sender, RoutedEventArgs e)
         {
             string total = PayTotal.Text;
@@ -87,6 +109,11 @@ namespace FinalProject1
             LowCashWarningCheck();
         }
 
+        /// <summary>
+        /// Increases the quantity of an item in the Transaction ListView by 1
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void QuantityUp_Click(object sender, RoutedEventArgs e)
         {
             if (Transaction.SelectedItem != null)
@@ -134,6 +161,11 @@ namespace FinalProject1
             }
         }
 
+        /// <summary>
+        /// Removes all instances of an item from the Transaction ListView
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RemoveItem_Click(object sender, RoutedEventArgs e)
         {
             if (Transaction.SelectedItem != null)
@@ -169,16 +201,31 @@ namespace FinalProject1
             }
         }
 
+        /// <summary>
+        /// Changes the font size of the UpC.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpC_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             ((TextBox)sender).FontSize = ((TextBox)sender).ActualHeight / 2;
         }
 
+        /// <summary>
+        /// Changes the font size of PayTotal.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PayTotal_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             ((TextBlock)sender).FontSize = ((TextBlock)sender).ActualHeight / 1.5;
         }
 
+        /// <summary>
+        /// Changes the size of the Transaction element columns.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Transaction_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             TransactionItemColumn.Width = ((ListView)sender).ActualWidth * .65;
@@ -186,6 +233,11 @@ namespace FinalProject1
             TransactionQuantityColumn.Width = ((ListView)sender).ActualWidth * .1;
         }
 
+        /// <summary>
+        /// Changes the font size of the Category list.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Category_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             ((ComboBox)sender).FontSize = ((ComboBox)sender).ActualHeight * .5;
@@ -196,7 +248,6 @@ namespace FinalProject1
         /// </summary>
         private void Inventory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
             ItemDTO itm = (ItemDTO)Inventory.SelectedItem;
             if (itm != null)
             {
@@ -206,7 +257,6 @@ namespace FinalProject1
                     UpdateTransactionView();
                     UpdateTotal();
                     Inventory.SelectedItem = null;
-
                 }
                 catch (Exception)
                 {
@@ -231,6 +281,9 @@ namespace FinalProject1
             }
         }
 
+        /// <summary>
+        /// Update the PayTotal element's text value.
+        /// </summary>
         private void UpdateTotal()
         {
             PayTotal.Text = String.Format("{0:#,###0.00}", cartController.GetTotal());
@@ -281,6 +334,11 @@ namespace FinalProject1
             }
         }
 
+        /// <summary>
+        /// Change the quantity of the item selected by entering an amount via mouse controls.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChangeQuantity_Click(object sender, RoutedEventArgs e)
         {
             if (Transaction.SelectedItem != null)
@@ -325,7 +383,6 @@ namespace FinalProject1
             decimal refundTotal = decimal.Parse(PayTotal.Text);
             if (amountInDrawer < refundTotal)
             {
-                //decimal amountInDrawer = drawerController.CurrentCashInDrawer();
                 MessageBox.Show("Not enough money in the till to complete refund. Amount is currently: $" + amountInDrawer + ". Please Deposit More.");
                 return false;
             }
@@ -335,6 +392,11 @@ namespace FinalProject1
             }
         }
 
+        /// <summary>
+        /// Change the quantity of the item selected by entering an amount via touch controls.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChangeQuantity_TouchUp(object sender, TouchEventArgs e)
         {
             if (Transaction.SelectedItem != null)
