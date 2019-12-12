@@ -25,7 +25,6 @@ namespace FinalProject1
             InitializeComponent();
             // Initialize static BusinessInfo
             _ = new BusinessInfo(new BusinessInfoDataAccess());
-            // MainMenuUI.Navigate(new SalesPage());
             MainMenuUI.Navigate(new Login_Page());
         }
     }

@@ -105,7 +105,6 @@ namespace FinalProject1
                 MessageBox.Show("Refund total is: " + total);
                 UpdateTotal();
             }
-
             // After cash is taken out this will determine if the cash left in the drawer is low
             LowCashWarningCheck();
         }

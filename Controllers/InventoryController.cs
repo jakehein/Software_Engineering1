@@ -94,6 +94,12 @@ namespace FinalProject1
             return iDA.GetAllItemsFromCategory(iD);
         }
 
+        /// <summary>
+        /// This method updates a specificed item with a new category
+        /// </summary>
+        /// <param name="item">itemDTO of the item we are trying to update</param>
+        /// <param name="category">is the category to update the item to</param>
+        /// <returns></returns>
         public bool UpdateItemCategory(ItemDTO item, CategoryDTO category)
         {
             return iDA.UpdateItemCategory(item, category);

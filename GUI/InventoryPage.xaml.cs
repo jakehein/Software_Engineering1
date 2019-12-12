@@ -57,7 +57,6 @@ namespace FinalProject1
         void FillCategoryComboBox()
         {
             List<CategoryDTO> categories = categoryControl.GetAllCategories();
-            //CategoryListComboBoxInput.ItemsSource = categoryControl.GetAllCategories();
 
             // create new category option
             UpdateCategoryListComboBoxInput();

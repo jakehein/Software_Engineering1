@@ -61,6 +61,11 @@ namespace FinalProject1
             return result;
         }
 
+        /// <summary>
+        /// Handles Apostrophe 
+        /// </summary>
+        /// <param name="inString"></param>
+        /// <returns></returns>
         protected string HandleApostrophe(string inString)
         {
             string s = "";

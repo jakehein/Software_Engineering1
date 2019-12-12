@@ -90,6 +90,10 @@ namespace FinalProject1
             }
         }
 
+        /// <summary>
+        /// This method determines if cash is high in the drawer.
+        /// </summary>
+        /// <returns>true if the cash amount is above the specified highCashAmount</returns>
         public bool cashIsHigh()
         {
             decimal highCashAmount = 300;
