@@ -135,11 +135,11 @@ namespace FinalProject1
         }
 
         /// <summary>
-        /// This method handles the touch pad keyboard
+        /// Display the on-screen number pad when touch input is detected
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CashAmountText_TouchUp(object sender, TouchEventArgs e)
+        private void DisplayOnScreenNumPad(object sender, TouchEventArgs e)
         {
             GUI.OnScreenKeyboard.OnScreenNumPad numberPad = new GUI.OnScreenKeyboard.OnScreenNumPad(CashAmountText.Text);
             bool? dialogResult = numberPad.ShowDialog();
@@ -154,7 +154,7 @@ namespace FinalProject1
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CashAmountText_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void ResizeCashAmountFontSize(object sender, SizeChangedEventArgs e)
         {
             ((TextBox)sender).FontSize = ((TextBox)sender).ActualHeight * .7;
         }

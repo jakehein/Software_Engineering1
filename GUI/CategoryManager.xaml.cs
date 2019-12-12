@@ -206,16 +206,15 @@ namespace FinalProject1
         /// <param name="e">Event details</param>
         private void ExitBtn_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.RemoveBackEntry();
             this.NavigationService.Navigate(new InventoryPage());
         }
 
         /// <summary>
-        /// Handles CategoryText size change
+        /// Resize the category font on window size change
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CategoryText_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void ResizeCategoryFontSize(object sender, SizeChangedEventArgs e)
         {
             ((TextBox)sender).FontSize = ((TextBox)sender).ActualHeight * .7;
         }

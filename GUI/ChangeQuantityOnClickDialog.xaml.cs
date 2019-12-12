@@ -53,7 +53,7 @@ namespace FinalProject1.GUI
         }
 
         /// <summary>
-        /// Restrict text entry to numbers and set carretIndex to appropiate position
+        /// Restrict text entry to numbers
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

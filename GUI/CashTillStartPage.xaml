@@ -37,7 +37,7 @@
         <Viewbox Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="4" Margin="0,0" >
             <TextBlock x:Name="EnterCashLabel" Text="Enter Starting Cash in Till:" FontSize="32"/>
         </Viewbox>
-        <TextBox x:Name="CashAmountText" Text="" Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="4" Background="Ivory" FontSize="32" TouchUp="CashAmountText_TouchUp" SizeChanged="CashAmountText_SizeChanged"/>
+        <TextBox x:Name="CashAmountText" Text="" Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="4" Background="Ivory" FontSize="32" TouchUp="DisplayOnScreenNumPad" SizeChanged="ResizeCashAmountFontSize"/>
         <Button x:Name="EnterButton" Content="Enter" Grid.Row="5" Grid.Column="4" Grid.ColumnSpan="2" Margin="0,0" FontSize="20" IsDefault="True" Click="EnterButton_Click" ClickMode="Press"/>
 
 

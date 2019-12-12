@@ -36,7 +36,7 @@
         </Grid.ColumnDefinitions>
         <ListBox x:Name="CategoryListBox" Grid.ColumnSpan="5" Grid.Column="6" Grid.RowSpan="9" Background="Ivory" SelectionChanged="CategoryListBox_SelectionChanged" Margin="0.2,42,79.6,0.4" />
 
-        <TextBox x:Name="CategoryText" Text="" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" Background="Ivory" FontSize="32" SizeChanged="CategoryText_SizeChanged"/>
+        <TextBox x:Name="CategoryText" Text="" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" Background="Ivory" FontSize="32" SizeChanged="ResizeCategoryFontSize"/>
         <Viewbox Grid.Row="2" Grid.Column="2">
             <TextBlock x:Name="CategoryLabel" Text="Category:"/>
         </Viewbox>
