@@ -103,11 +103,20 @@ namespace FinalProject1
             return result <= 0;
         }
 
+        /// <summary>
+        /// Gets the value from the database from the NameColumn
+        /// </summary>
+        /// <returns> string of name </returns>
         public string Name { 
             get {
                 return GetValueFromDB(NameColumn);
             }
         }
+
+        /// <summary>
+        /// Gets the value from the database from the AddressColumn
+        /// </summary>
+        /// <returns> string of address </returns>
         public string Address
         {
             get
@@ -115,6 +124,11 @@ namespace FinalProject1
                 return GetValueFromDB(AddressColumn);
             }
         }
+
+        /// <summary>
+        /// Gets the value from the database from the LocalTaxColum/StateTaxColumn
+        /// </summary>
+        /// <returns> decimal value of the Tax Amount </returns>
         public decimal TaxAmount
         {
             get
@@ -124,6 +138,11 @@ namespace FinalProject1
                 return taxAmount;
             }
         }
+
+        /// <summary>
+        /// This method returns the cash warning level in decimal format
+        /// </summary>
+        /// <returns> decimal value of the cashWarningLevel </returns>
         public decimal? CashWarningLevel
         {
             get
@@ -139,6 +158,10 @@ namespace FinalProject1
             }
         }
 
+        /// <summary>
+        /// Gets the value from the database from the NameColumn
+        /// </summary>
+        /// <returns> string of name </returns>
         public decimal? StartingCashAmount
         {
             get
@@ -153,6 +176,11 @@ namespace FinalProject1
                 }
             }
         }
+
+        /// <summary>
+        /// Gets the phone number of the company from the the database
+        /// </summary>
+        /// <returns> return the phone number </returns>
         public string Phone
         {
             get
