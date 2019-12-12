@@ -201,7 +201,7 @@ namespace FinalProject1
             }
             else
             {
-                MessageBox.Show("Item with the entered UPC not found!!!");
+                MessageBox.Show("Item with the entered UPC not found.");
             }
         }
 

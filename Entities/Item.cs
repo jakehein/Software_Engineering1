@@ -44,8 +44,8 @@ namespace FinalProject1
                 }
             }
         }
+
         public Category Category { get; set; }
-        //public long CategoryID { get; set; }
 
         /// <summary>
         /// Holds any data warnings created when this object's attributes were assinged values
@@ -68,7 +68,6 @@ namespace FinalProject1
             item.Quantity = dto.Quantity;
             item.Price = dto.Price;
             item.Category = dto.Category;
-            //item.CategoryID = dto.CategoryID;
             return item;
         }
         
@@ -86,7 +85,6 @@ namespace FinalProject1
             dto.Quantity = item.Quantity;
             dto.Price = item.Price;
             dto.Category = item.Category;
-            //dto.CategoryID = item.CategoryID;
             return dto;
         }
 

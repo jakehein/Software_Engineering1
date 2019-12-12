@@ -210,6 +210,11 @@ namespace FinalProject1
             this.NavigationService.Navigate(new InventoryPage());
         }
 
+        /// <summary>
+        /// Handles CategoryText size change
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CategoryText_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             ((TextBox)sender).FontSize = ((TextBox)sender).ActualHeight * .7;

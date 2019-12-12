@@ -57,7 +57,7 @@ namespace FinalProject1
         void FillCategoryComboBox()
         {
             List<CategoryDTO> categories = categoryControl.GetAllCategories();
-            
+
             // create new category option
             UpdateCategoryListComboBoxInput();
             categories.Add(new CategoryDTO { CategoryID = 0, Items = null, Name = "All"});
@@ -259,6 +259,7 @@ namespace FinalProject1
             }
             return itm;
         }
+
 
         /// <summary>
         /// This method creates an Item Object specifically for creating 

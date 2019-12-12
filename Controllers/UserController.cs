@@ -31,9 +31,7 @@ namespace FinalProject1
         public string LogIn(string username, string password)
         {
             string errorMessage = "";
-            //string retrivedPassword = userDataAccess.GetPassword(username);
             if(!userDataAccess.ValidateUser(username, password))
-            //if (retrivedPassword != password)
             {
                 errorMessage = "Invalid username or password";
             }
@@ -42,7 +40,6 @@ namespace FinalProject1
                 CurrentUser = new User() { Username = username, Password = password, HasManagerAccess = userDataAccess.DoesUserHaveInvetoryAccess(username) };
             }
             return errorMessage;
-
         }
 
         /// <summary>
@@ -61,7 +58,6 @@ namespace FinalProject1
             {
                 validUser = true;
                 userDataAccess.CreateUser(newUser.Username, newUser.Password, newUser.HasManagerAccess);
-                //this.CurrentUser = newUser;
             }
 
             return validUser;
