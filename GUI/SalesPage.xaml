@@ -44,9 +44,7 @@
         <Button x:Name="MainMenu" Content="Main Menu" Grid.Row="9" Grid.Column="9" Margin="0,0" FontSize="14" Click="MainMenu_Click" ClickMode="Press"/>
         <Button x:Name="Cancel" Content="Cancel" Grid.Row="9" Grid.Column="6" Margin="0,0" FontSize="16" Click="Cancel_Click" ClickMode="Press"/>
         <Button x:Name="Pay" Content="Pay" Grid.Row="9" Grid.Column="3" Grid.ColumnSpan="2" Margin="0,0" FontSize="32" Click="Pay_Click" ClickMode="Press"/>
-
         <TextBlock x:Name="PayTotal" Text="00.00" Background="Ivory" SizeChanged="PayTotal_SizeChanged" Padding="5,0,0,0" Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0"/>
-
         <Viewbox Grid.Row="9" Grid.Column="0" Margin="0,0" >
             <TextBlock x:Name="TotalLabel" Text="Total = $" />
         </Viewbox>
@@ -75,7 +73,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <!--<ListBox x:Name="Transaction" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="8" Background="Ivory" FontSize="16" />-->
         <ListBox x:Name="Inventory" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="6" Grid.RowSpan="7" Background="Ivory" FontSize="16" SelectionChanged="Inventory_SelectionChanged" />
         <Button x:Name="ChangeQuantity" Grid.Row="3" Grid.Column="3" Margin="0,0" ClickMode="Press" PreviewMouseLeftButtonUp="ChangeQuantity_MouseUp" TouchUp="ChangeQuantity_TouchUp">
             <TextBlock x:Name="ChangeQuantityBlock" TextWrapping="Wrap" Text="Change Quantity"/>
@@ -83,9 +80,7 @@
         <Button x:Name="QuantityUp" Content="+" Grid.Row="4" Grid.Column="3" Margin="0,0" FontSize="32" Click="QuantityUp_Click" ClickMode="Press"/>
         <Button x:Name="QuantityDown" Content="-" Grid.Row="5" Grid.Column="3" Margin="0,0" FontSize="32" Click="QuantityDown_Click" ClickMode="Press"/>
         <Button x:Name="RemoveItem" Content="Remove" Grid.Row="6" Grid.Column="3" Margin="0,0" FontSize="20" Click="RemoveItem_Click" ClickMode="Press"/>
-
         <TextBox x:Name="UpC" Text=""  Background="Ivory" SizeChanged="UpC_SizeChanged" Grid.Row="8" MaxLength="12" Grid.Column="4" Grid.ColumnSpan="3" Margin="0,0" FontSize="32"/>
-
         <Viewbox Grid.Row="8" Grid.Column="3" Margin="0,0,0,0">
             <TextBlock x:Name="UpCLabel" Text="UPC: " />
         </Viewbox>

@@ -205,16 +205,31 @@ namespace FinalProject1
             }
         }
 
+        /// <summary>
+        /// Changes the font size of the UpC.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpC_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             ((TextBox)sender).FontSize = ((TextBox)sender).ActualHeight / 2;
         }
 
+        /// <summary>
+        /// Changes the font size of PayTotal.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PayTotal_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             ((TextBlock)sender).FontSize = ((TextBlock)sender).ActualHeight / 1.5;
         }
 
+        /// <summary>
+        /// Changes the size of the Transaction element columns.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Transaction_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             TransactionItemColumn.Width = ((ListView)sender).ActualWidth * .65;
@@ -222,17 +237,21 @@ namespace FinalProject1
             TransactionQuantityColumn.Width = ((ListView)sender).ActualWidth * .1;
         }
 
+        /// <summary>
+        /// Changes the font size of the Category list.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Category_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             ((ComboBox)sender).FontSize = ((ComboBox)sender).ActualHeight * .5;
         }
 
         /// <summary>
-        /// This method takes the selected item and adds it to the Transaction list
+        /// This method takes the selected item and adds it to the Transaction list.
         /// </summary>
         private void Inventory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
             ItemDTO itm = (ItemDTO)Inventory.SelectedItem;
             if (itm != null)
             {
@@ -266,13 +285,16 @@ namespace FinalProject1
             }
         }
 
+        /// <summary>
+        /// Update the PayTotal element's text value.
+        /// </summary>
         private void UpdateTotal()
         {
             PayTotal.Text = String.Format("{0:#,###0.00}", cartController.GetTotal());
         }
 
         /// <summary>
-        /// Check for barcode reader key combinations when keys are pressed is entered
+        /// Check for barcode reader key combinations when keys are pressed is entered.
         /// </summary>
         /// <param name="sender">Object that triggered the event</param>
         /// <param name="e">Event details</param>
@@ -341,6 +363,11 @@ namespace FinalProject1
             }
         }
 
+        /// <summary>
+        /// Change the quantity of the item selected by entering an amount via mouse controls.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChangeQuantity_MouseUp(object sender, MouseButtonEventArgs e)
         {
             if (Transaction.SelectedItem != null)
@@ -362,6 +389,11 @@ namespace FinalProject1
             }
         }
 
+        /// <summary>
+        /// Change the quantity of the item selected by entering an amount via touch controls.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChangeQuantity_TouchUp(object sender, TouchEventArgs e)
         {
             if (Transaction.SelectedItem != null)
