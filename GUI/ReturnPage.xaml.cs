@@ -326,7 +326,6 @@ namespace FinalProject1
                 }
                 reading = false;
             }
-            //
             else if (reading && !Keyboard.IsKeyDown(Key.LeftCtrl))
             {
                 // get the character from the event item and add it to the current upc

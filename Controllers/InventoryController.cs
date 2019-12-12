@@ -42,8 +42,9 @@ namespace FinalProject1
         }
 
         /// <summary>
-        /// All UPCs in the system
+        /// This method gets and returns all UPCs in the system
         /// </summary>
+        /// <returns> List<string> containing all UPC</returns>
         public List<string> AllUPCs
         {
             get
