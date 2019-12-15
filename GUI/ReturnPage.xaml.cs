@@ -402,7 +402,7 @@ namespace FinalProject1
             {
                 GUI.OnScreenKeyboard.OnScreenNumPad dialog = new GUI.OnScreenKeyboard.OnScreenNumPad("");
                 bool? result = dialog.ShowDialog();
-                if (result != null && (bool)result)
+                if (result != null && (bool)result && !dialog.GetResult().Equals(""))
                 {
                     ItemDTO item = ((DTOs.SalesItemDTO)Transaction.SelectedItem).Item;
                     int quantity = ((DTOs.SalesItemDTO)Transaction.SelectedItem).Quantity;
